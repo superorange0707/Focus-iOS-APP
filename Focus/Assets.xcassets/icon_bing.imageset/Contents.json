@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "filename": "icon_bing.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "filename": "icon_bing@2x.png",
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "filename": "icon_bing@3x.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}
