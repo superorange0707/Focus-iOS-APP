@@ -46,19 +46,12 @@ struct PlatformCard: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: 10) {
-                // Real app icon with glass style
-                ZStack {
-                    Circle()
-                        .fill(Color.white.opacity(isSelected ? 0.7 : 0.3))
-                        .frame(width: 54, height: 54)
-                        .shadow(color: isSelected ? platform.color.opacity(0.25) : .clear, radius: 10, x: 0, y: 4)
-                    
-                    Image(platform.assetName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 36, height: 36)
-                        .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 1)
-                }
+                // Real app icon - standalone like iOS apps
+                Image(platform.assetName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 54, height: 54)
+                    .shadow(color: isSelected ? platform.color.opacity(0.25) : .black.opacity(0.08), radius: isSelected ? 10 : 2, x: 0, y: isSelected ? 4 : 1)
                 
                 // Platform name
                 Text(platform.displayName)
