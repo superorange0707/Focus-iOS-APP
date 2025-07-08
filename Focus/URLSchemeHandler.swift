@@ -13,8 +13,7 @@ class URLSchemeHandler {
         .instagram: ["instagram://", "instagram://www.instagram.com/", "instagram://instagram.com/"],
         .facebook: ["fb://", "facebook://", "fb://www.facebook.com/", "facebook://www.facebook.com/"],
         .x: ["x://", "x://www.x.com/", "x://x.com/"],
-        .google: ["google://", "google://www.google.com/", "google://google.com/"],
-        .bing: ["bing://", "bing://www.bing.com/", "bing://bing.com/"]
+        .tiktok: ["tiktok://", "tiktok://www.tiktok.com/", "tiktok://tiktok.com/"]
     ]
     
     // App Store IDs for fallback
@@ -24,23 +23,27 @@ class URLSchemeHandler {
         .instagram: "389801252",
         .facebook: "284882215",
         .x: "333903271",
-        .google: "284815942",
-        .bing: "345323231"
+        .tiktok: "835599320"
     ]
     
     func openInNativeApp(platform: Platform, url: String) -> Bool {
-        // Try to open in native app first
-        if let schemes = urlSchemes[platform] {
-            for scheme in schemes {
-                let appURL = scheme + url.replacingOccurrences(of: "https://", with: "")
-                if let url = URL(string: appURL), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                    return true
+        // Simplified for free tier - try to open native app directly without checking
+        // This avoids UIApplication.canOpenURL calls that cause eligibility_plist errors
+        
+        if let schemes = urlSchemes[platform], let firstScheme = schemes.first {
+            let appURL = firstScheme + url.replacingOccurrences(of: "https://", with: "")
+            if let url = URL(string: appURL) {
+                UIApplication.shared.open(url) { success in
+                    if !success {
+                        // If native app fails, open in browser as fallback
+                        _ = self.openInBrowser(url: url.absoluteString)
+                    }
                 }
+                return true
             }
         }
         
-        // If native app is not available, open in browser
+        // Fallback to browser
         if let url = URL(string: url) {
             UIApplication.shared.open(url)
             return true
@@ -62,14 +65,18 @@ class URLSchemeHandler {
     }
     
     func canOpenNativeApp(platform: Platform) -> Bool {
-        guard let schemes = urlSchemes[platform] else { return false }
-        
-        for scheme in schemes {
-            if let url = URL(string: scheme), UIApplication.shared.canOpenURL(url) {
-                return true
-            }
+        // Check if we're running in simulator - apps usually aren't installed there
+        #if targetEnvironment(simulator)
+        return false  // Simulator typically doesn't have these apps installed
+        #else
+        // On real devices, try native apps for common platforms
+        switch platform {
+        case .youtube, .instagram, .facebook, .x, .tiktok:
+            return true  // Try native app first on real devices
+        case .reddit:
+            return false // Less common, always use browser
         }
-        return false
+        #endif
     }
     
     func getPreferredAction(for platform: Platform) -> PreferredAction {
@@ -101,10 +108,9 @@ extension URLSchemeHandler {
             return "https://www.facebook.com/search/top/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .x:
             return "https://www.x.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
-        case .google:
-            return "https://www.google.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
-        case .bing:
-            return "https://www.bing.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+        case .tiktok:
+            // TikTok web search - this works but doesn't pre-populate the search field
+            return "https://www.tiktok.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         }
     }
     
@@ -120,10 +126,10 @@ extension URLSchemeHandler {
             return "fb://www.facebook.com/search/top/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .x:
             return "x://www.x.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
-        case .google:
-            return "google://www.google.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
-        case .bing:
-            return "bing://www.bing.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+        case .tiktok:
+            // TikTok doesn't support search parameters in URL scheme
+            // Just return the main app URL 
+            return "tiktok://"
         }
     }
 } 

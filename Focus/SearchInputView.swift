@@ -10,7 +10,7 @@ struct SearchInputView: View {
         VStack(spacing: 0) {
             HStack(spacing: 15) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.7))
+                    .foregroundColor(Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.75))
                     .font(.title3)
                     .fontWeight(.medium)
                 
@@ -20,6 +20,10 @@ struct SearchInputView: View {
                     .focused($isTextFieldFocused)
                     .onSubmit {
                         onSearch()
+                    }
+                    .onTapGesture {
+                        // Ensure field gets focus on first tap
+                        isTextFieldFocused = true
                     }
                 
                 if !searchText.isEmpty {
@@ -40,11 +44,16 @@ struct SearchInputView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isTextFieldFocused ? Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.7) : Color.white.opacity(0.18),
+                        isTextFieldFocused ? Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.7) : Color.white.opacity(0.20),
                         lineWidth: isTextFieldFocused ? 2 : 1
                     )
             )
             .shadow(color: Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.08), radius: 10, x: 0, y: 5)
+            .contentShape(Rectangle()) // Makes entire area tappable
+            .onTapGesture {
+                // Backup tap handler for the entire container
+                isTextFieldFocused = true
+            }
         }
     }
 }

@@ -4,17 +4,16 @@ struct ContentView: View {
     @State private var selectedPlatform: Platform = .youtube
     @State private var searchText = ""
     @State private var isSearching = false
-    @State private var searchResults: [SearchResult] = []
-    @State private var showingResults = false
+    // Removed showingResults state - not needed for free tier direct navigation
     @StateObject private var searchService = SearchService.shared
     
     var body: some View {
         ZStack {
-            // White/blue glassmorphism background
+            // White/blue glassmorphism background - restored original with minimal enhancement
             LinearGradient(
                 colors: [
                     Color.white.opacity(0.95),
-                    Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.18), // #007AFF
+                    Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.20), // Slightly increased from 0.18 for visibility
                     Color.white.opacity(0.85)
                 ],
                 startPoint: .topLeading,
@@ -23,23 +22,23 @@ struct ContentView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 28) {
-                // App title with glass style
+                // App title with better integration - no separate card, blend with background
                 VStack(spacing: 8) {
-                    Text("Focus Search")
+                Text("Focus Search")
                         .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundColor(Color(red: 0.0, green: 0.48, blue: 1.0))
-                        .shadow(color: Color.white.opacity(0.7), radius: 8, x: 0, y: 2)
+                        .shadow(color: Color.white.opacity(0.8), radius: 12, x: 0, y: 3)
                     
                     Text("Search directly, stay focused")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .fontWeight(.medium)
+                        .opacity(0.9)
+                    
+                    // Free tier launch - no premium features
                 }
-                .padding(.top, 48)
-                .padding(.bottom, 4)
-                .background(.ultraThinMaterial)
-                .cornerRadius(24)
-                .shadow(color: Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.08), radius: 16, x: 0, y: 8)
+                .padding(.top, 25)
+                .padding(.bottom, 15)
                 
                 // Platform selector
                 PlatformSelectorView(selectedPlatform: $selectedPlatform)
@@ -54,7 +53,20 @@ struct ContentView: View {
                         onSearch: performSearch
                     )
                     
-                    // Glass style search button
+                    // Simple info text for free tier
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color(red: 0.0, green: 0.48, blue: 1.0))
+                            .font(.caption2)
+                        Text("Search directly in your favorite apps")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 5)
+                    .opacity(0.8) // Slightly increased from 0.7 for better visibility
+                    
+                    // Glass style search button - restored original
                     Button(action: performSearch) {
                         HStack(spacing: 12) {
                             if isSearching {
@@ -62,12 +74,12 @@ struct ContentView: View {
                                     .progressViewStyle(CircularProgressViewStyle(tint: Color(red: 0.0, green: 0.48, blue: 1.0)))
                                     .scaleEffect(0.8)
                             } else {
-                                Image(systemName: "magnifyingglass")
+                            Image(systemName: "magnifyingglass")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
                             
-                            Text(isSearching ? "Searching..." : "Search \(selectedPlatform.displayName)")
+                            Text(isSearching ? "Searching..." : getSimpleSearchButtonText())
                                 .font(.headline)
                                 .fontWeight(.semibold)
                         }
@@ -94,7 +106,7 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, 30)
                 
-                // Recent searches section
+                // Recent searches section - restored original
                 if !searchService.recentSearches.isEmpty && searchText.isEmpty {
                     VStack(spacing: 15) {
                         HStack {
@@ -148,7 +160,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                // Footer with app info
+                // Footer with app info - restored original
                 VStack(spacing: 8) {
                     Text("Focus on what matters")
                         .font(.caption)
@@ -161,41 +173,39 @@ struct ContentView: View {
                 .padding(.bottom, 30)
             }
             
-            // Search results overlay with enhanced animation
-            if showingResults {
-                SearchResultsView(
-                    results: searchResults,
-                    platform: selectedPlatform,
-                    onDismiss: { 
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            showingResults = false
-                        }
-                    }
-                )
-                .transition(.asymmetric(
-                    insertion: .move(edge: .bottom).combined(with: .opacity),
-                    removal: .move(edge: .bottom).combined(with: .opacity)
-                ))
-            }
+            // Removed SearchResultsView overlay - free tier uses direct navigation only
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: showingResults)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: searchText.isEmpty)
+        // No premium upgrade popup in free tier
+    }
+    
+    private func getSimpleSearchButtonText() -> String {
+        // Check if native app is available
+        if URLSchemeHandler.shared.canOpenNativeApp(platform: selectedPlatform) {
+            return "Open in \(selectedPlatform.displayName) App"
+        } else {
+            return "Search on \(selectedPlatform.displayName)"
+        }
     }
     
     private func performSearch() {
         guard !searchText.isEmpty else { return }
+        
+        // Free tier - always use direct search
         isSearching = true
-        searchService.search(query: searchText, platform: selectedPlatform) { results in
-            DispatchQueue.main.async {
-                self.searchResults = results
-                self.isSearching = false
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                    self.showingResults = true
-                }
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // Small delay for UX
+            let success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+            self.isSearching = false
+            
+            if !success {
+                // Show error message or fallback
+                print("Failed to open \(selectedPlatform.displayName)")
         }
     }
 }
+}
+
+// Premium upgrade views removed for free tier launch
 
 #Preview {
     ContentView()

@@ -10,10 +10,10 @@ struct PlatformSelectorView: View {
                     .foregroundColor(.secondary)
                     .font(.caption)
                 
-                Text("Choose Platform")
-                    .font(.headline)
+            Text("Choose Platform")
+                .font(.headline)
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+                .foregroundColor(.primary)
                 
                 Spacer()
             }
@@ -27,7 +27,7 @@ struct PlatformSelectorView: View {
                             isSelected: selectedPlatform == platform
                         ) {
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                selectedPlatform = platform
+                            selectedPlatform = platform
                             }
                         }
                     }
@@ -46,12 +46,12 @@ struct PlatformCard: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: 10) {
-                // Real app icon - standalone like iOS apps
+                // Platform icon - enhanced quality and shadows
                 Image(platform.assetName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 54, height: 54)
-                    .shadow(color: isSelected ? platform.color.opacity(0.25) : .black.opacity(0.08), radius: isSelected ? 10 : 2, x: 0, y: isSelected ? 4 : 1)
+                    .frame(width: 56, height: 56) // Slightly larger for better visibility
+                    .shadow(color: isSelected ? platform.color.opacity(0.3) : .black.opacity(0.12), radius: isSelected ? 12 : 3, x: 0, y: isSelected ? 5 : 2)
                 
                 // Platform name
                 Text(platform.displayName)
@@ -64,23 +64,23 @@ struct PlatformCard: View {
             .frame(width: 90, height: 100)
             .background(
                 RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.white.opacity(isSelected ? 0.25 : 0.12))
+                    .fill(Color.white.opacity(isSelected ? 0.3 : 0.18)) // Slightly more opaque for better visibility
             )
             .background(
-                isSelected ? Color.white.opacity(0.18) : Color.clear
+                isSelected ? Color.white.opacity(0.2) : Color.clear
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 22)
                     .stroke(
-                        isSelected ? platform.color : Color.white.opacity(0.18),
+                        isSelected ? platform.color : Color.white.opacity(0.25), // Slightly more visible borders
                         lineWidth: isSelected ? 2.5 : 1
                     )
             )
             .shadow(
-                color: isSelected ? platform.color.opacity(0.18) : .black.opacity(0.06),
-                radius: isSelected ? 14 : 8,
+                color: isSelected ? platform.color.opacity(0.2) : .black.opacity(0.08),
+                radius: isSelected ? 16 : 8, // Enhanced shadows for better depth
                 x: 0,
-                y: isSelected ? 7 : 4
+                y: isSelected ? 8 : 4
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -90,11 +90,11 @@ struct PlatformCard: View {
 
 #Preview {
     VStack(spacing: 30) {
-        PlatformSelectorView(selectedPlatform: .constant(.youtube))
+    PlatformSelectorView(selectedPlatform: .constant(.youtube))
         PlatformSelectorView(selectedPlatform: .constant(.x))
         PlatformSelectorView(selectedPlatform: .constant(.reddit))
     }
-    .padding()
+        .padding()
     .background(
         LinearGradient(
             colors: [Color.white, Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.12)],
