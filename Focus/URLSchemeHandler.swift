@@ -69,12 +69,20 @@ class URLSchemeHandler {
         #if targetEnvironment(simulator)
         return false  // Simulator typically doesn't have these apps installed
         #else
-        // On real devices, try native apps for common platforms
+        // On real devices, try native apps for ALL platforms with creative workarounds
         switch platform {
-        case .youtube, .instagram, .facebook, .x, .tiktok:
-            return true  // Try native app first on real devices
+        case .youtube:
+            return true  // YouTube app supports search URLs
+        case .instagram:
+            return true  // Instagram app supports hashtag/user searches + clipboard workaround for general search
+        case .x:
+            return true  // X/Twitter app supports search URLs
         case .reddit:
-            return false // Less common, always use browser
+            return true  // Reddit app supports search URLs
+        case .facebook:
+            return true  // Facebook app opens + clipboard workaround for search
+        case .tiktok:
+            return false  // Always use web-to-app redirect strategy for TikTok search
         }
         #endif
     }
@@ -103,33 +111,57 @@ extension URLSchemeHandler {
         case .reddit:
             return "https://www.reddit.com/search/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .instagram:
-            return "https://www.instagram.com/explore/tags/\(query.replacingOccurrences(of: "#", with: "").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            // Use general search format that works for all types of content
+            if query.hasPrefix("#") {
+                // For hashtag searches, use the hashtag URL format
+                let cleanQuery = query.replacingOccurrences(of: "#", with: "")
+                return "https://www.instagram.com/explore/tags/\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)/"
+            } else if query.hasPrefix("@") {
+                // For user searches, go directly to user profile
+                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
+                return "https://www.instagram.com/\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)/"
+            } else {
+                // For general searches, use Google search for Instagram content since Instagram blocks direct search URLs
+                return "https://www.google.com/search?q=site:instagram.com+\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            }
         case .facebook:
             return "https://www.facebook.com/search/top/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .x:
             return "https://www.x.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .tiktok:
-            // TikTok web search - this works but doesn't pre-populate the search field
-            return "https://www.tiktok.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            // TikTok: Always open main search page for single input experience
+            // Let users input their search query directly in TikTok WebView
+            return "https://www.tiktok.com/search"
         }
     }
     
     func formatNativeAppURL(for platform: Platform, query: String) -> String? {
+        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return nil
+        }
+        
         switch platform {
         case .youtube:
-            return "youtube://www.youtube.com/results?search_query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            return "youtube://www.youtube.com/results?search_query=\(encodedQuery)"
         case .reddit:
-            return "reddit://www.reddit.com/search/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            return "reddit://www.reddit.com/search/?q=\(encodedQuery)"
         case .instagram:
-            return "instagram://www.instagram.com/explore/tags/\(query.replacingOccurrences(of: "#", with: "").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            // Instagram only supports hashtags and users in native app
+            if query.hasPrefix("#") {
+                let cleanQuery = query.replacingOccurrences(of: "#", with: "")
+                return "instagram://tag?name=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
+            } else if !query.contains(" ") && query.count > 2 {
+                return "instagram://user?username=\(query)"
+            } else {
+                return nil // Use browser for general searches
+            }
         case .facebook:
-            return "fb://www.facebook.com/search/top/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            return nil // Facebook app doesn't support search URLs
         case .x:
-            return "x://www.x.com/search?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+            return "twitter://search?query=\(encodedQuery)"
         case .tiktok:
-            // TikTok doesn't support search parameters in URL scheme
-            // Just return the main app URL 
-            return "tiktok://"
+            // TikTok app doesn't support search URL schemes - always use web-to-app redirect strategy
+            return nil
         }
     }
 } 

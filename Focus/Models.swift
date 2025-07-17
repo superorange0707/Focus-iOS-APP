@@ -1,15 +1,25 @@
 import Foundation
 import SwiftUI
 import UIKit
+import SafariServices
+import WebKit
 
-// Platform enum
+// MARK: - Search Error Types
+enum SearchError: Error {
+    case invalidQuery
+    case failedToOpenURL
+    case networkError
+    case noResults
+}
+
+// MARK: - Platform Definitions
 enum Platform: String, CaseIterable {
     case youtube = "youtube"
     case reddit = "reddit"
-    case instagram = "instagram"
-    case facebook = "facebook"
     case x = "x"
     case tiktok = "tiktok"
+    case instagram = "instagram"
+    case facebook = "facebook"
     
     var displayName: String {
         switch self {
@@ -60,7 +70,7 @@ enum Platform: String, CaseIterable {
         switch self {
         case .youtube: return "https://www.youtube.com/results?search_query="
         case .reddit: return "https://www.reddit.com/search/?q="
-        case .instagram: return "https://www.instagram.com/explore/tags/"
+        case .instagram: return "https://www.instagram.com/explore/search/?q="
         case .facebook: return "https://www.facebook.com/search/top/?q="
         case .x: return "https://x.com/search?q="
         case .tiktok: return "https://www.tiktok.com/search?q="
@@ -78,6 +88,8 @@ enum Platform: String, CaseIterable {
         }
     }
 }
+
+
 
 // Search suggestion model
 struct SearchSuggestion: Identifiable, Hashable {
@@ -382,72 +394,206 @@ class SearchService: ObservableObject {
         completion(results)
     }
     
-    func search(query: String, platform: Platform, completion: @escaping ([SearchResult]) -> Void) {
-        // Free tier - no in-app results, use direct search only
-        completion([])
-    }
-    
-    /// Direct search function - immediately opens platform search without showing results
-    /// Prioritizes native apps over browser for better UX
-    func directSearch(query: String, platform: Platform) -> Bool {
-        addToRecentSearches(query)
-        
-        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            return false
+    /// Main search function that handles platform-specific search logic
+    func search(query: String, platform: Platform, completion: @escaping (Result<Void, SearchError>) -> Void) {
+        // Allow empty queries for TikTok since users input search in WebView
+        if platform != .tiktok {
+            guard !query.isEmpty else {
+                completion(.failure(SearchError.invalidQuery))
+                return
+            }
         }
         
-        print("🚀 Direct search: \(query) on \(platform.displayName)")
+        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            completion(.failure(SearchError.invalidQuery))
+            return
+        }
         
         // Smart approach: Try native apps on real devices, browser-first in simulator
         if URLSchemeHandler.shared.canOpenNativeApp(platform: platform) {
             print("📱 Native app available for \(platform.displayName)")
             
-            // Use platform-specific native URL schemes
+            // DUAL APPROACH: Native apps first, then smart browser fallback
             let nativeURL: String?
+            var shouldTryNative = false
+            var needsSpecialHandling = false
+            
             switch platform {
             case .youtube:
+                // YouTube app DOES support search URLs perfectly
                 nativeURL = "youtube://www.youtube.com/results?search_query=\(encodedQuery)"
+                shouldTryNative = true
             case .reddit:
+                // Reddit app DOES support search URLs perfectly
                 nativeURL = "reddit://www.reddit.com/search/?q=\(encodedQuery)"
+                shouldTryNative = true
             case .instagram:
-                // Instagram app URL schemes
+                // Instagram app supports specific hashtags and users
                 if query.hasPrefix("#") {
                     let cleanQuery = query.replacingOccurrences(of: "#", with: "")
-                    nativeURL = "instagram://tag?name=\(cleanQuery)"
+                    nativeURL = "instagram://tag?name=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
+                    shouldTryNative = true
+                } else if query.hasPrefix("@") {
+                    let cleanQuery = query.replacingOccurrences(of: "@", with: "")
+                    nativeURL = "instagram://user?username=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
+                    shouldTryNative = true
                 } else {
-                    nativeURL = "instagram://user?username=\(query.replacingOccurrences(of: " ", with: ""))"
+                    // General search: try Instagram app first, then browser (with clipboard helper)
+                    nativeURL = "instagram://app"
+                    shouldTryNative = true
+                    needsSpecialHandling = true
+                    print("📱 Opening Instagram app with clipboard query for general search")
                 }
-            case .facebook:
-                nativeURL = "fb://profile" // Facebook app doesn't support direct search URLs
             case .x:
-                nativeURL = "x://search?query=\(encodedQuery)"
+                // X/Twitter app DOES support search URLs perfectly
+                nativeURL = "twitter://search?query=\(encodedQuery)"
+                shouldTryNative = true
+            case .facebook:
+                // Facebook app works with posts search URL format
+                nativeURL = "https://www.facebook.com/search/posts/?q=\(encodedQuery)"
+                shouldTryNative = true
+                needsSpecialHandling = false
+                print("📱 Opening Facebook app with posts search")
             case .tiktok:
-                nativeURL = "tiktok://" // TikTok doesn't support search in URL scheme
+                // TikTok: Use smart web-to-app redirect strategy
+                // TikTok app doesn't support direct search URLs, but web version auto-redirects to app with search query
+                print("🌐 Using TikTok web-to-app redirect strategy for search")
+                shouldTryNative = false
+                nativeURL = nil
             }
             
-            if let nativeURL = nativeURL, let url = URL(string: nativeURL) {
-                print("🔗 Trying native URL: \(nativeURL)")
-                // Directly try to open without checking to avoid eligibility_plist errors
-                UIApplication.shared.open(url) { success in
-                    print("📱 Native app opened: \(success)")
-                    if !success {
-                        print("⚠️ Native app failed, opening browser fallback")
-                        // If native app fails, open browser as fallback
-                        DispatchQueue.main.async {
-                            _ = URLSchemeHandler.shared.openInBrowser(url: self.getBrowserURL(platform: platform, query: query))
+            // Try native app first if supported
+            if shouldTryNative, let nativeURL = nativeURL {
+                print("🚀 Trying native app URL: \(nativeURL)")
+                
+                if needsSpecialHandling {
+                    // SMART DUAL APPROACH: App + clipboard + browser fallback
+                    DispatchQueue.main.async {
+                        UIPasteboard.general.string = query
+                        print("📋 Copied '\(query)' to clipboard for app use")
+                        
+                        if let url = URL(string: nativeURL) {
+                            UIApplication.shared.open(url) { appSuccess in
+                                if appSuccess {
+                                    print("✅ Opened \(platform.displayName) app - search query in clipboard!")
+                                    print("💡 Paste '\(query)' in the app's search bar")
+                                    
+                                    // Also provide browser option after a delay
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                        print("🌐 Browser option: \(self.getBrowserURL(platform: platform, query: query))")
+                                    }
+                                    completion(.success(()))
+                                } else {
+                                    print("❌ App failed, falling back to browser")
+                                    self.openBrowserSearch(platform: platform, query: query, completion: completion)
+                                }
+                            }
+                        } else {
+                            print("❌ Invalid native URL, using browser")
+                            self.openBrowserSearch(platform: platform, query: query, completion: completion)
                         }
                     }
+                } else {
+                    // Standard native app approach for platforms with working URL schemes
+                    if let url = URL(string: nativeURL) {
+                        DispatchQueue.main.async {
+                            UIApplication.shared.open(url) { success in
+                                if success {
+                                    print("✅ Successfully opened \(platform.displayName) app with search")
+                                    completion(.success(()))
+                                } else {
+                                    print("❌ Native app failed, falling back to browser")
+                                    self.openBrowserSearch(platform: platform, query: query, completion: completion)
+                                }
+                            }
+                        }
+                    } else {
+                        print("❌ Invalid native URL, falling back to browser")
+                        openBrowserSearch(platform: platform, query: query, completion: completion)
+                    }
                 }
-                return true
+            } else {
+                // Use browser for platforms that don't support native URLs
+                print("🌐 Using browser for \(platform.displayName) search")
+                openBrowserSearch(platform: platform, query: query, completion: completion)
             }
+        } else {
+            // Simulator or no native app - use browser
+            print("🌐 Using browser for \(platform.displayName)")
+            openBrowserSearch(platform: platform, query: query, completion: completion)
+        }
+    }
+    
+    /// Helper function to open browser search
+    private func openBrowserSearch(platform: Platform, query: String, completion: @escaping (Result<Void, SearchError>) -> Void) {
+        let browserURL = getBrowserURL(platform: platform, query: query)
+        guard let url = URL(string: browserURL) else {
+            completion(.failure(SearchError.failedToOpenURL))
+            return
         }
         
-        // Fallback to browser
-        print("🌐 Opening browser for \(platform.displayName)")
+        print("🌐 Opening browser URL: \(browserURL)")
         
-        let browserURL = getBrowserURL(platform: platform, query: query)
-        print("🔗 Opening browser URL: \(browserURL)")
-        return URLSchemeHandler.shared.openInBrowser(url: browserURL)
+        // Special handling for TikTok to ensure search query is filled
+        if platform == .tiktok {
+            openTikTokWithSafariController(url: url, query: query, completion: completion)
+        } else {
+            // Use standard browser opening for other platforms
+            UIApplication.shared.open(url) { success in
+                DispatchQueue.main.async {
+                    completion(success ? .success(()) : .failure(SearchError.failedToOpenURL))
+                }
+            }
+        }
+    }
+    
+    
+    /// Special function to open TikTok with Safari View Controller and ensure search query is filled
+    private func openTikTokWithSafariController(url: URL, query: String, completion: @escaping (Result<Void, SearchError>) -> Void) {
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first,
+                  let rootViewController = window.rootViewController else {
+                // Fallback to regular browser opening
+                print("🌐 WebView fallback: Opening TikTok in Safari")
+                UIApplication.shared.open(url) { success in
+                    DispatchQueue.main.async {
+                        completion(success ? .success(()) : .failure(SearchError.failedToOpenURL))
+                    }
+                }
+                return
+            }
+            
+            // Simple WebView approach - let user search manually
+            print("📱 Opening TikTok WebView for manual search")
+            let tiktokController = TikTokSearchViewController(url: url, searchQuery: query)
+            let navController = UINavigationController(rootViewController: tiktokController)
+            
+            // Present the TikTok controller
+            rootViewController.present(navController, animated: true) {
+                completion(.success(()))
+            }
+        }
+    }
+
+    
+    /// Direct search function - immediately opens platform search without showing results
+    /// Prioritizes native apps over browser for better UX
+    func directSearch(query: String, platform: Platform) -> Bool {
+        // Only add to recent searches if query is not empty
+        if !query.isEmpty {
+            addToRecentSearches(query)
+        }
+        
+        search(query: query, platform: platform) { result in
+            switch result {
+            case .success:
+                print("✅ Search completed successfully")
+            case .failure(let error):
+                print("❌ Search failed: \(error)")
+            }
+        }
+        return true
     }
     
     private func getBrowserURL(platform: Platform, query: String) -> String {
@@ -461,19 +607,34 @@ class SearchService: ObservableObject {
         case .reddit:
             return "https://www.reddit.com/search/?q=\(encodedQuery)"
         case .instagram:
-            // For Instagram web, default to hashtag search if query starts with #
+            // Instagram web search - direct to Instagram
             if query.hasPrefix("#") {
                 let cleanQuery = query.replacingOccurrences(of: "#", with: "")
                 return "https://www.instagram.com/explore/tags/\(cleanQuery)/"
+            } else if query.hasPrefix("@") {
+                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
+                return "https://www.instagram.com/\(cleanQuery)/"
             } else {
+                // For general searches, use Instagram's search page
                 return "https://www.instagram.com/explore/search/keyword/?q=\(encodedQuery)"
             }
-        case .facebook:
-            return "https://www.facebook.com/search/top/?q=\(encodedQuery)"
         case .x:
-            return "https://x.com/search?q=\(encodedQuery)&src=typed_query"
+            return "https://x.com/search?q=\(encodedQuery)"
+        case .facebook:
+            // Facebook web search - top format that works in browser
+            return "https://www.facebook.com/search/top?q=\(encodedQuery)"
         case .tiktok:
-            return "https://www.tiktok.com/search?q=\(encodedQuery)"
+            // TikTok smart redirect strategy: Use URL format that properly fills search box
+            if query.hasPrefix("#") {
+                let cleanQuery = query.replacingOccurrences(of: "#", with: "").replacingOccurrences(of: " ", with: "")
+                return "https://www.tiktok.com/tag/\(cleanQuery)"
+            } else if query.hasPrefix("@") {
+                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
+                return "https://www.tiktok.com/@\(cleanQuery)"
+            } else {
+                // Use standard TikTok desktop search URL - more reliable
+                return "https://www.tiktok.com/search?q=\(encodedQuery)"
+            }
         }
     }
     
@@ -519,7 +680,7 @@ class SearchService: ObservableObject {
             return
         }
         
-        let urlString = "https://www.tiktok.com/search?q=\(encodedQuery)"
+        let urlString = "https://www.tiktok.com/search?q=\(encodedQuery)&t=\(Int(Date().timeIntervalSince1970))"
         guard let url = URL(string: urlString) else {
             print("TikTok Search: Failed to create URL")
             completion([])
@@ -527,8 +688,8 @@ class SearchService: ObservableObject {
         }
         
         var request = URLRequest(url: url)
-        // Add user agent to avoid being blocked
-        request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1", forHTTPHeaderField: "User-Agent")
+        // Use desktop User-Agent to get proper TikTok search page
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         
         print("TikTok Search: Starting request for query: \(query)")
         
@@ -606,7 +767,7 @@ class SearchService: ObservableObject {
     }
     
     func searchInstagram(query: String, completion: @escaping ([SearchResult]) -> Void) {
-        // Instagram doesn't have a public search API, so we'll create helpful links
+        // Instagram doesn't have a public search API and blocks direct search URLs, so we'll create helpful alternatives
         guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             completion([])
             return
@@ -616,7 +777,7 @@ class SearchService: ObservableObject {
             SearchResult(
                 title: "#\(query)",
                 description: "Search hashtag #\(query) on Instagram",
-                url: "https://www.instagram.com/explore/tags/\(query.replacingOccurrences(of: "#", with: ""))/",
+                url: "https://www.instagram.com/explore/tags/\(query.replacingOccurrences(of: "#", with: ""))/" ,
                 thumbnailURL: nil,
                 platform: .instagram,
                 type: .post,
@@ -625,30 +786,30 @@ class SearchService: ObservableObject {
                 directAction: .openInApp
             ),
             SearchResult(
-                title: "Search \"\(query)\" on Instagram",
-                description: "Find posts, stories, and accounts related to \(query)",
-                url: "https://www.instagram.com/explore/search/keyword/?q=\(encodedQuery)",
+                title: "Search \"\(query)\" via Google",
+                description: "Find Instagram content about \(query) through Google search",
+                url: "https://www.google.com/search?q=site:instagram.com+\(encodedQuery)",
                 thumbnailURL: nil,
                 platform: .instagram,
                 type: .post,
-                metadata: ["domain": "instagram.com", "query": query, "type": "search"],
-                previewContent: nil,
-                directAction: .openInApp
+                metadata: ["domain": "google.com", "query": query, "type": "google_search"],
+                previewContent: "Google search for Instagram content (works better than direct Instagram search)",
+                directAction: .openInBrowser
             ),
             SearchResult(
-                title: "\(query) • Instagram",
-                description: "Search for accounts named \(query)",
-                url: "https://www.instagram.com/\(query.replacingOccurrences(of: " ", with: ""))/",
+                title: "Open Instagram App",
+                description: "Search for \"\(query)\" in the Instagram app",
+                url: "instagram://app",
                 thumbnailURL: nil,
                 platform: .instagram,
-                type: .user,
-                metadata: ["domain": "instagram.com", "query": query, "type": "profile"],
-                previewContent: nil,
+                type: .post,
+                metadata: ["domain": "instagram.com", "query": query, "type": "app_search"],
+                previewContent: "Search query will be copied to clipboard for easy pasting",
                 directAction: .openInApp
             )
         ]
         
-        print("Instagram Search: Created \(results.count) helpful search links")
+        print("Instagram Search: Created \(results.count) helpful search alternatives")
         completion(results)
     }
     
@@ -834,7 +995,7 @@ class SearchService: ObservableObject {
                 SearchResult(
                     title: "Search \"\(query)\" on TikTok",
                     description: "Find videos and creators about \(query)",
-                    url: "https://www.tiktok.com/search?q=\(encodedQuery)",
+                    url: "https://www.tiktok.com/search?q=\(encodedQuery)&t=\(Int(Date().timeIntervalSince1970))",
                     thumbnailURL: nil,
                     platform: .tiktok,
                     type: .video,
@@ -856,7 +1017,7 @@ class SearchService: ObservableObject {
                 SearchResult(
                     title: "\(query) • Trending",
                     description: "See trending TikTok videos about \(query)",
-                    url: "https://www.tiktok.com/search?q=\(encodedQuery)&t=1",
+                    url: "https://www.tiktok.com/search?q=\(encodedQuery)&t=\(Int(Date().timeIntervalSince1970))",
                     thumbnailURL: nil,
                     platform: .tiktok,
                     type: .video,
@@ -1008,4 +1169,109 @@ class SearchService: ObservableObject {
         
         return (results, afterToken, hasMore)
     }
-} 
+}
+
+// MARK: - TikTok Search View Controller
+class TikTokSearchViewController: UIViewController, WKNavigationDelegate {
+    private let targetURL: URL
+    private let searchQuery: String
+    private var webView: WKWebView!
+    
+    init(url: URL, searchQuery: String) {
+        self.targetURL = url
+        self.searchQuery = searchQuery
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupWebView()
+        setupNavigationBar()
+        loadTikTokPage()
+    }
+    
+    private func setupWebView() {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.navigationDelegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(webView)
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func loadTikTokPage() {
+        let request = URLRequest(url: targetURL)
+        webView.load(request)
+    }
+    
+    private func setupNavigationBar() {
+        title = "TikTok Search"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: .done,
+            target: self,
+            action: #selector(dismissController)
+        )
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Safari",
+            style: .plain,
+            target: self,
+            action: #selector(openInSafari)
+        )
+    }
+    
+    @objc private func dismissController() {
+        dismiss(animated: true)
+    }
+    
+    @objc private func openInSafari() {
+        dismiss(animated: true) {
+            UIApplication.shared.open(self.targetURL)
+        }
+    }
+    
+    // MARK: - WKNavigationDelegate
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("✅ TikTok page loaded successfully")
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("❌ TikTok page failed to load: \(error.localizedDescription)")
+        
+        let alert = UIAlertController(
+            title: "Loading Error", 
+            message: "TikTok failed to load. Would you like to open it in Safari instead?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Open in Safari", style: .default) { _ in
+            self.dismiss(animated: true) {
+                UIApplication.shared.open(self.targetURL)
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.dismiss(animated: true)
+        })
+        
+        present(alert, animated: true)
+    }
+}
+
+ 

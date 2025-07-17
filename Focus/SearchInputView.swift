@@ -10,20 +10,23 @@ struct SearchInputView: View {
         VStack(spacing: 0) {
             HStack(spacing: 15) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.75))
+                    .foregroundColor(Color.focusBlue.opacity(0.75))
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                TextField("Search \(platform.displayName)...", text: $searchText)
+                TextField(getPlaceholderText(), text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .font(.body)
                     .focused($isTextFieldFocused)
+                    .disabled(platform == .tiktok)
+                    .submitLabel(.search)
                     .onSubmit {
                         onSearch()
                     }
                     .onTapGesture {
-                        // Ensure field gets focus on first tap
-                        isTextFieldFocused = true
+                        if platform == .tiktok {
+                            onSearch() // Open TikTok search page directly
+                        }
                     }
                 
                 if !searchText.isEmpty {
@@ -39,21 +42,31 @@ struct SearchInputView: View {
             }
             .padding(.horizontal, 22)
             .padding(.vertical, 18)
-            .background(.ultraThinMaterial)
+            .background(Color.glassBackground)
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isTextFieldFocused ? Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.7) : Color.white.opacity(0.20),
+                        isTextFieldFocused ? Color.focusBlue.opacity(0.7) : Color.glassStroke,
                         lineWidth: isTextFieldFocused ? 2 : 1
                     )
             )
-            .shadow(color: Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.08), radius: 10, x: 0, y: 5)
-            .contentShape(Rectangle()) // Makes entire area tappable
             .onTapGesture {
-                // Backup tap handler for the entire container
-                isTextFieldFocused = true
+                // Always try to focus when tapping the search area
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isTextFieldFocused = true
+                }
             }
+            .shadow(color: Color.shadowColor, radius: 10, x: 0, y: 5)
+        }
+    }
+    
+    private func getPlaceholderText() -> String {
+        switch platform {
+        case .tiktok:
+            return "Tap to open TikTok search"
+        default:
+            return "Search \(platform.displayName)..."
         }
     }
 }
@@ -67,7 +80,7 @@ struct SearchInputView: View {
     .padding()
     .background(
         LinearGradient(
-            colors: [Color.white, Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.12)],
+            colors: [Color.gradientTop, Color.gradientMiddle, Color.gradientBottom],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )

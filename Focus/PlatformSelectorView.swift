@@ -7,7 +7,7 @@ struct PlatformSelectorView: View {
         VStack(spacing: 15) {
             HStack {
                 Image(systemName: "globe")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color.secondaryText)
                     .font(.caption)
                 
             Text("Choose Platform")
@@ -27,7 +27,7 @@ struct PlatformSelectorView: View {
                             isSelected: selectedPlatform == platform
                         ) {
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                            selectedPlatform = platform
+                                selectedPlatform = platform
                             }
                         }
                     }
@@ -50,7 +50,8 @@ struct PlatformCard: View {
                 Image(platform.assetName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 56, height: 56) // Slightly larger for better visibility
+                    .frame(width: 72, height: 56)
+                    .scaleEffect(platform == .youtube ? 1.4 : 1.0)
                     .shadow(color: isSelected ? platform.color.opacity(0.3) : .black.opacity(0.12), radius: isSelected ? 12 : 3, x: 0, y: isSelected ? 5 : 2)
                 
                 // Platform name
@@ -64,21 +65,18 @@ struct PlatformCard: View {
             .frame(width: 90, height: 100)
             .background(
                 RoundedRectangle(cornerRadius: 22)
-                    .fill(Color.white.opacity(isSelected ? 0.3 : 0.18)) // Slightly more opaque for better visibility
-            )
-            .background(
-                isSelected ? Color.white.opacity(0.2) : Color.clear
+                    .fill(isSelected ? Color.cardBackgroundSelected : Color.cardBackground)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 22)
                     .stroke(
-                        isSelected ? platform.color : Color.white.opacity(0.25), // Slightly more visible borders
+                        isSelected ? platform.color : Color.glassStroke,
                         lineWidth: isSelected ? 2.5 : 1
                     )
             )
             .shadow(
-                color: isSelected ? platform.color.opacity(0.2) : .black.opacity(0.08),
-                radius: isSelected ? 16 : 8, // Enhanced shadows for better depth
+                color: isSelected ? Color.selectedShadowColor : Color.shadowColor,
+                radius: isSelected ? 16 : 8,
                 x: 0,
                 y: isSelected ? 8 : 4
             )
@@ -87,6 +85,8 @@ struct PlatformCard: View {
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
     }
 }
+
+
 
 #Preview {
     VStack(spacing: 30) {
@@ -97,7 +97,7 @@ struct PlatformCard: View {
         .padding()
     .background(
         LinearGradient(
-            colors: [Color.white, Color(red: 0.0, green: 0.48, blue: 1.0).opacity(0.12)],
+            colors: [Color.gradientTop, Color.gradientMiddle, Color.gradientBottom],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
