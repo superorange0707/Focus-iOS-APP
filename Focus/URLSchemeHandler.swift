@@ -74,7 +74,7 @@ class URLSchemeHandler {
         case .youtube:
             return true  // YouTube app supports search URLs
         case .instagram:
-            return true  // Instagram app supports hashtag/user searches + clipboard workaround for general search
+            return true  // Instagram app supports hashtag/user searches perfectly (no # required)
         case .x:
             return true  // X/Twitter app supports search URLs
         case .reddit:
@@ -111,18 +111,14 @@ extension URLSchemeHandler {
         case .reddit:
             return "https://www.reddit.com/search/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
         case .instagram:
-            // Use general search format that works for all types of content
-            if query.hasPrefix("#") {
-                // For hashtag searches, use the hashtag URL format
-                let cleanQuery = query.replacingOccurrences(of: "#", with: "")
-                return "https://www.instagram.com/explore/tags/\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)/"
-            } else if query.hasPrefix("@") {
+            // Use keyword search format for browser (works great, shows accounts + posts)
+            if query.hasPrefix("@") {
                 // For user searches, go directly to user profile
                 let cleanQuery = query.replacingOccurrences(of: "@", with: "")
                 return "https://www.instagram.com/\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)/"
             } else {
-                // For general searches, use Google search for Instagram content since Instagram blocks direct search URLs
-                return "https://www.google.com/search?q=site:instagram.com+\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
+                // Use keyword search format - shows both accounts and posts
+                return "https://www.instagram.com/explore/search/keyword/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
             }
         case .facebook:
             return "https://www.facebook.com/search/top/?q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
@@ -146,14 +142,13 @@ extension URLSchemeHandler {
         case .reddit:
             return "reddit://www.reddit.com/search/?q=\(encodedQuery)"
         case .instagram:
-            // Instagram only supports hashtags and users in native app
-            if query.hasPrefix("#") {
-                let cleanQuery = query.replacingOccurrences(of: "#", with: "")
-                return "instagram://tag?name=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
-            } else if !query.contains(" ") && query.count > 2 {
-                return "instagram://user?username=\(query)"
+            // Instagram supports hashtags and users perfectly in native app
+            if query.hasPrefix("@") {
+                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
+                return "instagram://user?username=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
             } else {
-                return nil // Use browser for general searches
+                // For all other queries, use hashtag format (works great as-is)
+                return "instagram://tag?name=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
             }
         case .facebook:
             return nil // Facebook app doesn't support search URLs

@@ -259,7 +259,7 @@ class SearchService: ObservableObject {
             ].map { SearchSuggestion(text: $0, type: .related, platform: platform) }
         case .instagram:
             return [
-                "#\(query)",
+                "\(query)",
                 "\(query) photos",
                 "\(query) reels",
                 "\(query) stories"
@@ -428,21 +428,17 @@ class SearchService: ObservableObject {
                 nativeURL = "reddit://www.reddit.com/search/?q=\(encodedQuery)"
                 shouldTryNative = true
             case .instagram:
-                // Instagram app supports specific hashtags and users
-                if query.hasPrefix("#") {
-                    let cleanQuery = query.replacingOccurrences(of: "#", with: "")
-                    nativeURL = "instagram://tag?name=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
-                    shouldTryNative = true
-                } else if query.hasPrefix("@") {
+                // Instagram app supports hashtags and users perfectly
+                if query.hasPrefix("@") {
                     let cleanQuery = query.replacingOccurrences(of: "@", with: "")
                     nativeURL = "instagram://user?username=\(cleanQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? cleanQuery)"
                     shouldTryNative = true
+                    print("📱 Instagram user search: \(cleanQuery)")
                 } else {
-                    // General search: try Instagram app first, then browser (with clipboard helper)
-                    nativeURL = "instagram://app"
+                    // For all other queries, use hashtag format (works great as-is)
+                    nativeURL = "instagram://tag?name=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query)"
                     shouldTryNative = true
-                    needsSpecialHandling = true
-                    print("📱 Opening Instagram app with clipboard query for general search")
+                    print("📱 Instagram hashtag search: \(query)")
                 }
             case .x:
                 // X/Twitter app DOES support search URLs perfectly
@@ -455,11 +451,11 @@ class SearchService: ObservableObject {
                 needsSpecialHandling = false
                 print("📱 Opening Facebook app with posts search")
             case .tiktok:
-                // TikTok: Use smart web-to-app redirect strategy
-                // TikTok app doesn't support direct search URLs, but web version auto-redirects to app with search query
-                print("🌐 Using TikTok web-to-app redirect strategy for search")
-                shouldTryNative = false
-                nativeURL = nil
+                // TikTok app works with web search URL format
+                nativeURL = "https://www.tiktok.com/search?q=\(encodedQuery)"
+                shouldTryNative = true
+                needsSpecialHandling = false
+                print("📱 Opening TikTok app with search")
             }
             
             // Try native app first if supported
@@ -569,6 +565,14 @@ class SearchService: ObservableObject {
             let tiktokController = TikTokSearchViewController(url: url, searchQuery: query)
             let navController = UINavigationController(rootViewController: tiktokController)
             
+            // Configure presentation style for better appearance
+            navController.modalPresentationStyle = .pageSheet
+            if let sheet = navController.sheetPresentationController {
+                sheet.detents = [.large()]
+                sheet.prefersGrabberVisible = false
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            }
+            
             // Present the TikTok controller
             rootViewController.present(navController, animated: true) {
                 completion(.success(()))
@@ -607,15 +611,12 @@ class SearchService: ObservableObject {
         case .reddit:
             return "https://www.reddit.com/search/?q=\(encodedQuery)"
         case .instagram:
-            // Instagram web search - direct to Instagram
-            if query.hasPrefix("#") {
-                let cleanQuery = query.replacingOccurrences(of: "#", with: "")
-                return "https://www.instagram.com/explore/tags/\(cleanQuery)/"
-            } else if query.hasPrefix("@") {
+            // Instagram web search - use keyword search format that works best
+            if query.hasPrefix("@") {
                 let cleanQuery = query.replacingOccurrences(of: "@", with: "")
                 return "https://www.instagram.com/\(cleanQuery)/"
             } else {
-                // For general searches, use Instagram's search page
+                // Use keyword search format - shows both accounts and posts
                 return "https://www.instagram.com/explore/search/keyword/?q=\(encodedQuery)"
             }
         case .x:
@@ -624,7 +625,7 @@ class SearchService: ObservableObject {
             // Facebook web search - top format that works in browser
             return "https://www.facebook.com/search/top?q=\(encodedQuery)"
         case .tiktok:
-            // TikTok smart redirect strategy: Use URL format that properly fills search box
+            // TikTok browser search - simple format that works in Safari
             if query.hasPrefix("#") {
                 let cleanQuery = query.replacingOccurrences(of: "#", with: "").replacingOccurrences(of: " ", with: "")
                 return "https://www.tiktok.com/tag/\(cleanQuery)"
@@ -632,7 +633,7 @@ class SearchService: ObservableObject {
                 let cleanQuery = query.replacingOccurrences(of: "@", with: "")
                 return "https://www.tiktok.com/@\(cleanQuery)"
             } else {
-                // Use standard TikTok desktop search URL - more reliable
+                // Use standard TikTok search URL that works in browser
                 return "https://www.tiktok.com/search?q=\(encodedQuery)"
             }
         }
@@ -775,14 +776,14 @@ class SearchService: ObservableObject {
         
         let results = [
             SearchResult(
-                title: "#\(query)",
-                description: "Search hashtag #\(query) on Instagram",
+                title: "Search \"\(query)\" on Instagram",
+                description: "Find posts and accounts about \(query) on Instagram",
                 url: "https://www.instagram.com/explore/tags/\(query.replacingOccurrences(of: "#", with: ""))/" ,
                 thumbnailURL: nil,
                 platform: .instagram,
                 type: .post,
                 metadata: ["domain": "instagram.com", "query": query, "type": "hashtag"],
-                previewContent: "Explore photos and videos tagged with #\(query)",
+                previewContent: "Explore content about \(query) on Instagram",
                 directAction: .openInApp
             ),
             SearchResult(
@@ -958,7 +959,6 @@ class SearchService: ObservableObject {
                 // Filter out unwanted URLs and ensure quality
                 if !url.contains("tiktok.com") &&
                    !url.contains("youtube.com") &&
-                   !title.isEmpty &&
                    title.count >= 10 &&
                    title.count <= 100 &&
                    !seenURLs.contains(url) {
@@ -1189,9 +1189,21 @@ class TikTokSearchViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewController()
         setupWebView()
         setupNavigationBar()
         loadTikTokPage()
+    }
+    
+    private func setupViewController() {
+        // Set proper background color
+        view.backgroundColor = UIColor.systemBackground
+        
+        // Configure modal presentation style
+        if let presentationController = presentationController as? UISheetPresentationController {
+            presentationController.detents = [.large()]
+            presentationController.prefersGrabberVisible = false
+        }
     }
     
     private func setupWebView() {
@@ -1219,7 +1231,29 @@ class TikTokSearchViewController: UIViewController, WKNavigationDelegate {
     
     private func setupNavigationBar() {
         title = "TikTok Search"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        // Set proper background and appearance
+        if let navigationController = navigationController {
+            let navBar = navigationController.navigationBar
+            navBar.prefersLargeTitles = false
+            
+            // Configure navigation bar appearance
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+            ]
+            
+            // Apply appearance
+            navBar.standardAppearance = appearance
+            navBar.scrollEdgeAppearance = appearance
+            navBar.compactAppearance = appearance
+            
+            // Set tint color for buttons
+            navBar.tintColor = UIColor.systemBlue
+        }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Done",
