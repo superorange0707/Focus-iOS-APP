@@ -5,6 +5,7 @@ struct SearchInputView: View {
     let platform: Platform
     let onSearch: () -> Void
     @FocusState private var isTextFieldFocused: Bool
+    @StateObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -64,10 +65,30 @@ struct SearchInputView: View {
     private func getPlaceholderText() -> String {
         switch platform {
         case .tiktok:
-            return "Tap to open TikTok search"
+            return getLocalizedTikTokText()
         default:
-            return "Search \(platform.displayName)..."
+            return getLocalizedSearchText(for: platform)
         }
+    }
+
+    private func getLocalizedTikTokText() -> String {
+        switch localizationManager.currentLanguage {
+        case "es": return "Toca para abrir búsqueda de TikTok"
+        case "fr": return "Appuyez pour ouvrir la recherche TikTok"
+        case "de": return "Tippen Sie, um TikTok-Suche zu öffnen"
+        case "it": return "Tocca per aprire la ricerca TikTok"
+        case "pt": return "Toque para abrir pesquisa do TikTok"
+        case "ru": return "Нажмите, чтобы открыть поиск TikTok"
+        case "ja": return "TikTok検索を開くにはタップ"
+        case "ko": return "TikTok 검색을 열려면 탭하세요"
+        case "zh": return "点击打开TikTok搜索"
+        default: return "Tap to open TikTok search"
+        }
+    }
+
+    private func getLocalizedSearchText(for platform: Platform) -> String {
+        let searchWord = localizationManager.localizedString(.search)
+        return "\(searchWord) \(platform.displayName)..."
     }
 }
 

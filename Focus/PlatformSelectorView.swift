@@ -2,6 +2,13 @@ import SwiftUI
 
 struct PlatformSelectorView: View {
     @Binding var selectedPlatform: Platform
+    let platforms: [Platform]
+    @StateObject private var localizationManager = LocalizationManager.shared
+
+    init(selectedPlatform: Binding<Platform>, platforms: [Platform] = Platform.allCases) {
+        self._selectedPlatform = selectedPlatform
+        self.platforms = platforms
+    }
     
     var body: some View {
         VStack(spacing: 15) {
@@ -10,7 +17,7 @@ struct PlatformSelectorView: View {
                     .foregroundColor(Color.secondaryText)
                     .font(.caption)
                 
-            Text("Choose Platform")
+            Text(localizationManager.localizedString(.choosePlatform))
                 .font(.headline)
                     .fontWeight(.semibold)
                 .foregroundColor(.primary)
@@ -21,7 +28,7 @@ struct PlatformSelectorView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 18) {
-                    ForEach(Platform.allCases, id: \.self) { platform in
+                    ForEach(platforms, id: \.self) { platform in
                         PlatformCard(
                             platform: platform,
                             isSelected: selectedPlatform == platform

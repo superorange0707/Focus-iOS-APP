@@ -4,12 +4,234 @@ import UIKit
 import SafariServices
 import WebKit
 
+// MARK: - Extensions
+extension DateFormatter {
+    static let dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+}
+
 // MARK: - Search Error Types
 enum SearchError: Error {
     case invalidQuery
     case failedToOpenURL
     case networkError
     case noResults
+}
+
+// MARK: - User Preferences & Settings
+struct UserPreferences: Codable {
+    var preferredLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
+    var autoDetectLanguage: Bool = true
+    var enableDoNotDisturb: Bool = false
+    var platformOrder: [Platform] = Platform.allCases
+    var searchMode: SearchMode = .direct
+    var dailySearchLimit: Int = 20
+    var hasSeenOnboarding: Bool = false
+
+    enum SearchMode: String, Codable, CaseIterable {
+        case direct = "direct"
+        case inApp = "in_app"
+
+        var displayName: String {
+            switch self {
+            case .direct: return "Direct Search"
+            case .inApp: return "In-App Browsing"
+            }
+        }
+    }
+
+    // Custom coding keys to handle Platform array
+    enum CodingKeys: String, CodingKey {
+        case preferredLanguage, autoDetectLanguage, enableDoNotDisturb
+        case platformOrder, searchMode, dailySearchLimit, hasSeenOnboarding
+    }
+
+    init() {
+        // Default initializer
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        preferredLanguage = try container.decodeIfPresent(String.self, forKey: .preferredLanguage) ?? "en"
+        autoDetectLanguage = try container.decodeIfPresent(Bool.self, forKey: .autoDetectLanguage) ?? true
+        enableDoNotDisturb = try container.decodeIfPresent(Bool.self, forKey: .enableDoNotDisturb) ?? false
+        searchMode = try container.decodeIfPresent(SearchMode.self, forKey: .searchMode) ?? .direct
+        dailySearchLimit = try container.decodeIfPresent(Int.self, forKey: .dailySearchLimit) ?? 20
+        hasSeenOnboarding = try container.decodeIfPresent(Bool.self, forKey: .hasSeenOnboarding) ?? false
+
+        // Handle platform order with fallback
+        if let platformStrings = try? container.decode([String].self, forKey: .platformOrder) {
+            platformOrder = platformStrings.compactMap { Platform(rawValue: $0) }
+            if platformOrder.isEmpty {
+                platformOrder = Platform.allCases
+            }
+        } else {
+            platformOrder = Platform.allCases
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(preferredLanguage, forKey: .preferredLanguage)
+        try container.encode(autoDetectLanguage, forKey: .autoDetectLanguage)
+        try container.encode(enableDoNotDisturb, forKey: .enableDoNotDisturb)
+        try container.encode(platformOrder.map { $0.rawValue }, forKey: .platformOrder)
+        try container.encode(searchMode, forKey: .searchMode)
+        try container.encode(dailySearchLimit, forKey: .dailySearchLimit)
+        try container.encode(hasSeenOnboarding, forKey: .hasSeenOnboarding)
+    }
+}
+
+// MARK: - Usage Analytics
+struct UsageAnalytics: Codable {
+    var totalSearches: Int = 0
+    var searchesByPlatform: [String: Int] = [:]
+    var dailySearches: [String: Int] = [:] // Date string -> count
+    var timeSpentOnPlatforms: [String: TimeInterval] = [:]
+    var lastResetDate: Date = Date()
+    var averageTimePerSearch: TimeInterval = 30.0 // seconds
+
+    // Custom coding keys
+    enum CodingKeys: String, CodingKey {
+        case totalSearches, searchesByPlatform, dailySearches
+        case timeSpentOnPlatforms, lastResetDate, averageTimePerSearch
+    }
+
+    init() {
+        // Default initializer
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        totalSearches = try container.decodeIfPresent(Int.self, forKey: .totalSearches) ?? 0
+        searchesByPlatform = try container.decodeIfPresent([String: Int].self, forKey: .searchesByPlatform) ?? [:]
+        dailySearches = try container.decodeIfPresent([String: Int].self, forKey: .dailySearches) ?? [:]
+        timeSpentOnPlatforms = try container.decodeIfPresent([String: TimeInterval].self, forKey: .timeSpentOnPlatforms) ?? [:]
+        lastResetDate = try container.decodeIfPresent(Date.self, forKey: .lastResetDate) ?? Date()
+        averageTimePerSearch = try container.decodeIfPresent(TimeInterval.self, forKey: .averageTimePerSearch) ?? 30.0
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(totalSearches, forKey: .totalSearches)
+        try container.encode(searchesByPlatform, forKey: .searchesByPlatform)
+        try container.encode(dailySearches, forKey: .dailySearches)
+        try container.encode(timeSpentOnPlatforms, forKey: .timeSpentOnPlatforms)
+        try container.encode(lastResetDate, forKey: .lastResetDate)
+        try container.encode(averageTimePerSearch, forKey: .averageTimePerSearch)
+    }
+
+    mutating func recordSearch(platform: Platform) {
+        totalSearches += 1
+        searchesByPlatform[platform.rawValue, default: 0] += 1
+
+        let dateKey = DateFormatter.dayFormatter.string(from: Date())
+        dailySearches[dateKey, default: 0] += 1
+    }
+
+    func getTodaysSearchCount() -> Int {
+        let today = DateFormatter.dayFormatter.string(from: Date())
+        return dailySearches[today, default: 0]
+    }
+
+    func getTimeSaved() -> TimeInterval {
+        // Based on research: average time spent on social media before finding content
+        let averageWastedTime: TimeInterval = 180.0 // 3 minutes per search
+        let timeSavedPerSearch = averageWastedTime - averageTimePerSearch
+        return Double(totalSearches) * timeSavedPerSearch
+    }
+
+    func getTimeSavedToday() -> TimeInterval {
+        let todaySearches = getTodaysSearchCount()
+        let averageWastedTime: TimeInterval = 180.0
+        let timeSavedPerSearch = averageWastedTime - averageTimePerSearch
+        return Double(todaySearches) * timeSavedPerSearch
+    }
+}
+
+// MARK: - Search History
+struct SearchHistoryItem: Codable, Identifiable {
+    let id: UUID
+    let query: String
+    let platform: Platform
+    let timestamp: Date
+    let resultCount: Int?
+
+    // Custom coding keys
+    enum CodingKeys: String, CodingKey {
+        case id, query, platform, timestamp, resultCount
+    }
+
+    init(query: String, platform: Platform, timestamp: Date = Date(), resultCount: Int? = nil) {
+        self.id = UUID()
+        self.query = query
+        self.platform = platform
+        self.timestamp = timestamp
+        self.resultCount = resultCount
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        query = try container.decode(String.self, forKey: .query)
+        timestamp = try container.decode(Date.self, forKey: .timestamp)
+        resultCount = try container.decodeIfPresent(Int.self, forKey: .resultCount)
+
+        // Handle platform decoding
+        let platformString = try container.decode(String.self, forKey: .platform)
+        guard let decodedPlatform = Platform(rawValue: platformString) else {
+            throw DecodingError.dataCorruptedError(forKey: .platform, in: container, debugDescription: "Invalid platform value")
+        }
+        platform = decodedPlatform
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(query, forKey: .query)
+        try container.encode(platform.rawValue, forKey: .platform)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(resultCount, forKey: .resultCount)
+    }
+
+    var timeAgo: String {
+        return LocalizationManager.shared.formatRelativeTime(for: timestamp)
+    }
+}
+
+// MARK: - Premium Features
+enum PremiumFeature: String, CaseIterable {
+    case inAppBrowsing = "in_app_browsing"
+    case searchHistory = "search_history"
+    case doNotDisturb = "do_not_disturb"
+    case advancedSearch = "advanced_search"
+    case contentSummary = "content_summary"
+    case unlimitedSearches = "unlimited_searches"
+
+    var displayName: String {
+        switch self {
+        case .inAppBrowsing: return "In-App Browsing"
+        case .searchHistory: return "Search History"
+        case .doNotDisturb: return "Auto Do Not Disturb"
+        case .advancedSearch: return "Advanced Search Filters"
+        case .contentSummary: return "Content Summarization"
+        case .unlimitedSearches: return "Unlimited Searches"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .inAppBrowsing: return "Browse search results within the app"
+        case .searchHistory: return "Keep track of your search history"
+        case .doNotDisturb: return "Automatically enable Do Not Disturb when opening the app"
+        case .advancedSearch: return "Use advanced filters for more precise searches"
+        case .contentSummary: return "Get AI-powered summaries of videos and posts"
+        case .unlimitedSearches: return "Remove daily search limits"
+        }
+    }
 }
 
 // MARK: - Platform Definitions
@@ -601,42 +823,8 @@ class SearchService: ObservableObject {
     }
     
     private func getBrowserURL(platform: Platform, query: String) -> String {
-        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            return "https://www.google.com/search?q=\(query)"
-        }
-        
-        switch platform {
-        case .youtube:
-            return "https://www.youtube.com/results?search_query=\(encodedQuery)"
-        case .reddit:
-            return "https://www.reddit.com/search/?q=\(encodedQuery)"
-        case .instagram:
-            // Instagram web search - use keyword search format that works best
-            if query.hasPrefix("@") {
-                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
-                return "https://www.instagram.com/\(cleanQuery)/"
-            } else {
-                // Use keyword search format - shows both accounts and posts
-                return "https://www.instagram.com/explore/search/keyword/?q=\(encodedQuery)"
-            }
-        case .x:
-            return "https://x.com/search?q=\(encodedQuery)"
-        case .facebook:
-            // Facebook web search - top format that works in browser
-            return "https://www.facebook.com/search/top?q=\(encodedQuery)"
-        case .tiktok:
-            // TikTok browser search - simple format that works in Safari
-            if query.hasPrefix("#") {
-                let cleanQuery = query.replacingOccurrences(of: "#", with: "").replacingOccurrences(of: " ", with: "")
-                return "https://www.tiktok.com/tag/\(cleanQuery)"
-            } else if query.hasPrefix("@") {
-                let cleanQuery = query.replacingOccurrences(of: "@", with: "")
-                return "https://www.tiktok.com/@\(cleanQuery)"
-            } else {
-                // Use standard TikTok search URL that works in browser
-                return "https://www.tiktok.com/search?q=\(encodedQuery)"
-            }
-        }
+        // Use LanguageManager for localized URLs
+        return LanguageManager.shared.getLocalizedSearchURL(for: platform, query: query)
     }
     
     // Removed loadMoreResults - free tier uses direct navigation only

@@ -5,8 +5,17 @@ struct ContentView: View {
     @State private var selectedPlatform: Platform = .youtube
     @State private var searchText = ""
     @State private var isSearching = false
-    // Removed showingResults state - not needed for free tier direct navigation
+    @State private var showingSettings = false
+    @State private var showingData = false
+    @State private var showingPremiumUpgrade = false
+    @State private var showingSearchLimitAlert = false
+
     @StateObject private var searchService = SearchService.shared
+    @StateObject private var userPreferences = UserPreferencesManager.shared
+    @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    @StateObject private var premiumManager = PremiumManager.shared
+    @StateObject private var doNotDisturbManager = DoNotDisturbManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
         ZStack {
@@ -27,26 +36,44 @@ struct ContentView: View {
             }
             
             VStack(spacing: 28) {
-                // App title with better integration - no separate card, blend with background
-                VStack(spacing: 8) {
-                Text("Focus Search")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
-                        .foregroundColor(Color.focusBlue)
-                        .shadow(color: Color.backgroundPrimary.opacity(0.8), radius: 12, x: 0, y: 3)
-                    
-                    Text("Search directly, stay focused")
-                        .font(.subheadline)
-                        .foregroundColor(Color.secondaryText)
-                        .fontWeight(.medium)
-                    
-                    // Free tier launch - no premium features
+                // Header with navigation
+                HStack {
+                    Button(action: { showingData = true }) {
+                        Image(systemName: "chart.bar.fill")
+                            .font(.title3)
+                            .foregroundColor(.focusBlue)
+                    }
+
+                    Spacer()
+
+                    VStack(spacing: 4) {
+                        Text("SkipFeed")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(Color.focusBlue)
+
+                        Text("Skip the feed, find what matters")
+                            .font(.caption)
+                            .foregroundColor(Color.secondaryText)
+                            .fontWeight(.medium)
+                    }
+
+                    Spacer()
+
+                    Button(action: { showingSettings = true }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.title3)
+                            .foregroundColor(.focusBlue)
+                    }
                 }
-                .padding(.top, 25)
-                .padding(.bottom, 15)
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
                 
-                // Platform selector
-                PlatformSelectorView(selectedPlatform: $selectedPlatform)
-                    .padding(.top, 2)
+                // Platform selector with dynamic ordering
+                PlatformSelectorView(
+                    selectedPlatform: $selectedPlatform,
+                    platforms: userPreferences.getOrderedPlatforms()
+                )
+                .padding(.top, 2)
                 
                 // Search section
                 VStack(spacing: 18) {
@@ -64,7 +91,7 @@ struct ContentView: View {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(Color.focusBlue)
                                 .font(.caption2)
-                            Text("Search directly in your favorite apps")
+                            Text(localizationManager.localizedString(.searchPlaceholder))
                                 .font(.caption2)
                                 .foregroundColor(Color.secondaryText)
                             Spacer()
@@ -132,14 +159,14 @@ struct ContentView: View {
                                 .foregroundColor(Color.focusBlue)
                                 .font(.caption)
                             
-                            Text("Recent Searches")
+                            Text(localizationManager.localizedString(.recentSearches))
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundColor(Color.secondaryText)
-                            
+
                             Spacer()
-                            
-                            Button("Clear") {
+
+                            Button(localizationManager.localizedString(.clear)) {
                                 searchService.recentSearches.removeAll()
                             }
                             .font(.caption2)
@@ -180,13 +207,13 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                // Footer with app info - restored original
+                // Footer with app info
                 VStack(spacing: 8) {
-                    Text("Focus on what matters")
+                    Text("Skip the feed, find what matters")
                         .font(.caption)
                         .foregroundColor(Color.focusBlue.opacity(0.7))
-                    
-                    Text("No distractions, just results")
+
+                    Text("Direct search, zero distractions")
                         .font(.caption2)
                         .foregroundColor(Color.tertiaryText)
                 }
@@ -196,7 +223,31 @@ struct ContentView: View {
             // Removed SearchResultsView overlay - free tier uses direct navigation only
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: searchText.isEmpty)
-        // No premium upgrade popup in free tier
+        .sheet(isPresented: $showingData) {
+            DataView()
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+        }
+        .sheet(isPresented: $showingPremiumUpgrade) {
+            PremiumUpgradeView()
+        }
+        .alert("Search Limit Reached", isPresented: $showingSearchLimitAlert) {
+            Button("Upgrade to Premium") {
+                showingPremiumUpgrade = true
+            }
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("You've reached your daily search limit of \(userPreferences.preferences.dailySearchLimit) searches. Upgrade to Premium for unlimited searches!")
+        }
+        .onAppear {
+            // Start trial if user hasn't started it yet
+            if !premiumManager.isPremiumUser && !premiumManager.isTrialActive {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    // Show trial offer after a delay
+                }
+            }
+        }
     }
     
     private func hideKeyboard() {
@@ -211,48 +262,72 @@ struct ContentView: View {
     private func getSimpleSearchButtonText() -> String {
         // Special handling for TikTok - users input query in WebView
         if selectedPlatform == .tiktok {
-            return "Open TikTok Search"
+            return localizationManager.localizedString(.openTikTokSearch)
         }
-        
+
         // Check if native app is available for other platforms
         if URLSchemeHandler.shared.canOpenNativeApp(platform: selectedPlatform) {
-            return "Open in \(selectedPlatform.displayName) App"
+            return "\(localizationManager.localizedString(.openIn)) \(selectedPlatform.displayName) App"
         } else {
-            return "Search on \(selectedPlatform.displayName)"
+            return "\(localizationManager.localizedString(.searchOn)) \(selectedPlatform.displayName)"
         }
     }
     
     private func performSearch() {
+        // Check search limits for free users
+        if !premiumManager.isPremiumFeatureAvailable(.unlimitedSearches) {
+            if !analyticsManager.canPerformSearch() {
+                showingSearchLimitAlert = true
+                return
+            }
+        }
+
+        // Enable Do Not Disturb if preference is set
+        if premiumManager.isPremiumFeatureAvailable(.doNotDisturb) && userPreferences.isDoNotDisturbEnabled() {
+            doNotDisturbManager.enableDoNotDisturb()
+        }
+
         // Special handling for TikTok - no search text required
         if selectedPlatform == .tiktok {
-            // For TikTok, open search page directly where users can input their query
             hideKeyboard()
             isSearching = true
+
+            // Record analytics
+            analyticsManager.recordSearch(for: selectedPlatform)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 let success = searchService.directSearch(query: "", platform: selectedPlatform)
                 self.isSearching = false
-                
+
                 if !success {
                     print("Failed to open \(selectedPlatform.displayName)")
                 }
             }
             return
         }
-        
+
         // For other platforms, require search text
         guard !searchText.isEmpty else { return }
-        
+
         // Dismiss keyboard when performing search
         hideKeyboard()
-        
-        // Free tier - always use direct search
+
+        // Record analytics and search history
+        analyticsManager.recordSearch(for: selectedPlatform)
+
+        if premiumManager.isPremiumFeatureAvailable(.searchHistory) {
+            SearchHistoryManager.shared.addSearchToHistory(
+                query: searchText,
+                platform: selectedPlatform
+            )
+        }
+
         isSearching = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // Small delay for UX
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let success = searchService.directSearch(query: searchText, platform: selectedPlatform)
             self.isSearching = false
-            
+
             if !success {
-                // Show error message or fallback
                 print("Failed to open \(selectedPlatform.displayName)")
             }
         }
