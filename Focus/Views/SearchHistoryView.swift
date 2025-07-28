@@ -84,11 +84,18 @@ struct SearchHistoryView: View {
                 } else {
                     List {
                         ForEach(filteredHistory) { item in
-                            SearchHistoryRow(item: item) {
-                                // Repeat search
-                                searchService.directSearch(query: item.query, platform: item.platform)
-                                dismiss()
-                            }
+                            SearchHistoryRow(
+                                item: item,
+                                onRepeatSearch: {
+                                    // Repeat search
+                                    searchService.directSearch(query: item.query, platform: item.platform)
+                                    dismiss()
+                                },
+                                onDelete: {
+                                    // Delete individual item properly
+                                    searchHistoryManager.deleteItem(withId: item.id)
+                                }
+                            )
                         }
                         .onDelete(perform: deleteItems)
                     }
@@ -117,12 +124,8 @@ struct SearchHistoryView: View {
     }
     
     private func deleteItems(offsets: IndexSet) {
-        for index in offsets {
-            let item = filteredHistory[index]
-            if let originalIndex = searchHistoryManager.searchHistory.firstIndex(where: { $0.id == item.id }) {
-                searchHistoryManager.searchHistory.remove(at: originalIndex)
-            }
-        }
+        let itemsToDelete = offsets.map { filteredHistory[$0].id }
+        searchHistoryManager.deleteItems(withIds: Set(itemsToDelete))
     }
 }
 
@@ -130,9 +133,41 @@ struct SearchHistoryView: View {
 struct SearchHistoryRow: View {
     let item: SearchHistoryItem
     let onRepeatSearch: () -> Void
-    
+    let onDelete: (() -> Void)?
+    let isSelectionMode: Bool
+    let isSelected: Bool
+    let onSelectionToggle: (() -> Void)?
+
+    init(
+        item: SearchHistoryItem,
+        onRepeatSearch: @escaping () -> Void,
+        onDelete: (() -> Void)? = nil,
+        isSelectionMode: Bool = false,
+        isSelected: Bool = false,
+        onSelectionToggle: (() -> Void)? = nil
+    ) {
+        self.item = item
+        self.onRepeatSearch = onRepeatSearch
+        self.onDelete = onDelete
+        self.isSelectionMode = isSelectionMode
+        self.isSelected = isSelected
+        self.onSelectionToggle = onSelectionToggle
+    }
+
     var body: some View {
         HStack(spacing: 12) {
+            // Selection circle (in selection mode)
+            if isSelectionMode {
+                Button(action: {
+                    onSelectionToggle?()
+                }) {
+                    Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                        .font(.system(size: 20))
+                        .foregroundColor(isSelected ? .focusBlue : .secondary)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+
             // Platform icon
             Image(item.platform.assetName)
                 .resizable()
@@ -140,14 +175,14 @@ struct SearchHistoryRow: View {
                 .frame(width: 32, height: 32)
                 .background(Color.cardBackground)
                 .cornerRadius(8)
-            
+
             // Search details
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.query)
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .lineLimit(2)
-                
+
                 HStack {
                     Text(item.platform.displayName)
                         .font(.caption)
@@ -156,29 +191,54 @@ struct SearchHistoryRow: View {
                         .padding(.vertical, 2)
                         .background(Color.focusBlue.opacity(0.1))
                         .cornerRadius(4)
-                    
+
                     Text(item.timeAgo)
                         .font(.caption)
                         .foregroundColor(.secondaryText)
-                    
+
                     Spacer()
                 }
             }
             
             Spacer()
-            
-            // Repeat search button
-            Button(action: onRepeatSearch) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.title3)
-                    .foregroundColor(.focusBlue)
+
+            // Action buttons (hidden in selection mode)
+            if !isSelectionMode {
+                HStack(spacing: 12) {
+                    // Delete button
+                    if let onDelete = onDelete {
+                        Button(action: onDelete) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.red)
+                                .frame(width: 32, height: 32)
+                                .background(Color.red.opacity(0.1))
+                                .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+
+                    // Repeat search button
+                    Button(action: onRepeatSearch) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(.focusBlue)
+                            .frame(width: 32, height: 32)
+                            .background(Color.focusBlue.opacity(0.1))
+                            .cornerRadius(8)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
             }
-            .buttonStyle(PlainButtonStyle())
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
         .onTapGesture {
-            onRepeatSearch()
+            if isSelectionMode {
+                onSelectionToggle?()
+            } else {
+                onRepeatSearch()
+            }
         }
     }
 }

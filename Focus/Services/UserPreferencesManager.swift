@@ -45,6 +45,26 @@ class UserPreferencesManager: ObservableObject {
         newOrder.insert(platform, at: 0)
         preferences.platformOrder = newOrder
     }
+
+    func updatePlatformOrderByUsage(_ platformUsage: [String: Int]) {
+        // Create a sorted list of platforms based on usage frequency
+        let sortedPlatforms = platformUsage.compactMap { (key: String, count: Int) -> (Platform, Int)? in
+            guard let platform = Platform(rawValue: key) else { return nil }
+            return (platform, count)
+        }.sorted { (first: (Platform, Int), second: (Platform, Int)) -> Bool in
+            return first.1 > second.1
+        }.map { (platformTuple: (Platform, Int)) -> Platform in
+            return platformTuple.0
+        }
+
+        // Get platforms that haven't been used yet (maintain their original order)
+        let unusedPlatforms = Platform.allCases.filter { platform in
+            !sortedPlatforms.contains(platform)
+        }
+
+        // Combine: most used platforms first, then unused platforms in original order
+        preferences.platformOrder = sortedPlatforms + unusedPlatforms
+    }
     
     // MARK: - Language Settings
     func updateLanguage(_ languageCode: String) {
@@ -131,9 +151,9 @@ class UsageAnalyticsManager: ObservableObject {
     // MARK: - Search Tracking
     func recordSearch(for platform: Platform) {
         analytics.recordSearch(platform: platform)
-        
-        // Update platform ordering based on usage
-        UserPreferencesManager.shared.movePlatformToTop(platform)
+
+        // Update platform ordering based on actual usage frequency
+        UserPreferencesManager.shared.updatePlatformOrderByUsage(analytics.searchesByPlatform)
     }
     
     func getTotalSearches() -> Int {
@@ -159,18 +179,7 @@ class UsageAnalyticsManager: ObservableObject {
         }.sorted { $0.1 > $1.1 }
     }
     
-    // MARK: - Daily Limits
-    func canPerformSearch() -> Bool {
-        let todaySearches = getTodaysSearches()
-        let limit = UserPreferencesManager.shared.preferences.dailySearchLimit
-        return todaySearches < limit
-    }
-    
-    func getRemainingSearches() -> Int {
-        let todaySearches = getTodaysSearches()
-        let limit = UserPreferencesManager.shared.preferences.dailySearchLimit
-        return max(0, limit - todaySearches)
-    }
+
 
     // MARK: - Search History Integration
     func getRecentSearchHistory(limit: Int = 20) -> [SearchHistoryItem] {
@@ -231,7 +240,19 @@ class SearchHistoryManager: ObservableObject {
         searchHistory.removeAll()
         saveSearchHistory()
     }
-    
+
+    func deleteItem(withId id: UUID) {
+        if let index = searchHistory.firstIndex(where: { $0.id == id }) {
+            searchHistory.remove(at: index)
+            saveSearchHistory()
+        }
+    }
+
+    func deleteItems(withIds ids: Set<UUID>) {
+        searchHistory.removeAll { ids.contains($0.id) }
+        saveSearchHistory()
+    }
+
     func getRecentSearches(limit: Int = 10) -> [SearchHistoryItem] {
         return Array(searchHistory.prefix(limit))
     }

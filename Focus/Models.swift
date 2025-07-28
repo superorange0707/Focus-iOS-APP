@@ -28,7 +28,6 @@ struct UserPreferences: Codable {
     var enableDoNotDisturb: Bool = false
     var platformOrder: [Platform] = Platform.allCases
     var searchMode: SearchMode = .direct
-    var dailySearchLimit: Int = 20
     var hasSeenOnboarding: Bool = false
 
     enum SearchMode: String, Codable, CaseIterable {
@@ -46,7 +45,7 @@ struct UserPreferences: Codable {
     // Custom coding keys to handle Platform array
     enum CodingKeys: String, CodingKey {
         case preferredLanguage, autoDetectLanguage, enableDoNotDisturb
-        case platformOrder, searchMode, dailySearchLimit, hasSeenOnboarding
+        case platformOrder, searchMode, hasSeenOnboarding
     }
 
     init() {
@@ -59,7 +58,6 @@ struct UserPreferences: Codable {
         autoDetectLanguage = try container.decodeIfPresent(Bool.self, forKey: .autoDetectLanguage) ?? true
         enableDoNotDisturb = try container.decodeIfPresent(Bool.self, forKey: .enableDoNotDisturb) ?? false
         searchMode = try container.decodeIfPresent(SearchMode.self, forKey: .searchMode) ?? .direct
-        dailySearchLimit = try container.decodeIfPresent(Int.self, forKey: .dailySearchLimit) ?? 20
         hasSeenOnboarding = try container.decodeIfPresent(Bool.self, forKey: .hasSeenOnboarding) ?? false
 
         // Handle platform order with fallback
@@ -80,7 +78,6 @@ struct UserPreferences: Codable {
         try container.encode(enableDoNotDisturb, forKey: .enableDoNotDisturb)
         try container.encode(platformOrder.map { $0.rawValue }, forKey: .platformOrder)
         try container.encode(searchMode, forKey: .searchMode)
-        try container.encode(dailySearchLimit, forKey: .dailySearchLimit)
         try container.encode(hasSeenOnboarding, forKey: .hasSeenOnboarding)
     }
 }

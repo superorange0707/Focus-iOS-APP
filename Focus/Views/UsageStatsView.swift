@@ -45,12 +45,6 @@ struct UsageStatsView: View {
                             .padding(.horizontal, 20)
                     }
 
-                    // Daily Progress Section (for free users)
-                    if !premiumManager.isPremiumUser {
-                        ModernDailyLimitCard()
-                            .padding(.horizontal, 20)
-                    }
-
                     // Insights Section
                     ModernInsightsCard(
                         todayTimeSaved: analyticsManager.getTimeSavedToday(),
@@ -115,7 +109,7 @@ struct HeroStatCard: View {
         VStack(spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
+                    HStack(spacing: 8) {
                         Image(systemName: icon)
                             .font(.title2)
                             .foregroundStyle(.white)
@@ -124,6 +118,8 @@ struct HeroStatCard: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                     }
 
                     Text(value)
@@ -133,6 +129,8 @@ struct HeroStatCard: View {
                     Text(subtitle)
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.8))
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.9)
                 }
 
                 Spacer()
@@ -147,7 +145,7 @@ struct HeroStatCard: View {
             )
         )
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: gradient.first?.opacity(0.3) ?? .clear, radius: 20, x: 0, y: 10)
+        .shadow(color: .black.opacity(0.1), radius: 20, x: 0, y: 10)
     }
 }
 
@@ -282,81 +280,7 @@ struct ModernPlatformRow: View {
     }
 }
 
-struct ModernDailyLimitCard: View {
-    @StateObject private var analyticsManager = UsageAnalyticsManager.shared
-    @StateObject private var premiumManager = PremiumManager.shared
-    @StateObject private var localizationManager = LocalizationManager.shared
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Image(systemName: "hourglass.circle.fill")
-                    .font(.title3)
-                    .foregroundColor(.orange)
-
-                Text(localizationManager.localizedString(.dailyLimit))
-                    .font(.headline)
-                    .fontWeight(.semibold)
-
-                Spacer()
-
-                if premiumManager.isTrialActive {
-                    Text(localizationManager.formatTrialText(premiumManager.trialDaysRemaining))
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .foregroundColor(.orange)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.orange.opacity(0.1))
-                        .clipShape(Capsule())
-                }
-            }
-
-            let remaining = analyticsManager.getRemainingSearches()
-            let total = UserPreferencesManager.shared.preferences.dailySearchLimit
-            let used = total - remaining
-            let progress = Double(used) / Double(total)
-
-            VStack(spacing: 12) {
-                HStack {
-                    Text(localizationManager.formatLimitText(used, total))
-                        .font(.title3)
-                        .fontWeight(.semibold)
-
-                    Spacer()
-
-                    Text(localizationManager.formatRemainingText(remaining))
-                        .font(.subheadline)
-                        .foregroundColor(remaining > 5 ? .green : .orange)
-                        .fontWeight(.medium)
-                }
-
-                ProgressView(value: progress)
-                    .progressViewStyle(LinearProgressViewStyle(tint: remaining > 5 ? .green : .orange))
-                    .scaleEffect(y: 2)
-
-                if remaining <= 3 && remaining > 0 {
-                    HStack {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .foregroundColor(.orange)
-                            .font(.caption)
-
-                        Text("Running low! Upgrade for unlimited searches.")
-                            .font(.caption)
-                            .foregroundColor(.orange)
-
-                        Spacer()
-                    }
-                    .padding(.top, 4)
-                }
-            }
-        }
-        .padding(20)
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-    }
-}
 
 struct ModernInsightsCard: View {
     let todayTimeSaved: TimeInterval

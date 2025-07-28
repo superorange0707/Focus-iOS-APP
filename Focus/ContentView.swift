@@ -8,7 +8,6 @@ struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingData = false
     @State private var showingPremiumUpgrade = false
-    @State private var showingSearchLimitAlert = false
 
     @StateObject private var searchService = SearchService.shared
     @StateObject private var userPreferences = UserPreferencesManager.shared
@@ -85,18 +84,10 @@ struct ContentView: View {
                             platform: selectedPlatform,
                             onSearch: performSearch
                         )
-                        
-                        // Simple info text for free tier
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(Color.focusBlue)
-                                .font(.caption2)
-                            Text(localizationManager.localizedString(.searchPlaceholder))
-                                .font(.caption2)
-                                .foregroundColor(Color.secondaryText)
-                            Spacer()
-                        }
-                        .padding(.horizontal, 5)
+
+                        // Search mode toggle under search bar with reduced spacing
+                        SearchModeToggleView()
+                            .padding(.top, -6)
                     } else {
                         // For TikTok, show a simple message
                         HStack {
@@ -232,14 +223,7 @@ struct ContentView: View {
         .sheet(isPresented: $showingPremiumUpgrade) {
             PremiumUpgradeView()
         }
-        .alert("Search Limit Reached", isPresented: $showingSearchLimitAlert) {
-            Button("Upgrade to Premium") {
-                showingPremiumUpgrade = true
-            }
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("You've reached your daily search limit of \(userPreferences.preferences.dailySearchLimit) searches. Upgrade to Premium for unlimited searches!")
-        }
+
         .onAppear {
             // Start trial if user hasn't started it yet
             if !premiumManager.isPremiumUser && !premiumManager.isTrialActive {
@@ -274,14 +258,6 @@ struct ContentView: View {
     }
     
     private func performSearch() {
-        // Check search limits for free users
-        if !premiumManager.isPremiumFeatureAvailable(.unlimitedSearches) {
-            if !analyticsManager.canPerformSearch() {
-                showingSearchLimitAlert = true
-                return
-            }
-        }
-
         // Enable Do Not Disturb if preference is set
         if premiumManager.isPremiumFeatureAvailable(.doNotDisturb) && userPreferences.isDoNotDisturbEnabled() {
             doNotDisturbManager.enableDoNotDisturb()
@@ -324,7 +300,18 @@ struct ContentView: View {
 
         isSearching = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+            let searchMode = userPreferences.getSearchMode()
+            let success: Bool
+
+            switch searchMode {
+            case .direct:
+                success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+            case .inApp:
+                // For in-app browsing, we would show results in a web view
+                // For now, fall back to direct search
+                success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+            }
+
             self.isSearching = false
 
             if !success {
@@ -336,6 +323,84 @@ struct ContentView: View {
 
 // Premium upgrade views removed for free tier launch
 
+// MARK: - Search Mode Toggle View
+struct SearchModeToggleView: View {
+    @StateObject private var userPreferences = UserPreferencesManager.shared
+    @StateObject private var premiumManager = PremiumManager.shared
+    @State private var showingPremiumUpgrade = false
+
+    var body: some View {
+        HStack(spacing: 12) {
+            // Simple toggle switch like the AUTO example you showed
+            HStack(spacing: 0) {
+                // Direct mode button
+                Button(action: {
+                    userPreferences.setSearchMode(.direct)
+                }) {
+                    Text("Direct")
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(userPreferences.getSearchMode() == .direct ? .white : Color.primary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(
+                            userPreferences.getSearchMode() == .direct ?
+                            Color.focusBlue : Color.clear
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .buttonStyle(PlainButtonStyle())
+
+                // In-App mode button
+                Button(action: {
+                    if premiumManager.isPremiumUser || premiumManager.isTrialActive {
+                        userPreferences.setSearchMode(.inApp)
+                    } else {
+                        showingPremiumUpgrade = true
+                    }
+                }) {
+                    HStack(spacing: 4) {
+                        Text("In-App")
+                            .font(.caption)
+                            .fontWeight(.medium)
+
+                        // Premium crown indicator
+                        if !premiumManager.isPremiumUser && !premiumManager.isTrialActive {
+                            Image(systemName: "crown.fill")
+                                .font(.caption2)
+                                .foregroundColor(.yellow)
+                        }
+                    }
+                    .foregroundColor(userPreferences.getSearchMode() == .inApp ? .white : Color.primary)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(
+                        userPreferences.getSearchMode() == .inApp ?
+                        Color.focusBlue : Color.clear
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .buttonStyle(PlainButtonStyle())
+                .opacity(!premiumManager.isPremiumUser && !premiumManager.isTrialActive ? 0.7 : 1.0)
+            }
+            .padding(4)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemGray6))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color(.systemGray4), lineWidth: 0.5)
+                    )
+            )
+
+            Spacer()
+        }
+        .sheet(isPresented: $showingPremiumUpgrade) {
+            PremiumUpgradeView()
+        }
+    }
+}
+
 #Preview {
     ContentView()
-} 
+}

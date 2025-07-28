@@ -224,16 +224,16 @@ class LocalizationManager: ObservableObject {
     
     private func getSearchPlaceholder() -> String {
         switch currentLanguage {
-        case "es": return "Buscar en todas las plataformas..."
-        case "fr": return "Rechercher sur toutes les plateformes..."
-        case "de": return "Auf allen Plattformen suchen..."
-        case "it": return "Cerca su tutte le piattaforme..."
-        case "pt": return "Pesquisar em todas as plataformas..."
-        case "ru": return "Поиск на всех платформах..."
-        case "ja": return "すべてのプラットフォームで検索..."
-        case "ko": return "모든 플랫폼에서 검색..."
-        case "zh": return "在所有平台搜索..."
-        default: return "Search across all platforms..."
+        case "es": return "Buscar contenido..."
+        case "fr": return "Rechercher du contenu..."
+        case "de": return "Inhalte suchen..."
+        case "it": return "Cerca contenuti..."
+        case "pt": return "Pesquisar conteúdo..."
+        case "ru": return "Поиск контента..."
+        case "ja": return "コンテンツを検索..."
+        case "ko": return "콘텐츠 검색..."
+        case "zh": return "搜索内容..."
+        default: return "Search content..."
         }
     }
     
@@ -374,16 +374,16 @@ class LocalizationManager: ObservableObject {
     
     private func getTotalSearchesText() -> String {
         switch currentLanguage {
-        case "es": return "Búsquedas Totales"
-        case "fr": return "Recherches Totales"
-        case "de": return "Gesamte Suchen"
-        case "it": return "Ricerche Totali"
-        case "pt": return "Pesquisas Totais"
-        case "ru": return "Всего Поисков"
-        case "ja": return "総検索数"
-        case "ko": return "총 검색"
-        case "zh": return "总搜索"
-        default: return "Total Searches"
+        case "es": return "Total"
+        case "fr": return "Total"
+        case "de": return "Gesamt"
+        case "it": return "Totale"
+        case "pt": return "Total"
+        case "ru": return "Всего"
+        case "ja": return "合計"
+        case "ko": return "총계"
+        case "zh": return "总计"
+        default: return "Total"
         }
     }
     

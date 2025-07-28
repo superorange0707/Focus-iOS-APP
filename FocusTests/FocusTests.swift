@@ -55,17 +55,7 @@ struct FocusTests {
         #expect(manager.getTimeSaved() > 0)
     }
 
-    @Test func dailySearchLimits() async throws {
-        let analyticsManager = UsageAnalyticsManager.shared
-        let preferencesManager = UserPreferencesManager.shared
 
-        // Set a low limit for testing
-        preferencesManager.preferences.dailySearchLimit = 2
-
-        // Reset today's count for testing
-        let initialCanSearch = analyticsManager.canPerformSearch()
-        #expect(initialCanSearch == true || analyticsManager.getRemainingSearches() > 0)
-    }
 
     // MARK: - Search History Tests
 

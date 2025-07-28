@@ -9,7 +9,6 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var showingPremiumUpgrade = false
-    @State private var showingLanguageSelector = false
 
     var body: some View {
         NavigationView {
@@ -26,10 +25,7 @@ struct SettingsView: View {
                         }
                     }
 
-                    // Search Preferences Card
-                    ModernSearchPreferencesCard(
-                        showingLanguageSelector: $showingLanguageSelector
-                    )
+
 
                     // Premium Features Card
                     if premiumManager.isPremiumUser || premiumManager.isTrialActive {
@@ -62,9 +58,6 @@ struct SettingsView: View {
 
         .sheet(isPresented: $showingPremiumUpgrade) {
             PremiumUpgradeView()
-        }
-        .sheet(isPresented: $showingLanguageSelector) {
-            LanguageSelectorView()
         }
 
     }
@@ -203,54 +196,7 @@ struct ModernUpgradePromptCard: View {
     }
 }
 
-struct ModernSearchPreferencesCard: View {
-    @StateObject private var userPreferences = UserPreferencesManager.shared
-    @StateObject private var premiumManager = PremiumManager.shared
-    @StateObject private var localizationManager = LocalizationManager.shared
-    @Binding var showingLanguageSelector: Bool
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Image(systemName: "magnifyingglass.circle.fill")
-                    .font(.title3)
-                    .foregroundColor(.blue)
-
-                Text(localizationManager.localizedString(.searchPreferences))
-                    .font(.headline)
-                    .fontWeight(.semibold)
-
-                Spacer()
-            }
-
-            VStack(spacing: 12) {
-                // Search Mode (Premium)
-                if premiumManager.isPremiumFeatureAvailable(.inAppBrowsing) {
-                    ModernSettingRow(
-                        icon: "safari",
-                        title: localizationManager.localizedString(.searchMode),
-                        value: localizationManager.localizedString(.searchModeDescription),
-                        action: { /* Show picker */ }
-                    )
-                }
-
-                // Language Settings
-                ModernSettingRow(
-                    icon: "globe",
-                    title: localizationManager.localizedString(.language),
-                    value: userPreferences.preferences.autoDetectLanguage ? localizationManager.localizedString(.autoDetect) : localizationManager.getLanguageName(for: localizationManager.currentLanguage),
-                    action: { showingLanguageSelector = true }
-                )
-
-
-            }
-        }
-        .padding(20)
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-    }
-}
 
 struct ModernPremiumFeaturesCard: View {
     @StateObject private var userPreferences = UserPreferencesManager.shared
@@ -320,17 +266,6 @@ struct ModernUsageDataCard: View {
             }
 
             VStack(spacing: 12) {
-                // Daily Search Limit (Free users only)
-                if !premiumManager.isPremiumUser {
-                    ModernStepperRow(
-                        icon: "hourglass",
-                        title: "Daily Search Limit",
-                        value: $userPreferences.preferences.dailySearchLimit,
-                        range: 5...50,
-                        step: 5
-                    )
-                }
-
                 // Clear Recent Searches
                 ModernActionRow(
                     icon: "trash.circle",
@@ -340,8 +275,6 @@ struct ModernUsageDataCard: View {
                         SearchService.shared.recentSearches.removeAll()
                     }
                 )
-
-
             }
         }
         .padding(20)
@@ -353,9 +286,11 @@ struct ModernUsageDataCard: View {
 
 struct ModernAboutCard: View {
     @StateObject private var localizationManager = LocalizationManager.shared
+    @StateObject private var userPreferences = UserPreferencesManager.shared
     @State private var showingPrivacyPolicy = false
     @State private var showingTermsOfService = false
     @State private var showingSupportFAQ = false
+    @State private var showingLanguageSelector = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -372,11 +307,31 @@ struct ModernAboutCard: View {
             }
 
             VStack(spacing: 12) {
+                HStack(spacing: 12) {
+                    Image(systemName: "app.badge")
+                        .font(.title3)
+                        .foregroundColor(.blue)
+                        .frame(width: 24)
+
+                    Text(localizationManager.localizedString(.version))
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.primary)
+
+                    Spacer()
+
+                    Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.vertical, 4)
+
+                // Language Settings
                 ModernSettingRow(
-                    icon: "app.badge",
-                    title: localizationManager.localizedString(.version),
-                    value: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0",
-                    action: nil
+                    icon: "globe",
+                    title: localizationManager.localizedString(.language),
+                    value: userPreferences.preferences.autoDetectLanguage ? localizationManager.localizedString(.autoDetect) : localizationManager.getLanguageName(for: localizationManager.currentLanguage),
+                    action: { showingLanguageSelector = true }
                 )
 
                 ModernActionRow(
@@ -419,6 +374,9 @@ struct ModernAboutCard: View {
         .sheet(isPresented: $showingPrivacyPolicy) {
             FormattedPrivacyPolicyView(localizationManager: localizationManager)
         }
+        .sheet(isPresented: $showingLanguageSelector) {
+            LanguageSelectorView()
+        }
         .sheet(isPresented: $showingTermsOfService) {
             FormattedTermsOfServiceView(localizationManager: localizationManager)
         }
@@ -457,7 +415,7 @@ struct ModernSettingRow: View {
                     }
                 }
 
-                Spacer()
+                Spacer(minLength: 0)
 
                 if action != nil {
                     Image(systemName: "chevron.right")
@@ -466,6 +424,7 @@ struct ModernSettingRow: View {
                 }
             }
             .padding(.vertical, 4)
+            .contentShape(Rectangle())
         }
         .buttonStyle(PlainButtonStyle())
         .disabled(action == nil)

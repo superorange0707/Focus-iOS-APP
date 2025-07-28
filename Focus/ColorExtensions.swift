@@ -93,11 +93,16 @@ extension Color {
         Color(.tertiaryLabel)
     }
     
+    // Border colors
+    static var borderColor: Color {
+        Color(.separator)
+    }
+
     // Shadow colors
     static var shadowColor: Color {
         Color(.label).opacity(0.1)
     }
-    
+
     static var selectedShadowColor: Color {
         focusBlue.opacity(0.2)
     }
