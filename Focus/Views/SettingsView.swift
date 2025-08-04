@@ -3,37 +3,16 @@ import SwiftUI
 // MARK: - Settings View
 struct SettingsView: View {
     @StateObject private var userPreferences = UserPreferencesManager.shared
-    @StateObject private var premiumManager = PremiumManager.shared
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
     @StateObject private var localizationManager = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
-
-    @State private var showingPremiumUpgrade = false
 
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 20) {
-                    // Premium Status Card
-                    if premiumManager.isPremiumUser {
-                        ModernPremiumStatusCard()
-                    } else if premiumManager.isTrialActive {
-                        ModernTrialStatusCard()
-                    } else {
-                        ModernUpgradePromptCard {
-                            showingPremiumUpgrade = true
-                        }
-                    }
-
-
-
-                    // Premium Features Card
-                    if premiumManager.isPremiumUser || premiumManager.isTrialActive {
-                        ModernPremiumFeaturesCard()
-                    }
-
-                    // Usage & Data Card
-                    ModernUsageDataCard()
+                    // Preferences Card
+                    ModernPreferencesCard()
 
                     // About & Support Card
                     ModernAboutCard()
@@ -54,149 +33,54 @@ struct SettingsView: View {
                 }
             }
         }
-                
-
-        .sheet(isPresented: $showingPremiumUpgrade) {
-            PremiumUpgradeView()
-        }
 
     }
 }
 
 // MARK: - Modern Card Components
 
-struct ModernPremiumStatusCard: View {
-    var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                ZStack {
-                    Circle()
-                        .fill(LinearGradient(colors: [.yellow, .orange], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .frame(width: 50, height: 50)
 
-                    Image(systemName: "crown.fill")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                }
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("SkipFeed Premium")
-                        .font(.headline)
-                        .fontWeight(.bold)
 
-                    Text("All features unlocked")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
 
-                Spacer()
-
-                Image(systemName: "checkmark.seal.fill")
-                    .font(.title2)
-                    .foregroundColor(.green)
-            }
-        }
-        .padding(20)
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-    }
-}
-
-struct ModernTrialStatusCard: View {
-    @StateObject private var premiumManager = PremiumManager.shared
+struct ModernPreferencesCard: View {
+    @StateObject private var userPreferences = UserPreferencesManager.shared
     @StateObject private var localizationManager = LocalizationManager.shared
+    @State private var showingLanguageSelector = false
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
-                ZStack {
-                    Circle()
-                        .fill(LinearGradient(colors: [.orange, .red], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .frame(width: 50, height: 50)
+                Image(systemName: "gearshape.circle.fill")
+                    .font(.title3)
+                    .foregroundColor(.blue)
 
-                    Image(systemName: "timer")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                }
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(localizationManager.localizedString(.freeTrialActive))
-                        .font(.headline)
-                        .fontWeight(.bold)
-
-                    Text("\(premiumManager.trialDaysRemaining) \(localizationManager.localizedString(.daysRemaining))")
-                        .font(.subheadline)
-                        .foregroundColor(.orange)
-                        .fontWeight(.medium)
-                }
+                Text(localizationManager.localizedString(.preferences))
+                    .font(.headline)
+                    .fontWeight(.semibold)
 
                 Spacer()
+            }
 
-                Button("Upgrade") {
-                    // Show premium upgrade
-                }
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.orange)
-                .clipShape(Capsule())
+            VStack(spacing: 12) {
+                // Language Settings
+                ModernSettingRow(
+                    icon: "globe",
+                    title: localizationManager.localizedString(.language),
+                    value: userPreferences.preferences.autoDetectLanguage ? localizationManager.localizedString(.autoDetect) : localizationManager.getLanguageName(for: localizationManager.currentLanguage),
+                    action: { showingLanguageSelector = true }
+                )
             }
         }
         .padding(20)
         .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-    }
-}
-
-struct ModernUpgradePromptCard: View {
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 16) {
-                HStack {
-                    ZStack {
-                        Circle()
-                            .fill(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .frame(width: 50, height: 50)
-
-                        Image(systemName: "crown")
-                            .font(.title2)
-                            .foregroundColor(.white)
-                    }
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Upgrade to Premium")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-
-                        Text("3-day free trial • Unlock all features")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-            }
-            .padding(20)
-            .background(Color(.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+        .sheet(isPresented: $showingLanguageSelector) {
+            LanguageSelectorView()
         }
-        .buttonStyle(PlainButtonStyle())
     }
 }
-
-
 
 struct ModernPremiumFeaturesCard: View {
     @StateObject private var userPreferences = UserPreferencesManager.shared
@@ -218,25 +102,11 @@ struct ModernPremiumFeaturesCard: View {
             }
 
             VStack(spacing: 12) {
-                // Do Not Disturb
-                if premiumManager.isPremiumFeatureAvailable(.doNotDisturb) {
-                    ModernToggleRow(
-                        icon: "moon.circle",
-                        title: localizationManager.localizedString(.autoDoNotDisturb),
-                        subtitle: localizationManager.localizedString(.autoDoNotDisturbDescription),
-                        isOn: $userPreferences.preferences.enableDoNotDisturb
-                    )
-                }
-
-                // Content Summarization
-                if premiumManager.isPremiumFeatureAvailable(.contentSummary) {
-                    ModernSettingRow(
-                        icon: "doc.text.magnifyingglass",
-                        title: localizationManager.localizedString(.aiSummarization),
-                        value: "\(ContentSummarizationManager.shared.getRemainingCredits()) \(localizationManager.localizedString(.creditsLeft))",
-                        action: { /* Show info */ }
-                    )
-                }
+                // Premium features will be added here when available
+                Text("Premium features coming soon")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 8)
             }
         }
         .padding(20)
@@ -246,43 +116,7 @@ struct ModernPremiumFeaturesCard: View {
     }
 }
 
-struct ModernUsageDataCard: View {
-    @StateObject private var userPreferences = UserPreferencesManager.shared
-    @StateObject private var premiumManager = PremiumManager.shared
-    @StateObject private var localizationManager = LocalizationManager.shared
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Image(systemName: "chart.bar.circle.fill")
-                    .font(.title3)
-                    .foregroundColor(.green)
-
-                Text(localizationManager.localizedString(.usageAndData))
-                    .font(.headline)
-                    .fontWeight(.semibold)
-
-                Spacer()
-            }
-
-            VStack(spacing: 12) {
-                // Clear Recent Searches
-                ModernActionRow(
-                    icon: "trash.circle",
-                    title: localizationManager.localizedString(.clearRecentSearches),
-                    isDestructive: true,
-                    action: {
-                        SearchService.shared.recentSearches.removeAll()
-                    }
-                )
-            }
-        }
-        .padding(20)
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-    }
-}
+// ModernUsageDataCard removed - functionality moved to Data tab
 
 struct ModernAboutCard: View {
     @StateObject private var localizationManager = LocalizationManager.shared
@@ -290,7 +124,7 @@ struct ModernAboutCard: View {
     @State private var showingPrivacyPolicy = false
     @State private var showingTermsOfService = false
     @State private var showingSupportFAQ = false
-    @State private var showingLanguageSelector = false
+    // Language selector moved to Preferences
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -326,13 +160,7 @@ struct ModernAboutCard: View {
                 }
                 .padding(.vertical, 4)
 
-                // Language Settings
-                ModernSettingRow(
-                    icon: "globe",
-                    title: localizationManager.localizedString(.language),
-                    value: userPreferences.preferences.autoDetectLanguage ? localizationManager.localizedString(.autoDetect) : localizationManager.getLanguageName(for: localizationManager.currentLanguage),
-                    action: { showingLanguageSelector = true }
-                )
+                // Language settings moved to Preferences
 
                 ModernActionRow(
                     icon: "doc.text",
@@ -374,9 +202,7 @@ struct ModernAboutCard: View {
         .sheet(isPresented: $showingPrivacyPolicy) {
             FormattedPrivacyPolicyView(localizationManager: localizationManager)
         }
-        .sheet(isPresented: $showingLanguageSelector) {
-            LanguageSelectorView()
-        }
+        // Language selector sheet moved to Preferences
         .sheet(isPresented: $showingTermsOfService) {
             FormattedTermsOfServiceView(localizationManager: localizationManager)
         }
@@ -598,8 +424,10 @@ struct LanguageSelectorView: View {
                                                 .foregroundColor(.blue)
                                         }
                                     }
-                                    .padding(.vertical, 8)
-                                    .padding(.horizontal, 4)
+                                    .padding(.vertical, 12)
+                                    .padding(.horizontal, 16)
+                                    .background(Color.clear)
+                                    .contentShape(Rectangle())
                                 }
                                 .buttonStyle(PlainButtonStyle())
                                 .disabled(userPreferences.preferences.autoDetectLanguage)

@@ -15,7 +15,7 @@ class LocalizationManager: ObservableObject {
     
     private let supportedLanguages = [
         "en": "English",
-        "es": "Español", 
+        "es": "Español",
         "fr": "Français",
         "de": "Deutsch",
         "it": "Italiano",
@@ -23,7 +23,8 @@ class LocalizationManager: ObservableObject {
         "ru": "Русский",
         "ja": "日本語",
         "ko": "한국어",
-        "zh": "中文"
+        "zh": "中文",
+        "ar": "العربية"
     ]
     
     private init() {
@@ -54,6 +55,10 @@ class LocalizationManager: ObservableObject {
     func getSystemLanguage() -> String {
         return Locale.current.language.languageCode?.identifier ?? "en"
     }
+
+    func isRightToLeft() -> Bool {
+        return currentLanguage == "ar" // Arabic is RTL
+    }
     
     // MARK: - Localized Strings
     
@@ -82,6 +87,10 @@ class LocalizationManager: ObservableObject {
             return getOpenInText()
         case .openTikTokSearch:
             return getOpenTikTokSearchText()
+        case .direct:
+            return getDirectText()
+        case .inApp:
+            return getInAppText()
 
         // Stats
         case .totalSearches:
@@ -134,14 +143,15 @@ class LocalizationManager: ObservableObject {
             return getSearchModeText()
         case .directSearch:
             return getDirectSearchText()
-        case .doNotDisturb:
-            return getDoNotDisturbText()
+        // Do Not Disturb functionality removed
         case .done:
             return getDoneText()
         case .selectLanguage:
             return getSelectLanguageText()
         case .searchPreferences:
             return getSearchPreferencesText()
+        case .preferences:
+            return getPreferencesText()
         case .premiumFeatures:
             return getPremiumFeaturesText()
         case .usageAndData:
@@ -154,16 +164,10 @@ class LocalizationManager: ObservableObject {
             return getClearRecentSearchesText()
         case .searchModeDescription:
             return getSearchModeDescriptionText()
-        case .autoDoNotDisturbDescription:
-            return getAutoDoNotDisturbDescriptionText()
-        case .aiSummarizationDescription:
-            return getAiSummarizationDescriptionText()
+        // Auto Do Not Disturb functionality removed
         case .dailySearchLimitDescription:
             return getDailySearchLimitDescriptionText()
-        case .autoDoNotDisturb:
-            return getAutoDoNotDisturbText()
-        case .aiSummarization:
-            return getAiSummarizationText()
+        // Auto Do Not Disturb functionality removed
         case .creditsLeft:
             return getCreditsLeftText()
         case .searchesPerDay:
@@ -202,6 +206,10 @@ class LocalizationManager: ObservableObject {
             return getAllPlatformsText()
         case .clearHistory:
             return getClearHistoryText()
+        case .clearAll:
+            return getClearAllText()
+        case .searchHistory_placeholder:
+            return getSearchHistoryPlaceholderText()
         }
     }
     
@@ -218,6 +226,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "検索"
         case "ko": return "검색"
         case "zh": return "搜索"
+        case "ar": return "بحث"
         default: return "Search"
         }
     }
@@ -233,6 +242,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "コンテンツを検索..."
         case "ko": return "콘텐츠 검색..."
         case "zh": return "搜索内容..."
+        case "ar": return "البحث عن المحتوى..."
         default: return "Search content..."
         }
     }
@@ -248,6 +258,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "設定"
         case "ko": return "설정"
         case "zh": return "设置"
+        case "ar": return "الإعدادات"
         default: return "Settings"
         }
     }
@@ -263,6 +274,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "プレミアム"
         case "ko": return "프리미엄"
         case "zh": return "高级版"
+        case "ar": return "المميز"
         default: return "Premium"
         }
     }
@@ -278,6 +290,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "データ"
         case "ko": return "데이터"
         case "zh": return "数据"
+        case "ar": return "البيانات"
         default: return "Data"
         }
     }
@@ -293,6 +306,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "プラットフォームを選択"
         case "ko": return "플랫폼 선택"
         case "zh": return "选择平台"
+        case "ar": return "اختر المنصة"
         default: return "Choose Platform"
         }
     }
@@ -308,6 +322,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "最近の検索"
         case "ko": return "최근 검색"
         case "zh": return "最近搜索"
+        case "ar": return "عمليات البحث الأخيرة"
         default: return "Recent Searches"
         }
     }
@@ -323,6 +338,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "クリア"
         case "ko": return "지우기"
         case "zh": return "清除"
+        case "ar": return "مسح"
         default: return "Clear"
         }
     }
@@ -398,6 +414,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "今日"
         case "ko": return "오늘"
         case "zh": return "今天"
+        case "ar": return "اليوم"
         default: return "Today"
         }
     }
@@ -413,6 +430,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "節約した時間"
         case "ko": return "절약된 시간"
         case "zh": return "节省时间"
+        case "ar": return "الوقت المُوفر"
         default: return "Time Saved"
         }
     }
@@ -428,6 +446,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "プラットフォーム使用状況"
         case "ko": return "플랫폼 사용량"
         case "zh": return "平台使用情况"
+        case "ar": return "استخدام المنصات"
         default: return "Platform Usage"
         }
     }
@@ -443,6 +462,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "検索履歴"
         case "ko": return "검색 기록"
         case "zh": return "搜索历史"
+        case "ar": return "تاريخ البحث"
         default: return "Search History"
         }
     }
@@ -458,6 +478,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "統計"
         case "ko": return "통계"
         case "zh": return "统计"
+        case "ar": return "الإحصائيات"
         default: return "Stats"
         }
     }
@@ -473,6 +494,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "履歴"
         case "ko": return "기록"
         case "zh": return "历史"
+        case "ar": return "التاريخ"
         default: return "History"
         }
     }
@@ -503,6 +525,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "インサイト"
         case "ko": return "인사이트"
         case "zh": return "洞察"
+        case "ar": return "الرؤى"
         default: return "Insights"
         }
     }
@@ -518,6 +541,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "フォーカススコア"
         case "ko": return "집중 점수"
         case "zh": return "专注评分"
+        case "ar": return "نقاط التركيز"
         default: return "Focus Score"
         }
     }
@@ -533,6 +557,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "集中を保っています！"
         case "ko": return "집중을 유지하고 있습니다!"
         case "zh": return "你保持专注！"
+        case "ar": return "أنت تحافظ على التركيز!"
         default: return "You're staying focused!"
         }
     }
@@ -548,6 +573,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "今日の影響"
         case "ko": return "오늘의 영향"
         case "zh": return "今日影响"
+        case "ar": return "تأثير اليوم"
         default: return "Today's Impact"
         }
     }
@@ -563,6 +589,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "気を散らすことから節約された時間"
         case "ko": return "방해 요소로부터 절약된 시간"
         case "zh": return "从干扰中节省的时间"
+        case "ar": return "الوقت المُوفر من المشتتات"
         default: return "Time saved from distractions"
         }
     }
@@ -578,6 +605,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "効率性"
         case "ko": return "효율성"
         case "zh": return "效率"
+        case "ar": return "الكفاءة"
         default: return "Efficiency"
         }
     }
@@ -593,6 +621,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "直接検索は時間を節約します"
         case "ko": return "직접 검색으로 시간을 절약합니다"
         case "zh": return "直接搜索节省时间"
+        case "ar": return "البحث المباشر يوفر الوقت"
         default: return "Direct searches save time"
         }
     }
@@ -608,6 +637,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "検索"
         case "ko": return "검색"
         case "zh": return "搜索"
+        case "ar": return "عمليات بحث"
         default: return "searches"
         }
     }
@@ -623,6 +653,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "残り"
         case "ko": return "남음"
         case "zh": return "剩余"
+        case "ar": return "متبقية"
         default: return "left"
         }
     }
@@ -638,6 +669,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "の"
         case "ko": return "중"
         case "zh": return "的"
+        case "ar": return "من"
         default: return "of"
         }
     }
@@ -668,6 +700,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "言語"
         case "ko": return "언어"
         case "zh": return "语言"
+        case "ar": return "اللغة"
         default: return "Language"
         }
     }
@@ -683,6 +716,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "自動検出"
         case "ko": return "자동 감지"
         case "zh": return "自动检测"
+        case "ar": return "الكشف التلقائي"
         default: return "Auto-detect"
         }
     }
@@ -732,20 +766,7 @@ class LocalizationManager: ObservableObject {
         }
     }
     
-    private func getDoNotDisturbText() -> String {
-        switch currentLanguage {
-        case "es": return "No Molestar"
-        case "fr": return "Ne Pas Déranger"
-        case "de": return "Nicht Stören"
-        case "it": return "Non Disturbare"
-        case "pt": return "Não Perturbar"
-        case "ru": return "Не Беспокоить"
-        case "ja": return "おやすみモード"
-        case "ko": return "방해 금지"
-        case "zh": return "勿扰模式"
-        default: return "Do Not Disturb"
-        }
-    }
+    // Do Not Disturb functionality removed
     
     private func getDoneText() -> String {
         switch currentLanguage {
@@ -758,6 +779,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "完了"
         case "ko": return "완료"
         case "zh": return "完成"
+        case "ar": return "تم"
         default: return "Done"
         }
     }
@@ -773,6 +795,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "言語を選択"
         case "ko": return "언어 선택"
         case "zh": return "选择语言"
+        case "ar": return "اختر اللغة"
         default: return "Select Language"
         }
     }
@@ -789,6 +812,22 @@ class LocalizationManager: ObservableObject {
         case "ko": return "검색 설정"
         case "zh": return "搜索偏好"
         default: return "Search Preferences"
+        }
+    }
+
+    private func getPreferencesText() -> String {
+        switch currentLanguage {
+        case "es": return "Preferencias"
+        case "fr": return "Préférences"
+        case "de": return "Einstellungen"
+        case "it": return "Preferenze"
+        case "pt": return "Preferências"
+        case "ru": return "Настройки"
+        case "ja": return "設定"
+        case "ko": return "설정"
+        case "zh": return "偏好设置"
+        case "ar": return "التفضيلات"
+        default: return "Preferences"
         }
     }
 
@@ -882,35 +921,9 @@ class LocalizationManager: ObservableObject {
         }
     }
 
-    private func getAutoDoNotDisturbDescriptionText() -> String {
-        switch currentLanguage {
-        case "es": return "Habilitar al abrir SkipFeed"
-        case "fr": return "Activer lors de l'ouverture de SkipFeed"
-        case "de": return "Beim Öffnen von SkipFeed aktivieren"
-        case "it": return "Abilita all'apertura di SkipFeed"
-        case "pt": return "Ativar ao abrir SkipFeed"
-        case "ru": return "Включить при открытии SkipFeed"
-        case "ja": return "SkipFeed開く時に有効にする"
-        case "ko": return "SkipFeed 열 때 활성화"
-        case "zh": return "打开SkipFeed时启用"
-        default: return "Enable when opening SkipFeed"
-        }
-    }
+    // Auto Do Not Disturb functionality removed
 
-    private func getAiSummarizationDescriptionText() -> String {
-        switch currentLanguage {
-        case "es": return "50 créditos restantes"
-        case "fr": return "50 crédits restants"
-        case "de": return "50 Credits übrig"
-        case "it": return "50 crediti rimanenti"
-        case "pt": return "50 créditos restantes"
-        case "ru": return "50 кредитов осталось"
-        case "ja": return "50クレジット残り"
-        case "ko": return "50 크레딧 남음"
-        case "zh": return "50积分剩余"
-        default: return "50 credits left"
-        }
-    }
+    // AI Summarization description function removed
 
     private func getDailySearchLimitDescriptionText() -> String {
         switch currentLanguage {
@@ -927,35 +940,9 @@ class LocalizationManager: ObservableObject {
         }
     }
 
-    private func getAutoDoNotDisturbText() -> String {
-        switch currentLanguage {
-        case "es": return "Auto No Molestar"
-        case "fr": return "Auto Ne Pas Déranger"
-        case "de": return "Auto Nicht Stören"
-        case "it": return "Auto Non Disturbare"
-        case "pt": return "Auto Não Perturbar"
-        case "ru": return "Авто Не Беспокоить"
-        case "ja": return "自動おやすみモード"
-        case "ko": return "자동 방해 금지"
-        case "zh": return "自动勿扰"
-        default: return "Auto Do Not Disturb"
-        }
-    }
+    // Auto Do Not Disturb functionality removed
 
-    private func getAiSummarizationText() -> String {
-        switch currentLanguage {
-        case "es": return "Resumen con IA"
-        case "fr": return "Résumé IA"
-        case "de": return "KI-Zusammenfassung"
-        case "it": return "Riassunto IA"
-        case "pt": return "Resumo IA"
-        case "ru": return "ИИ Резюме"
-        case "ja": return "AI要約"
-        case "ko": return "AI 요약"
-        case "zh": return "AI摘要"
-        default: return "AI Summarization"
-        }
-    }
+    // AI Summarization text function removed
 
     private func getCreditsLeftText() -> String {
         switch currentLanguage {
@@ -998,6 +985,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "アプリについて・サポート"
         case "ko": return "앱 정보 및 지원"
         case "zh": return "关于与支持"
+        case "ar": return "حول التطبيق والدعم"
         default: return "About & Support"
         }
     }
@@ -1013,6 +1001,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "バージョン"
         case "ko": return "버전"
         case "zh": return "版本"
+        case "ar": return "الإصدار"
         default: return "Version"
         }
     }
@@ -1028,6 +1017,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "プライバシーポリシー"
         case "ko": return "개인정보 처리방침"
         case "zh": return "隐私政策"
+        case "ar": return "سياسة الخصوصية"
         default: return "Privacy Policy"
         }
     }
@@ -1043,6 +1033,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "利用規約"
         case "ko": return "서비스 약관"
         case "zh": return "服务条款"
+        case "ar": return "شروط الخدمة"
         default: return "Terms of Service"
         }
     }
@@ -1058,6 +1049,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "サポート・FAQ"
         case "ko": return "지원 및 FAQ"
         case "zh": return "支持与常见问题"
+        case "ar": return "الدعم والأسئلة الشائعة"
         default: return "Support & FAQ"
         }
     }
@@ -1073,6 +1065,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "お問い合わせ"
         case "ko": return "문의하기"
         case "zh": return "联系我们"
+        case "ar": return "اتصل بنا"
         default: return "Contact Us"
         }
     }
@@ -1148,6 +1141,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "履歴なし"
         case "ko": return "기록 없음"
         case "zh": return "无历史记录"
+        case "ar": return "لا يوجد تاريخ"
         default: return "No History"
         }
     }
@@ -1163,6 +1157,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "検索履歴がここに表示されます"
         case "ko": return "검색 기록이 여기에 표시됩니다"
         case "zh": return "您的搜索记录将显示在这里"
+        case "ar": return "ستظهر عمليات البحث الخاصة بك هنا"
         default: return "Your searches will appear here"
         }
     }
@@ -1178,6 +1173,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "履歴を検索..."
         case "ko": return "기록에서 검색..."
         case "zh": return "在历史记录中搜索..."
+        case "ar": return "البحث في التاريخ..."
         default: return "Search in history..."
         }
     }
@@ -1193,6 +1189,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "すべてのプラットフォーム"
         case "ko": return "모든 플랫폼"
         case "zh": return "所有平台"
+        case "ar": return "جميع المنصات"
         default: return "All Platforms"
         }
     }
@@ -1208,6 +1205,7 @@ class LocalizationManager: ObservableObject {
         case "ja": return "履歴をクリア"
         case "ko": return "기록 지우기"
         case "zh": return "清除历史"
+        case "ar": return "مسح التاريخ"
         default: return "Clear History"
         }
     }
@@ -1217,7 +1215,7 @@ class LocalizationManager: ObservableObject {
 enum LocalizedStringKey {
     // Main UI
     case search, searchPlaceholder, settings, premium, data, choosePlatform, recentSearches, clear
-    case searchOn, openIn, openTikTokSearch
+    case searchOn, openIn, openTikTokSearch, direct, inApp
 
     // Stats
     case totalSearches, today, timeSaved, platformUsage, searchHistory, stats, history
@@ -1225,10 +1223,10 @@ enum LocalizedStringKey {
     case efficiency, directSearchesSaveTime, searches, left, of, trial
 
     // Settings
-    case language, autoDetect, autoDetectSubtitle, searchMode, directSearch, doNotDisturb, done, selectLanguage
-    case searchPreferences, premiumFeatures, usageAndData, freeTrialActive, daysRemaining, clearRecentSearches
-    case searchModeDescription, autoDoNotDisturbDescription, aiSummarizationDescription, dailySearchLimitDescription
-    case autoDoNotDisturb, aiSummarization, creditsLeft, searchesPerDay
+    case language, autoDetect, autoDetectSubtitle, searchMode, directSearch, done, selectLanguage
+    case searchPreferences, preferences, premiumFeatures, usageAndData, freeTrialActive, daysRemaining, clearRecentSearches
+    case searchModeDescription, dailySearchLimitDescription
+    case creditsLeft, searchesPerDay
 
     // About & Support
     case aboutAndSupport, version, privacyPolicy, termsOfService, supportAndFAQ, contactUs
@@ -1237,7 +1235,7 @@ enum LocalizedStringKey {
     case upgradeToUnlock, freeTrial, startFreeTrial, restorePurchases
 
     // Search History
-    case noHistory, noHistoryMessage, searchInHistory, allPlatforms, clearHistory
+    case noHistory, noHistoryMessage, searchInHistory, allPlatforms, clearHistory, clearAll, searchHistory_placeholder
 }
 
 // MARK: - LocalizationManager Extensions
@@ -1305,6 +1303,72 @@ extension LocalizationManager {
             case "zh": return "刚刚"
             default: return "Now"
             }
+        }
+    }
+
+    // MARK: - New Methods for Missing Localizations
+
+    private func getDirectText() -> String {
+        switch currentLanguage {
+        case "es": return "Directo"
+        case "fr": return "Direct"
+        case "de": return "Direkt"
+        case "it": return "Diretto"
+        case "pt": return "Direto"
+        case "ru": return "Прямой"
+        case "ja": return "ダイレクト"
+        case "ko": return "직접"
+        case "zh": return "直接"
+        case "ar": return "مباشر"
+        default: return "Direct"
+        }
+    }
+
+    private func getInAppText() -> String {
+        switch currentLanguage {
+        case "es": return "En la App"
+        case "fr": return "Dans l'App"
+        case "de": return "In der App"
+        case "it": return "Nell'App"
+        case "pt": return "No App"
+        case "ru": return "В приложении"
+        case "ja": return "アプリ内"
+        case "ko": return "앱 내"
+        case "zh": return "应用内"
+        case "ar": return "داخل التطبيق"
+        default: return "In-App"
+        }
+    }
+
+    private func getClearAllText() -> String {
+        switch currentLanguage {
+        case "es": return "Borrar Todo"
+        case "fr": return "Tout Effacer"
+        case "de": return "Alles Löschen"
+        case "it": return "Cancella Tutto"
+        case "pt": return "Limpar Tudo"
+        case "ru": return "Очистить Всё"
+        case "ja": return "すべてクリア"
+        case "ko": return "모두 지우기"
+        case "zh": return "全部清除"
+        case "ar": return "مسح الكل"
+        default: return "Clear All"
+        }
+    }
+
+    private func getSearchHistoryPlaceholderText() -> String {
+        switch currentLanguage {
+        case "es": return "Buscar en historial..."
+        case "fr": return "Rechercher dans l'historique..."
+        case "de": return "Im Verlauf suchen..."
+        case "it": return "Cerca nella cronologia..."
+        case "pt": return "Pesquisar no histórico..."
+        case "ru": return "Поиск в истории..."
+        case "ja": return "履歴で検索..."
+        case "ko": return "기록에서 검색..."
+        case "zh": return "在历史记录中搜索..."
+        case "ar": return "البحث في التاريخ..."
+        default: return "Search history..."
         }
     }
 }

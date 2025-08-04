@@ -16,7 +16,7 @@ struct FocusTests {
         let manager = UserPreferencesManager.shared
         #expect(manager.preferences.preferredLanguage == "en")
         #expect(manager.preferences.autoDetectLanguage == true)
-        #expect(manager.preferences.enableDoNotDisturb == false)
+        // Do Not Disturb functionality removed
         #expect(manager.preferences.platformOrder.count == Platform.allCases.count)
     }
 
@@ -121,21 +121,7 @@ struct FocusTests {
         }
     }
 
-    // MARK: - Content Summarization Tests
-
-    @Test func contentSummarizationManager() async throws {
-        let manager = ContentSummarizationManager.shared
-
-        #expect(manager.getRemainingCredits() >= 0)
-        #expect(manager.getRemainingCredits() <= 50)
-
-        let canUse = manager.canUseSummaryFeature()
-        let premiumManager = PremiumManager.shared
-        let expectedCanUse = manager.getRemainingCredits() > 0 &&
-                           premiumManager.isPremiumFeatureAvailable(.contentSummary)
-
-        #expect(canUse == expectedCanUse)
-    }
+    // MARK: - Content Summarization Tests (Temporarily Removed)
 
     // MARK: - Data Model Tests
 

@@ -49,14 +49,31 @@ struct DataView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(selectedTab == tab ? Color.blue.opacity(0.1) : Color.clear)
+                                Group {
+                                    if selectedTab == tab {
+                                        if tab == .history {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(LinearGradient(colors: [Color.blue.opacity(0.15), Color.blue.opacity(0.08)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 16)
+                                                        .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+                                                )
+                                        } else {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(Color.blue.opacity(0.1))
+                                        }
+                                    } else {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(Color.clear)
+                                    }
+                                }
                             )
                         }
                     }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
+                .padding(.bottom, 20)
                 .background(Color(.systemGroupedBackground))
                 
                 // Content
@@ -161,9 +178,205 @@ struct HistoryTabContent: View {
     @State private var selectedPlatform: Platform? = nil
     @State private var isSelectionMode = false
     @State private var selectedItems: Set<UUID> = []
-    
+    @State private var searchText = ""
+    @State private var showSettings = false
+    @State private var showDateGrouping = true
+    @State private var autoCleanupDays = 30
+    @State private var itemsToShow = 50
+
+    // Computed properties for statistics
+    private var todayCount: Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return searchHistoryManager.searchHistory.filter { item in
+            Calendar.current.isDate(item.timestamp, inSameDayAs: today)
+        }.count
+    }
+
+    private var thisWeekCount: Int {
+        let calendar = Calendar.current
+        let now = Date()
+        let weekAgo = calendar.date(byAdding: .day, value: -7, to: now) ?? now
+        return searchHistoryManager.searchHistory.filter { item in
+            item.timestamp >= weekAgo
+        }.count
+    }
+
+    private var thisMonthCount: Int {
+        let calendar = Calendar.current
+        let now = Date()
+        let monthAgo = calendar.date(byAdding: .month, value: -1, to: now) ?? now
+        return searchHistoryManager.searchHistory.filter { item in
+            item.timestamp >= monthAgo
+        }.count
+    }
+
     var body: some View {
         VStack(spacing: 0) {
+
+            // Search bar and controls
+            HStack(spacing: 12) {
+                // Search bar container
+                HStack(spacing: 8) {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 16, weight: .medium))
+
+                    TextField("Search history...", text: $searchText)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .font(.system(size: 16))
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                        .shadow(color: Color.black.opacity(0.04), radius: 1, x: 0, y: 0.5)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(.separator), lineWidth: 0.33)
+                )
+
+                // Group/List toggle button
+                Button(action: {
+                    showDateGrouping.toggle()
+                }) {
+                    Image(systemName: showDateGrouping ? "list.bullet" : "rectangle.grid.1x2")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.blue)
+                        .frame(width: 44, height: 44)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemGroupedBackground))
+                                .shadow(color: Color.black.opacity(0.04), radius: 1, x: 0, y: 0.5)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(.separator), lineWidth: 0.33)
+                        )
+                }
+
+                // Settings button
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        showSettings.toggle()
+                    }
+                }) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.blue)
+                        .frame(width: 44, height: 44)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemGroupedBackground))
+                                .shadow(color: Color.black.opacity(0.04), radius: 1, x: 0, y: 0.5)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(.separator), lineWidth: 0.33)
+                        )
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 16)
+
+            // Settings panel
+            if showSettings {
+                VStack(spacing: 16) {
+                    // History Settings header
+                    HStack {
+                        Text("History Settings")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+
+                    // Auto-cleanup setting
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Auto-cleanup")
+                                .font(.system(size: 16, weight: .medium))
+                            Spacer()
+                            Text("Delete items older than \(autoCleanupDays) days")
+                                .font(.system(size: 14))
+                                .foregroundColor(.secondary)
+                        }
+
+                        HStack {
+                            Text("7")
+                                .font(.system(size: 12))
+                                .foregroundColor(.secondary)
+
+                            Slider(value: Binding(
+                                get: { Double(autoCleanupDays) },
+                                set: { autoCleanupDays = Int($0) }
+                            ), in: 7...365, step: 1)
+                            .accentColor(.blue)
+
+                            Text("365")
+                                .font(.system(size: 12))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    // Statistics section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Statistics")
+                            .font(.system(size: 16, weight: .medium))
+
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Total: \(searchHistoryManager.searchHistory.count)")
+                                    .font(.system(size: 14))
+                                Text("Today: \(todayCount)")
+                                    .font(.system(size: 14))
+                            }
+
+                            Spacer()
+
+                            VStack(alignment: .trailing, spacing: 4) {
+                                Text("This Week: \(thisWeekCount)")
+                                    .font(.system(size: 14))
+                                Text("This Month: \(thisMonthCount)")
+                                    .font(.system(size: 14))
+                            }
+                        }
+                        .foregroundColor(.secondary)
+                    }
+
+                    // Action buttons
+                    HStack(spacing: 16) {
+                        Button("Clean Now") {
+                            cleanOldItems()
+                        }
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.blue)
+
+                        Spacer()
+
+                        Button("Done") {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                showSettings = false
+                            }
+                        }
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.blue)
+                    }
+                }
+                .padding(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                        .shadow(color: Color.black.opacity(0.04), radius: 1, x: 0, y: 0.5)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(.separator), lineWidth: 0.33)
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 16)
+            }
+
             // Header with Platform Filter and Clear All button
             VStack(spacing: 12) {
                 // Platform Filter
@@ -189,6 +402,7 @@ struct HistoryTabContent: View {
                     }
                     .padding(.horizontal, 20)
                 }
+                .padding(.bottom, 20)
 
                 // Action buttons (only show if there's history)
                 if !analyticsManager.getRecentSearchHistory().isEmpty {
@@ -268,10 +482,11 @@ struct HistoryTabContent: View {
                         }
                     }
                     .padding(.horizontal, 20)
+                    .padding(.bottom, 8)
                     .animation(.easeInOut(duration: 0.2), value: isSelectionMode)
                 }
             }
-            .padding(.vertical, 16)
+            .padding(.top, 16)
             .background(Color(.systemGroupedBackground))
             
             // Search History List
@@ -304,29 +519,77 @@ struct HistoryTabContent: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 12) {
-                        ForEach(filteredHistory, id: \.id) { item in
-                            SearchHistoryRow(
-                                item: item,
-                                onRepeatSearch: {
-                                    // Handle repeat search
-                                    let _ = SearchService.shared.directSearch(query: item.query, platform: item.platform)
-                                },
-                                onDelete: isSelectionMode ? nil : {
-                                    // Delete individual item properly
-                                    searchHistoryManager.deleteItem(withId: item.id)
-                                },
-                                isSelectionMode: isSelectionMode,
-                                isSelected: selectedItems.contains(item.id),
-                                onSelectionToggle: {
-                                    if selectedItems.contains(item.id) {
-                                        selectedItems.remove(item.id)
-                                    } else {
-                                        selectedItems.insert(item.id)
+                        if showDateGrouping {
+                            // Grouped view
+                            ForEach(groupedHistory(), id: \.0) { groupName, items in
+                                VStack(alignment: .leading, spacing: 12) {
+                                    // Group header
+                                    HStack {
+                                        Text(groupName)
+                                            .font(.system(size: 18, weight: .semibold))
+                                            .foregroundColor(.primary)
+
+                                        Spacer()
+
+                                        Text("\(items.count)")
+                                            .font(.system(size: 14, weight: .medium))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, groupName == groupedHistory().first?.0 ? 0 : 16)
+
+                                    // Group items
+                                    ForEach(items, id: \.id) { item in
+                                        SearchHistoryRow(
+                                            item: item,
+                                            onRepeatSearch: {
+                                                // Handle repeat search
+                                                let _ = SearchService.shared.directSearch(query: item.query, platform: item.platform)
+                                            },
+                                            onDelete: isSelectionMode ? nil : {
+                                                // Delete individual item properly
+                                                searchHistoryManager.deleteItem(withId: item.id)
+                                            },
+                                            isSelectionMode: isSelectionMode,
+                                            isSelected: selectedItems.contains(item.id),
+                                            onSelectionToggle: {
+                                                if selectedItems.contains(item.id) {
+                                                    selectedItems.remove(item.id)
+                                                } else {
+                                                    selectedItems.insert(item.id)
+                                                }
+                                            }
+                                        )
+                                        .padding(.horizontal, 20)
                                     }
                                 }
-                            )
+                            }
+                        } else {
+                            // Flat list view
+                            ForEach(filteredHistory, id: \.id) { item in
+                                SearchHistoryRow(
+                                    item: item,
+                                    onRepeatSearch: {
+                                        // Handle repeat search
+                                        let _ = SearchService.shared.directSearch(query: item.query, platform: item.platform)
+                                    },
+                                    onDelete: isSelectionMode ? nil : {
+                                        // Delete individual item properly
+                                        searchHistoryManager.deleteItem(withId: item.id)
+                                    },
+                                    isSelectionMode: isSelectionMode,
+                                    isSelected: selectedItems.contains(item.id),
+                                    onSelectionToggle: {
+                                        if selectedItems.contains(item.id) {
+                                            selectedItems.remove(item.id)
+                                        } else {
+                                            selectedItems.insert(item.id)
+                                        }
+                                    }
+                                )
+                                .padding(.horizontal, 20)
+                            }
                         }
-                        .padding(.horizontal, 20)
                     }
                     .padding(.vertical, 20)
                 }
@@ -336,11 +599,79 @@ struct HistoryTabContent: View {
     
     private func getFilteredHistory() -> [SearchHistoryItem] {
         let allHistory = analyticsManager.getRecentSearchHistory()
-        
+
+        var filtered = allHistory
+
+        // Filter by platform
         if let platform = selectedPlatform {
-            return allHistory.filter { $0.platform == platform }
+            filtered = filtered.filter { $0.platform == platform }
         }
-        return allHistory
+
+        // Filter by search text
+        if !searchText.isEmpty {
+            filtered = filtered.filter { item in
+                item.query.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+
+        return filtered
+    }
+
+    private func cleanOldItems() {
+        let cutoffDate = Calendar.current.date(byAdding: .day, value: -autoCleanupDays, to: Date()) ?? Date()
+        let itemsToDelete = searchHistoryManager.searchHistory.filter { $0.timestamp < cutoffDate }
+        let idsToDelete = Set(itemsToDelete.map { $0.id })
+        searchHistoryManager.deleteItems(withIds: idsToDelete)
+    }
+
+    private func groupedHistory() -> [(String, [SearchHistoryItem])] {
+        let filtered = getFilteredHistory()
+        let calendar = Calendar.current
+        let now = Date()
+
+        var groups: [String: [SearchHistoryItem]] = [:]
+
+        for item in filtered {
+            let key: String
+            if calendar.isDateInToday(item.timestamp) {
+                key = "Today"
+            } else if calendar.isDateInYesterday(item.timestamp) {
+                key = "Yesterday"
+            } else if calendar.dateInterval(of: .weekOfYear, for: now)?.contains(item.timestamp) == true {
+                key = "This Week"
+            } else {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .medium
+                key = formatter.string(from: item.timestamp)
+            }
+
+            if groups[key] == nil {
+                groups[key] = []
+            }
+            groups[key]?.append(item)
+        }
+
+        // Sort groups by date (most recent first)
+        let sortedGroups = groups.map { (key, items) in
+            (key, items.sorted { $0.timestamp > $1.timestamp })
+        }.sorted { (group1, group2) in
+            // Custom sorting for groups
+            let order = ["Today", "Yesterday", "This Week"]
+            if let index1 = order.firstIndex(of: group1.0), let index2 = order.firstIndex(of: group2.0) {
+                return index1 < index2
+            } else if order.contains(group1.0) {
+                return true
+            } else if order.contains(group2.0) {
+                return false
+            } else {
+                // For date strings, compare the first item's timestamp
+                let date1 = group1.1.first?.timestamp ?? Date.distantPast
+                let date2 = group2.1.first?.timestamp ?? Date.distantPast
+                return date1 > date2
+            }
+        }
+
+        return sortedGroups
     }
     
 

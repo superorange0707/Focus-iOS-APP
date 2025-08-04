@@ -103,14 +103,7 @@ class UserPreferencesManager: ObservableObject {
         return preferences.searchMode
     }
     
-    // MARK: - Do Not Disturb
-    func setDoNotDisturbEnabled(_ enabled: Bool) {
-        preferences.enableDoNotDisturb = enabled
-    }
-    
-    func isDoNotDisturbEnabled() -> Bool {
-        return preferences.enableDoNotDisturb
-    }
+    // Do Not Disturb functionality removed - not practical on iOS
 }
 
 // MARK: - Usage Analytics Manager
@@ -262,5 +255,29 @@ class SearchHistoryManager: ObservableObject {
             .filter { $0.platform == platform }
             .prefix(limit)
             .map { $0 }
+    }
+
+    // MARK: - Auto-cleanup functionality
+    func cleanupOldHistory(olderThan days: Int) {
+        let cutoffDate = Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
+        let initialCount = searchHistory.count
+
+        searchHistory.removeAll { $0.timestamp < cutoffDate }
+
+        if searchHistory.count != initialCount {
+            saveSearchHistory()
+        }
+    }
+
+    func getHistoryStats() -> (total: Int, today: Int, thisWeek: Int, thisMonth: Int) {
+        let calendar = Calendar.current
+        let now = Date()
+
+        let total = searchHistory.count
+        let today = searchHistory.filter { calendar.isDateInToday($0.timestamp) }.count
+        let thisWeek = searchHistory.filter { calendar.isDate($0.timestamp, equalTo: now, toGranularity: .weekOfYear) }.count
+        let thisMonth = searchHistory.filter { calendar.isDate($0.timestamp, equalTo: now, toGranularity: .month) }.count
+
+        return (total, today, thisWeek, thisMonth)
     }
 }

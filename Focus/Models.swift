@@ -25,7 +25,6 @@ enum SearchError: Error {
 struct UserPreferences: Codable {
     var preferredLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
     var autoDetectLanguage: Bool = true
-    var enableDoNotDisturb: Bool = false
     var platformOrder: [Platform] = Platform.allCases
     var searchMode: SearchMode = .direct
     var hasSeenOnboarding: Bool = false
@@ -44,7 +43,7 @@ struct UserPreferences: Codable {
 
     // Custom coding keys to handle Platform array
     enum CodingKeys: String, CodingKey {
-        case preferredLanguage, autoDetectLanguage, enableDoNotDisturb
+        case preferredLanguage, autoDetectLanguage
         case platformOrder, searchMode, hasSeenOnboarding
     }
 
@@ -56,7 +55,6 @@ struct UserPreferences: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         preferredLanguage = try container.decodeIfPresent(String.self, forKey: .preferredLanguage) ?? "en"
         autoDetectLanguage = try container.decodeIfPresent(Bool.self, forKey: .autoDetectLanguage) ?? true
-        enableDoNotDisturb = try container.decodeIfPresent(Bool.self, forKey: .enableDoNotDisturb) ?? false
         searchMode = try container.decodeIfPresent(SearchMode.self, forKey: .searchMode) ?? .direct
         hasSeenOnboarding = try container.decodeIfPresent(Bool.self, forKey: .hasSeenOnboarding) ?? false
 
@@ -75,7 +73,7 @@ struct UserPreferences: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(preferredLanguage, forKey: .preferredLanguage)
         try container.encode(autoDetectLanguage, forKey: .autoDetectLanguage)
-        try container.encode(enableDoNotDisturb, forKey: .enableDoNotDisturb)
+        // enableDoNotDisturb removed
         try container.encode(platformOrder.map { $0.rawValue }, forKey: .platformOrder)
         try container.encode(searchMode, forKey: .searchMode)
         try container.encode(hasSeenOnboarding, forKey: .hasSeenOnboarding)
@@ -197,24 +195,48 @@ struct SearchHistoryItem: Codable, Identifiable {
     var timeAgo: String {
         return LocalizationManager.shared.formatRelativeTime(for: timestamp)
     }
+
+    var detailedTimeString: String {
+        let calendar = Calendar.current
+        let now = Date()
+
+        if calendar.isDateInToday(timestamp) {
+            // Today: show time only
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            return formatter.string(from: timestamp)
+        } else if calendar.isDateInYesterday(timestamp) {
+            // Yesterday: show "Yesterday" + time
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            return "Yesterday \(formatter.string(from: timestamp))"
+        } else if calendar.dateInterval(of: .weekOfYear, for: now)?.contains(timestamp) == true {
+            // This week: show day name + time
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE h:mm a"
+            return formatter.string(from: timestamp)
+        } else {
+            // Older: show date + time
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            return formatter.string(from: timestamp)
+        }
+    }
 }
 
 // MARK: - Premium Features
 enum PremiumFeature: String, CaseIterable {
     case inAppBrowsing = "in_app_browsing"
     case searchHistory = "search_history"
-    case doNotDisturb = "do_not_disturb"
     case advancedSearch = "advanced_search"
-    case contentSummary = "content_summary"
     case unlimitedSearches = "unlimited_searches"
 
     var displayName: String {
         switch self {
         case .inAppBrowsing: return "In-App Browsing"
         case .searchHistory: return "Search History"
-        case .doNotDisturb: return "Auto Do Not Disturb"
         case .advancedSearch: return "Advanced Search Filters"
-        case .contentSummary: return "Content Summarization"
         case .unlimitedSearches: return "Unlimited Searches"
         }
     }
@@ -223,9 +245,7 @@ enum PremiumFeature: String, CaseIterable {
         switch self {
         case .inAppBrowsing: return "Browse search results within the app"
         case .searchHistory: return "Keep track of your search history"
-        case .doNotDisturb: return "Automatically enable Do Not Disturb when opening the app"
         case .advancedSearch: return "Use advanced filters for more precise searches"
-        case .contentSummary: return "Get AI-powered summaries of videos and posts"
         case .unlimitedSearches: return "Remove daily search limits"
         }
     }

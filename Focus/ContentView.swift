@@ -7,13 +7,16 @@ struct ContentView: View {
     @State private var isSearching = false
     @State private var showingSettings = false
     @State private var showingData = false
-    @State private var showingPremiumUpgrade = false
+    @State private var showingInAppBrowser = false
+    @State private var showingRedditSearch = false
+    @State private var inAppBrowserURL: URL?
+    @State private var currentSearchQuery = ""
 
     @StateObject private var searchService = SearchService.shared
     @StateObject private var userPreferences = UserPreferencesManager.shared
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
     @StateObject private var premiumManager = PremiumManager.shared
-    @StateObject private var doNotDisturbManager = DoNotDisturbManager.shared
+    // DoNotDisturbManager removed - feature not needed
     @StateObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
@@ -172,6 +175,7 @@ struct ContentView: View {
                                         // Dismiss keyboard first
                                         hideKeyboard()
                                         searchText = recentSearch
+                                        // Use performSearch to respect user's search mode preference
                                         performSearch()
                                     }) {
                                         Text(recentSearch)
@@ -220,18 +224,15 @@ struct ContentView: View {
         .sheet(isPresented: $showingSettings) {
             SettingsView()
         }
-        .sheet(isPresented: $showingPremiumUpgrade) {
-            PremiumUpgradeView()
-        }
-
-        .onAppear {
-            // Start trial if user hasn't started it yet
-            if !premiumManager.isPremiumUser && !premiumManager.isTrialActive {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    // Show trial offer after a delay
-                }
+        .sheet(isPresented: $showingInAppBrowser) {
+            if let url = inAppBrowserURL {
+                InAppBrowserView(url: url, platform: selectedPlatform, query: currentSearchQuery)
             }
         }
+        .sheet(isPresented: $showingRedditSearch) {
+            RedditSearchView(query: currentSearchQuery)
+        }
+        // Do Not Disturb alert removed - feature not needed
     }
     
     private func hideKeyboard() {
@@ -258,10 +259,7 @@ struct ContentView: View {
     }
     
     private func performSearch() {
-        // Enable Do Not Disturb if preference is set
-        if premiumManager.isPremiumFeatureAvailable(.doNotDisturb) && userPreferences.isDoNotDisturbEnabled() {
-            doNotDisturbManager.enableDoNotDisturb()
-        }
+        // Do Not Disturb functionality removed - not practical on iOS
 
         // Special handling for TikTok - no search text required
         if selectedPlatform == .tiktok {
@@ -299,23 +297,66 @@ struct ContentView: View {
         }
 
         isSearching = true
+
+        // Capture the search text before clearing it
+        let queryToSearch = searchText
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let searchMode = userPreferences.getSearchMode()
             let success: Bool
 
             switch searchMode {
             case .direct:
-                success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+                success = searchService.directSearch(query: queryToSearch, platform: selectedPlatform)
             case .inApp:
-                // For in-app browsing, we would show results in a web view
-                // For now, fall back to direct search
-                success = searchService.directSearch(query: searchText, platform: selectedPlatform)
+                // In-app browsing - choose between API view or WebView
+                if selectedPlatform == .reddit {
+                    // Use Reddit API for better experience
+                    currentSearchQuery = queryToSearch
+                    showingRedditSearch = true
+                    success = true
+                } else {
+                    // Use WebView for other platforms
+                    if let url = URL(string: selectedPlatform.searchURL + queryToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
+                        inAppBrowserURL = url
+                        showingInAppBrowser = true
+                        success = true
+                    } else {
+                        success = false
+                    }
+                }
             }
 
             self.isSearching = false
 
             if !success {
                 print("Failed to open \(selectedPlatform.displayName)")
+            }
+        }
+
+        // Clear search text after performing search
+        searchText = ""
+    }
+
+    // Method to execute search with given query and platform, respecting user's search mode
+    private func executeSearch(query: String, platform: Platform) {
+        let searchMode = userPreferences.getSearchMode()
+
+        switch searchMode {
+        case .direct:
+            let _ = searchService.directSearch(query: query, platform: platform)
+        case .inApp:
+            // In-app browsing - choose between API view or WebView
+            if platform == .reddit {
+                // Use Reddit API for better experience
+                currentSearchQuery = query
+                showingRedditSearch = true
+            } else {
+                // Use WebView for other platforms
+                if let url = URL(string: platform.searchURL + query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
+                    inAppBrowserURL = url
+                    showingInAppBrowser = true
+                }
             }
         }
     }
@@ -326,8 +367,7 @@ struct ContentView: View {
 // MARK: - Search Mode Toggle View
 struct SearchModeToggleView: View {
     @StateObject private var userPreferences = UserPreferencesManager.shared
-    @StateObject private var premiumManager = PremiumManager.shared
-    @State private var showingPremiumUpgrade = false
+    @StateObject private var localizationManager = LocalizationManager.shared
 
     var body: some View {
         HStack(spacing: 12) {
@@ -337,7 +377,7 @@ struct SearchModeToggleView: View {
                 Button(action: {
                     userPreferences.setSearchMode(.direct)
                 }) {
-                    Text("Direct")
+                    Text(localizationManager.localizedString(.direct))
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundColor(userPreferences.getSearchMode() == .direct ? .white : Color.primary)
@@ -353,24 +393,11 @@ struct SearchModeToggleView: View {
 
                 // In-App mode button
                 Button(action: {
-                    if premiumManager.isPremiumUser || premiumManager.isTrialActive {
-                        userPreferences.setSearchMode(.inApp)
-                    } else {
-                        showingPremiumUpgrade = true
-                    }
+                    userPreferences.setSearchMode(.inApp)
                 }) {
-                    HStack(spacing: 4) {
-                        Text("In-App")
-                            .font(.caption)
-                            .fontWeight(.medium)
-
-                        // Premium crown indicator
-                        if !premiumManager.isPremiumUser && !premiumManager.isTrialActive {
-                            Image(systemName: "crown.fill")
-                                .font(.caption2)
-                                .foregroundColor(.yellow)
-                        }
-                    }
+                    Text(localizationManager.localizedString(.inApp))
+                        .font(.caption)
+                        .fontWeight(.medium)
                     .foregroundColor(userPreferences.getSearchMode() == .inApp ? .white : Color.primary)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
@@ -381,7 +408,6 @@ struct SearchModeToggleView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .buttonStyle(PlainButtonStyle())
-                .opacity(!premiumManager.isPremiumUser && !premiumManager.isTrialActive ? 0.7 : 1.0)
             }
             .padding(4)
             .background(
@@ -394,9 +420,6 @@ struct SearchModeToggleView: View {
             )
 
             Spacer()
-        }
-        .sheet(isPresented: $showingPremiumUpgrade) {
-            PremiumUpgradeView()
         }
     }
 }

@@ -7,20 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1407BC4D2E38360A00AA78BF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1407BC4C2E38360900AA78BF /* WidgetKit.framework */; };
-		1407BC4F2E38360A00AA78BF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1407BC4E2E38360A00AA78BF /* SwiftUI.framework */; };
-		1407BC5E2E38360B00AA78BF /* SkipFeedWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1407BC4A2E38360900AA78BF /* SkipFeedWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		147C8F422E1D94110004DBB2 /* File.txt in Resources */ = {isa = PBXBuildFile; fileRef = 147C8F412E1D94110004DBB2 /* File.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1407BC5C2E38360B00AA78BF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1435BD772E19F398005A651A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1407BC492E38360900AA78BF;
-			remoteInfo = SkipFeedWidgetExtension;
-		};
 		1435BD8D2E19F399005A651A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1435BD772E19F398005A651A /* Project object */;
@@ -37,51 +27,14 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		1407BC5F2E38360B00AA78BF /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				1407BC5E2E38360B00AA78BF /* SkipFeedWidgetExtension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		1407BC4A2E38360900AA78BF /* SkipFeedWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SkipFeedWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		1407BC4C2E38360900AA78BF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		1407BC4E2E38360A00AA78BF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		1407BC682E3836AA00AA78BF /* SkipFeed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkipFeed.entitlements; sourceTree = "<group>"; };
-		1407BC692E3836CC00AA78BF /* SkipFeedWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SkipFeedWidgetExtension.entitlements; sourceTree = "<group>"; };
 		1435BD7F2E19F398005A651A /* SkipFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkipFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1435BD8C2E19F399005A651A /* FocusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FocusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1435BD962E19F399005A651A /* FocusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FocusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		147C8F412E1D94110004DBB2 /* File.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1407BC622E38360B00AA78BF /* Exceptions for "SkipFeedWidget" folder in "SkipFeedWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 1407BC492E38360900AA78BF /* SkipFeedWidgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1407BC502E38360A00AA78BF /* SkipFeedWidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				1407BC622E38360B00AA78BF /* Exceptions for "SkipFeedWidget" folder in "SkipFeedWidgetExtension" target */,
-			);
-			path = SkipFeedWidget;
-			sourceTree = "<group>";
-		};
 		1435BD812E19F398005A651A /* Focus */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Focus;
@@ -100,15 +53,6 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1407BC472E38360900AA78BF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1407BC4F2E38360A00AA78BF /* SwiftUI.framework in Frameworks */,
-				1407BC4D2E38360A00AA78BF /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1435BD7C2E19F398005A651A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,26 +77,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1407BC4B2E38360900AA78BF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1407BC4C2E38360900AA78BF /* WidgetKit.framework */,
-				1407BC4E2E38360A00AA78BF /* SwiftUI.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1435BD762E19F398005A651A = {
 			isa = PBXGroup;
 			children = (
-				1407BC692E3836CC00AA78BF /* SkipFeedWidgetExtension.entitlements */,
-				1407BC682E3836AA00AA78BF /* SkipFeed.entitlements */,
 				147C8F412E1D94110004DBB2 /* File.txt */,
 				1435BD812E19F398005A651A /* Focus */,
 				1435BD8F2E19F399005A651A /* FocusTests */,
 				1435BD992E19F399005A651A /* FocusUITests */,
-				1407BC502E38360A00AA78BF /* SkipFeedWidget */,
-				1407BC4B2E38360900AA78BF /* Frameworks */,
 				1435BD802E19F398005A651A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -163,7 +94,6 @@
 				1435BD7F2E19F398005A651A /* SkipFeed.app */,
 				1435BD8C2E19F399005A651A /* FocusTests.xctest */,
 				1435BD962E19F399005A651A /* FocusUITests.xctest */,
-				1407BC4A2E38360900AA78BF /* SkipFeedWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,28 +101,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1407BC492E38360900AA78BF /* SkipFeedWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1407BC632E38360B00AA78BF /* Build configuration list for PBXNativeTarget "SkipFeedWidgetExtension" */;
-			buildPhases = (
-				1407BC462E38360900AA78BF /* Sources */,
-				1407BC472E38360900AA78BF /* Frameworks */,
-				1407BC482E38360900AA78BF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1407BC502E38360A00AA78BF /* SkipFeedWidget */,
-			);
-			name = SkipFeedWidgetExtension;
-			packageProductDependencies = (
-			);
-			productName = SkipFeedWidgetExtension;
-			productReference = 1407BC4A2E38360900AA78BF /* SkipFeedWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		1435BD7E2E19F398005A651A /* SkipFeed */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1435BDA02E19F399005A651A /* Build configuration list for PBXNativeTarget "SkipFeed" */;
@@ -200,12 +108,10 @@
 				1435BD7B2E19F398005A651A /* Sources */,
 				1435BD7C2E19F398005A651A /* Frameworks */,
 				1435BD7D2E19F398005A651A /* Resources */,
-				1407BC5F2E38360B00AA78BF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1407BC5D2E38360B00AA78BF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				1435BD812E19F398005A651A /* Focus */,
@@ -273,9 +179,6 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					1407BC492E38360900AA78BF = {
-						CreatedOnToolsVersion = 16.4;
-					};
 					1435BD7E2E19F398005A651A = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -306,19 +209,11 @@
 				1435BD7E2E19F398005A651A /* SkipFeed */,
 				1435BD8B2E19F399005A651A /* FocusTests */,
 				1435BD952E19F399005A651A /* FocusUITests */,
-				1407BC492E38360900AA78BF /* SkipFeedWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1407BC482E38360900AA78BF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1435BD7D2E19F398005A651A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,13 +239,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1407BC462E38360900AA78BF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1435BD7B2E19F398005A651A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,11 +263,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1407BC5D2E38360B00AA78BF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1407BC492E38360900AA78BF /* SkipFeedWidgetExtension */;
-			targetProxy = 1407BC5C2E38360B00AA78BF /* PBXContainerItemProxy */;
-		};
 		1435BD8E2E19F399005A651A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1435BD7E2E19F398005A651A /* SkipFeed */;
@@ -393,62 +276,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1407BC602E38360B00AA78BF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SkipFeedWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X94AB3DS6D;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SkipFeedWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SkipFeedWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Superorange.Focus.SkipFeedWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1407BC612E38360B00AA78BF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SkipFeedWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X94AB3DS6D;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SkipFeedWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SkipFeedWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Superorange.Focus.SkipFeedWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		1435BD9E2E19F399005A651A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -575,7 +402,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SkipFeed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X94AB3DS6D;
@@ -604,7 +430,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SkipFeed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X94AB3DS6D;
@@ -703,15 +528,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1407BC632E38360B00AA78BF /* Build configuration list for PBXNativeTarget "SkipFeedWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1407BC602E38360B00AA78BF /* Debug */,
-				1407BC612E38360B00AA78BF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1435BD7A2E19F398005A651A /* Build configuration list for PBXProject "Focus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

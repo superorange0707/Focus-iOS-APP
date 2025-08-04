@@ -2,12 +2,19 @@ import SwiftUI
 
 // MARK: - Search History View
 struct SearchHistoryView: View {
+    let onExecuteSearch: ((String, Platform) -> Void)?
+
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
     @StateObject private var searchService = SearchService.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var searchText = ""
     @State private var selectedPlatform: Platform?
+
+    init(onExecuteSearch: ((String, Platform) -> Void)? = nil) {
+        self.onExecuteSearch = onExecuteSearch
+    }
     
     var filteredHistory: [SearchHistoryItem] {
         var history = searchHistoryManager.searchHistory
@@ -37,7 +44,7 @@ struct SearchHistoryView: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondaryText)
                         
-                        TextField("Search history...", text: $searchText)
+                        TextField(localizationManager.localizedString(.searchHistory_placeholder), text: $searchText)
                             .textFieldStyle(PlainTextFieldStyle())
                         
                         if !searchText.isEmpty {
@@ -87,8 +94,12 @@ struct SearchHistoryView: View {
                             SearchHistoryRow(
                                 item: item,
                                 onRepeatSearch: {
-                                    // Repeat search
-                                    searchService.directSearch(query: item.query, platform: item.platform)
+                                    // Use callback if available, otherwise fall back to direct search
+                                    if let onExecuteSearch = onExecuteSearch {
+                                        onExecuteSearch(item.query, item.platform)
+                                    } else {
+                                        searchService.directSearch(query: item.query, platform: item.platform)
+                                    }
                                     dismiss()
                                 },
                                 onDelete: {
@@ -102,20 +113,20 @@ struct SearchHistoryView: View {
                     .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle("Search History")
+            .navigationTitle(localizationManager.localizedString(.searchHistory))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if !searchHistoryManager.searchHistory.isEmpty {
-                        Button("Clear All") {
+                        Button(localizationManager.localizedString(.clearAll)) {
                             searchHistoryManager.clearHistory()
                         }
                         .foregroundColor(.red)
                     }
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button(localizationManager.localizedString(.done)) {
                         dismiss()
                     }
                 }
@@ -192,7 +203,7 @@ struct SearchHistoryRow: View {
                         .background(Color.focusBlue.opacity(0.1))
                         .cornerRadius(4)
 
-                    Text(item.timeAgo)
+                    Text(item.detailedTimeString)
                         .font(.caption)
                         .foregroundColor(.secondaryText)
 

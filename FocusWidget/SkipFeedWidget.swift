@@ -66,79 +66,53 @@ struct SkipFeedWidgetSmallView: View {
     let entry: SkipFeedWidgetEntry
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header with app name
+        VStack(spacing: 12) {
+            // Icon and title
             HStack {
-                Text("SkipFeed")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.primary)
+                Image(systemName: "magnifyingglass.circle.fill")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.blue)
 
                 Spacer()
 
-                Image(systemName: "magnifyingglass.circle.fill")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.blue)
+                Text("SkipFeed")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.secondary)
             }
-            .padding(.bottom, 12)
 
-            // Main stats area
-            VStack(spacing: 8) {
-                // Today data
-                HStack {
-                    HStack(spacing: 4) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundColor(.orange)
+            Spacer()
 
-                        Text("Today")
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(.primary)
-                    }
+            // Main metric
+            VStack(spacing: 4) {
+                Text("\(entry.totalSearches)")
+                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                    .foregroundColor(.primary)
 
-                    Spacer()
-
-                    Text("\(entry.todaySearches)")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary)
-                }
-
-                // Total data
-                HStack {
-                    HStack(spacing: 4) {
-                        Image(systemName: "chart.bar.fill")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundColor(.purple)
-
-                        Text("Total")
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(.primary)
-                    }
-
-                    Spacer()
-
-                    Text("\(entry.totalSearches)")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundColor(.primary)
-                }
+                Text("Total Searches")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.secondary)
+                    .textCase(.uppercase)
+                    .tracking(0.5)
             }
-            .padding(.vertical, 8)
 
             Spacer()
 
             // Time saved
             HStack {
                 Image(systemName: "clock.fill")
-                    .font(.system(size: 9))
+                    .font(.system(size: 12))
                     .foregroundColor(.green)
 
-                Text("\(formatTime(entry.timeSaved)) saved")
-                    .font(.system(size: 10, weight: .medium))
+                Text(formatTime(entry.timeSaved))
+                    .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.green)
 
-                Spacer()
+                Text("saved")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.secondary)
             }
         }
-        .padding(12)
+        .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
@@ -161,22 +135,30 @@ struct SkipFeedWidgetMediumView: View {
         VStack(spacing: 16) {
             // Header
             HStack {
-                Text("SkipFeed")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.primary)
+                HStack(spacing: 8) {
+                    Image(systemName: "magnifyingglass.circle.fill")
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundColor(.blue)
+
+                    Text("SkipFeed")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.primary)
+                }
 
                 Spacer()
 
-                Image(systemName: "magnifyingglass.circle.fill")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.blue)
+                Text("Statistics")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.secondary)
+                    .textCase(.uppercase)
+                    .tracking(0.5)
             }
 
             // Stats Grid
             HStack(spacing: 24) {
                 // Today's Stats
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack(spacing: 6) {
+                    HStack {
                         Image(systemName: "calendar")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.orange)
@@ -190,20 +172,20 @@ struct SkipFeedWidgetMediumView: View {
                         Text("\(entry.todaySearches)")
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                             .foregroundColor(.primary)
-                            .minimumScaleFactor(0.8)
 
                         Text("searches")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.system(size: 11, weight: .medium))
                             .foregroundColor(.secondary)
+                            .textCase(.uppercase)
                     }
 
                     HStack(spacing: 4) {
                         Image(systemName: "clock.fill")
-                            .font(.system(size: 9))
+                            .font(.system(size: 10))
                             .foregroundColor(.green)
 
                         Text("\(formatTime(entry.todayTimeSaved)) saved")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.system(size: 11, weight: .medium))
                             .foregroundColor(.green)
                     }
                 }
@@ -212,7 +194,7 @@ struct SkipFeedWidgetMediumView: View {
 
                 // Total Stats
                 VStack(alignment: .trailing, spacing: 8) {
-                    HStack(spacing: 6) {
+                    HStack {
                         Text("All Time")
                             .font(.system(size: 12, weight: .semibold))
                             .foregroundColor(.primary)
@@ -226,20 +208,20 @@ struct SkipFeedWidgetMediumView: View {
                         Text("\(entry.totalSearches)")
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                             .foregroundColor(.primary)
-                            .minimumScaleFactor(0.8)
 
                         Text("searches")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.system(size: 11, weight: .medium))
                             .foregroundColor(.secondary)
+                            .textCase(.uppercase)
                     }
 
                     HStack(spacing: 4) {
                         Text("\(formatTime(entry.timeSaved)) saved")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.system(size: 11, weight: .medium))
                             .foregroundColor(.green)
 
                         Image(systemName: "clock.fill")
-                            .font(.system(size: 9))
+                            .font(.system(size: 10))
                             .foregroundColor(.green)
                     }
                 }
@@ -268,9 +250,7 @@ struct SkipFeedWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: SkipFeedWidgetProvider()) { entry in
             SkipFeedWidgetEntryView(entry: entry)
-                .containerBackground(for: .widget) {
-                    Color.clear
-                }
+                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("SkipFeed")
         .description("View your search statistics and time saved.")

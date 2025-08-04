@@ -96,10 +96,13 @@ struct WebView: UIViewRepresentable {
         let webView = WKWebView()
         webView.navigationDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = true
-        
+
         // Configure for better mobile experience
         webView.scrollView.contentInsetAdjustmentBehavior = .automatic
-        
+
+        // Set the webView reference in coordinator
+        context.coordinator.webView = webView
+
         return webView
     }
     
@@ -116,11 +119,12 @@ struct WebView: UIViewRepresentable {
     
     class Coordinator: NSObject, WKNavigationDelegate {
         let parent: WebView
-        
+        weak var webView: WKWebView?
+
         init(_ parent: WebView) {
             self.parent = parent
             super.init()
-            
+
             // Listen for navigation commands
             NotificationCenter.default.addObserver(
                 self,
@@ -128,18 +132,25 @@ struct WebView: UIViewRepresentable {
                 name: .webViewGoBack,
                 object: nil
             )
-            
+
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(goForward),
                 name: .webViewGoForward,
                 object: nil
             )
-            
+
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(refresh),
                 name: .webViewRefresh,
+                object: nil
+            )
+
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(loadURL),
+                name: .webViewLoadURL,
                 object: nil
             )
         }
@@ -149,25 +160,26 @@ struct WebView: UIViewRepresentable {
         }
         
         @objc func goBack() {
-            if let webView = getCurrentWebView(), webView.canGoBack {
+            if let webView = webView, webView.canGoBack {
                 webView.goBack()
             }
         }
-        
+
         @objc func goForward() {
-            if let webView = getCurrentWebView(), webView.canGoForward {
+            if let webView = webView, webView.canGoForward {
                 webView.goForward()
             }
         }
-        
+
         @objc func refresh() {
-            getCurrentWebView()?.reload()
+            webView?.reload()
         }
-        
-        private func getCurrentWebView() -> WKWebView? {
-            // This is a simplified approach - in a real implementation,
-            // you'd want to maintain a reference to the current webView
-            return nil
+
+        @objc func loadURL(_ notification: Notification) {
+            if let url = notification.object as? URL {
+                let request = URLRequest(url: url)
+                webView?.load(request)
+            }
         }
         
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

@@ -55,11 +55,11 @@ struct UsageStatsView: View {
                 .padding(.vertical, 20)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Your Stats")
+            .navigationTitle(localizationManager.localizedString(.stats))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button(localizationManager.localizedString(.done)) {
                         dismiss()
                     }
                     .font(.subheadline)

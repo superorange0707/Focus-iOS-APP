@@ -76,7 +76,9 @@ class PremiumManager: ObservableObject {
     }
     
     func isPremiumFeatureAvailable(_ feature: PremiumFeature) -> Bool {
-        return isPremiumUser || isTrialActive
+        // For now, all features are free while premium is being developed
+        return true
+        // return isPremiumUser || isTrialActive
     }
     
     // MARK: - StoreKit Integration
@@ -214,27 +216,40 @@ enum PremiumError: Error, LocalizedError {
 // MARK: - Do Not Disturb Manager
 class DoNotDisturbManager: ObservableObject {
     static let shared = DoNotDisturbManager()
-    
+
+    @Published var shouldShowDoNotDisturbAlert = false
+    @Published var hasShownDoNotDisturbAlert = false
+
     private init() {}
-    
+
     func enableDoNotDisturb() {
-        // Note: iOS doesn't allow apps to directly control Do Not Disturb
-        // This would need to guide users to enable it manually or use Focus modes
-        // For now, we'll implement a notification to remind users
-        
-        if UserPreferencesManager.shared.isDoNotDisturbEnabled() {
-            showDoNotDisturbReminder()
+        // Do Not Disturb functionality completely removed
+        // This method is kept for compatibility but does nothing
+    }
+
+    private func showDoNotDisturbReminder() {
+        // Show an alert to guide users to enable Do Not Disturb
+        DispatchQueue.main.async {
+            self.shouldShowDoNotDisturbAlert = true
+            self.hasShownDoNotDisturbAlert = true
         }
     }
-    
-    private func showDoNotDisturbReminder() {
-        // Show a notification or alert reminding users to enable Do Not Disturb
-        // This could be implemented as a banner or modal
-        print("Reminder: Enable Do Not Disturb for focused searching")
+
+    func openFocusSettings() {
+        // Open iOS Focus settings where users can configure Do Not Disturb
+        if let settingsUrl = URL(string: "App-prefs:FOCUS") {
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            } else {
+                // Fallback to general settings
+                if let generalSettingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(generalSettingsUrl)
+                }
+            }
+        }
     }
-    
-    func scheduleDoNotDisturbReminder() {
-        // Schedule a local notification to remind users about Do Not Disturb
-        // This would be implemented with UNUserNotificationCenter
+
+    func resetAlertState() {
+        hasShownDoNotDisturbAlert = false
     }
 }

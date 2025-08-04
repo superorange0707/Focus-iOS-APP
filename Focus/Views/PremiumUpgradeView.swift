@@ -285,9 +285,7 @@ struct PremiumFeatureRow: View {
         switch feature {
         case .inAppBrowsing: return "safari"
         case .searchHistory: return "clock.arrow.circlepath"
-        case .doNotDisturb: return "moon.fill"
         case .advancedSearch: return "slider.horizontal.3"
-        case .contentSummary: return "doc.text.magnifyingglass"
         case .unlimitedSearches: return "infinity"
         }
     }
