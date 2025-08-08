@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - 跳过滚动，找到重点",
+    "description": "多平台搜索聚合应用，帮您高效发现YouTube、Reddit、Twitter、TikTok、Instagram、Facebook等平台上的内容。"
+  },
+  "navigation": {
+    "home": "首页",
+    "support": "支持",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "download": "下载"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "跳过滚动，找到重点",
+      "description": "高效搜索多个平台。节省时间，保持专注，发现真正重要的内容。"
+    },
+    "platforms": {
+      "title": "搜索所有主要平台",
+      "description": "一个应用搜索全部。跳过无限滚动，精准找到您要的内容。"
+    },
+    "features": {
+      "title": "为现代用户打造的强大功能",
+      "description": "让您搜索更智能，而非更辛苦。",
+      "search": {
+        "title": "多平台搜索",
+        "description": "在一个地方搜索YouTube、Reddit、Twitter、TikTok、Instagram、Facebook、Google和Bing。"
+      },
+      "analytics": {
+        "title": "智能分析",
+        "description": "追踪您的搜索模式、节省时间和专注分数。了解您的数字消费习惯。"
+      },
+      "widgets": {
+        "title": "主屏幕小组件",
+        "description": "直接在主屏幕快速查看您的搜索统计和节省时间。"
+      },
+      "languages": {
+        "title": "支持11种语言",
+        "description": "使用您偏好的语言使用SkipFeed，完全本地化支持。"
+      },
+      "efficiency": {
+        "title": "时间效率",
+        "description": "停止无限滚动。计算您通过专注搜索节省了多少时间。"
+      },
+      "privacy": {
+        "title": "隐私优先",
+        "description": "所有数据都保存在您的设备上。无追踪，无数据收集，只有私密搜索。"
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "免费下载"
+    },
+    "cta": {
+      "title": "准备好跳过信息流了吗？",
+      "description": "加入已经改变搜索体验的数千用户。"
+    }
+  },
+  "footer": {
+    "description": "跳过滚动，找到重点。多平台搜索变得简单。",
+    "product": {
+      "title": "产品",
+      "features": "功能",
+      "support": "支持",
+      "download": "下载"
+    },
+    "legal": {
+      "title": "法律",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "contact": "联系我们"
+    },
+    "social": {
+      "title": "联系",
+      "email": "邮件支持"
+    },
+    "copyright": "版权所有。",
+    "madeWith": "用"
+  }
+}

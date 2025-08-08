@@ -11,6 +11,13 @@ class RedditAPIService: ObservableObject {
     @Published var posts: [RedditPost] = []
     @Published var isLoading = false
     @Published var error: String?
+    @Published var hasMorePosts = false
+    @Published var isLoadingMore = false
+    
+    private var currentAfterToken: String?
+    private var currentQuery: String = ""
+    private var currentSort: RedditSort = .relevance
+    private var currentTimeFilter: RedditTimeFilter = .all
     
     private init() {}
     
@@ -18,13 +25,22 @@ class RedditAPIService: ObservableObject {
         await MainActor.run {
             isLoading = true
             error = nil
+            posts = [] // Clear existing posts for new search
+            currentAfterToken = nil // Reset pagination
         }
         
+        // Store current search parameters
+        currentQuery = query
+        currentSort = sort
+        currentTimeFilter = timeFilter
+        
         do {
-            let searchResults = try await performSearch(query: query, subreddit: subreddit, sort: sort, timeFilter: timeFilter)
+            let (searchResults, afterToken) = try await performSearch(query: query, subreddit: subreddit, sort: sort, timeFilter: timeFilter, after: nil)
             
             await MainActor.run {
                 self.posts = searchResults
+                self.currentAfterToken = afterToken
+                self.hasMorePosts = afterToken != nil
                 self.isLoading = false
             }
         } catch {
@@ -35,15 +51,50 @@ class RedditAPIService: ObservableObject {
         }
     }
     
-    private func performSearch(query: String, subreddit: String?, sort: RedditSort, timeFilter: RedditTimeFilter) async throws -> [RedditPost] {
+    func loadMorePosts() async {
+        guard !isLoadingMore, hasMorePosts, let afterToken = currentAfterToken else { return }
+        
+        await MainActor.run {
+            isLoadingMore = true
+        }
+        
+        do {
+            let (moreResults, newAfterToken) = try await performSearch(
+                query: currentQuery,
+                subreddit: nil,
+                sort: currentSort,
+                timeFilter: currentTimeFilter,
+                after: afterToken
+            )
+            
+            await MainActor.run {
+                self.posts.append(contentsOf: moreResults)
+                self.currentAfterToken = newAfterToken
+                self.hasMorePosts = newAfterToken != nil
+                self.isLoadingMore = false
+            }
+        } catch {
+            await MainActor.run {
+                self.error = error.localizedDescription
+                self.isLoadingMore = false
+            }
+        }
+    }
+    
+    private func performSearch(query: String, subreddit: String?, sort: RedditSort, timeFilter: RedditTimeFilter, after: String?) async throws -> ([RedditPost], String?) {
         var urlString = "\(baseURL)/search.json"
         var queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "sort", value: sort.rawValue),
             URLQueryItem(name: "t", value: timeFilter.rawValue),
-            URLQueryItem(name: "limit", value: "25"),
+            URLQueryItem(name: "limit", value: "50"),
             URLQueryItem(name: "raw_json", value: "1")
         ]
+        
+        // Add pagination token if provided
+        if let after = after {
+            queryItems.append(URLQueryItem(name: "after", value: after))
+        }
         
         if let subreddit = subreddit {
             queryItems.append(URLQueryItem(name: "restrict_sr", value: "1"))
@@ -65,7 +116,10 @@ class RedditAPIService: ObservableObject {
         }
         
         let redditResponse = try JSONDecoder().decode(RedditResponse.self, from: data)
-        return redditResponse.data.children.map { $0.data }
+        let posts = redditResponse.data.children.map { $0.data }
+        let afterToken = redditResponse.data.after
+        
+        return (posts, afterToken)
     }
 }
 
@@ -76,6 +130,7 @@ struct RedditResponse: Codable {
 
 struct RedditListing: Codable {
     let children: [RedditChild]
+    let after: String?
 }
 
 struct RedditChild: Codable {

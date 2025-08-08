@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - Pule a rolagem, encontre o que importa",
+    "description": "Aplicativo de agregação de pesquisa multiplataforma para descoberta eficiente de conteúdo no YouTube, Reddit, Twitter, TikTok, Instagram, Facebook e mais."
+  },
+  "navigation": {
+    "home": "Início",
+    "support": "Suporte",
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "download": "Baixar"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "Pule a rolagem, encontre o que importa",
+      "description": "Pesquise eficientemente em múltiplas plataformas. Economize tempo, mantenha o foco e descubra conteúdo que realmente importa para você."
+    },
+    "platforms": {
+      "title": "Pesquise em Todas as Principais Plataformas",
+      "description": "Um app para pesquisar em todas. Pule a rolagem infinita e encontre exatamente o que você está procurando."
+    },
+    "features": {
+      "title": "Recursos Poderosos para Usuários Modernos",
+      "description": "Tudo que você precisa para pesquisar de forma mais inteligente, não mais difícil.",
+      "search": {
+        "title": "Pesquisa Multiplataforma",
+        "description": "Pesquise no YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google e Bing de um só lugar."
+      },
+      "analytics": {
+        "title": "Análises Inteligentes",
+        "description": "Acompanhe seus padrões de pesquisa, tempo economizado e pontuação de foco. Entenda seus hábitos de consumo digital."
+      },
+      "widgets": {
+        "title": "Widgets de Tela Inicial",
+        "description": "Acesso rápido às suas estatísticas de pesquisa e tempo economizado diretamente da sua tela inicial."
+      },
+      "languages": {
+        "title": "11 Idiomas Suportados",
+        "description": "Use o SkipFeed no seu idioma preferido com suporte completo de localização."
+      },
+      "efficiency": {
+        "title": "Eficiência de Tempo",
+        "description": "Pare a rolagem infinita. Calcule quanto tempo você economiza com pesquisas focadas."
+      },
+      "privacy": {
+        "title": "Privacidade em Primeiro Lugar",
+        "description": "Todos os seus dados permanecem no seu dispositivo. Sem rastreamento, sem coleta de dados, apenas pesquisas privadas."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "Baixar Grátis"
+    },
+    "cta": {
+      "title": "Pronto para Pular o Feed?",
+      "description": "Junte-se a milhares de usuários que já transformaram sua experiência de pesquisa."
+    }
+  },
+  "footer": {
+    "description": "Pule a rolagem, encontre o que importa. Pesquisa multiplataforma simplificada.",
+    "product": {
+      "title": "Produto",
+      "features": "Recursos",
+      "support": "Suporte",
+      "download": "Baixar"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Política de Privacidade",
+      "terms": "Termos de Serviço",
+      "contact": "Contato"
+    },
+    "social": {
+      "title": "Conectar",
+      "email": "Suporte por Email"
+    },
+    "copyright": "Todos os direitos reservados.",
+    "madeWith": "Feito com"
+  }
+}

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  skipfeed-website:
+    build: .
+    container_name: skipfeed-website
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=3001
+    restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

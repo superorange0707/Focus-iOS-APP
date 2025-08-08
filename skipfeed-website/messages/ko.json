@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - 스크롤을 건너뛰고, 중요한 것을 찾으세요",
+    "description": "YouTube, Reddit, Twitter, TikTok, Instagram, Facebook 등에서 효율적인 콘텐츠 발견을 위한 멀티플랫폼 검색 통합 앱."
+  },
+  "navigation": {
+    "home": "홈",
+    "support": "지원",
+    "privacy": "개인정보",
+    "terms": "약관",
+    "download": "다운로드"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "스크롤을 건너뛰고, 중요한 것을 찾으세요",
+      "description": "여러 플랫폼에서 효율적으로 검색하세요. 시간을 절약하고, 집중을 유지하며, 정말 중요한 콘텐츠를 발견하세요."
+    },
+    "platforms": {
+      "title": "모든 주요 플랫폼에서 검색",
+      "description": "모든 것을 검색하는 하나의 앱. 무한 스크롤을 건너뛰고 정확히 찾고 있는 것을 발견하세요."
+    },
+    "features": {
+      "title": "현대 사용자를 위한 강력한 기능",
+      "description": "더 어렵게가 아닌 더 스마트하게 검색하기 위해 필요한 모든 것.",
+      "search": {
+        "title": "멀티플랫폼 검색",
+        "description": "한 곳에서 YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google, Bing을 검색하세요."
+      },
+      "analytics": {
+        "title": "스마트 분석",
+        "description": "검색 패턴, 절약된 시간, 집중도 점수를 추적하세요. 디지털 소비 습관을 이해하세요."
+      },
+      "widgets": {
+        "title": "홈 화면 위젯",
+        "description": "홈 화면에서 바로 검색 통계와 절약된 시간에 빠르게 액세스하세요."
+      },
+      "languages": {
+        "title": "11개 언어 지원",
+        "description": "완전한 현지화 지원으로 선호하는 언어로 SkipFeed를 사용하세요."
+      },
+      "efficiency": {
+        "title": "시간 효율성",
+        "description": "무한 스크롤을 멈추세요. 집중된 검색으로 얼마나 많은 시간을 절약하는지 계산하세요."
+      },
+      "privacy": {
+        "title": "개인정보 우선",
+        "description": "모든 데이터가 기기에 남아있습니다. 추적 없음, 데이터 수집 없음, 오직 개인적인 검색만."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "무료 다운로드"
+    },
+    "cta": {
+      "title": "피드를 건너뛸 준비가 되셨나요?",
+      "description": "이미 검색 경험을 변화시킨 수천 명의 사용자들과 함께하세요."
+    }
+  },
+  "footer": {
+    "description": "스크롤을 건너뛰고, 중요한 것을 찾으세요. 멀티플랫폼 검색이 간단해졌습니다.",
+    "product": {
+      "title": "제품",
+      "features": "기능",
+      "support": "지원",
+      "download": "다운로드"
+    },
+    "legal": {
+      "title": "법적 사항",
+      "privacy": "개인정보처리방침",
+      "terms": "서비스 이용약관",
+      "contact": "문의"
+    },
+    "social": {
+      "title": "연결",
+      "email": "이메일 지원"
+    },
+    "copyright": "모든 권리 보유.",
+    "madeWith": "사랑으로 제작"
+  }
+}

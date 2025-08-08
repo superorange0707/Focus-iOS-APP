@@ -618,10 +618,7 @@ struct HistoryTabContent: View {
     }
 
     private func cleanOldItems() {
-        let cutoffDate = Calendar.current.date(byAdding: .day, value: -autoCleanupDays, to: Date()) ?? Date()
-        let itemsToDelete = searchHistoryManager.searchHistory.filter { $0.timestamp < cutoffDate }
-        let idsToDelete = Set(itemsToDelete.map { $0.id })
-        searchHistoryManager.deleteItems(withIds: idsToDelete)
+        searchHistoryManager.cleanupOldHistory(olderThan: autoCleanupDays)
     }
 
     private func groupedHistory() -> [(String, [SearchHistoryItem])] {

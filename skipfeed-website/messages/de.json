@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - Überspringe das Scrollen, finde was wichtig ist",
+    "description": "Multi-Plattform-Such-Aggregations-App für effiziente Inhalts-Entdeckung auf YouTube, Reddit, Twitter, TikTok, Instagram, Facebook und mehr."
+  },
+  "navigation": {
+    "home": "Startseite",
+    "support": "Support",
+    "privacy": "Datenschutz",
+    "terms": "Bedingungen",
+    "download": "Herunterladen"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "Überspringe das Scrollen, finde was wichtig ist",
+      "description": "Suche effizient auf mehreren Plattformen. Spare Zeit, bleibe fokussiert und entdecke Inhalte, die dir wirklich wichtig sind."
+    },
+    "platforms": {
+      "title": "Durchsuche Alle Großen Plattformen",
+      "description": "Eine App, um alle zu durchsuchen. Überspringe das endlose Scrollen und finde genau was du suchst."
+    },
+    "features": {
+      "title": "Mächtige Funktionen für Moderne Nutzer",
+      "description": "Alles was du brauchst, um intelligenter zu suchen, nicht härter.",
+      "search": {
+        "title": "Multi-Plattform-Suche",
+        "description": "Durchsuche YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google und Bing von einem Ort aus."
+      },
+      "analytics": {
+        "title": "Intelligente Analysen",
+        "description": "Verfolge deine Suchmuster, gesparte Zeit und Fokus-Score. Verstehe deine digitalen Konsumgewohnheiten."
+      },
+      "widgets": {
+        "title": "Startbildschirm-Widgets",
+        "description": "Schneller Zugriff auf deine Suchstatistiken und gesparte Zeit direkt von deinem Startbildschirm."
+      },
+      "languages": {
+        "title": "11 Sprachen Unterstützt",
+        "description": "Nutze SkipFeed in deiner bevorzugten Sprache mit vollständiger Lokalisierungsunterstützung."
+      },
+      "efficiency": {
+        "title": "Zeit-Effizienz",
+        "description": "Stoppe endloses Scrollen. Berechne wie viel Zeit du mit fokussierten Suchen sparst."
+      },
+      "privacy": {
+        "title": "Datenschutz Zuerst",
+        "description": "Alle deine Daten bleiben auf deinem Gerät. Kein Tracking, keine Datensammlung, nur private Suchen."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "Kostenlos Herunterladen"
+    },
+    "cta": {
+      "title": "Bereit den Feed zu Überspringen?",
+      "description": "Schließe dich Tausenden von Nutzern an, die bereits ihre Sucherfahrung transformiert haben."
+    }
+  },
+  "footer": {
+    "description": "Überspringe das Scrollen, finde was wichtig ist. Multi-Plattform-Suche vereinfacht.",
+    "product": {
+      "title": "Produkt",
+      "features": "Funktionen",
+      "support": "Support",
+      "download": "Herunterladen"
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "privacy": "Datenschutzrichtlinie",
+      "terms": "Nutzungsbedingungen",
+      "contact": "Kontakt"
+    },
+    "social": {
+      "title": "Verbinden",
+      "email": "Email-Support"
+    },
+    "copyright": "Alle Rechte vorbehalten.",
+    "madeWith": "Gemacht mit"
+  }
+}

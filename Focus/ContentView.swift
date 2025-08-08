@@ -76,6 +76,13 @@ struct ContentView: View {
                     platforms: userPreferences.getOrderedPlatforms()
                 )
                 .padding(.top, 2)
+                .onChange(of: selectedPlatform) { newPlatform in
+                    // Auto-switch to Direct mode for non-Reddit platforms
+                    // since only Reddit has proper in-app support
+                    if newPlatform != .reddit && userPreferences.getSearchMode() == .inApp {
+                        userPreferences.setSearchMode(.direct)
+                    }
+                }
                 
                 // Search section
                 VStack(spacing: 18) {
@@ -89,8 +96,11 @@ struct ContentView: View {
                         )
 
                         // Search mode toggle under search bar with reduced spacing
-                        SearchModeToggleView()
-                            .padding(.top, -6)
+                        // Only show for Reddit platform since it's the only one with proper in-app support
+                        if selectedPlatform == .reddit {
+                            SearchModeToggleView()
+                                .padding(.top, -6)
+                        }
                     } else {
                         // For TikTok, show a simple message
                         HStack {
@@ -317,6 +327,7 @@ struct ContentView: View {
                     success = true
                 } else {
                     // Use WebView for other platforms
+                    // Note: This should rarely be reached since we auto-switch non-Reddit platforms to Direct mode
                     if let url = URL(string: selectedPlatform.searchURL + queryToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
                         inAppBrowserURL = url
                         showingInAppBrowser = true
@@ -353,6 +364,7 @@ struct ContentView: View {
                 showingRedditSearch = true
             } else {
                 // Use WebView for other platforms
+                // Note: This should rarely be reached since we auto-switch non-Reddit platforms to Direct mode
                 if let url = URL(string: platform.searchURL + query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
                     inAppBrowserURL = url
                     showingInAppBrowser = true

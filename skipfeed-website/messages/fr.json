@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - Ignorez le défilement, trouvez ce qui compte",
+    "description": "Application d'agrégation de recherche multi-plateforme pour la découverte efficace de contenu sur YouTube, Reddit, Twitter, TikTok, Instagram, Facebook et plus."
+  },
+  "navigation": {
+    "home": "Accueil",
+    "support": "Support",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "download": "Télécharger"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "Ignorez le défilement, trouvez ce qui compte",
+      "description": "Recherchez efficacement sur plusieurs plateformes. Économisez du temps, restez concentré et découvrez du contenu qui vous importe vraiment."
+    },
+    "platforms": {
+      "title": "Recherchez sur Toutes les Principales Plateformes",
+      "description": "Une application pour toutes les rechercher. Ignorez le défilement infini et trouvez exactement ce que vous cherchez."
+    },
+    "features": {
+      "title": "Fonctionnalités Puissantes pour les Utilisateurs Modernes",
+      "description": "Tout ce dont vous avez besoin pour rechercher plus intelligemment, pas plus difficilement.",
+      "search": {
+        "title": "Recherche Multi-Plateforme",
+        "description": "Recherchez sur YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google et Bing depuis un seul endroit."
+      },
+      "analytics": {
+        "title": "Analyses Intelligentes",
+        "description": "Suivez vos modèles de recherche, le temps économisé et le score de concentration. Comprenez vos habitudes de consommation numérique."
+      },
+      "widgets": {
+        "title": "Widgets d'Écran d'Accueil",
+        "description": "Accès rapide à vos statistiques de recherche et au temps économisé directement depuis votre écran d'accueil."
+      },
+      "languages": {
+        "title": "11 Langues Prises en Charge",
+        "description": "Utilisez SkipFeed dans votre langue préférée avec un support de localisation complet."
+      },
+      "efficiency": {
+        "title": "Efficacité Temporelle",
+        "description": "Arrêtez le défilement infini. Calculez combien de temps vous économisez avec des recherches ciblées."
+      },
+      "privacy": {
+        "title": "Confidentialité d'Abord",
+        "description": "Toutes vos données restent sur votre appareil. Aucun suivi, aucune collecte de données, seulement des recherches privées."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "Télécharger Gratuitement"
+    },
+    "cta": {
+      "title": "Prêt à Ignorer le Flux ?",
+      "description": "Rejoignez des milliers d'utilisateurs qui ont déjà transformé leur expérience de recherche."
+    }
+  },
+  "footer": {
+    "description": "Ignorez le défilement, trouvez ce qui compte. Recherche multi-plateforme simplifiée.",
+    "product": {
+      "title": "Produit",
+      "features": "Fonctionnalités",
+      "support": "Support",
+      "download": "Télécharger"
+    },
+    "legal": {
+      "title": "Légal",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions de Service",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Connecter",
+      "email": "Support Email"
+    },
+    "copyright": "Tous droits réservés.",
+    "madeWith": "Fait avec"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - Salta el scroll, encuentra lo que importa",
+    "description": "Aplicación de agregación de búsqueda multiplataforma para el descubrimiento eficiente de contenido en YouTube, Reddit, Twitter, TikTok, Instagram, Facebook y más."
+  },
+  "navigation": {
+    "home": "Inicio",
+    "support": "Soporte",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "download": "Descargar"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "Salta el scroll, encuentra lo que importa",
+      "description": "Busca en múltiples plataformas de manera eficiente. Ahorra tiempo, mantente enfocado y descubre contenido que realmente te importa."
+    },
+    "platforms": {
+      "title": "Busca en Todas las Plataformas Principales",
+      "description": "Una app para buscarlas todas. Salta el desplazamiento infinito y encuentra exactamente lo que buscas."
+    },
+    "features": {
+      "title": "Características Poderosas para Usuarios Modernos",
+      "description": "Todo lo que necesitas para buscar más inteligente, no más difícil.",
+      "search": {
+        "title": "Búsqueda Multiplataforma",
+        "description": "Busca en YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google y Bing desde un solo lugar."
+      },
+      "analytics": {
+        "title": "Análisis Inteligente",
+        "description": "Rastrea tus patrones de búsqueda, tiempo ahorrado y puntuación de enfoque. Comprende tus hábitos de consumo digital."
+      },
+      "widgets": {
+        "title": "Widgets de Pantalla de Inicio",
+        "description": "Acceso rápido a tus estadísticas de búsqueda y tiempo ahorrado directamente desde tu pantalla de inicio."
+      },
+      "languages": {
+        "title": "11 Idiomas Soportados",
+        "description": "Usa SkipFeed en tu idioma preferido con soporte completo de localización."
+      },
+      "efficiency": {
+        "title": "Eficiencia de Tiempo",
+        "description": "Detén el desplazamiento infinito. Calcula cuánto tiempo ahorras con búsquedas enfocadas."
+      },
+      "privacy": {
+        "title": "Privacidad Primero",
+        "description": "Todos tus datos permanecen en tu dispositivo. Sin rastreo, sin recopilación de datos, solo búsquedas privadas."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "Descargar Gratis"
+    },
+    "cta": {
+      "title": "¿Listo para Saltar el Feed?",
+      "description": "Únete a miles de usuarios que ya han transformado su experiencia de búsqueda."
+    }
+  },
+  "footer": {
+    "description": "Salta el scroll, encuentra lo que importa. Búsqueda multiplataforma simplificada.",
+    "product": {
+      "title": "Producto",
+      "features": "Características",
+      "support": "Soporte",
+      "download": "Descargar"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "contact": "Contacto"
+    },
+    "social": {
+      "title": "Conectar",
+      "email": "Soporte por Email"
+    },
+    "copyright": "Todos los derechos reservados.",
+    "madeWith": "Hecho con"
+  }
+}

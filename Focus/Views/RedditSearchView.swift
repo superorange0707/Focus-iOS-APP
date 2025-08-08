@@ -163,12 +163,47 @@ struct RedditSearchView: View {
     }
     
     private var postsList: some View {
-        List(redditService.posts) { post in
-            RedditPostRow(post: post) {
-                selectedPost = post
-                showingPostDetail = true
+        List {
+            ForEach(redditService.posts) { post in
+                RedditPostRow(post: post) {
+                    selectedPost = post
+                    showingPostDetail = true
+                }
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                .onAppear {
+                    // Load more when reaching the last few items
+                    if post.id == redditService.posts.last?.id {
+                        Task {
+                            await redditService.loadMorePosts()
+                        }
+                    }
+                }
             }
-            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            
+            // Load more indicator
+            if redditService.hasMorePosts {
+                HStack {
+                    Spacer()
+                    if redditService.isLoadingMore {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                        Text("Loading more posts...")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .padding(.leading, 8)
+                    } else {
+                        Button("Load More") {
+                            Task {
+                                await redditService.loadMorePosts()
+                            }
+                        }
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                    }
+                    Spacer()
+                }
+                .listRowInsets(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+            }
         }
         .listStyle(PlainListStyle())
         .refreshable {

@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - スクロールをスキップ、重要なものを見つける",
+    "description": "YouTube、Reddit、Twitter、TikTok、Instagram、Facebookなどでの効率的なコンテンツ発見のためのマルチプラットフォーム検索集約アプリ。"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "support": "サポート",
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "download": "ダウンロード"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "スクロールをスキップ、重要なものを見つける",
+      "description": "複数のプラットフォームで効率的に検索。時間を節約し、集中を保ち、本当に重要なコンテンツを発見しましょう。"
+    },
+    "platforms": {
+      "title": "すべての主要プラットフォームを検索",
+      "description": "すべてを検索する一つのアプリ。無限スクロールをスキップして、探しているものを正確に見つけましょう。"
+    },
+    "features": {
+      "title": "現代ユーザーのための強力な機能",
+      "description": "より難しくではなく、よりスマートに検索するために必要なすべて。",
+      "search": {
+        "title": "マルチプラットフォーム検索",
+        "description": "YouTube、Reddit、Twitter、TikTok、Instagram、Facebook、Google、Bingを一箇所から検索。"
+      },
+      "analytics": {
+        "title": "スマート分析",
+        "description": "検索パターン、節約時間、フォーカススコアを追跡。デジタル消費習慣を理解しましょう。"
+      },
+      "widgets": {
+        "title": "ホーム画面ウィジェット",
+        "description": "ホーム画面から直接、検索統計と節約時間への迅速アクセス。"
+      },
+      "languages": {
+        "title": "11言語サポート",
+        "description": "完全なローカライゼーションサポートで、お好みの言語でSkipFeedを使用。"
+      },
+      "efficiency": {
+        "title": "時間効率",
+        "description": "無限スクロールを停止。集中した検索でどれだけの時間を節約できるかを計算。"
+      },
+      "privacy": {
+        "title": "プライバシーファースト",
+        "description": "すべてのデータはデバイスに残ります。追跡なし、データ収集なし、プライベート検索のみ。"
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "無料ダウンロード"
+    },
+    "cta": {
+      "title": "フィードをスキップする準備はできましたか？",
+      "description": "すでに検索体験を変革した何千ものユーザーに参加しましょう。"
+    }
+  },
+  "footer": {
+    "description": "スクロールをスキップ、重要なものを見つける。マルチプラットフォーム検索を簡単に。",
+    "product": {
+      "title": "プロダクト",
+      "features": "機能",
+      "support": "サポート",
+      "download": "ダウンロード"
+    },
+    "legal": {
+      "title": "法的事項",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "contact": "お問い合わせ"
+    },
+    "social": {
+      "title": "接続",
+      "email": "メールサポート"
+    },
+    "copyright": "全著作権所有。",
+    "madeWith": "愛をこめて"
+  }
+}

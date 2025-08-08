@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "SkipFeed - Skip the scroll, find what matters",
+    "description": "Multi-platform search aggregation app for efficient content discovery across YouTube, Reddit, Twitter, TikTok, Instagram, Facebook and more."
+  },
+  "navigation": {
+    "home": "Home",
+    "support": "Support",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "download": "Download"
+  },
+  "homepage": {
+    "hero": {
+      "subtitle": "Skip the scroll, find what matters",
+      "description": "Search across multiple platforms efficiently. Save time, stay focused, and discover content that actually matters to you."
+    },
+    "platforms": {
+      "title": "Search Across All Major Platforms",
+      "description": "One app to search them all. Skip the endless scrolling and find exactly what you're looking for."
+    },
+    "features": {
+      "title": "Powerful Features for Modern Users",
+      "description": "Everything you need to search smarter, not harder.",
+      "search": {
+        "title": "Multi-Platform Search",
+        "description": "Search across YouTube, Reddit, Twitter, TikTok, Instagram, Facebook, Google, and Bing all from one place."
+      },
+      "analytics": {
+        "title": "Smart Analytics",
+        "description": "Track your search patterns, time saved, and focus score. Understand your digital consumption habits."
+      },
+      "widgets": {
+        "title": "Home Screen Widgets",
+        "description": "Quick access to your search stats and time saved right from your home screen."
+      },
+      "languages": {
+        "title": "11 Languages Supported",
+        "description": "Use SkipFeed in your preferred language with full localization support."
+      },
+      "efficiency": {
+        "title": "Time Efficiency",
+        "description": "Stop endless scrolling. Calculate how much time you save with focused searching."
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "All your data stays on your device. No tracking, no data collection, just private searching."
+      }
+    },
+    "buttons": {
+      "appStore": "App Store",
+      "playStore": "Google Play",
+      "downloadFree": "Download Free"
+    },
+    "cta": {
+      "title": "Ready to Skip the Feed?",
+      "description": "Join thousands of users who have already transformed their search experience."
+    }
+  },
+  "footer": {
+    "description": "Skip the scroll, find what matters. Multi-platform search made simple.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "support": "Support",
+      "download": "Download"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Connect",
+      "email": "Email Support"
+    },
+    "copyright": "All rights reserved.",
+    "madeWith": "Made with"
+  }
+}
