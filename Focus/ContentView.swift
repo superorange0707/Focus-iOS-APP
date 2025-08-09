@@ -76,7 +76,7 @@ struct ContentView: View {
                     platforms: userPreferences.getOrderedPlatforms()
                 )
                 .padding(.top, 2)
-                .onChange(of: selectedPlatform) { newPlatform in
+                .onChange(of: selectedPlatform) { _, newPlatform in
                     // Auto-switch to Direct mode for non-Reddit platforms
                     // since only Reddit has proper in-app support
                     if newPlatform != .reddit && userPreferences.getSearchMode() == .inApp {
@@ -376,65 +376,7 @@ struct ContentView: View {
 
 // Premium upgrade views removed for free tier launch
 
-// MARK: - Search Mode Toggle View
-struct SearchModeToggleView: View {
-    @StateObject private var userPreferences = UserPreferencesManager.shared
-    @StateObject private var localizationManager = LocalizationManager.shared
-
-    var body: some View {
-        HStack(spacing: 12) {
-            // Simple toggle switch like the AUTO example you showed
-            HStack(spacing: 0) {
-                // Direct mode button
-                Button(action: {
-                    userPreferences.setSearchMode(.direct)
-                }) {
-                    Text(localizationManager.localizedString(.direct))
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .foregroundColor(userPreferences.getSearchMode() == .direct ? .white : Color.primary)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(
-                            userPreferences.getSearchMode() == .direct ?
-                            Color.focusBlue : Color.clear
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-                .buttonStyle(PlainButtonStyle())
-
-                // In-App mode button
-                Button(action: {
-                    userPreferences.setSearchMode(.inApp)
-                }) {
-                    Text(localizationManager.localizedString(.inApp))
-                        .font(.caption)
-                        .fontWeight(.medium)
-                    .foregroundColor(userPreferences.getSearchMode() == .inApp ? .white : Color.primary)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(
-                        userPreferences.getSearchMode() == .inApp ?
-                        Color.focusBlue : Color.clear
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-            .padding(4)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color(.systemGray6))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color(.systemGray4), lineWidth: 0.5)
-                    )
-            )
-
-            Spacer()
-        }
-    }
-}
+// Note: SearchModeToggleView moved to SearchView.swift to avoid redeclaration
 
 #Preview {
     ContentView()

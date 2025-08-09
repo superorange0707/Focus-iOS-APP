@@ -1,0 +1,494 @@
+import SwiftUI
+
+// Import Charts only if available (iOS 16+)
+#if canImport(Charts)
+import Charts
+#endif
+
+// MARK: - Main Statistics View
+struct StatisticsView: View {
+    @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
+    @State private var selectedTimeRange: TimeRange = .week
+    @State private var showingExport = false
+    
+    enum TimeRange: String, CaseIterable {
+        case week = "7d"
+        case month = "30d"
+        
+        var displayName: String {
+            switch self {
+            case .week: return "7 Days"
+            case .month: return "30 Days"
+            }
+        }
+    }
+
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    // Time Range Picker
+                    Picker("Time Range", selection: $selectedTimeRange) {
+                        ForEach(TimeRange.allCases, id: \.self) { range in
+                            Text(range.displayName).tag(range)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 20)
+                    
+                    // Hero Stats Section
+                    VStack(spacing: 16) {
+                        HeroStatCard(
+                            title: localizationManager.localizedString(.timeSaved),
+                            value: formatTimeSaved(analyticsManager.getTimeSaved()),
+                            subtitle: getLocalizedSubtitle(),
+                            icon: "clock.badge.checkmark.fill",
+                            gradient: [Color.green, Color.mint]
+                        )
+
+                        HStack(spacing: 12) {
+                            CompactStatCard(
+                                title: localizationManager.localizedString(.totalSearches),
+                                value: "\(analyticsManager.getTotalSearches())",
+                                icon: "magnifyingglass.circle.fill",
+                                color: .blue
+                            )
+
+                            CompactStatCard(
+                                title: localizationManager.localizedString(.today),
+                                value: "\(analyticsManager.getTodaysSearches())",
+                                icon: "calendar.circle.fill",
+                                color: .orange
+                            )
+                        }
+                    }
+                    .padding(.horizontal, 20)
+
+                    // Platform Usage Pie Chart
+                    if !analyticsManager.getMostUsedPlatforms().isEmpty {
+                        PlatformUsagePieChartCard(
+                            platforms: analyticsManager.getMostUsedPlatforms(),
+                            timeRange: selectedTimeRange
+                        )
+                        .padding(.horizontal, 20)
+                    }
+
+                    // Trend Chart
+                    SearchTrendChartCard(
+                        timeRange: selectedTimeRange
+                    )
+                    .padding(.horizontal, 20)
+
+                    // Time of Day Analysis
+                    TimeOfDayAnalysisCard()
+                        .padding(.horizontal, 20)
+
+                    // Insights Section
+                    ModernInsightsCard(
+                        todayTimeSaved: analyticsManager.getTimeSavedToday(),
+                        totalSearches: analyticsManager.getTotalSearches()
+                    )
+                    .padding(.horizontal, 20)
+                }
+                .padding(.vertical, 20)
+            }
+            .background(Color(.systemGroupedBackground))
+            .navigationTitle("Statistics")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingExport = true }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
+            .sheet(isPresented: $showingExport) {
+                DataExportView()
+            }
+        }
+    }
+    
+    private func formatTimeSaved(_ timeInterval: TimeInterval) -> String {
+        let hours = Int(timeInterval) / 3600
+        let minutes = (Int(timeInterval) % 3600) / 60
+
+        if hours > 0 {
+            return "\(hours)h \(minutes)m"
+        } else {
+            return "\(minutes)m"
+        }
+    }
+
+    private func getLocalizedSubtitle() -> String {
+        switch localizationManager.currentLanguage {
+        case "es": return "vs desplazamiento infinito"
+        case "fr": return "vs défilement infini"
+        case "de": return "vs endloses Scrollen"
+        case "it": return "vs scorrimento infinito"
+        case "pt": return "vs rolagem infinita"
+        case "ru": return "vs бесконечная прокрутка"
+        case "ja": return "vs 無限スクロール"
+        case "ko": return "vs 무한 스크롤"
+        case "zh": return "vs 无限滚动"
+        default: return "vs endless scrolling"
+        }
+    }
+}
+
+// MARK: - Platform Usage Pie Chart
+struct PlatformUsagePieChartCard: View {
+    let platforms: [(Platform, Int)]
+    let timeRange: StatisticsView.TimeRange
+    @StateObject private var localizationManager = LocalizationManager.shared
+
+    var chartData: [PlatformChartData] {
+        let total = platforms.reduce(0) { $0 + $1.1 }
+        return platforms.map { platform, count in
+            PlatformChartData(
+                platform: platform,
+                count: count,
+                percentage: Double(count) / Double(total) * 100
+            )
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Image(systemName: "chart.pie.fill")
+                    .font(.title3)
+                    .foregroundColor(.blue)
+
+                Text("Platform Usage")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+
+                Spacer()
+                
+                Text(timeRange.displayName)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color(.systemGray5))
+                    .cornerRadius(8)
+            }
+
+            HStack(spacing: 20) {
+                // Pie Chart
+                if #available(iOS 16.0, *) {
+                    Chart(chartData, id: \.platform) { data in
+                        SectorMark(
+                            angle: .value("Count", data.count),
+                            innerRadius: .ratio(0.5),
+                            angularInset: 2
+                        )
+                        .foregroundStyle(data.platform.color)
+                        .cornerRadius(4)
+                    }
+                    .frame(width: 120, height: 120)
+                } else {
+                    // Fallback for iOS 15
+                    SimplePieChart(data: chartData)
+                        .frame(width: 120, height: 120)
+                }
+
+                // Legend
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(chartData.prefix(4), id: \.platform) { data in
+                        HStack(spacing: 8) {
+                            Circle()
+                                .fill(data.platform.color)
+                                .frame(width: 12, height: 12)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(data.platform.displayName)
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+
+                                Text("\(Int(data.percentage))% • \(data.count) searches")
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Spacer()
+                        }
+                    }
+                }
+            }
+        }
+        .padding(20)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+    }
+}
+
+// MARK: - Search Trend Chart
+struct SearchTrendChartCard: View {
+    let timeRange: StatisticsView.TimeRange
+    @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+
+    var chartData: [DailySearchData] {
+        let days = timeRange == .week ? 7 : 30
+        let calendar = Calendar.current
+        let endDate = Date()
+        
+        return (0..<days).compactMap { dayOffset in
+            guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: endDate) else { return nil }
+            let dateKey = DateFormatter.dayFormatter.string(from: date)
+            let count = analyticsManager.analytics.dailySearches[dateKey] ?? 0
+            
+            return DailySearchData(date: date, searchCount: count)
+        }.reversed()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Image(systemName: "chart.line.uptrend.xyaxis")
+                    .font(.title3)
+                    .foregroundColor(.blue)
+
+                Text("Search Trend")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+
+                Spacer()
+                
+                Text(timeRange.displayName)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color(.systemGray5))
+                    .cornerRadius(8)
+            }
+
+            if #available(iOS 16.0, *) {
+                Chart(chartData, id: \.date) { data in
+                    LineMark(
+                        x: .value("Date", data.date),
+                        y: .value("Searches", data.searchCount)
+                    )
+                    .foregroundStyle(.blue)
+                    .lineStyle(.init(lineWidth: 3))
+                    
+                    AreaMark(
+                        x: .value("Date", data.date),
+                        y: .value("Searches", data.searchCount)
+                    )
+                    .foregroundStyle(.blue.opacity(0.1))
+                }
+                .frame(height: 150)
+                .chartXAxis {
+                    AxisMarks(values: .automatic(desiredCount: 5)) { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel(format: .dateTime.weekday(.abbreviated))
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks { _ in
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel()
+                    }
+                }
+            } else {
+                // Fallback for iOS 15
+                SimpleLineChart(data: chartData)
+                    .frame(height: 150)
+            }
+        }
+        .padding(20)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+    }
+}
+
+// MARK: - Time of Day Analysis
+struct TimeOfDayAnalysisCard: View {
+    @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    
+    var timeOfDayData: [TimeOfDayData] {
+        // For now, create sample data based on typical usage patterns
+        // In a real implementation, you would track actual search times
+        let morningSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.25)
+        let afternoonSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.35)
+        let eveningSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.40)
+        
+        return [
+            TimeOfDayData(period: "Morning", searchCount: morningSearches, icon: "sunrise.fill"),
+            TimeOfDayData(period: "Afternoon", searchCount: afternoonSearches, icon: "sun.max.fill"),
+            TimeOfDayData(period: "Evening", searchCount: eveningSearches, icon: "moon.fill")
+        ]
+    }
+    
+    var mostActiveTime: String {
+        let maxData = timeOfDayData.max { $0.searchCount < $1.searchCount }
+        return maxData?.period.lowercased() ?? "evening"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Image(systemName: "clock.fill")
+                    .font(.title3)
+                    .foregroundColor(.purple)
+
+                Text("Time of Day Analysis")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+
+                Spacer()
+            }
+
+            // Summary insight
+            HStack {
+                Image(systemName: "lightbulb.fill")
+                    .foregroundColor(.yellow)
+                
+                Text("You search most often in the \(mostActiveTime)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(Color.yellow.opacity(0.1))
+            .cornerRadius(12)
+
+            // Time period breakdown
+            VStack(spacing: 12) {
+                ForEach(timeOfDayData, id: \.period) { data in
+                    TimeOfDayRow(data: data, totalSearches: analyticsManager.getTotalSearches())
+                }
+            }
+        }
+        .padding(20)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+    }
+}
+
+// MARK: - Supporting Data Models
+struct PlatformChartData {
+    let platform: Platform
+    let count: Int
+    let percentage: Double
+}
+
+struct DailySearchData {
+    let date: Date
+    let searchCount: Int
+}
+
+struct TimeOfDayData {
+    let period: String
+    let searchCount: Int
+    let icon: String
+}
+
+// MARK: - Supporting Views
+struct TimeOfDayRow: View {
+    let data: TimeOfDayData
+    let totalSearches: Int
+    
+    var percentage: Double {
+        guard totalSearches > 0 else { return 0 }
+        return Double(data.searchCount) / Double(totalSearches) * 100
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: data.icon)
+                .font(.title3)
+                .foregroundColor(.purple)
+                .frame(width: 24)
+
+            VStack(alignment: .leading, spacing: 2) {
+                HStack {
+                    Text(data.period)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+
+                    Spacer()
+
+                    Text("\(data.searchCount) searches")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
+                ProgressView(value: percentage / 100)
+                    .progressViewStyle(LinearProgressViewStyle(tint: .purple))
+                    .frame(height: 4)
+            }
+        }
+    }
+}
+
+// MARK: - Fallback Charts for iOS 15
+struct SimplePieChart: View {
+    let data: [PlatformChartData]
+    
+    var body: some View {
+        ZStack {
+            ForEach(Array(data.enumerated()), id: \.offset) { index, chartData in
+                let startAngle = data.prefix(index).reduce(0) { $0 + $1.percentage } * 3.6
+                let endAngle = startAngle + chartData.percentage * 3.6
+                
+                Path { path in
+                    let center = CGPoint(x: 60, y: 60)
+                    path.move(to: center)
+                    path.addArc(
+                        center: center,
+                        radius: 50,
+                        startAngle: .degrees(startAngle - 90),
+                        endAngle: .degrees(endAngle - 90),
+                        clockwise: false
+                    )
+                    path.closeSubpath()
+                }
+                .fill(chartData.platform.color)
+            }
+            
+            Circle()
+                .fill(Color(.systemBackground))
+                .frame(width: 60, height: 60)
+        }
+    }
+}
+
+struct SimpleLineChart: View {
+    let data: [DailySearchData]
+    
+    var body: some View {
+        GeometryReader { geometry in
+            let maxValue = Double(data.map(\.searchCount).max() ?? 1)
+            let points = data.enumerated().map { index, item in
+                CGPoint(
+                    x: CGFloat(index) / CGFloat(data.count - 1) * geometry.size.width,
+                    y: geometry.size.height - (CGFloat(item.searchCount) / CGFloat(maxValue) * geometry.size.height)
+                )
+            }
+            
+            Path { path in
+                guard let firstPoint = points.first else { return }
+                path.move(to: firstPoint)
+                for point in points.dropFirst() {
+                    path.addLine(to: point)
+                }
+            }
+            .stroke(Color.blue, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+        }
+    }
+}
+
+#Preview {
+    StatisticsView()
+}

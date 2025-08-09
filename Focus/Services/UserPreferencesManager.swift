@@ -103,6 +103,15 @@ class UserPreferencesManager: ObservableObject {
         return preferences.searchMode
     }
     
+    // MARK: - Onboarding
+    var hasSeenOnboarding: Bool {
+        return preferences.hasSeenOnboarding
+    }
+    
+    func setHasSeenOnboarding(_ hasSeen: Bool) {
+        preferences.hasSeenOnboarding = hasSeen
+    }
+    
     // Do Not Disturb functionality removed - not practical on iOS
 }
 

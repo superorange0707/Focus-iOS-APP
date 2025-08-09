@@ -100,7 +100,6 @@ struct SearchHistoryView: View {
                                     } else {
                                         searchService.directSearch(query: item.query, platform: item.platform)
                                     }
-                                    dismiss()
                                 },
                                 onDelete: {
                                     // Delete individual item properly
@@ -113,21 +112,15 @@ struct SearchHistoryView: View {
                     .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle(localizationManager.localizedString(.searchHistory))
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Search History")
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     if !searchHistoryManager.searchHistory.isEmpty {
-                        Button(localizationManager.localizedString(.clearAll)) {
+                        Button("Clear All") {
                             searchHistoryManager.clearHistory()
                         }
                         .foregroundColor(.red)
-                    }
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(localizationManager.localizedString(.done)) {
-                        dismiss()
                     }
                 }
             }

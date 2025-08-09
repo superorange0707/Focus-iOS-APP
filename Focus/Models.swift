@@ -253,8 +253,8 @@ enum PremiumFeature: String, CaseIterable {
 
 // MARK: - Platform Definitions
 enum Platform: String, CaseIterable {
-    case youtube = "youtube"
     case reddit = "reddit"
+    case youtube = "youtube"
     case x = "x"
     case tiktok = "tiktok"
     case instagram = "instagram"

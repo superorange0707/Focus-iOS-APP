@@ -14,6 +14,9 @@ struct SettingsView: View {
                     // Preferences Card
                     ModernPreferencesCard()
 
+                    // Data Management Card
+                    DataManagementCard()
+
                     // About & Support Card
                     ModernAboutCard()
                 }
@@ -21,19 +24,183 @@ struct SettingsView: View {
                 .padding(.vertical, 20)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle(localizationManager.localizedString(.settings))
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(localizationManager.localizedString(.done)) {
-                        dismiss()
-                    }
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                }
-            }
         }
 
+    }
+}
+
+// MARK: - Data Management Card
+struct DataManagementCard: View {
+    @StateObject private var searchHistoryManager = SearchHistoryManager.shared
+    @StateObject private var userPreferences = UserPreferencesManager.shared
+    @State private var selectedRetentionPeriod: DataRetentionPeriod = .month
+    @State private var showingExportView = false
+    @State private var showingClearConfirmation = false
+    @State private var automaticPlatformOrder = true
+    
+    enum DataRetentionPeriod: String, CaseIterable {
+        case week = "7 Days"
+        case month = "30 Days"
+        case forever = "Forever"
+        
+        var days: Int? {
+            switch self {
+            case .week: return 7
+            case .month: return 30
+            case .forever: return nil
+            }
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Header
+            HStack {
+                Image(systemName: "externaldrive.fill")
+                    .font(.title3)
+                    .foregroundColor(.blue)
+                
+                Text("Data Management")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                
+                Spacer()
+            }
+            
+            VStack(spacing: 16) {
+                // Data Retention Setting
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .foregroundColor(.orange)
+                            .frame(width: 24)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Data Retention Period")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            Text("How long to keep search history")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                    Picker("Retention Period", selection: $selectedRetentionPeriod) {
+                        ForEach(DataRetentionPeriod.allCases, id: \.self) { period in
+                            Text(period.rawValue).tag(period)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .onChange(of: selectedRetentionPeriod) { _, period in
+                        if let days = period.days {
+                            searchHistoryManager.cleanupOldHistory(olderThan: days)
+                        }
+                    }
+                }
+                
+                Divider()
+                
+                // Platform Order Setting
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Image(systemName: "arrow.up.arrow.down")
+                            .foregroundColor(.purple)
+                            .frame(width: 24)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Platform Order")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            Text(automaticPlatformOrder ? "Auto-sorted by usage frequency" : "Manual order maintained")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Toggle("", isOn: $automaticPlatformOrder)
+                            .labelsHidden()
+                    }
+                }
+                
+                Divider()
+                
+                // Data Export
+                Button(action: { showingExportView = true }) {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.green)
+                            .frame(width: 24)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Export Data")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .foregroundColor(.primary)
+                            
+                            Text("Export search history and statistics")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                Divider()
+                
+                // Clear Data
+                Button(action: { showingClearConfirmation = true }) {
+                    HStack {
+                        Image(systemName: "trash.fill")
+                            .foregroundColor(.red)
+                            .frame(width: 24)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Clear All Data")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .foregroundColor(.red)
+                            
+                            Text("Remove all search history and statistics")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+        }
+        .padding(20)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+        .sheet(isPresented: $showingExportView) {
+            DataExportView()
+        }
+        .alert("Clear All Data", isPresented: $showingClearConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Clear", role: .destructive) {
+                searchHistoryManager.clearHistory()
+                // Reset analytics if needed
+                UsageAnalyticsManager.shared.analytics = UsageAnalytics()
+            }
+        } message: {
+            Text("This will permanently delete all your search history and usage statistics. This action cannot be undone.")
+        }
     }
 }
 
