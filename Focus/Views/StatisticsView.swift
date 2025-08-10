@@ -10,7 +10,6 @@ struct StatisticsView: View {
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
     @StateObject private var localizationManager = LocalizationManager.shared
     @State private var selectedTimeRange: TimeRange = .week
-    @State private var showingExport = false
     
     enum TimeRange: String, CaseIterable {
         case week = "7d"
@@ -95,17 +94,7 @@ struct StatisticsView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Statistics")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingExport = true }) {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                }
-            }
-            .sheet(isPresented: $showingExport) {
-                DataExportView()
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -286,14 +275,29 @@ struct SearchTrendChartCard: View {
                     )
                     .foregroundStyle(.blue.opacity(0.1))
                 }
-                .frame(height: 150)
+                .frame(height: UIScreen.main.bounds.width < 400 ? 120 : 150) // Shorter on smaller iPhone screens
                 .chartXAxis {
-                    AxisMarks(preset: .aligned, values: chartData.map { $0.date }) { value in
-                        AxisGridLine()
-                        AxisTick()
-                        if let date = value.as(Date.self) {
-                            AxisValueLabel {
-                                Text(date, format: .dateTime.weekday(.abbreviated))
+                    if timeRange == .week {
+                        // Show all 7 days for week view
+                        AxisMarks(preset: .aligned, values: chartData.map { $0.date }) { value in
+                            AxisGridLine()
+                            AxisTick()
+                            if let date = value.as(Date.self) {
+                                AxisValueLabel {
+                                    Text(date, format: .dateTime.weekday(.abbreviated))
+                                }
+                            }
+                        }
+                    } else {
+                        // Show fewer labels for month view to prevent overcrowding
+                        AxisMarks(preset: .aligned, values: .stride(by: .day, count: 5)) { value in
+                            AxisGridLine()
+                            AxisTick()
+                            if let date = value.as(Date.self) {
+                                AxisValueLabel {
+                                    Text(date, format: .dateTime.month(.abbreviated).day(.defaultDigits))
+                                        .font(.caption2)
+                                }
                             }
                         }
                     }
@@ -307,11 +311,11 @@ struct SearchTrendChartCard: View {
                 }
             } else {
                 // Fallback for iOS 15
-                SimpleLineChart(data: chartData)
-                    .frame(height: 150)
+                SimpleLineChart(data: chartData, timeRange: timeRange)
+                    .frame(height: UIScreen.main.bounds.width < 400 ? 120 : 150) // Shorter on smaller iPhone screens
             }
         }
-        .padding(20)
+        .padding(UIScreen.main.bounds.width < 400 ? 16 : 20) // Less padding on smaller screens
         .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
@@ -498,6 +502,7 @@ struct SimplePieChart: View {
 
 struct SimpleLineChart: View {
     let data: [DailySearchData]
+    let timeRange: StatisticsView.TimeRange
     
     var body: some View {
         GeometryReader { geometry in
@@ -509,14 +514,42 @@ struct SimpleLineChart: View {
                 )
             }
             
-            Path { path in
-                guard let firstPoint = points.first else { return }
-                path.move(to: firstPoint)
-                for point in points.dropFirst() {
-                    path.addLine(to: point)
+            ZStack {
+                // Area fill
+                Path { path in
+                    guard let firstPoint = points.first else { return }
+                    path.move(to: CGPoint(x: firstPoint.x, y: geometry.size.height))
+                    path.addLine(to: firstPoint)
+                    for point in points.dropFirst() {
+                        path.addLine(to: point)
+                    }
+                    if let lastPoint = points.last {
+                        path.addLine(to: CGPoint(x: lastPoint.x, y: geometry.size.height))
+                    }
+                    path.closeSubpath()
+                }
+                .fill(Color.blue.opacity(0.1))
+                
+                // Line
+                Path { path in
+                    guard let firstPoint = points.first else { return }
+                    path.move(to: firstPoint)
+                    for point in points.dropFirst() {
+                        path.addLine(to: point)
+                    }
+                }
+                .stroke(Color.blue, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                
+                // Data points for better visibility on smaller screens
+                ForEach(Array(points.enumerated()), id: \.offset) { index, point in
+                    if timeRange == .week || index % 5 == 0 { // Show fewer points for 30-day view
+                        Circle()
+                            .fill(Color.blue)
+                            .frame(width: 6, height: 6)
+                            .position(x: point.x, y: point.y)
+                    }
                 }
             }
-            .stroke(Color.blue, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
         }
     }
 }

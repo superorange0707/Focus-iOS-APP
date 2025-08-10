@@ -12,6 +12,8 @@ struct SearchHistoryView: View {
     @State private var searchText = ""
     @State private var selectedPlatform: Platform?
     @State private var selectedTimeFilter: TimeFilter = .all
+    @State private var isSelectionMode = false
+    @State private var selectedItems: Set<UUID> = []
     
     enum TimeFilter: String, CaseIterable {
         case today = "Today"
@@ -126,25 +128,56 @@ struct SearchHistoryView: View {
         NavigationView {
             VStack(spacing: 0) {
                 // Search and filter bar
-                VStack(spacing: 12) {
-                    // Search bar
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.secondaryText)
-                        
-                        TextField(localizationManager.localizedString(.searchHistory_placeholder), text: $searchText)
-                            .textFieldStyle(PlainTextFieldStyle())
-                        
-                        if !searchText.isEmpty {
-                            Button(action: { searchText = "" }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.secondaryText)
+                VStack(spacing: 4) {
+                    // Search bar with time filter
+                    HStack(spacing: 12) {
+                        // Search bar
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.secondaryText)
+                            
+                            TextField(localizationManager.localizedString(.searchHistory_placeholder), text: $searchText)
+                                .textFieldStyle(PlainTextFieldStyle())
+                            
+                            if !searchText.isEmpty {
+                                Button(action: { searchText = "" }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.secondaryText)
+                                }
                             }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.cardBackground)
+                        .cornerRadius(12)
+                        
+                        // Time filter
+                        Menu {
+                            ForEach(TimeFilter.allCases, id: \.self) { timeFilter in
+                                Button {
+                                    selectedTimeFilter = timeFilter
+                                } label: {
+                                    HStack {
+                                        Image(systemName: timeFilter.icon)
+                                        Text(timeFilter.rawValue)
+                                        Spacer()
+                                        if selectedTimeFilter == timeFilter {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.focusBlue)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: selectedTimeFilter.icon)
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(.focusBlue)
+                                .frame(width: 48, height: 48) // Match search bar height
+                                .background(Color.cardBackground)
+                                .cornerRadius(12)
+                        }
                     }
-                    .padding()
-                    .background(Color.cardBackground)
-                    .cornerRadius(12)
+                    .padding(.horizontal, 20) // Add consistent padding
                     
                     // Platform filter
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -167,53 +200,99 @@ struct SearchHistoryView: View {
                                 )
                             }
                         }
-                        .padding(.horizontal)
+                        .padding(.leading, 20) // Only left padding to align with content
+                        .padding(.trailing, 20) // Right padding for scrolling
                     }
                     
-                    // Time filter
-                    HStack {
-                        Image(systemName: selectedTimeFilter.icon)
-                            .foregroundColor(.focusBlue)
-                            .font(.system(size: 16, weight: .medium))
-                        
-                        Menu {
-                            ForEach(TimeFilter.allCases, id: \.self) { timeFilter in
-                                Button {
-                                    selectedTimeFilter = timeFilter
-                                } label: {
-                                    HStack {
-                                        Image(systemName: timeFilter.icon)
-                                        Text(timeFilter.rawValue)
-                                        Spacer()
-                                        if selectedTimeFilter == timeFilter {
-                                            Image(systemName: "checkmark")
-                                                .foregroundColor(.focusBlue)
+                    // Action buttons - Clear All absolutely to edge
+                    if !searchHistoryManager.searchHistory.isEmpty {
+                        ZStack {
+                            // Left side buttons - aligned with content
+                            HStack {
+                                HStack(spacing: 8) {
+                                    Button(isSelectionMode ? "Cancel" : "Select") {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            isSelectionMode.toggle()
+                                            if !isSelectionMode {
+                                                selectedItems.removeAll()
+                                            }
                                         }
                                     }
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Text(selectedTimeFilter.rawValue)
-                                    .font(.subheadline)
+                                    .font(.caption)
                                     .fontWeight(.medium)
-                                    .foregroundColor(.primary)
+                                    .foregroundColor(.focusBlue)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.focusBlue.opacity(0.1))
+                                    .cornerRadius(14)
+                                    
+                                    // Select All button (only in selection mode)
+                                    if isSelectionMode {
+                                        Button(selectedItems.count == filteredHistory.count ? "Deselect All" : "Select All") {
+                                            if selectedItems.count == filteredHistory.count {
+                                                selectedItems.removeAll()
+                                            } else {
+                                                selectedItems = Set(filteredHistory.map { $0.id })
+                                            }
+                                        }
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.focusBlue)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(Color.focusBlue.opacity(0.1))
+                                        .cornerRadius(14)
+                                    }
+                                }
+                                .padding(.leading, 20) // Left padding for Select button
                                 
-                                Image(systemName: "chevron.down")
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                Spacer()
                             }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(Color.cardBackground)
-                            .cornerRadius(8)
+                            
+                            // Right side buttons - absolutely to edge
+                            HStack {
+                                Spacer()
+                                
+                                HStack(spacing: 8) {
+                                    // Delete selected button (only in selection mode)
+                                    if isSelectionMode && !selectedItems.isEmpty {
+                                        Button("Delete (\(selectedItems.count))") {
+                                            searchHistoryManager.deleteItems(withIds: selectedItems)
+                                            selectedItems.removeAll()
+                                            isSelectionMode = false
+                                        }
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.red)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(Color.red.opacity(0.1))
+                                        .cornerRadius(14)
+                                    }
+                                    
+                                    // Clear All button (only when not in selection mode)
+                                    if !isSelectionMode {
+                                        Button("Clear All") {
+                                            searchHistoryManager.clearHistory()
+                                        }
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.red)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(Color.red.opacity(0.1))
+                                        .cornerRadius(14)
+                                    }
+                                }
+                                .padding(.trailing, 16) // Minimal right padding for absolute edge
+                            }
                         }
-                        
-                        Spacer()
+                        .padding(.top, 4) // Minimal top spacing
+                        .padding(.bottom, 0)
                     }
-                    .padding(.horizontal)
                 }
-                .padding()
+                .padding(.top, 4) // Minimal top padding to bring very close to title
+                .padding(.bottom, 0) // No bottom padding
                 .background(Color.backgroundPrimary)
                 
                 // History list
@@ -234,9 +313,18 @@ struct SearchHistoryView: View {
                                                 searchService.directSearch(query: item.query, platform: item.platform)
                                             }
                                         },
-                                        onDelete: {
+                                        onDelete: isSelectionMode ? nil : {
                                             // Delete individual item properly
                                             searchHistoryManager.deleteItem(withId: item.id)
+                                        },
+                                        isSelectionMode: isSelectionMode,
+                                        isSelected: selectedItems.contains(item.id),
+                                        onSelectionToggle: {
+                                            if selectedItems.contains(item.id) {
+                                                selectedItems.remove(item.id)
+                                            } else {
+                                                selectedItems.insert(item.id)
+                                            }
                                         }
                                     )
                                 }
@@ -253,17 +341,7 @@ struct SearchHistoryView: View {
                 }
             }
             .navigationTitle("Search History")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if !searchHistoryManager.searchHistory.isEmpty {
-                        Button("Clear All") {
-                            searchHistoryManager.clearHistory()
-                        }
-                        .foregroundColor(.red)
-                    }
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     

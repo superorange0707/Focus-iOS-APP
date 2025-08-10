@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 struct SearchView: View {
-    @State private var selectedPlatform: Platform = .youtube
+    @State private var selectedPlatform: Platform = Platform.allCases.first ?? .reddit
     @State private var searchText = ""
     @State private var isSearching = false
     @State private var showingInAppBrowser = false
@@ -55,6 +55,12 @@ struct SearchView: View {
                         platforms: userPreferences.getOrderedPlatforms()
                     )
                     .padding(.top, 2)
+                    .onAppear {
+                        // Set initial platform to the first one in user's preferred order
+                        if let firstPlatform = userPreferences.getOrderedPlatforms().first {
+                            selectedPlatform = firstPlatform
+                        }
+                    }
                     .onChange(of: selectedPlatform) { _, newPlatform in
                         // Auto-switch to Direct mode for non-Reddit platforms
                         // since only Reddit has proper in-app support

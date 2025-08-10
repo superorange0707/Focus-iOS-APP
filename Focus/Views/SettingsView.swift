@@ -25,7 +25,7 @@ struct SettingsView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
         }
 
     }
