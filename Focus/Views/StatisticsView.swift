@@ -93,7 +93,7 @@ struct StatisticsView: View {
                 .padding(.vertical, 20)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Statistics")
+            .navigationTitle(localizationManager.localizedString(.statistics))
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -149,7 +149,7 @@ struct PlatformUsagePieChartCard: View {
                     .font(.title3)
                     .foregroundColor(.blue)
 
-                Text("Platform Usage")
+                Text(localizationManager.localizedString(.platformUsageStats))
                     .font(.headline)
                     .fontWeight(.semibold)
 
@@ -218,6 +218,7 @@ struct PlatformUsagePieChartCard: View {
 struct SearchTrendChartCard: View {
     let timeRange: StatisticsView.TimeRange
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
 
     var chartData: [DailySearchData] {
         let days = timeRange == .week ? 7 : 30
@@ -245,7 +246,7 @@ struct SearchTrendChartCard: View {
                     .font(.title3)
                     .foregroundColor(.blue)
 
-                Text("Search Trend")
+                Text(localizationManager.localizedString(.searchTrend))
                     .font(.headline)
                     .fontWeight(.semibold)
 
@@ -325,6 +326,7 @@ struct SearchTrendChartCard: View {
 // MARK: - Time of Day Analysis
 struct TimeOfDayAnalysisCard: View {
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
     
     var timeOfDayData: [TimeOfDayData] {
         let searchHistory = SearchHistoryManager.shared.searchHistory
@@ -357,9 +359,9 @@ struct TimeOfDayAnalysisCard: View {
         }
         
         return [
-            TimeOfDayData(period: "Morning", searchCount: morningCount, icon: "sunrise.fill"),
-            TimeOfDayData(period: "Afternoon", searchCount: afternoonCount, icon: "sun.max.fill"),
-            TimeOfDayData(period: "Evening", searchCount: eveningCount, icon: "moon.fill")
+            TimeOfDayData(period: localizationManager.localizedString(.morningTime), searchCount: morningCount, icon: "sunrise.fill"),
+            TimeOfDayData(period: localizationManager.localizedString(.afternoonTime), searchCount: afternoonCount, icon: "sun.max.fill"),
+            TimeOfDayData(period: localizationManager.localizedString(.eveningTime), searchCount: eveningCount, icon: "moon.fill")
         ]
     }
     
@@ -375,7 +377,7 @@ struct TimeOfDayAnalysisCard: View {
                     .font(.title3)
                     .foregroundColor(.purple)
 
-                Text("Time of Day Analysis")
+                Text(localizationManager.localizedString(.timeOfDayAnalysis))
                     .font(.headline)
                     .fontWeight(.semibold)
 
@@ -455,7 +457,7 @@ struct TimeOfDayRow: View {
 
                     Spacer()
 
-                    Text("\(data.searchCount) searches")
+                    Text("\(data.searchCount) \(LocalizationManager.shared.localizedString(.searchesCount))")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

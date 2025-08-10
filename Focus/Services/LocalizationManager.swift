@@ -210,6 +210,102 @@ class LocalizationManager: ObservableObject {
             return getClearAllText()
         case .searchHistory_placeholder:
             return getSearchHistoryPlaceholderText()
+            
+        // Data Management & Export
+        case .dataManagement:
+            return getDataManagementText()
+        case .dataRetentionPeriod:
+            return getDataRetentionPeriodText()
+        case .retentionDescription:
+            return getRetentionDescriptionText()
+        case .platformOrder:
+            return getPlatformOrderText()
+        case .autoSortedByUsage:
+            return getAutoSortedByUsageText()
+        case .exportData:
+            return getExportDataText()
+        case .exportDataDescription:
+            return getExportDataDescriptionText()
+        case .clearAllData:
+            return getClearAllDataText()
+        case .clearAllDataDescription:
+            return getClearAllDataDescriptionText()
+        case .sevenDays:
+            return getSevenDaysText()
+        case .thirtyDays:
+            return getThirtyDaysText()
+        case .forever:
+            return getForeverText()
+            
+        // Statistics & Analytics
+        case .statistics:
+            return getStatisticsText()
+        case .searchTrend:
+            return getSearchTrendText()
+        case .timeOfDayAnalysis:
+            return getTimeOfDayAnalysisText()
+        case .platformUsageStats:
+            return getPlatformUsageStatsText()
+        case .morningTime:
+            return getMorningTimeText()
+        case .afternoonTime:
+            return getAfternoonTimeText()
+        case .eveningTime:
+            return getEveningTimeText()
+        case .youSearchMostOften:
+            return getYouSearchMostOftenText()
+        case .searchesCount:
+            return getSearchesCountText()
+        case .exportYourData:
+            return getExportYourDataText()
+        case .exportSearchHistory:
+            return getExportSearchHistoryText()
+        case .timePeriod:
+            return getTimePeriodText()
+        case .sinceFirstUse:
+            return getSinceFirstUseText()
+        case .allTime:
+            return getAllTimeText()
+        case .lastSevenDays:
+            return getLastSevenDaysText()
+        case .lastThirtyDays:
+            return getLastThirtyDaysText()
+        case .exportFormat:
+            return getExportFormatText()
+        case .timeRange:
+            return getTimeRangeText()
+        case .exportContent:
+            return getExportContentText()
+        case .searchQueries:
+            return getSearchQueriesText()
+        case .searchQueriesDescription:
+            return getSearchQueriesDescriptionText()
+        case .platformUsageDescription:
+            return getPlatformUsageDescriptionText()
+        case .usageStatistics:
+            return getUsageStatisticsText()
+        case .usageStatisticsDescription:
+            return getUsageStatisticsDescriptionText()
+        case .exportingData:
+            return getExportingDataText()
+        case .exportDataButton:
+            return getExportDataButtonText()
+        case .noDataAvailable:
+            return getNoDataAvailableText()
+            
+        // Time saved and insights
+        case .vsEndlessScrolling:
+            return getVsEndlessScrollingText()
+        case .stayingFocusedExclamation:
+            return getStayingFocusedExclamationText()
+        case .timeSavedFromDistractions_detailed:
+            return getTimeSavedFromDistractionsDetailedText()
+        case .highEfficiency:
+            return getHighEfficiencyText()
+        case .focusScorePercent:
+            return getFocusScorePercentText()
+        case .todaysImpactTime:
+            return getTodaysImpactTimeText()
         }
     }
     
@@ -1236,6 +1332,25 @@ enum LocalizedStringKey {
 
     // Search History
     case noHistory, noHistoryMessage, searchInHistory, allPlatforms, clearHistory, clearAll, searchHistory_placeholder
+    
+    // Data Management & Export
+    case dataManagement, dataRetentionPeriod, retentionDescription, platformOrder, autoSortedByUsage
+    case exportData, exportDataDescription, clearAllData, clearAllDataDescription
+    case sevenDays, thirtyDays, forever
+    
+    // Statistics & Analytics
+    case statistics, searchTrend, timeOfDayAnalysis, platformUsageStats
+    case morningTime, afternoonTime, eveningTime
+    case youSearchMostOften, searchesCount
+    case exportYourData, exportSearchHistory, timePeriod, sinceFirstUse
+    case allTime, lastSevenDays, lastThirtyDays
+    case exportFormat, timeRange, exportContent, searchQueries, searchQueriesDescription
+    case platformUsageDescription, usageStatistics, usageStatisticsDescription
+    case exportingData, exportDataButton, noDataAvailable
+    
+    // Time saved and insights
+    case vsEndlessScrolling, stayingFocusedExclamation, timeSavedFromDistractions_detailed
+    case highEfficiency, focusScorePercent, todaysImpactTime
 }
 
 // MARK: - LocalizationManager Extensions
@@ -1369,6 +1484,732 @@ extension LocalizationManager {
         case "zh": return "在历史记录中搜索..."
         case "ar": return "البحث في التاريخ..."
         default: return "Search history..."
+        }
+    }
+    
+    // MARK: - Data Management & Export Localizations
+    
+    private func getDataManagementText() -> String {
+        switch currentLanguage {
+        case "es": return "Gestión de Datos"
+        case "fr": return "Gestion des Données"
+        case "de": return "Datenverwaltung"
+        case "it": return "Gestione Dati"
+        case "pt": return "Gerenciamento de Dados"
+        case "ru": return "Управление Данными"
+        case "ja": return "データ管理"
+        case "ko": return "데이터 관리"
+        case "zh": return "数据管理"
+        case "ar": return "إدارة البيانات"
+        default: return "Data Management"
+        }
+    }
+    
+    private func getDataRetentionPeriodText() -> String {
+        switch currentLanguage {
+        case "es": return "Período de Retención de Datos"
+        case "fr": return "Période de Rétention des Données"
+        case "de": return "Datenaufbewahrungszeitraum"
+        case "it": return "Periodo di Conservazione Dati"
+        case "pt": return "Período de Retenção de Dados"
+        case "ru": return "Период Хранения Данных"
+        case "ja": return "データ保持期間"
+        case "ko": return "데이터 보관 기간"
+        case "zh": return "数据保留期限"
+        case "ar": return "فترة الاحتفاظ بالبيانات"
+        default: return "Data Retention Period"
+        }
+    }
+    
+    private func getRetentionDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Cuánto tiempo mantener el historial de búsqueda"
+        case "fr": return "Combien de temps conserver l'historique de recherche"
+        case "de": return "Wie lange der Suchverlauf gespeichert werden soll"
+        case "it": return "Quanto tempo mantenere la cronologia di ricerca"
+        case "pt": return "Por quanto tempo manter o histórico de pesquisa"
+        case "ru": return "Как долго хранить историю поиска"
+        case "ja": return "検索履歴を保持する期間"
+        case "ko": return "검색 기록을 보관할 기간"
+        case "zh": return "保留搜索历史记录的时间"
+        case "ar": return "مدة الاحتفاظ بتاريخ البحث"
+        default: return "How long to keep search history"
+        }
+    }
+    
+    private func getPlatformOrderText() -> String {
+        switch currentLanguage {
+        case "es": return "Orden de Plataformas"
+        case "fr": return "Ordre des Plateformes"
+        case "de": return "Plattform-Reihenfolge"
+        case "it": return "Ordine delle Piattaforme"
+        case "pt": return "Ordem das Plataformas"
+        case "ru": return "Порядок Платформ"
+        case "ja": return "プラットフォーム順序"
+        case "ko": return "플랫폼 순서"
+        case "zh": return "平台顺序"
+        case "ar": return "ترتيب المنصات"
+        default: return "Platform Order"
+        }
+    }
+    
+    private func getAutoSortedByUsageText() -> String {
+        switch currentLanguage {
+        case "es": return "Ordenado automáticamente por frecuencia de uso"
+        case "fr": return "Trié automatiquement par fréquence d'utilisation"
+        case "de": return "Automatisch nach Nutzungshäufigkeit sortiert"
+        case "it": return "Ordinato automaticamente per frequenza di utilizzo"
+        case "pt": return "Ordenado automaticamente por frequência de uso"
+        case "ru": return "Автоматически отсортировано по частоте использования"
+        case "ja": return "使用頻度で自動ソート"
+        case "ko": return "사용 빈도별 자동 정렬"
+        case "zh": return "按使用频率自动排序"
+        case "ar": return "مرتب تلقائياً حسب تكرار الاستخدام"
+        default: return "Auto-sorted by usage frequency"
+        }
+    }
+    
+    private func getExportDataText() -> String {
+        switch currentLanguage {
+        case "es": return "Exportar Datos"
+        case "fr": return "Exporter les Données"
+        case "de": return "Daten Exportieren"
+        case "it": return "Esporta Dati"
+        case "pt": return "Exportar Dados"
+        case "ru": return "Экспорт Данных"
+        case "ja": return "データエクスポート"
+        case "ko": return "데이터 내보내기"
+        case "zh": return "导出数据"
+        case "ar": return "تصدير البيانات"
+        default: return "Export Data"
+        }
+    }
+    
+    private func getExportDataDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Exportar historial de búsqueda y estadísticas"
+        case "fr": return "Exporter l'historique de recherche et les statistiques"
+        case "de": return "Suchverlauf und Statistiken exportieren"
+        case "it": return "Esporta cronologia di ricerca e statistiche"
+        case "pt": return "Exportar histórico de pesquisa e estatísticas"
+        case "ru": return "Экспорт истории поиска и статистики"
+        case "ja": return "検索履歴と統計をエクスポート"
+        case "ko": return "검색 기록 및 통계 내보내기"
+        case "zh": return "导出搜索历史和统计数据"
+        case "ar": return "تصدير تاريخ البحث والإحصائيات"
+        default: return "Export search history and statistics"
+        }
+    }
+    
+    private func getClearAllDataText() -> String {
+        switch currentLanguage {
+        case "es": return "Borrar Todos los Datos"
+        case "fr": return "Effacer Toutes les Données"
+        case "de": return "Alle Daten Löschen"
+        case "it": return "Cancella Tutti i Dati"
+        case "pt": return "Apagar Todos os Dados"
+        case "ru": return "Очистить Все Данные"
+        case "ja": return "全データを削除"
+        case "ko": return "모든 데이터 지우기"
+        case "zh": return "清除所有数据"
+        case "ar": return "محو جميع البيانات"
+        default: return "Clear All Data"
+        }
+    }
+    
+    private func getClearAllDataDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Eliminar todo el historial de búsqueda y estadísticas"
+        case "fr": return "Supprimer tout l'historique de recherche et les statistiques"
+        case "de": return "Gesamten Suchverlauf und Statistiken löschen"
+        case "it": return "Rimuovi tutta la cronologia di ricerca e le statistiche"
+        case "pt": return "Remover todo o histórico de pesquisa e estatísticas"
+        case "ru": return "Удалить всю историю поиска и статистику"
+        case "ja": return "すべての検索履歴と統計を削除"
+        case "ko": return "모든 검색 기록 및 통계 제거"
+        case "zh": return "删除所有搜索历史和统计数据"
+        case "ar": return "إزالة جميع تاريخ البحث والإحصائيات"
+        default: return "Remove all search history and statistics"
+        }
+    }
+    
+    private func getSevenDaysText() -> String {
+        switch currentLanguage {
+        case "es": return "7 Días"
+        case "fr": return "7 Jours"
+        case "de": return "7 Tage"
+        case "it": return "7 Giorni"
+        case "pt": return "7 Dias"
+        case "ru": return "7 Дней"
+        case "ja": return "7日間"
+        case "ko": return "7일"
+        case "zh": return "7天"
+        case "ar": return "7 أيام"
+        default: return "7 Days"
+        }
+    }
+    
+    private func getThirtyDaysText() -> String {
+        switch currentLanguage {
+        case "es": return "30 Días"
+        case "fr": return "30 Jours"
+        case "de": return "30 Tage"
+        case "it": return "30 Giorni"
+        case "pt": return "30 Dias"
+        case "ru": return "30 Дней"
+        case "ja": return "30日間"
+        case "ko": return "30일"
+        case "zh": return "30天"
+        case "ar": return "30 يوماً"
+        default: return "30 Days"
+        }
+    }
+    
+    private func getForeverText() -> String {
+        switch currentLanguage {
+        case "es": return "Siempre"
+        case "fr": return "Toujours"
+        case "de": return "Für Immer"
+        case "it": return "Per Sempre"
+        case "pt": return "Para Sempre"
+        case "ru": return "Навсегда"
+        case "ja": return "永続"
+        case "ko": return "영구"
+        case "zh": return "永久"
+        case "ar": return "إلى الأبد"
+        default: return "Forever"
+        }
+    }
+    
+    // MARK: - Statistics & Analytics Localizations
+    
+    private func getStatisticsText() -> String {
+        switch currentLanguage {
+        case "es": return "Estadísticas"
+        case "fr": return "Statistiques"
+        case "de": return "Statistiken"
+        case "it": return "Statistiche"
+        case "pt": return "Estatísticas"
+        case "ru": return "Статистика"
+        case "ja": return "統計"
+        case "ko": return "통계"
+        case "zh": return "统计"
+        case "ar": return "الإحصائيات"
+        default: return "Statistics"
+        }
+    }
+    
+    private func getSearchTrendText() -> String {
+        switch currentLanguage {
+        case "es": return "Tendencia de Búsqueda"
+        case "fr": return "Tendance de Recherche"
+        case "de": return "Suchtrend"
+        case "it": return "Tendenza di Ricerca"
+        case "pt": return "Tendência de Pesquisa"
+        case "ru": return "Тренд Поиска"
+        case "ja": return "検索トレンド"
+        case "ko": return "검색 트렌드"
+        case "zh": return "搜索趋势"
+        case "ar": return "اتجاه البحث"
+        default: return "Search Trend"
+        }
+    }
+    
+    private func getTimeOfDayAnalysisText() -> String {
+        switch currentLanguage {
+        case "es": return "Análisis por Hora del Día"
+        case "fr": return "Analyse par Heure de la Journée"
+        case "de": return "Tageszeit-Analyse"
+        case "it": return "Analisi per Ora del Giorno"
+        case "pt": return "Análise por Hora do Dia"
+        case "ru": return "Анализ Времени Дня"
+        case "ja": return "時間帯分析"
+        case "ko": return "시간대별 분석"
+        case "zh": return "时段分析"
+        case "ar": return "تحليل أوقات اليوم"
+        default: return "Time of Day Analysis"
+        }
+    }
+    
+    private func getPlatformUsageStatsText() -> String {
+        switch currentLanguage {
+        case "es": return "Uso de Plataformas"
+        case "fr": return "Utilisation des Plateformes"
+        case "de": return "Plattform-Nutzung"
+        case "it": return "Utilizzo delle Piattaforme"
+        case "pt": return "Uso das Plataformas"
+        case "ru": return "Использование Платформ"
+        case "ja": return "プラットフォーム使用状況"
+        case "ko": return "플랫폼 사용량"
+        case "zh": return "平台使用情况"
+        case "ar": return "استخدام المنصات"
+        default: return "Platform Usage"
+        }
+    }
+    
+    private func getMorningTimeText() -> String {
+        switch currentLanguage {
+        case "es": return "Mañana"
+        case "fr": return "Matin"
+        case "de": return "Morgen"
+        case "it": return "Mattina"
+        case "pt": return "Manhã"
+        case "ru": return "Утро"
+        case "ja": return "朝"
+        case "ko": return "아침"
+        case "zh": return "上午"
+        case "ar": return "الصباح"
+        default: return "Morning"
+        }
+    }
+    
+    private func getAfternoonTimeText() -> String {
+        switch currentLanguage {
+        case "es": return "Tarde"
+        case "fr": return "Après-midi"
+        case "de": return "Nachmittag"
+        case "it": return "Pomeriggio"
+        case "pt": return "Tarde"
+        case "ru": return "День"
+        case "ja": return "午後"
+        case "ko": return "오후"
+        case "zh": return "下午"
+        case "ar": return "بعد الظهر"
+        default: return "Afternoon"
+        }
+    }
+    
+    private func getEveningTimeText() -> String {
+        switch currentLanguage {
+        case "es": return "Noche"
+        case "fr": return "Soir"
+        case "de": return "Abend"
+        case "it": return "Sera"
+        case "pt": return "Noite"
+        case "ru": return "Вечер"
+        case "ja": return "夜"
+        case "ko": return "저녁"
+        case "zh": return "晚上"
+        case "ar": return "المساء"
+        default: return "Evening"
+        }
+    }
+    
+    private func getYouSearchMostOftenText() -> String {
+        switch currentLanguage {
+        case "es": return "Buscas más a menudo en"
+        case "fr": return "Vous recherchez le plus souvent"
+        case "de": return "Sie suchen am häufigsten"
+        case "it": return "Cerchi più spesso"
+        case "pt": return "Você pesquisa mais frequentemente"
+        case "ru": return "Вы чаще всего ищете"
+        case "ja": return "最もよく検索する時間帯"
+        case "ko": return "가장 자주 검색하는 시간"
+        case "zh": return "你最常搜索的时段是"
+        case "ar": return "تبحث أكثر ما يكون في"
+        default: return "You search most often in the"
+        }
+    }
+    
+    private func getSearchesCountText() -> String {
+        switch currentLanguage {
+        case "es": return "búsquedas"
+        case "fr": return "recherches"
+        case "de": return "Suchen"
+        case "it": return "ricerche"
+        case "pt": return "pesquisas"
+        case "ru": return "поисков"
+        case "ja": return "回の検索"
+        case "ko": return "번 검색"
+        case "zh": return "次搜索"
+        case "ar": return "عمليات بحث"
+        default: return "searches"
+        }
+    }
+    
+    private func getExportYourDataText() -> String {
+        switch currentLanguage {
+        case "es": return "Exporta Tus Datos"
+        case "fr": return "Exportez Vos Données"
+        case "de": return "Exportieren Sie Ihre Daten"
+        case "it": return "Esporta i Tuoi Dati"
+        case "pt": return "Exporte Seus Dados"
+        case "ru": return "Экспортируйте Ваши Данные"
+        case "ja": return "データをエクスポート"
+        case "ko": return "데이터 내보내기"
+        case "zh": return "导出你的数据"
+        case "ar": return "صدّر بياناتك"
+        default: return "Export Your Data"
+        }
+    }
+    
+    private func getExportSearchHistoryText() -> String {
+        switch currentLanguage {
+        case "es": return "Historial de Búsqueda"
+        case "fr": return "Historique de Recherche"
+        case "de": return "Suchverlauf"
+        case "it": return "Cronologia di Ricerca"
+        case "pt": return "Histórico de Pesquisa"
+        case "ru": return "История Поиска"
+        case "ja": return "検索履歴"
+        case "ko": return "검색 기록"
+        case "zh": return "搜索历史"
+        case "ar": return "تاريخ البحث"
+        default: return "Search History"
+        }
+    }
+    
+    private func getTimePeriodText() -> String {
+        switch currentLanguage {
+        case "es": return "Período de Tiempo"
+        case "fr": return "Période de Temps"
+        case "de": return "Zeitraum"
+        case "it": return "Periodo di Tempo"
+        case "pt": return "Período de Tempo"
+        case "ru": return "Временной Период"
+        case "ja": return "期間"
+        case "ko": return "기간"
+        case "zh": return "时间段"
+        case "ar": return "الفترة الزمنية"
+        default: return "Time Period"
+        }
+    }
+    
+    private func getSinceFirstUseText() -> String {
+        switch currentLanguage {
+        case "es": return "desde el primer uso"
+        case "fr": return "depuis la première utilisation"
+        case "de": return "seit der ersten Nutzung"
+        case "it": return "dal primo utilizzo"
+        case "pt": return "desde o primeiro uso"
+        case "ru": return "с первого использования"
+        case "ja": return "初回使用から"
+        case "ko": return "첫 사용부터"
+        case "zh": return "自首次使用"
+        case "ar": return "منذ أول استخدام"
+        default: return "since first use"
+        }
+    }
+    
+    private func getAllTimeText() -> String {
+        switch currentLanguage {
+        case "es": return "Todo el Tiempo"
+        case "fr": return "Tout le Temps"
+        case "de": return "Alle Zeit"
+        case "it": return "Tutto il Tempo"
+        case "pt": return "Todo o Tempo"
+        case "ru": return "Все Время"
+        case "ja": return "全期間"
+        case "ko": return "전체 기간"
+        case "zh": return "全部时间"
+        case "ar": return "كل الوقت"
+        default: return "All Time"
+        }
+    }
+    
+    private func getLastSevenDaysText() -> String {
+        switch currentLanguage {
+        case "es": return "Últimos 7 Días"
+        case "fr": return "7 Derniers Jours"
+        case "de": return "Letzte 7 Tage"
+        case "it": return "Ultimi 7 Giorni"
+        case "pt": return "Últimos 7 Dias"
+        case "ru": return "Последние 7 Дней"
+        case "ja": return "過去7日間"
+        case "ko": return "최근 7일"
+        case "zh": return "最近7天"
+        case "ar": return "آخر 7 أيام"
+        default: return "Last 7 Days"
+        }
+    }
+    
+    private func getLastThirtyDaysText() -> String {
+        switch currentLanguage {
+        case "es": return "Últimos 30 Días"
+        case "fr": return "30 Derniers Jours"
+        case "de": return "Letzte 30 Tage"
+        case "it": return "Ultimi 30 Giorni"
+        case "pt": return "Últimos 30 Dias"
+        case "ru": return "Последние 30 Дней"
+        case "ja": return "過去30日間"
+        case "ko": return "최근 30일"
+        case "zh": return "最近30天"
+        case "ar": return "آخر 30 يوماً"
+        default: return "Last 30 Days"
+        }
+    }
+    
+    private func getExportFormatText() -> String {
+        switch currentLanguage {
+        case "es": return "Formato"
+        case "fr": return "Format"
+        case "de": return "Format"
+        case "it": return "Formato"
+        case "pt": return "Formato"
+        case "ru": return "Формат"
+        case "ja": return "フォーマット"
+        case "ko": return "형식"
+        case "zh": return "格式"
+        case "ar": return "التنسيق"
+        default: return "Format"
+        }
+    }
+    
+    private func getTimeRangeText() -> String {
+        switch currentLanguage {
+        case "es": return "Rango de Tiempo"
+        case "fr": return "Plage de Temps"
+        case "de": return "Zeitbereich"
+        case "it": return "Intervallo di Tempo"
+        case "pt": return "Intervalo de Tempo"
+        case "ru": return "Временной Диапазон"
+        case "ja": return "時間範囲"
+        case "ko": return "시간 범위"
+        case "zh": return "时间范围"
+        case "ar": return "النطاق الزمني"
+        default: return "Time Range"
+        }
+    }
+    
+    private func getExportContentText() -> String {
+        switch currentLanguage {
+        case "es": return "Contenido de Exportación"
+        case "fr": return "Contenu d'Exportation"
+        case "de": return "Export-Inhalt"
+        case "it": return "Contenuto di Esportazione"
+        case "pt": return "Conteúdo de Exportação"
+        case "ru": return "Содержимое Экспорта"
+        case "ja": return "エクスポート内容"
+        case "ko": return "내보내기 내용"
+        case "zh": return "导出内容"
+        case "ar": return "محتوى التصدير"
+        default: return "Export Content"
+        }
+    }
+    
+    private func getSearchQueriesText() -> String {
+        switch currentLanguage {
+        case "es": return "Consultas de Búsqueda"
+        case "fr": return "Requêtes de Recherche"
+        case "de": return "Suchanfragen"
+        case "it": return "Query di Ricerca"
+        case "pt": return "Consultas de Pesquisa"
+        case "ru": return "Поисковые Запросы"
+        case "ja": return "検索クエリ"
+        case "ko": return "검색 쿼리"
+        case "zh": return "搜索查询"
+        case "ar": return "استعلامات البحث"
+        default: return "Search Queries"
+        }
+    }
+    
+    private func getSearchQueriesDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Todos tus términos de búsqueda y marcas de tiempo"
+        case "fr": return "Tous vos termes de recherche et horodatages"
+        case "de": return "Alle Ihre Suchbegriffe und Zeitstempel"
+        case "it": return "Tutti i tuoi termini di ricerca e timestamp"
+        case "pt": return "Todos os seus termos de pesquisa e timestamps"
+        case "ru": return "Все ваши поисковые термины и временные метки"
+        case "ja": return "すべての検索語句とタイムスタンプ"
+        case "ko": return "모든 검색어 및 타임스탬프"
+        case "zh": return "所有搜索词条和时间戳"
+        case "ar": return "جميع مصطلحات البحث والطوابع الزمنية"
+        default: return "All your search terms and timestamps"
+        }
+    }
+    
+    private func getPlatformUsageDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Qué plataformas buscaste más"
+        case "fr": return "Quelles plateformes vous avez le plus recherchées"
+        case "de": return "Welche Plattformen Sie am meisten durchsucht haben"
+        case "it": return "Quali piattaforme hai cercato di più"
+        case "pt": return "Quais plataformas você pesquisou mais"
+        case "ru": return "Какие платформы вы искали больше всего"
+        case "ja": return "最も検索したプラットフォーム"
+        case "ko": return "가장 많이 검색한 플랫폼"
+        case "zh": return "你搜索最多的平台"
+        case "ar": return "المنصات التي بحثت فيها أكثر"
+        default: return "Which platforms you searched most"
+        }
+    }
+    
+    private func getUsageStatisticsText() -> String {
+        switch currentLanguage {
+        case "es": return "Estadísticas de Uso"
+        case "fr": return "Statistiques d'Utilisation"
+        case "de": return "Nutzungsstatistiken"
+        case "it": return "Statistiche di Utilizzo"
+        case "pt": return "Estatísticas de Uso"
+        case "ru": return "Статистика Использования"
+        case "ja": return "使用統計"
+        case "ko": return "사용 통계"
+        case "zh": return "使用统计"
+        case "ar": return "إحصائيات الاستخدام"
+        default: return "Usage Statistics"
+        }
+    }
+    
+    private func getUsageStatisticsDescriptionText() -> String {
+        switch currentLanguage {
+        case "es": return "Recuentos de búsqueda y datos de tiempo ahorrado"
+        case "fr": return "Comptes de recherches et données de temps économisé"
+        case "de": return "Suchzahlen und Daten zur eingesparten Zeit"
+        case "it": return "Conteggi di ricerca e dati sul tempo risparmiato"
+        case "pt": return "Contagens de pesquisa e dados de tempo economizado"
+        case "ru": return "Количество поисков и данные сэкономленного времени"
+        case "ja": return "検索回数と節約時間のデータ"
+        case "ko": return "검색 횟수 및 절약된 시간 데이터"
+        case "zh": return "搜索次数和节省时间数据"
+        case "ar": return "عدد عمليات البحث وبيانات الوقت المُوفر"
+        default: return "Search counts and time saved data"
+        }
+    }
+    
+    private func getExportingDataText() -> String {
+        switch currentLanguage {
+        case "es": return "Exportando..."
+        case "fr": return "Exportation..."
+        case "de": return "Exportieren..."
+        case "it": return "Esportazione..."
+        case "pt": return "Exportando..."
+        case "ru": return "Экспорт..."
+        case "ja": return "エクスポート中..."
+        case "ko": return "내보내는 중..."
+        case "zh": return "导出中..."
+        case "ar": return "جاري التصدير..."
+        default: return "Exporting..."
+        }
+    }
+    
+    private func getExportDataButtonText() -> String {
+        switch currentLanguage {
+        case "es": return "Exportar Datos"
+        case "fr": return "Exporter les Données"
+        case "de": return "Daten Exportieren"
+        case "it": return "Esporta Dati"
+        case "pt": return "Exportar Dados"
+        case "ru": return "Экспорт Данных"
+        case "ja": return "データエクスポート"
+        case "ko": return "데이터 내보내기"
+        case "zh": return "导出数据"
+        case "ar": return "تصدير البيانات"
+        default: return "Export Data"
+        }
+    }
+    
+    private func getNoDataAvailableText() -> String {
+        switch currentLanguage {
+        case "es": return "No hay datos disponibles para el rango de tiempo seleccionado"
+        case "fr": return "Aucune donnée disponible pour la plage de temps sélectionnée"
+        case "de": return "Keine Daten für den ausgewählten Zeitraum verfügbar"
+        case "it": return "Nessun dato disponibile per l'intervallo di tempo selezionato"
+        case "pt": return "Nenhum dado disponível para o intervalo de tempo selecionado"
+        case "ru": return "Нет данных для выбранного временного диапазона"
+        case "ja": return "選択した時間範囲のデータがありません"
+        case "ko": return "선택한 시간 범위에 대한 데이터가 없습니다"
+        case "zh": return "所选时间范围内没有可用数据"
+        case "ar": return "لا توجد بيانات متاحة للنطاق الزمني المحدد"
+        default: return "No data available for the selected time range"
+        }
+    }
+    
+    // MARK: - Time Saved and Insights Localizations
+    
+    private func getVsEndlessScrollingText() -> String {
+        switch currentLanguage {
+        case "es": return "vs desplazamiento infinito"
+        case "fr": return "vs défilement infini"
+        case "de": return "vs endloses Scrollen"
+        case "it": return "vs scorrimento infinito"
+        case "pt": return "vs rolagem infinita"
+        case "ru": return "vs бесконечная прокрутка"
+        case "ja": return "vs 無限スクロール"
+        case "ko": return "vs 무한 스크롤"
+        case "zh": return "vs 无限滚动"
+        case "ar": return "مقابل التمرير اللانهائي"
+        default: return "vs endless scrolling"
+        }
+    }
+    
+    private func getStayingFocusedExclamationText() -> String {
+        switch currentLanguage {
+        case "es": return "¡Te mantienes enfocado!"
+        case "fr": return "Vous restez concentré !"
+        case "de": return "Sie bleiben fokussiert!"
+        case "it": return "Rimani concentrato!"
+        case "pt": return "Você se mantém focado!"
+        case "ru": return "Вы остаетесь сосредоточенными!"
+        case "ja": return "集中を保っています！"
+        case "ko": return "집중력을 유지하고 있습니다!"
+        case "zh": return "你保持专注！"
+        case "ar": return "أنت تحافظ على تركيزك!"
+        default: return "You're staying focused!"
+        }
+    }
+    
+    private func getTimeSavedFromDistractionsDetailedText() -> String {
+        switch currentLanguage {
+        case "es": return "Tiempo ahorrado evitando distracciones"
+        case "fr": return "Temps économisé en évitant les distractions"
+        case "de": return "Zeit gespart durch Vermeidung von Ablenkungen"
+        case "it": return "Tempo risparmiato evitando distrazioni"
+        case "pt": return "Tempo economizado evitando distrações"
+        case "ru": return "Время, сэкономленное избеганием отвлечений"
+        case "ja": return "気が散ることを避けて節約した時間"
+        case "ko": return "방해 요소를 피해 절약한 시간"
+        case "zh": return "避免分心节省的时间"
+        case "ar": return "الوقت المُوفر من تجنب الإلهاءات"
+        default: return "Time saved from distractions"
+        }
+    }
+    
+    private func getHighEfficiencyText() -> String {
+        switch currentLanguage {
+        case "es": return "Alta"
+        case "fr": return "Élevée"
+        case "de": return "Hoch"
+        case "it": return "Alta"
+        case "pt": return "Alta"
+        case "ru": return "Высокая"
+        case "ja": return "高"
+        case "ko": return "높음"
+        case "zh": return "高"
+        case "ar": return "عالية"
+        default: return "High"
+        }
+    }
+    
+    private func getFocusScorePercentText() -> String {
+        switch currentLanguage {
+        case "es": return "Puntuación de Enfoque"
+        case "fr": return "Score de Concentration"
+        case "de": return "Fokus-Bewertung"
+        case "it": return "Punteggio di Concentrazione"
+        case "pt": return "Pontuação de Foco"
+        case "ru": return "Оценка Фокуса"
+        case "ja": return "集中スコア"
+        case "ko": return "집중 점수"
+        case "zh": return "专注评分"
+        case "ar": return "نقاط التركيز"
+        default: return "Focus Score"
+        }
+    }
+    
+    private func getTodaysImpactTimeText() -> String {
+        switch currentLanguage {
+        case "es": return "Impacto de Hoy"
+        case "fr": return "Impact d'Aujourd'hui"
+        case "de": return "Heutiger Einfluss"
+        case "it": return "Impatto di Oggi"
+        case "pt": return "Impacto de Hoje"
+        case "ru": return "Сегодняшний Эффект"
+        case "ja": return "今日の影響"
+        case "ko": return "오늘의 영향"
+        case "zh": return "今日影响"
+        case "ar": return "تأثير اليوم"
+        default: return "Today's Impact"
         }
     }
 }

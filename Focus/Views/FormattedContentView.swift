@@ -440,8 +440,8 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
-                        question: "📊 如何访问数据视图？",
-                        answer: "点击左上角的图表图标查看全面的分析数据：\n• 总搜索次数和今日计数\n• 平台使用情况分析\n• 相比无限滚动节省的时间\n• 专注评分和效率洞察\n• 按日期查看搜索历史\n• 特定平台的使用统计"
+                        question: "📊 如何访问统计数据？",
+                        answer: "通过底部的统计标签页查看全面的分析数据：\n• 7天和30天搜索趋势图表\n• 总搜索次数和今日计数\n• 平台使用情况分析\n• 相比无限滚动节省的时间\n• 一天中不同时间的使用分析\n• 通过历史标签页查看搜索历史"
                     )
 
                     FAQItem(
@@ -457,6 +457,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 语言自适应如何工作？",
                         answer: "SkipFeed 会自动适应您的语言：\n• 根据系统语言/地区自动检测\n• 支持10+种语言，包括中文、英文、西班牙文、法文、德文、意大利文、葡萄牙文、俄文、日文、韩文\n• 可在设置中手动更改\n• 平台顺序会根据地区偏好调整"
+                    )
+
+                    FAQItem(
+                        question: "📤 如何导出我的数据？",
+                        answer: "从设置中导出您的搜索历史和统计信息：\n• 进入设置 > 导出数据\n• 选择格式：CSV、TXT 或 JSON\n• 选择时间范围：最近7天、30天或全部时间\n• 选择要包含的内容：搜索查询、平台使用情况和/或统计数据\n• 点击\"导出数据\"来保存或分享文件\n\n非常适合备份数据或分析使用模式！"
                     )
 
                     FAQItem(
@@ -573,6 +578,11 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
+                        question: "📤 ¿Cómo exportar mis datos?",
+                        answer: "Exporta tu historial de búsqueda y estadísticas desde Configuración:\n• Ve a Configuración > Exportar Datos\n• Elige formato: CSV, TXT o JSON\n• Selecciona rango de tiempo: Últimos 7 días, 30 días o Todo el tiempo\n• Selecciona qué incluir: consultas de búsqueda, uso de plataformas y/o estadísticas\n• Toca \"Exportar Datos\" para guardar o compartir el archivo\n\n¡Perfecto para respaldar datos o analizar patrones de uso!"
+                    )
+
+                    FAQItem(
                         question: "📈 ¿Cómo funciona el ordenamiento de plataformas?",
                         answer: "Los botones de plataforma se reordenan automáticamente según tu uso:\n• Las plataformas más utilizadas aparecen primero\n• Se adapta a tus patrones de búsqueda personales\n• Te ayuda a acceder más rápido a tus plataformas preferidas\n• El orden se actualiza dinámicamente con el tiempo"
                     )
@@ -683,6 +693,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 Comment fonctionne l'adaptation linguistique ?",
                         answer: "SkipFeed s'adapte automatiquement à votre langue :\n• Détection automatique basée sur votre langue/région système\n• Supporte 10+ langues incluant anglais, chinois, espagnol, français, allemand, italien, portugais, russe, japonais, coréen\n• Peut être changé manuellement dans les Paramètres\n• L'ordre des plateformes s'adapte selon les préférences régionales"
+                    )
+
+                    FAQItem(
+                        question: "📤 Comment exporter mes données ?",
+                        answer: "Exportez votre historique de recherche et statistiques depuis Paramètres :\n• Allez dans Paramètres > Exporter les Données\n• Choisissez le format : CSV, TXT ou JSON\n• Sélectionnez la plage : 7 derniers jours, 30 jours ou Tout le temps\n• Sélectionnez le contenu : requêtes de recherche, utilisation des plateformes et/ou statistiques\n• Appuyez sur \"Exporter les Données\" pour sauvegarder ou partager le fichier\n\nParfait pour sauvegarder les données ou analyser les habitudes d'utilisation !"
                     )
 
                     FAQItem(
@@ -799,6 +814,11 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
+                        question: "📤 Wie exportiere ich meine Daten?",
+                        answer: "Exportieren Sie Ihren Suchverlauf und Statistiken aus den Einstellungen:\n• Gehen Sie zu Einstellungen > Daten Exportieren\n• Wählen Sie das Format: CSV, TXT oder JSON\n• Wählen Sie den Zeitraum: Letzte 7 Tage, 30 Tage oder Alle Zeit\n• Wählen Sie den Inhalt: Suchanfragen, Plattformnutzung und/oder Statistiken\n• Tippen Sie auf \"Daten Exportieren\" um die Datei zu speichern oder zu teilen\n\nPerfekt zum Sichern von Daten oder Analysieren von Nutzungsmustern!"
+                    )
+
+                    FAQItem(
                         question: "📈 Wie funktioniert die Plattform-Sortierung?",
                         answer: "Plattform-Schaltflächen ordnen sich automatisch nach Ihrer Nutzung um:\n• Die am häufigsten genutzten Plattformen erscheinen zuerst\n• Passt sich an Ihre persönlichen Suchmuster an\n• Hilft Ihnen, schneller auf Ihre bevorzugten Plattformen zuzugreifen\n• Reihenfolge aktualisiert sich dynamisch über die Zeit"
                     )
@@ -909,6 +929,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 Come funziona l'adattamento linguistico?",
                         answer: "SkipFeed si adatta automaticamente alla tua lingua:\n• Rilevamento automatico basato sulla lingua/regione del sistema\n• Supporta 10+ lingue inclusi inglese, cinese, spagnolo, francese, tedesco, italiano, portoghese, russo, giapponese, coreano\n• Può essere cambiato manualmente nelle Impostazioni\n• L'ordine delle piattaforme si adatta alle preferenze regionali"
+                    )
+
+                    FAQItem(
+                        question: "📤 Come esportare i miei dati?",
+                        answer: "Esporta la tua cronologia di ricerca e statistiche dalle Impostazioni:\n• Vai in Impostazioni > Esporta Dati\n• Scegli il formato: CSV, TXT o JSON\n• Seleziona l'intervallo: Ultimi 7 giorni, 30 giorni o Tutto il tempo\n• Seleziona il contenuto: query di ricerca, utilizzo piattaforme e/o statistiche\n• Tocca \"Esporta Dati\" per salvare o condividere il file\n\nPerfetto per fare backup dei dati o analizzare i modelli di utilizzo!"
                     )
 
                     FAQItem(
@@ -1025,6 +1050,11 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
+                        question: "📤 Como exportar meus dados?",
+                        answer: "Exporte seu histórico de pesquisa e estatísticas das Configurações:\n• Vá para Configurações > Exportar Dados\n• Escolha o formato: CSV, TXT ou JSON\n• Selecione o período: Últimos 7 dias, 30 dias ou Todo o tempo\n• Selecione o conteúdo: consultas de pesquisa, uso de plataformas e/ou estatísticas\n• Toque em \"Exportar Dados\" para salvar ou compartilhar o arquivo\n\nPerfeito para fazer backup de dados ou analisar padrões de uso!"
+                    )
+
+                    FAQItem(
                         question: "📈 Como funciona a ordenação de plataformas?",
                         answer: "Os botões das plataformas se reorganizam automaticamente com base no seu uso:\n• As plataformas mais usadas aparecem primeiro\n• Se adapta aos seus padrões de pesquisa pessoais\n• Ajuda você a acessar suas plataformas preferidas mais rapidamente\n• A ordem se atualiza dinamicamente ao longo do tempo"
                     )
@@ -1115,6 +1145,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 Как работает адаптация языка?",
                         answer: "SkipFeed автоматически адаптируется к вашему языку:\n• Автоматическое определение на основе языка/региона системы\n• Поддерживает 10+ языков включая английский, китайский, испанский, французский, немецкий, итальянский, португальский, русский, японский, корейский\n• Может быть изменен вручную в Настройках\n• Порядок платформ адаптируется к региональным предпочтениям"
+                    )
+
+                    FAQItem(
+                        question: "📤 Как экспортировать мои данные?",
+                        answer: "Экспортируйте вашу историю поиска и статистику из Настроек:\n• Перейдите в Настройки > Экспорт Данных\n• Выберите формат: CSV, TXT или JSON\n• Выберите период: Последние 7 дней, 30 дней или Всё время\n• Выберите содержимое: поисковые запросы, использование платформ и/или статистика\n• Нажмите \"Экспорт Данных\" чтобы сохранить или поделиться файлом\n\nОтлично подходит для резервного копирования данных или анализа шаблонов использования!"
                     )
 
                     FAQItem(
@@ -1211,6 +1246,11 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
+                        question: "📤 データのエクスポート方法は？",
+                        answer: "設定から検索履歴と統計をエクスポート：\n• 設定 > データエクスポートに移動\n• フォーマットを選択：CSV、TXTまたはJSON\n• 期間を選択：過去7日間7日間、30日間または全期間\n• 内容を選択：検索クエリ、プラットフォーム使用状況、統計データ\n• \"データエクスポート\"をタップしてファイルを保存またはシェア\n\nデータのバックアップや使用パターンの分析に最適！"
+                    )
+
+                    FAQItem(
                         question: "📈 プラットフォームソートの仕組みは？",
                         answer: "プラットフォームボタンは使用状況に基づいて自動的に再配置：\n• 最も使用されるプラットフォームが最初に表示\n• 個人的な検索パターンに適応\n• 好みのプラットフォームにより早くアクセス可能\n• 順序は時間とともに動的に更新"
                     )
@@ -1301,6 +1341,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 언어 적응 작동 방식은?",
                         answer: "SkipFeed는 자동으로 언어에 적응:\n• 시스템 언어/지역 기반 자동 감지\n• 영어, 중국어, 스페인어, 프랑스어, 독일어, 이탈리아어, 포르투갈어, 러시아어, 일본어, 한국어 포함 10개 이상 언어 지원\n• 설정에서 수동 변경 가능\n• 플랫폼 순서가 지역 선호도에 적응"
+                    )
+
+                    FAQItem(
+                        question: "📤 데이터 내보내기 방법은?",
+                        answer: "설정에서 검색 기록과 통계를 내보내기:\n• 설정 > 데이터 내보내기로 이동\n• 형식 선택: CSV, TXT 또는 JSON\n• 시간 범위 선택: 최근 7일, 30일 또는 전체 기간\n• 내용 선택: 검색 쿼리, 플랫폼 사용량 및/또는 통계\n• \"데이터 내보내기\"를 눌러 파일을 저장하거나 공유\n\n데이터 백업이나 사용 패턴 분석에 완벽합니다!"
                     )
 
                     FAQItem(
@@ -1397,6 +1442,11 @@ struct FormattedSupportFAQView: View {
                     )
 
                     FAQItem(
+                        question: "📤 كيف أصدر بياناتي؟",
+                        answer: "قم بتصدير تاريخ البحث والإحصائيات من الإعدادات:\n• اذهب إلى الإعدادات > تصدير البيانات\n• اختر التنسيق: CSV أو TXT أو JSON\n• حدد النطاق الزمني: آخر 7 أيام، 30 يوماً أو كل الوقت\n• حدد المحتوى: استعلامات البحث، استخدام المنصات و/أو الإحصائيات\n• اضغط على \"تصدير البيانات\" لحفظ أو مشاركة الملف\n\nممتاز لنسخ البيانات احتياطياً أو تحليل أنماط الاستخدام!"
+                    )
+
+                    FAQItem(
                         question: "📈 كيف يعمل ترتيب المنصات؟",
                         answer: "أزرار المنصات تُعيد ترتيب نفسها تلقائياً بناءً على استخدامك:\n• المنصات الأكثر استخداماً تظهر أولاً\n• تتكيف مع أنماط البحث الشخصية\n• تساعدك في الوصول أسرع للمنصات المفضلة\n• الترتيب يتحدث ديناميكياً مع الوقت"
                     )
@@ -1487,6 +1537,11 @@ struct FormattedSupportFAQView: View {
                     FAQItem(
                         question: "🌍 How does language adaptation work?",
                         answer: "SkipFeed automatically adapts to your language:\n• Auto-detects based on your system language/region\n• Supports 10+ languages including English, Chinese, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean\n• Can be manually changed in Settings\n• Platform order adapts based on regional preferences"
+                    )
+
+                    FAQItem(
+                        question: "📤 How do I export my data?",
+                        answer: "Export your search history and statistics from Settings:\n• Go to Settings > Export Data\n• Choose format: CSV, TXT, or JSON\n• Select time range: Last 7 days, 30 days, or All time\n• Select what to include: search queries, platform usage, and/or statistics\n• Tap \"Export Data\" to save or share the file\n\nPerfect for backing up data or analyzing usage patterns!"
                     )
 
                     FAQItem(

@@ -1199,14 +1199,24 @@ struct SupportFAQView: View {
             3. 选择您偏好的语言或开启自动检测
 
             ### 📊 如何查看使用统计？
-            点击主界面右上角的统计图标查看：
-            - 总搜索次数
-            - 今日搜索次数
-            - 节省的时间
-            - 平台使用情况
+            通过底部的统计标签页查看：
+            - 7天和30天搜索趋势图表
+            - 总搜索次数和今日搜索次数
+            - 相比无限滚动节省的时间
+            - 平台使用情况分析
+            - 一天中不同时间的使用分析
+            - 通过历史标签页查看搜索历史
 
             ### 🔄 如何清除搜索历史？
             在设置页面中点击"清除最近搜索"按钮。
+
+            ### 📤 如何导出我的数据？
+            1. 打开设置页面
+            2. 点击"导出数据"选项
+            3. 选择导出格式（CSV、TXT 或 JSON）
+            4. 选择时间范围（最近7天、30天或全部时间）
+            5. 选择要包含的内容：搜索查询、平台使用情况、统计数据
+            6. 点击"导出数据"保存或分享文件
 
             ### 💎 高级功能有哪些？
             - **应用内浏览**：在 SkipFeed 内直接浏览内容
@@ -1249,6 +1259,780 @@ struct SupportFAQView: View {
             - 增强的使用统计
             - 现代化的界面设计
             """
+        case "es":
+            return """
+            # SkipFeed Soporte y FAQ
+
+            ## Preguntas Frecuentes
+
+            ### 🔍 ¿Cómo uso SkipFeed?
+            1. Selecciona la plataforma que quieres buscar
+            2. Ingresa tus palabras clave
+            3. Toca el botón de búsqueda
+            4. Elige abrir resultados en la app nativa o navegador
+
+            ### 📱 ¿Qué plataformas están soportadas?
+            - **YouTube** - Búsqueda de videos
+            - **Reddit** - Discusiones de comunidad
+            - **X (Twitter)** - Actualizaciones en tiempo real
+            - **TikTok** - Videos cortos
+            - **Instagram** - Fotos y videos
+            - **Facebook** - Contenido social
+
+            ### 🌍 ¿Cómo cambio el idioma?
+            1. Abre Configuración
+            2. Toca "Idioma"
+            3. Selecciona tu idioma preferido o habilita detección automática
+
+            ### 📊 ¿Cómo veo las estadísticas de uso?
+            Accede a través de la pestaña Estadísticas en la parte inferior:
+            - Gráficos de tendencias de 7 y 30 días
+            - Búsquedas totales y de hoy
+            - Tiempo ahorrado vs desplazamiento infinito
+            - Desglose de uso de plataformas
+            - Análisis de tiempo del día e insights
+            - Historial de búsqueda a través de la pestaña Historial
+
+            ### 🔄 ¿Cómo borro el historial de búsqueda?
+            Toca "Borrar Búsquedas Recientes" en la página de Configuración.
+
+            ### 📤 ¿Cómo exporto mis datos?
+            1. Abre Configuración
+            2. Toca "Exportar Datos"
+            3. Elige formato de exportación (CSV, TXT, o JSON)
+            4. Selecciona rango de tiempo (Últimos 7 días, 30 días, o Todo el tiempo)
+            5. Elige qué incluir: consultas de búsqueda, uso de plataformas, estadísticas
+            6. Toca "Exportar Datos" para guardar o compartir el archivo
+
+            ### 💎 ¿Qué funciones premium están disponibles?
+            - **Navegación en la App**: Navega contenido directamente dentro de SkipFeed
+            - **No Molestar Automático**: Habilita automáticamente el modo enfoque
+            - **Resumen con IA**: Resumen inteligente de contenido
+            - **Búsquedas Ilimitadas**: Elimina límites diarios de búsqueda
+
+            ## Solución de Problemas
+
+            ### Los resultados de búsqueda no se abren
+            - Asegúrate de que la app objetivo esté instalada
+            - Verifica tu conexión a internet
+            - Prueba abrir en el navegador
+
+            ### La app funciona lento
+            - Reinicia la app
+            - Borra el historial de búsqueda
+            - Reinicia tu dispositivo
+
+            ### El cambio de idioma no funciona
+            - Asegúrate de que el idioma correcto esté seleccionado
+            - Reinicia la app
+            - Verifica la configuración del idioma del sistema
+
+            ## Solicitudes de Funciones
+
+            ¡Aceptamos tus sugerencias! Si quieres nuevas funciones o soporte de plataformas, contáctanos.
+
+            ## Soporte Técnico
+
+            Para más asistencia, contacta:
+            - **Email**: support@skipfeed.app
+            - **Tiempo de Respuesta**: 24-48 horas
+
+            ## Información de Versión
+
+            La versión actual incluye:
+            - Soporte multilingüe completo
+            - Experiencia de búsqueda mejorada
+            - Analíticas de uso mejoradas
+            - Diseño de interfaz moderno
+            """
+        case "fr":
+            return """
+            # SkipFeed Support et FAQ
+
+            ## Questions Fréquentes
+
+            ### 🔍 Comment utiliser SkipFeed?
+            1. Sélectionnez la plateforme que vous voulez rechercher
+            2. Saisissez vos mots-clés
+            3. Appuyez sur le bouton de recherche
+            4. Choisissez d'ouvrir les résultats dans l'app native ou le navigateur
+
+            ### 📱 Quelles plateformes sont supportées?
+            - **YouTube** - Recherche de vidéos
+            - **Reddit** - Discussions communautaires
+            - **X (Twitter)** - Mises à jour en temps réel
+            - **TikTok** - Vidéos courtes
+            - **Instagram** - Photos et vidéos
+            - **Facebook** - Contenu social
+
+            ### 🌍 Comment changer la langue?
+            1. Ouvrez les Paramètres
+            2. Appuyez sur "Langue"
+            3. Sélectionnez votre langue préférée ou activez la détection automatique
+
+            ### 📊 Comment voir les statistiques d'utilisation?
+            Accédez via l'onglet Stats en bas:
+            - Graphiques de tendances sur 7 et 30 jours
+            - Recherches totales et d'aujourd'hui
+            - Temps économisé vs défilement infini
+            - Répartition de l'utilisation des plateformes
+            - Analyse de l'heure de la journée et insights
+            - Historique de recherche via l'onglet Historique
+
+            ### 🔄 Comment effacer l'historique de recherche?
+            Appuyez sur "Effacer les Recherches Récentes" dans la page Paramètres.
+
+            ### 📤 Comment exporter mes données?
+            1. Ouvrez les Paramètres
+            2. Appuyez sur "Exporter les Données"
+            3. Choisissez le format d'exportation (CSV, TXT, ou JSON)
+            4. Sélectionnez la plage de temps (7 derniers jours, 30 jours, ou Tout le temps)
+            5. Choisissez quoi inclure: requêtes de recherche, utilisation des plateformes, statistiques
+            6. Appuyez sur "Exporter les Données" pour sauvegarder ou partager le fichier
+
+            ### 💎 Quelles fonctionnalités premium sont disponibles?
+            - **Navigation dans l'App**: Naviguez le contenu directement dans SkipFeed
+            - **Ne Pas Déranger Auto**: Active automatiquement le mode focus
+            - **Résumé IA**: Résumé intelligent du contenu
+            - **Recherches Illimitées**: Supprime les limites quotidiennes de recherche
+
+            ## Dépannage
+
+            ### Les résultats de recherche ne s'ouvrent pas
+            - Assurez-vous que l'app cible est installée
+            - Vérifiez votre connexion internet
+            - Essayez d'ouvrir dans le navigateur
+
+            ### L'app fonctionne lentement
+            - Redémarrez l'app
+            - Effacez l'historique de recherche
+            - Redémarrez votre appareil
+
+            ### Le changement de langue ne fonctionne pas
+            - Assurez-vous que la bonne langue est sélectionnée
+            - Redémarrez l'app
+            - Vérifiez les paramètres de langue du système
+
+            ## Demandes de Fonctionnalités
+
+            Nous accueillons vos suggestions! Si vous voulez de nouvelles fonctionnalités ou support de plateformes, contactez-nous.
+
+            ## Support Technique
+
+            Pour plus d'assistance, contactez:
+            - **Email**: support@skipfeed.app
+            - **Temps de Réponse**: 24-48 heures
+
+            ## Informations de Version
+
+            La version actuelle inclut:
+            - Support multilingue complet
+            - Expérience de recherche améliorée
+            - Analytiques d'utilisation améliorées
+            - Design d'interface moderne
+            """
+        case "de":
+            return """
+            # SkipFeed Support & FAQ
+
+            ## Häufig gestellte Fragen
+
+            ### 🔍 Wie verwende ich SkipFeed?
+            1. Wählen Sie die Plattform aus, die Sie durchsuchen möchten
+            2. Geben Sie Ihre Suchbegriffe ein
+            3. Tippen Sie auf die Suchschaltfläche
+            4. Wählen Sie, ob Ergebnisse in der nativen App oder im Browser geöffnet werden sollen
+
+            ### 📱 Welche Plattformen werden unterstützt?
+            - **YouTube** - Videosuche
+            - **Reddit** - Community-Diskussionen
+            - **X (Twitter)** - Echtzeit-Updates
+            - **TikTok** - Kurze Videos
+            - **Instagram** - Fotos und Videos
+            - **Facebook** - Social Content
+
+            ### 🌍 Wie ändere ich die Sprache?
+            1. Öffnen Sie die Einstellungen
+            2. Tippen Sie auf "Sprache"
+            3. Wählen Sie Ihre bevorzugte Sprache oder aktivieren Sie die automatische Erkennung
+
+            ### 📊 Wie sehe ich Nutzungsstatistiken?
+            Zugriff über den Stats-Tab unten:
+            - 7-Tage und 30-Tage Trend-Diagramme
+            - Gesamtsuchen und heutige Suchen
+            - Gesparte Zeit vs endloses Scrollen
+            - Platform-Nutzungsaufschlüsselung
+            - Tageszeit-Analyse und Insights
+            - Suchverlauf über den Verlauf-Tab
+
+            ### 🔄 Wie lösche ich den Suchverlauf?
+            Tippen Sie auf "Letzte Suchen löschen" auf der Einstellungsseite.
+
+            ### 📤 Wie exportiere ich meine Daten?
+            1. Öffnen Sie die Einstellungen
+            2. Tippen Sie auf "Daten exportieren"
+            3. Wählen Sie das Exportformat (CSV, TXT oder JSON)
+            4. Wählen Sie den Zeitraum (Letzte 7 Tage, 30 Tage oder Alle Zeit)
+            5. Wählen Sie was enthalten sein soll: Suchanfragen, Platform-Nutzung, Statistiken
+            6. Tippen Sie auf "Daten exportieren" um die Datei zu speichern oder zu teilen
+
+            ### 💎 Welche Premium-Funktionen sind verfügbar?
+            - **In-App-Browsing**: Durchsuchen Sie Inhalte direkt in SkipFeed
+            - **Auto Nicht Stören**: Aktiviert automatisch den Focus-Modus
+            - **KI-Zusammenfassung**: Intelligente Inhaltszusammenfassung
+            - **Unbegrenzte Suchen**: Entfernt tägliche Suchlimits
+
+            ## Fehlerbehebung
+
+            ### Suchergebnisse öffnen sich nicht
+            - Stellen Sie sicher, dass die Ziel-App installiert ist
+            - Überprüfen Sie Ihre Internetverbindung
+            - Versuchen Sie im Browser zu öffnen
+
+            ### App läuft langsam
+            - Starten Sie die App neu
+            - Löschen Sie den Suchverlauf
+            - Starten Sie Ihr Gerät neu
+
+            ### Sprachwechsel funktioniert nicht
+            - Stellen Sie sicher, dass die richtige Sprache ausgewählt ist
+            - Starten Sie die App neu
+            - Überprüfen Sie die Systemspracheinstellungen
+
+            ## Feature-Anfragen
+
+            Wir begrüßen Ihre Vorschläge! Wenn Sie neue Features oder Platform-Support wünschen, kontaktieren Sie uns.
+
+            ## Technischer Support
+
+            Für weitere Hilfe, kontaktieren Sie:
+            - **Email**: support@skipfeed.app
+            - **Antwortzeit**: 24-48 Stunden
+
+            ## Versionsinformationen
+
+            Die aktuelle Version beinhaltet:
+            - Vollständige mehrsprachige Unterstützung
+            - Verbesserte Sucherfahrung
+            - Erweiterte Nutzungsanalytik
+            - Modernes Interface-Design
+            """
+        case "it":
+            return """
+            # SkipFeed Supporto e FAQ
+
+            ## Domande Frequenti
+
+            ### 🔍 Come uso SkipFeed?
+            1. Seleziona la piattaforma che vuoi cercare
+            2. Inserisci le tue parole chiave
+            3. Tocca il pulsante di ricerca
+            4. Scegli di aprire i risultati nell'app nativa o nel browser
+
+            ### 📱 Quali piattaforme sono supportate?
+            - **YouTube** - Ricerca video
+            - **Reddit** - Discussioni della community
+            - **X (Twitter)** - Aggiornamenti in tempo reale
+            - **TikTok** - Video brevi
+            - **Instagram** - Foto e video
+            - **Facebook** - Contenuto sociale
+
+            ### 🌍 Come cambio la lingua?
+            1. Apri le Impostazioni
+            2. Tocca "Lingua"
+            3. Seleziona la tua lingua preferita o abilita il rilevamento automatico
+
+            ### 📊 Come vedo le statistiche di utilizzo?
+            Accedi tramite la scheda Stats in basso:
+            - Grafici di tendenza a 7 e 30 giorni
+            - Ricerche totali e di oggi
+            - Tempo risparmiato vs scorrimento infinito
+            - Suddivisione dell'utilizzo delle piattaforme
+            - Analisi dell'ora del giorno e insights
+            - Cronologia delle ricerche tramite la scheda Cronologia
+
+            ### 🔄 Come cancello la cronologia delle ricerche?
+            Tocca "Cancella Ricerche Recenti" nella pagina Impostazioni.
+
+            ### 📤 Come esporto i miei dati?
+            1. Apri le Impostazioni
+            2. Tocca "Esporta Dati"
+            3. Scegli il formato di esportazione (CSV, TXT, o JSON)
+            4. Seleziona l'intervallo di tempo (Ultimi 7 giorni, 30 giorni, o Tutto il tempo)
+            5. Scegli cosa includere: query di ricerca, utilizzo piattaforme, statistiche
+            6. Tocca "Esporta Dati" per salvare o condividere il file
+
+            ### 💎 Quali funzionalità premium sono disponibili?
+            - **Navigazione In-App**: Naviga i contenuti direttamente in SkipFeed
+            - **Auto Non Disturbare**: Abilita automaticamente la modalità focus
+            - **Riassunto IA**: Riassunto intelligente dei contenuti
+            - **Ricerche Illimitate**: Rimuove i limiti giornalieri di ricerca
+
+            ## Risoluzione Problemi
+
+            ### I risultati di ricerca non si aprono
+            - Assicurati che l'app di destinazione sia installata
+            - Controlla la tua connessione internet
+            - Prova ad aprire nel browser
+
+            ### L'app funziona lentamente
+            - Riavvia l'app
+            - Cancella la cronologia delle ricerche
+            - Riavvia il tuo dispositivo
+
+            ### Il cambio lingua non funziona
+            - Assicurati che la lingua corretta sia selezionata
+            - Riavvia l'app
+            - Controlla le impostazioni della lingua di sistema
+
+            ## Richieste di Funzionalità
+
+            Accogliamo i tuoi suggerimenti! Se desideri nuove funzionalità o supporto per piattaforme, contattaci.
+
+            ## Supporto Tecnico
+
+            Per ulteriore assistenza, contatta:
+            - **Email**: support@skipfeed.app
+            - **Tempo di Risposta**: 24-48 ore
+
+            ## Informazioni sulla Versione
+
+            La versione attuale include:
+            - Supporto multilingue completo
+            - Esperienza di ricerca migliorata
+            - Analitiche di utilizzo migliorate
+            - Design dell'interfaccia moderno
+            """
+        case "pt":
+            return """
+            # SkipFeed Suporte e FAQ
+
+            ## Perguntas Frequentes
+
+            ### 🔍 Como uso o SkipFeed?
+            1. Selecione a plataforma que você quer pesquisar
+            2. Digite suas palavras-chave
+            3. Toque no botão de pesquisa
+            4. Escolha abrir os resultados no app nativo ou navegador
+
+            ### 📱 Quais plataformas são suportadas?
+            - **YouTube** - Busca de vídeos
+            - **Reddit** - Discussões da comunidade
+            - **X (Twitter)** - Atualizações em tempo real
+            - **TikTok** - Vídeos curtos
+            - **Instagram** - Fotos e vídeos
+            - **Facebook** - Conteúdo social
+
+            ### 🌍 Como mudo o idioma?
+            1. Abra as Configurações
+            2. Toque em "Idioma"
+            3. Selecione seu idioma preferido ou habilite detecção automática
+
+            ### 📊 Como vejo as estatísticas de uso?
+            Acesse através da aba Stats na parte inferior:
+            - Gráficos de tendência de 7 e 30 dias
+            - Pesquisas totais e de hoje
+            - Tempo economizado vs rolagem infinita
+            - Divisão de uso das plataformas
+            - Análise de horário do dia e insights
+            - Histórico de pesquisas via aba Histórico
+
+            ### 🔄 Como limpo o histórico de pesquisas?
+            Toque em "Limpar Pesquisas Recentes" na página de Configurações.
+
+            ### 📤 Como exporto meus dados?
+            1. Abra as Configurações
+            2. Toque em "Exportar Dados"
+            3. Escolha o formato de exportação (CSV, TXT, ou JSON)
+            4. Selecione o intervalo de tempo (Últimos 7 dias, 30 dias, ou Todo o tempo)
+            5. Escolha o que incluir: consultas de pesquisa, uso de plataformas, estatísticas
+            6. Toque em "Exportar Dados" para salvar ou compartilhar o arquivo
+
+            ### 💎 Quais recursos premium estão disponíveis?
+            - **Navegação no App**: Navegue conteúdo diretamente no SkipFeed
+            - **Auto Não Perturbe**: Ativa automaticamente o modo foco
+            - **Resumo IA**: Resumo inteligente de conteúdo
+            - **Pesquisas Ilimitadas**: Remove limites diários de pesquisa
+
+            ## Solução de Problemas
+
+            ### Resultados de pesquisa não abrem
+            - Certifique-se de que o app de destino está instalado
+            - Verifique sua conexão com a internet
+            - Tente abrir no navegador
+
+            ### App está lento
+            - Reinicie o app
+            - Limpe o histórico de pesquisas
+            - Reinicie seu dispositivo
+
+            ### Mudança de idioma não funciona
+            - Certifique-se de que o idioma correto está selecionado
+            - Reinicie o app
+            - Verifique as configurações de idioma do sistema
+
+            ## Solicitações de Recursos
+
+            Acolhemos suas sugestões! Se você quer novos recursos ou suporte de plataformas, entre em contato.
+
+            ## Suporte Técnico
+
+            Para mais assistência, entre em contato:
+            - **Email**: support@skipfeed.app
+            - **Tempo de Resposta**: 24-48 horas
+
+            ## Informações da Versão
+
+            A versão atual inclui:
+            - Suporte multilíngue completo
+            - Experiência de pesquisa melhorada
+            - Analíticas de uso aprimoradas
+            - Design de interface moderno
+            """
+        case "ru":
+            return """
+            # SkipFeed Поддержка и FAQ
+
+            ## Часто задаваемые вопросы
+
+            ### 🔍 Как использовать SkipFeed?
+            1. Выберите платформу для поиска
+            2. Введите ключевые слова
+            3. Нажмите кнопку поиска
+            4. Выберите открытие результатов в нативном приложении или браузере
+
+            ### 📱 Какие платформы поддерживаются?
+            - **YouTube** - Поиск видео
+            - **Reddit** - Обсуждения сообщества
+            - **X (Twitter)** - Обновления в реальном времени
+            - **TikTok** - Короткие видео
+            - **Instagram** - Фото и видео
+            - **Facebook** - Социальный контент
+
+            ### 🌍 Как изменить язык?
+            1. Откройте Настройки
+            2. Нажмите "Язык"
+            3. Выберите предпочитаемый язык или включите автоопределение
+
+            ### 📊 Как просмотреть статистику использования?
+            Доступ через вкладку Статистика внизу:
+            - Графики трендов за 7 и 30 дней
+            - Общие поиски и сегодняшние
+            - Сэкономленное время против бесконечной прокрутки
+            - Разбивка использования платформ
+            - Анализ времени дня и инсайты
+            - История поиска через вкладку История
+
+            ### 🔄 Как очистить историю поиска?
+            Нажмите "Очистить недавние поиски" на странице Настройки.
+
+            ### 📤 Как экспортировать мои данные?
+            1. Откройте Настройки
+            2. Нажмите "Экспорт данных"
+            3. Выберите формат экспорта (CSV, TXT, или JSON)
+            4. Выберите временной диапазон (Последние 7 дней, 30 дней, или Все время)
+            5. Выберите что включить: поисковые запросы, использование платформ, статистику
+            6. Нажмите "Экспорт данных" чтобы сохранить или поделиться файлом
+
+            ### 💎 Какие премиум функции доступны?
+            - **Просмотр в приложении**: Просматривайте контент прямо в SkipFeed
+            - **Авто Не беспокоить**: Автоматически включает режим фокуса
+            - **ИИ Резюме**: Умное резюмирование контента
+            - **Неограниченные поиски**: Убирает дневные лимиты поиска
+
+            ## Устранение неполадок
+
+            ### Результаты поиска не открываются
+            - Убедитесь, что целевое приложение установлено
+            - Проверьте интернет-соединение
+            - Попробуйте открыть в браузере
+
+            ### Приложение работает медленно
+            - Перезапустите приложение
+            - Очистите историю поиска
+            - Перезагрузите устройство
+
+            ### Смена языка не работает
+            - Убедитесь, что правильный язык выбран
+            - Перезапустите приложение
+            - Проверьте настройки языка системы
+
+            ## Запросы функций
+
+            Мы приветствуем ваши предложения! Если вы хотите новые функции или поддержку платформ, свяжитесь с нами.
+
+            ## Техническая поддержка
+
+            Для дополнительной помощи, свяжитесь:
+            - **Email**: support@skipfeed.app
+            - **Время ответа**: 24-48 часов
+
+            ## Информация о версии
+
+            Текущая версия включает:
+            - Полная многоязычная поддержка
+            - Улучшенный опыт поиска
+            - Расширенная аналитика использования
+            - Современный дизайн интерфейса
+            """
+        case "ja":
+            return """
+            # SkipFeed サポート & FAQ
+
+            ## よくある質問
+
+            ### 🔍 SkipFeedの使い方は？
+            1. 検索したいプラットフォームを選択
+            2. キーワードを入力
+            3. 検索ボタンをタップ
+            4. ネイティブアプリまたはブラウザで結果を開くかを選択
+
+            ### 📱 どのプラットフォームがサポートされていますか？
+            - **YouTube** - 動画検索
+            - **Reddit** - コミュニティディスカッション
+            - **X (Twitter)** - リアルタイム更新
+            - **TikTok** - ショート動画
+            - **Instagram** - 写真と動画
+            - **Facebook** - ソーシャルコンテンツ
+
+            ### 🌍 言語を変更するには？
+            1. 設定を開く
+            2. "言語"をタップ
+            3. 好みの言語を選択するか自動検出を有効にする
+
+            ### 📊 使用統計を表示するには？
+            下部の統計タブからアクセス：
+            - 7日と30日のトレンドチャート
+            - 総検索数と今日の検索数
+            - 無限スクロールと比較した節約時間
+            - プラットフォーム使用量の内訳
+            - 時間帯分析とインサイト
+            - 履歴タブから検索履歴
+
+            ### 🔄 検索履歴をクリアするには？
+            設定ページの「最近の検索をクリア」をタップ。
+
+            ### 📤 データをエクスポートするには？
+            1. 設定を開く
+            2. "データエクスポート"をタップ
+            3. エクスポート形式を選択（CSV、TXT、またはJSON）
+            4. 時間範囲を選択（過去7日、30日、または全期間）
+            5. 含める内容を選択：検索クエリ、プラットフォーム使用量、統計
+            6. "データエクスポート"をタップしてファイルを保存または共有
+
+            ### 💎 どのプレミアム機能が利用できますか？
+            - **アプリ内ブラウジング**: SkipFeed内でコンテンツを直接閲覧
+            - **自動おやすみモード**: フォーカスモードを自動的に有効化
+            - **AI要約**: インテリジェントなコンテンツ要約
+            - **無制限検索**: 日次検索制限を削除
+
+            ## トラブルシューティング
+
+            ### 検索結果が開かない
+            - ターゲットアプリがインストールされていることを確認
+            - インターネット接続を確認
+            - ブラウザで開くことを試す
+
+            ### アプリが遅い
+            - アプリを再起動
+            - 検索履歴をクリア
+            - デバイスを再起動
+
+            ### 言語切り替えが機能しない
+            - 正しい言語が選択されていることを確認
+            - アプリを再起動
+            - システム言語設定を確認
+
+            ## 機能リクエスト
+
+            ご提案をお待ちしています！新機能やプラットフォームサポートをご希望の場合は、お気軽にお問い合わせください。
+
+            ## 技術サポート
+
+            さらなるサポートについては、お問い合わせください：
+            - **Email**: support@skipfeed.app
+            - **応答時間**: 24-48時間
+
+            ## バージョン情報
+
+            現在のバージョンには以下が含まれます：
+            - 完全な多言語サポート
+            - 改善された検索体験
+            - 強化された使用統計
+            - モダンなインターフェースデザイン
+            """
+        case "ko":
+            return """
+            # SkipFeed 지원 & FAQ
+
+            ## 자주 묻는 질문
+
+            ### 🔍 SkipFeed를 어떻게 사용하나요?
+            1. 검색하고 싶은 플랫폼 선택
+            2. 키워드 입력
+            3. 검색 버튼 탭
+            4. 네이티브 앱 또는 브라우저에서 결과 열기 선택
+
+            ### 📱 어떤 플랫폼이 지원되나요?
+            - **YouTube** - 동영상 검색
+            - **Reddit** - 커뮤니티 토론
+            - **X (Twitter)** - 실시간 업데이트
+            - **TikTok** - 숏폼 동영상
+            - **Instagram** - 사진과 동영상
+            - **Facebook** - 소셜 콘텐츠
+
+            ### 🌍 언어를 어떻게 변경하나요?
+            1. 설정 열기
+            2. "언어" 탭
+            3. 선호하는 언어를 선택하거나 자동 감지 활성화
+
+            ### 📊 사용 통계를 어떻게 보나요?
+            하단의 통계 탭을 통해 접근:
+            - 7일 및 30일 트렌드 차트
+            - 총 검색수와 오늘의 검색수
+            - 무한 스크롤 대비 절약된 시간
+            - 플랫폼 사용량 분석
+            - 시간대별 분석 및 인사이트
+            - 히스토리 탭을 통한 검색 기록
+
+            ### 🔄 검색 기록을 어떻게 지우나요?
+            설정 페이지에서 "최근 검색 지우기"를 탭하세요.
+
+            ### 📤 데이터를 어떻게 내보내나요?
+            1. 설정 열기
+            2. "데이터 내보내기" 탭
+            3. 내보내기 형식 선택 (CSV, TXT, 또는 JSON)
+            4. 시간 범위 선택 (최근 7일, 30일, 또는 전체 기간)
+            5. 포함할 내용 선택: 검색 쿼리, 플랫폼 사용량, 통계
+            6. "데이터 내보내기"를 탭하여 파일을 저장하거나 공유
+
+            ### 💎 어떤 프리미엄 기능이 제공되나요?
+            - **앱 내 브라우징**: SkipFeed 내에서 직접 콘텐츠 탐색
+            - **자동 방해금지**: 포커스 모드를 자동으로 활성화
+            - **AI 요약**: 스마트 콘텐츠 요약
+            - **무제한 검색**: 일일 검색 제한 제거
+
+            ## 문제 해결
+
+            ### 검색 결과가 열리지 않음
+            - 대상 앱이 설치되었는지 확인
+            - 인터넷 연결 확인
+            - 브라우저에서 열기 시도
+
+            ### 앱이 느림
+            - 앱 재시작
+            - 검색 기록 지우기
+            - 기기 재시작
+
+            ### 언어 전환이 작동하지 않음
+            - 올바른 언어가 선택되었는지 확인
+            - 앱 재시작
+            - 시스템 언어 설정 확인
+
+            ## 기능 요청
+
+            여러분의 제안을 환영합니다! 새로운 기능이나 플랫폼 지원을 원하시면 연락해 주세요.
+
+            ## 기술 지원
+
+            추가 지원이 필요하시면 연락하세요:
+            - **Email**: support@skipfeed.app
+            - **응답 시간**: 24-48시간
+
+            ## 버전 정보
+
+            현재 버전 포함 사항:
+            - 완전한 다국어 지원
+            - 향상된 검색 경험
+            - 개선된 사용 분석
+            - 모던한 인터페이스 디자인
+            """
+        case "ar":
+            return """
+            # SkipFeed الدعم والأسئلة الشائعة
+
+            ## الأسئلة الشائعة
+
+            ### 🔍 كيف أستخدم SkipFeed؟
+            1. اختر المنصة التي تريد البحث فيها
+            2. أدخل كلماتك المفتاحية
+            3. اضغط على زر البحث
+            4. اختر فتح النتائج في التطبيق الأصلي أو المتصفح
+
+            ### 📱 ما هي المنصات المدعومة؟
+            - **YouTube** - البحث في الفيديوهات
+            - **Reddit** - مناقشات المجتمع
+            - **X (Twitter)** - التحديثات المباشرة
+            - **TikTok** - الفيديوهات القصيرة
+            - **Instagram** - الصور والفيديوهات
+            - **Facebook** - المحتوى الاجتماعي
+
+            ### 🌍 كيف أغير اللغة؟
+            1. افتح الإعدادات
+            2. اضغط على "اللغة"
+            3. اختر لغتك المفضلة أو فعّل الكشف التلقائي
+
+            ### 📊 كيف أشاهد إحصائيات الاستخدام؟
+            الوصول عبر تبويب الإحصائيات في الأسفل:
+            - مخططات الاتجاهات لـ 7 و 30 يوم
+            - إجمالي البحثات وبحثات اليوم
+            - الوقت المُوفر مقارنة بالتمرير اللانهائي
+            - تفصيل استخدام المنصات
+            - تحليل أوقات اليوم والرؤى
+            - تاريخ البحث عبر تبويب التاريخ
+
+            ### 🔄 كيف أمحو تاريخ البحث؟
+            اضغط على "محو البحثات الأخيرة" في صفحة الإعدادات.
+
+            ### 📤 كيف أصدر بياناتي؟
+            1. افتح الإعدادات
+            2. اضغط على "تصدير البيانات"
+            3. اختر تنسيق التصدير (CSV، TXT، أو JSON)
+            4. اختر النطاق الزمني (آخر 7 أيام، 30 يوم، أو كل الوقت)
+            5. اختر ما تريد تضمينه: استعلامات البحث، استخدام المنصات، الإحصائيات
+            6. اضغط على "تصدير البيانات" لحفظ أو مشاركة الملف
+
+            ### 💎 ما هي الميزات المميزة المتاحة؟
+            - **التصفح داخل التطبيق**: تصفح المحتوى مباشرة داخل SkipFeed
+            - **عدم الإزعاج التلقائي**: يفعل وضع التركيز تلقائياً
+            - **ملخص الذكاء الاصطناعي**: تلخيص ذكي للمحتوى
+            - **بحثات لا محدودة**: إزالة حدود البحث اليومية
+
+            ## استكشاف الأخطاء وإصلاحها
+
+            ### نتائج البحث لا تفتح
+            - تأكد من تثبيت التطبيق المطلوب
+            - تحقق من اتصال الإنترنت
+            - جرب الفتح في المتصفح
+
+            ### التطبيق بطيء
+            - أعد تشغيل التطبيق
+            - امحو تاريخ البحث
+            - أعد تشغيل جهازك
+
+            ### تبديل اللغة لا يعمل
+            - تأكد من اختيار اللغة الصحيحة
+            - أعد تشغيل التطبيق
+            - تحقق من إعدادات لغة النظام
+
+            ## طلبات الميزات
+
+            نرحب بمقترحاتكم! إذا كنتم تريدون ميزات جديدة أو دعم منصات، اتصلوا بنا.
+
+            ## الدعم التقني
+
+            للمساعدة الإضافية، اتصلوا بـ:
+            - **البريد الإلكتروني**: support@skipfeed.app
+            - **وقت الاستجابة**: 24-48 ساعة
+
+            ## معلومات الإصدار
+
+            الإصدار الحالي يتضمن:
+            - دعم متعدد اللغات كامل
+            - تجربة بحث محسّنة
+            - تحليلات استخدام متقدمة
+            - تصميم واجهة عصري
+            """
         default:
             return """
             # SkipFeed Support & FAQ
@@ -1275,14 +2059,24 @@ struct SupportFAQView: View {
             3. Select your preferred language or enable auto-detect
 
             ### 📊 How do I view usage statistics?
-            Tap the stats icon in the top-right corner to see:
-            - Total searches
-            - Today's searches
-            - Time saved
-            - Platform usage
+            Access through the Stats tab at the bottom:
+            - 7-day and 30-day search trend charts
+            - Total searches and today's searches
+            - Time saved vs infinite scrolling
+            - Platform usage breakdown
+            - Time of day analysis and insights
+            - Search history via History tab
 
             ### 🔄 How do I clear search history?
             Tap "Clear Recent Searches" in the Settings page.
+
+            ### 📤 How do I export my data?
+            1. Open Settings
+            2. Tap "Export Data"
+            3. Choose export format (CSV, TXT, or JSON)
+            4. Select time range (Last 7 days, 30 days, or All time)
+            5. Choose what to include: search queries, platform usage, statistics
+            6. Tap "Export Data" to save or share the file
 
             ### 💎 What premium features are available?
             - **In-App Browsing**: Browse content directly within SkipFeed

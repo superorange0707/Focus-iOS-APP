@@ -35,6 +35,7 @@ struct SettingsView: View {
 struct DataManagementCard: View {
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
     @StateObject private var userPreferences = UserPreferencesManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
     @State private var selectedRetentionPeriod: DataRetentionPeriod = .month
     @State private var showingExportView = false
     @State private var showingClearConfirmation = false
@@ -52,6 +53,14 @@ struct DataManagementCard: View {
             case .forever: return nil
             }
         }
+        
+        var localizedDisplayName: String {
+            switch self {
+            case .week: return LocalizationManager.shared.localizedString(.sevenDays)
+            case .month: return LocalizationManager.shared.localizedString(.thirtyDays)
+            case .forever: return LocalizationManager.shared.localizedString(.forever)
+            }
+        }
     }
     
     var body: some View {
@@ -62,7 +71,7 @@ struct DataManagementCard: View {
                     .font(.title3)
                     .foregroundColor(.blue)
                 
-                Text("Data Management")
+                Text(localizationManager.localizedString(.dataManagement))
                     .font(.headline)
                     .fontWeight(.semibold)
                 
@@ -78,11 +87,11 @@ struct DataManagementCard: View {
                             .frame(width: 24)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Data Retention Period")
+                            Text(localizationManager.localizedString(.dataRetentionPeriod))
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                             
-                            Text("How long to keep search history")
+                            Text(localizationManager.localizedString(.retentionDescription))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -92,7 +101,7 @@ struct DataManagementCard: View {
                     
                     Picker("Retention Period", selection: $selectedRetentionPeriod) {
                         ForEach(DataRetentionPeriod.allCases, id: \.self) { period in
-                            Text(period.rawValue).tag(period)
+                            Text(period.localizedDisplayName).tag(period)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -113,11 +122,11 @@ struct DataManagementCard: View {
                             .frame(width: 24)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Platform Order")
+                            Text(localizationManager.localizedString(.platformOrder))
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                             
-                            Text(automaticPlatformOrder ? "Auto-sorted by usage frequency" : "Manual order maintained")
+                            Text(automaticPlatformOrder ? localizationManager.localizedString(.autoSortedByUsage) : "Manual order maintained")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -139,12 +148,12 @@ struct DataManagementCard: View {
                             .frame(width: 24)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Export Data")
+                            Text(localizationManager.localizedString(.exportData))
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                                 .foregroundColor(.primary)
                             
-                            Text("Export search history and statistics")
+                            Text(localizationManager.localizedString(.exportDataDescription))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -168,12 +177,12 @@ struct DataManagementCard: View {
                             .frame(width: 24)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Clear All Data")
+                            Text(localizationManager.localizedString(.clearAllData))
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                                 .foregroundColor(.red)
                             
-                            Text("Remove all search history and statistics")
+                            Text(localizationManager.localizedString(.clearAllDataDescription))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -191,7 +200,7 @@ struct DataManagementCard: View {
         .sheet(isPresented: $showingExportView) {
             DataExportView()
         }
-        .alert("Clear All Data", isPresented: $showingClearConfirmation) {
+        .alert(localizationManager.localizedString(.clearAllData), isPresented: $showingClearConfirmation) {
             Button("Cancel", role: .cancel) { }
             Button("Clear", role: .destructive) {
                 searchHistoryManager.clearHistory()

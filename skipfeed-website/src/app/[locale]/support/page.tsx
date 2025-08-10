@@ -35,8 +35,8 @@ export default function SupportPage() {
                   answer: '• YouTube - 视频搜索\n• Reddit - 社区讨论（支持应用内浏览）\n• X (Twitter) - 实时更新\n• TikTok - 短视频发现\n• Instagram - 图片和视频\n• Facebook - 社交内容\n• Google - 网页搜索\n• Bing - 替代网页搜索'
                 },
                 {
-                  question: '📊 如何访问数据视图？',
-                  answer: '点击左上角的图表图标查看全面的分析数据：\n• 总搜索次数和今日计数\n• 平台使用情况分析\n• 相比无限滚动节省的时间\n• 专注评分和效率洞察\n• 按日期查看搜索历史\n• 特定平台的使用统计'
+                  question: '📊 如何访问统计数据？',
+                  answer: '通过统计标签页访问全面的分析数据：\n• 导航到底部的统计标签页\n• 查看7天和30天搜索趋势\n• 总搜索次数和今日计数\n• 带图表的平台使用情况分析\n• 相比无限滚动节省的时间\n• 一天中不同时间的使用分析和洞察\n• 搜索历史可通过历史标签页访问'
                 },
                 {
                   question: '🏠 如何设置小组件？',
@@ -45,6 +45,10 @@ export default function SupportPage() {
                 {
                   question: '🌍 语言自适应如何工作？',
                   answer: 'SkipFeed 会自动适应您的语言：\n• 根据系统语言/地区自动检测\n• 支持10+种语言，包括中文、英文、西班牙文、法文、德文、意大利文、葡萄牙文、俄文、日文、韩文\n• 可在设置中手动更改\n• 平台顺序会根据地区偏好调整'
+                },
+                {
+                  question: '📤 如何导出我的数据？',
+                  answer: '从设置中导出您的搜索历史和统计信息：\n• 进入设置 > 导出数据\n• 选择格式：CSV、TXT 或 JSON\n• 选择时间范围：最近7天、30天或全部时间\n• 选择要包含的内容：搜索查询、平台使用情况和/或统计数据\n• 点击"导出数据"来保存或分享文件\n\n非常适合备份数据或分析使用模式！'
                 }
               ]
             },
@@ -135,8 +139,8 @@ export default function SupportPage() {
                   answer: '• YouTube - Video search\n• Reddit - Community discussions (with in-app browsing)\n• X (Twitter) - Real-time updates\n• TikTok - Short-form video discovery\n• Instagram - Photos and videos\n• Facebook - Social content\n• Google - Web search\n• Bing - Alternative web search'
                 },
                 {
-                  question: '📊 How to access Data View?',
-                  answer: 'Tap the chart icon in the top-left corner to see comprehensive analytics:\n• Total searches and today\'s count\n• Platform usage breakdown\n• Time saved vs infinite scrolling\n• Focus score and efficiency insights\n• Search history by date\n• Platform-specific statistics'
+                  question: '📊 How to access Statistics?',
+                  answer: 'Access comprehensive analytics through the Stats tab:\n• Navigate to the Stats tab at the bottom\n• View 7-day and 30-day search trends\n• See total searches and today\'s count\n• Platform usage breakdown with charts\n• Time saved vs infinite scrolling\n• Time of day analysis and insights\n• Search history accessible via History tab'
                 },
                 {
                   question: '🏠 How to set up Widgets?',
@@ -145,6 +149,10 @@ export default function SupportPage() {
                 {
                   question: '🌍 How does language adaptation work?',
                   answer: 'SkipFeed automatically adapts to your language:\n• Auto-detection based on system language/region\n• Supports 10+ languages including English, Chinese, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean\n• Can be changed manually in Settings\n• Platform order adapts to regional preferences'
+                },
+                {
+                  question: '📤 How to export my data?',
+                  answer: 'Export your search history and statistics from Settings:\n• Go to Settings > Export Data\n• Choose format: CSV, TXT, or JSON\n• Select time range: Last 7 days, 30 days, or All time\n• Choose what to include: Search queries, platform usage, and/or statistics\n• Tap Export Data to save or share the file\n\nPerfect for backing up your data or analyzing your usage patterns!'
                 }
               ]
             },

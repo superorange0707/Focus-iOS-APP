@@ -4,6 +4,7 @@ import UniformTypeIdentifiers
 struct DataExportView: View {
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
+    @StateObject private var localizationManager = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
     
     @State private var selectedFormat: ExportFormat = .csv
@@ -38,6 +39,10 @@ struct DataExportView: View {
             case .json: return "application/json"
             }
         }
+        
+        var localizedDisplayName: String {
+            return self.rawValue // CSV, TXT, JSON are universal
+        }
     }
     
     enum ExportTimeRange: String, CaseIterable {
@@ -50,6 +55,14 @@ struct DataExportView: View {
             case .week: return 7
             case .month: return 30
             case .all: return nil
+            }
+        }
+        
+        var localizedDisplayName: String {
+            switch self {
+            case .week: return LocalizationManager.shared.localizedString(.lastSevenDays)
+            case .month: return LocalizationManager.shared.localizedString(.lastThirtyDays)
+            case .all: return LocalizationManager.shared.localizedString(.allTime)
             }
         }
     }
@@ -76,11 +89,11 @@ struct DataExportView: View {
                             .foregroundColor(.blue)
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Export Your Data")
+                            Text(localizationManager.localizedString(.exportYourData))
                                 .font(.headline)
                                 .fontWeight(.semibold)
                             
-                            Text("Export your search history and usage statistics")
+                            Text(localizationManager.localizedString(.exportDataDescription))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -91,15 +104,15 @@ struct DataExportView: View {
                     // Data summary
                     HStack(spacing: 20) {
                         DataSummaryCard(
-                            title: "Search History",
+                            title: localizationManager.localizedString(.exportSearchHistory),
                             value: "\(filteredHistory.count)",
                             subtitle: "searches to export",
                             icon: "clock.arrow.circlepath"
                         )
                         
                         DataSummaryCard(
-                            title: "Time Period",
-                            value: selectedTimeRange.rawValue,
+                            title: localizationManager.localizedString(.timePeriod),
+                            value: selectedTimeRange.localizedDisplayName,
                             subtitle: getDateRangeText(),
                             icon: "calendar"
                         )
@@ -110,11 +123,11 @@ struct DataExportView: View {
                 
                 // Export options
                 Form {
-                    Section("Export Format") {
+                    Section(localizationManager.localizedString(.exportFormat)) {
                         Picker("Format", selection: $selectedFormat) {
                             ForEach(ExportFormat.allCases, id: \.self) { format in
                                 HStack {
-                                    Text(format.rawValue)
+                                    Text(format.localizedDisplayName)
                                     Spacer()
                                     Text(".\(format.fileExtension)")
                                         .font(.caption)
@@ -126,10 +139,10 @@ struct DataExportView: View {
                         .pickerStyle(InlinePickerStyle())
                     }
                     
-                    Section("Time Range") {
+                    Section(localizationManager.localizedString(.timeRange)) {
                         ForEach(ExportTimeRange.allCases, id: \.self) { range in
                             HStack {
-                                Text(range.rawValue)
+                                Text(range.localizedDisplayName)
                                     .foregroundColor(.primary)
                                 Spacer()
                                 if selectedTimeRange == range {
