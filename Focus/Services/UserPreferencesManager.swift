@@ -196,7 +196,7 @@ class SearchHistoryManager: ObservableObject {
     @Published var searchHistory: [SearchHistoryItem] = []
     
     private let userDefaultsKey = "search_history"
-    private let maxHistoryItems = 100
+    // No limit on history items - let users keep all their search history
     
     private init() {
         loadSearchHistory()
@@ -217,25 +217,22 @@ class SearchHistoryManager: ObservableObject {
     }
     
     func addSearchToHistory(query: String, platform: Platform, resultCount: Int? = nil) {
+        let currentTime = Date()
+        
         let item = SearchHistoryItem(
             query: query,
             platform: platform,
-            timestamp: Date(),
+            timestamp: currentTime,
             resultCount: resultCount
         )
         
-        // Remove duplicate if exists
-        searchHistory.removeAll { $0.query == query && $0.platform == platform }
-        
-        // Add to beginning
+        // Add to beginning - keep ALL search history
         searchHistory.insert(item, at: 0)
         
-        // Limit history size
-        if searchHistory.count > maxHistoryItems {
-            searchHistory = Array(searchHistory.prefix(maxHistoryItems))
-        }
-        
         saveSearchHistory()
+        
+        // Record analytics for every search
+        UsageAnalyticsManager.shared.recordSearch(for: platform)
     }
     
     func clearHistory() {

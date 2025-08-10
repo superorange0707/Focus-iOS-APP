@@ -11,48 +11,13 @@ struct SearchHistoryView: View {
 
     @State private var searchText = ""
     @State private var selectedPlatform: Platform?
-    @State private var selectedTimeFilter: TimeFilter = .all
-    
-    enum TimeFilter: String, CaseIterable {
-        case today = "Today"
-        case yesterday = "Yesterday"
-        case week = "This Week"
-        case month = "This Month"
-        case all = "All Time"
-        
-        var icon: String {
-            switch self {
-            case .today: return "sun.max.fill"
-            case .yesterday: return "moon.fill"
-            case .week: return "calendar.circle.fill"
-            case .month: return "calendar"
-            case .all: return "clock.fill"
-            }
-        }
-        
-        func filterPredicate(for date: Date) -> Bool {
-            let calendar = Calendar.current
-            let now = Date()
-            
-            switch self {
-            case .today:
-                return calendar.isDate(date, inSameDayAs: now)
-            case .yesterday:
-                guard let yesterday = calendar.date(byAdding: .day, value: -1, to: now) else { return false }
-                return calendar.isDate(date, inSameDayAs: yesterday)
-            case .week:
-                return calendar.dateInterval(of: .weekOfYear, for: now)?.contains(date) == true
-            case .month:
-                return calendar.dateInterval(of: .month, for: now)?.contains(date) == true
-            case .all:
-                return true
-            }
-        }
-    }
+
 
     init(onExecuteSearch: ((String, Platform) -> Void)? = nil) {
         self.onExecuteSearch = onExecuteSearch
     }
+    
+
     
     var filteredHistory: [SearchHistoryItem] {
         var history = searchHistoryManager.searchHistory
@@ -69,10 +34,7 @@ struct SearchHistoryView: View {
             history = history.filter { $0.platform == platform }
         }
         
-        // Filter by time
-        history = history.filter { item in
-            selectedTimeFilter.filterPredicate(for: item.timestamp)
-        }
+
         
         return history
     }
@@ -170,48 +132,7 @@ struct SearchHistoryView: View {
                         .padding(.horizontal)
                     }
                     
-                    // Time filter
-                    HStack {
-                        Image(systemName: selectedTimeFilter.icon)
-                            .foregroundColor(.focusBlue)
-                            .font(.system(size: 16, weight: .medium))
-                        
-                        Menu {
-                            ForEach(TimeFilter.allCases, id: \.self) { timeFilter in
-                                Button {
-                                    selectedTimeFilter = timeFilter
-                                } label: {
-                                    HStack {
-                                        Image(systemName: timeFilter.icon)
-                                        Text(timeFilter.rawValue)
-                                        Spacer()
-                                        if selectedTimeFilter == timeFilter {
-                                            Image(systemName: "checkmark")
-                                                .foregroundColor(.focusBlue)
-                                        }
-                                    }
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Text(selectedTimeFilter.rawValue)
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.primary)
-                                
-                                Image(systemName: "chevron.down")
-                                    .font(.caption2)
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(Color.cardBackground)
-                            .cornerRadius(8)
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal)
+
                 }
                 .padding()
                 .background(Color.backgroundPrimary)
@@ -431,8 +352,10 @@ struct EmptyHistoryView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundPrimary)
+
     }
-}
+
+
 
 #Preview {
     SearchHistoryView()

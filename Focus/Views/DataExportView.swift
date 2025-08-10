@@ -13,6 +13,11 @@ struct DataExportView: View {
     @State private var showingActivityView = false
     @State private var exportedFileURL: URL?
     
+    // Export content toggles
+    @State private var includeSearchQueries = true
+    @State private var includePlatformUsage = true  
+    @State private var includeUsageStatistics = true
+    
     enum ExportFormat: String, CaseIterable {
         case csv = "CSV"
         case txt = "TXT"
@@ -122,32 +127,45 @@ struct DataExportView: View {
                     }
                     
                     Section("Time Range") {
-                        Picker("Range", selection: $selectedTimeRange) {
-                            ForEach(ExportTimeRange.allCases, id: \.self) { range in
-                                Text(range.rawValue).tag(range)
+                        ForEach(ExportTimeRange.allCases, id: \.self) { range in
+                            HStack {
+                                Text(range.rawValue)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                if selectedTimeRange == range {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.focusBlue)
+                                        .font(.system(size: 16, weight: .semibold))
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedTimeRange = range
                             }
                         }
-                        .pickerStyle(InlinePickerStyle())
                     }
                     
                     Section("Export Content") {
                         VStack(alignment: .leading, spacing: 12) {
-                            ExportContentRow(
+                            ToggleableExportContentRow(
                                 icon: "magnifyingglass",
                                 title: "Search Queries",
-                                description: "All your search terms and timestamps"
+                                description: "All your search terms and timestamps",
+                                isSelected: $includeSearchQueries
                             )
                             
-                            ExportContentRow(
+                            ToggleableExportContentRow(
                                 icon: "square.grid.3x3",
                                 title: "Platform Usage",
-                                description: "Which platforms you searched most"
+                                description: "Which platforms you searched most",
+                                isSelected: $includePlatformUsage
                             )
                             
-                            ExportContentRow(
+                            ToggleableExportContentRow(
                                 icon: "chart.bar",
                                 title: "Usage Statistics",
-                                description: "Search counts and time saved data"
+                                description: "Search counts and time saved data",
+                                isSelected: $includeUsageStatistics
                             )
                         }
                         .padding(.vertical, 8)
@@ -192,7 +210,7 @@ struct DataExportView: View {
                             )
                         )
                         .cornerRadius(12)
-                        .disabled(isExporting || filteredHistory.isEmpty)
+                        .disabled(isExporting || filteredHistory.isEmpty || (!includeSearchQueries && !includePlatformUsage && !includeUsageStatistics))
                     }
                     .padding(.horizontal, 20)
                     
@@ -281,28 +299,46 @@ struct DataExportView: View {
     }
     
     private func generateCSVContent() -> String {
-        var csv = "Date,Time,Platform,Query,Search_Count\n"
+        var csv = ""
         
-        for item in filteredHistory {
-            let date = DateFormatter.csvDateFormatter.string(from: item.timestamp)
-            let time = DateFormatter.csvTimeFormatter.string(from: item.timestamp)
-            let platform = item.platform.displayName
-            let query = item.query.replacingOccurrences(of: "\"", with: "\"\"") // Escape quotes
-            let searchCount = item.resultCount ?? 0
+        if includeSearchQueries {
+            csv += "Date,Time,Platform,Query,Search_Count\n"
             
-            csv += "\"\(date)\",\"\(time)\",\"\(platform)\",\"\(query)\",\(searchCount)\n"
+            for item in filteredHistory {
+                let date = DateFormatter.csvDateFormatter.string(from: item.timestamp)
+                let time = DateFormatter.csvTimeFormatter.string(from: item.timestamp)
+                let platform = item.platform.displayName
+                let query = item.query.replacingOccurrences(of: "\"", with: "\"\"") // Escape quotes
+                let searchCount = item.resultCount ?? 0
+                
+                csv += "\"\(date)\",\"\(time)\",\"\(platform)\",\"\(query)\",\(searchCount)\n"
+            }
         }
         
         // Add platform usage summary
-        csv += "\n\nPlatform Usage Summary:\n"
-        csv += "Platform,Total_Searches,Percentage\n"
+        if includePlatformUsage {
+            if !csv.isEmpty { csv += "\n\n" }
+            csv += "Platform Usage Summary:\n"
+            csv += "Platform,Total_Searches,Percentage\n"
+            
+            let platforms = analyticsManager.getMostUsedPlatforms()
+            let totalSearches = platforms.reduce(0) { $0 + $1.1 }
+            
+            for (platform, count) in platforms {
+                let percentage = totalSearches > 0 ? (Double(count) / Double(totalSearches) * 100) : 0
+                csv += "\"\(platform.displayName)\",\(count),\(String(format: "%.1f", percentage))%\n"
+            }
+        }
         
-        let platforms = analyticsManager.getMostUsedPlatforms()
-        let totalSearches = platforms.reduce(0) { $0 + $1.1 }
-        
-        for (platform, count) in platforms {
-            let percentage = totalSearches > 0 ? (Double(count) / Double(totalSearches) * 100) : 0
-            csv += "\"\(platform.displayName)\",\(count),\(String(format: "%.1f", percentage))%\n"
+        // Add usage statistics
+        if includeUsageStatistics {
+            if !csv.isEmpty { csv += "\n\n" }
+            csv += "Usage Statistics:\n"
+            csv += "Metric,Value\n"
+            csv += "\"Total Searches\",\(analyticsManager.getTotalSearches())\n"
+            csv += "\"Today's Searches\",\(analyticsManager.getTodaysSearches())\n"
+            csv += "\"Time Saved (minutes)\",\(Int(analyticsManager.getTimeSaved() / 60))\n"
+            csv += "\"Today's Time Saved (minutes)\",\(Int(analyticsManager.getTimeSavedToday() / 60))\n"
         }
         
         return csv
@@ -312,52 +348,70 @@ struct DataExportView: View {
         var content = "SkipFeed Export Report\n"
         content += "Generated: \(DateFormatter.fullDateFormatter.string(from: Date()))\n"
         content += "Time Range: \(selectedTimeRange.rawValue)\n"
-        content += "Total Searches: \(filteredHistory.count)\n"
+        if includeSearchQueries {
+            content += "Total Searches: \(filteredHistory.count)\n"
+        }
         content += String(repeating: "=", count: 50) + "\n\n"
         
-        content += "SEARCH HISTORY:\n"
-        content += String(repeating: "-", count: 20) + "\n"
-        
-        for item in filteredHistory {
-            content += "Date: \(DateFormatter.fullDateFormatter.string(from: item.timestamp))\n"
-            content += "Platform: \(item.platform.displayName)\n"
-            content += "Query: \(item.query)\n"
-            if let resultCount = item.resultCount {
-                content += "Results: \(resultCount)\n"
+        if includeSearchQueries {
+            content += "SEARCH HISTORY:\n"
+            content += String(repeating: "-", count: 20) + "\n"
+            
+            for item in filteredHistory {
+                content += "Date: \(DateFormatter.fullDateFormatter.string(from: item.timestamp))\n"
+                content += "Platform: \(item.platform.displayName)\n"
+                content += "Query: \(item.query)\n"
+                if let resultCount = item.resultCount {
+                    content += "Results: \(resultCount)\n"
+                }
+                content += "\n"
             }
-            content += "\n"
         }
         
-        content += "\nPLATFORM USAGE SUMMARY:\n"
-        content += String(repeating: "-", count: 25) + "\n"
-        
-        let platforms = analyticsManager.getMostUsedPlatforms()
-        let totalSearches = platforms.reduce(0) { $0 + $1.1 }
-        
-        for (platform, count) in platforms {
-            let percentage = totalSearches > 0 ? (Double(count) / Double(totalSearches) * 100) : 0
-            content += "\(platform.displayName): \(count) searches (\(String(format: "%.1f", percentage))%)\n"
+        if includePlatformUsage {
+            if includeSearchQueries { content += "\n" }
+            content += "PLATFORM USAGE SUMMARY:\n"
+            content += String(repeating: "-", count: 25) + "\n"
+            
+            let platforms = analyticsManager.getMostUsedPlatforms()
+            let totalSearches = platforms.reduce(0) { $0 + $1.1 }
+            
+            for (platform, count) in platforms {
+                let percentage = totalSearches > 0 ? (Double(count) / Double(totalSearches) * 100) : 0
+                content += "\(platform.displayName): \(count) searches (\(String(format: "%.1f", percentage))%)\n"
+            }
         }
         
-        content += "\nSTATISTICS:\n"
-        content += String(repeating: "-", count: 12) + "\n"
-        content += "Total Searches: \(analyticsManager.getTotalSearches())\n"
-        content += "Today's Searches: \(analyticsManager.getTodaysSearches())\n"
-        content += "Time Saved: \(formatTimeSaved(analyticsManager.getTimeSaved()))\n"
-        content += "Today's Time Saved: \(formatTimeSaved(analyticsManager.getTimeSavedToday()))\n"
+        if includeUsageStatistics {
+            if includeSearchQueries || includePlatformUsage { content += "\n" }
+            content += "STATISTICS:\n"
+            content += String(repeating: "-", count: 12) + "\n"
+            content += "Total Searches: \(analyticsManager.getTotalSearches())\n"
+            content += "Today's Searches: \(analyticsManager.getTodaysSearches())\n"
+            content += "Time Saved: \(formatTimeSaved(analyticsManager.getTimeSaved()))\n"
+            content += "Today's Time Saved: \(formatTimeSaved(analyticsManager.getTimeSavedToday()))\n"
+        }
         
         return content
     }
     
     private func generateJSONContent() throws -> String {
-        let exportData: [String: Any] = [
+        var exportData: [String: Any] = [
             "export_info": [
                 "generated_at": ISO8601DateFormatter().string(from: Date()),
                 "time_range": selectedTimeRange.rawValue,
                 "format": "JSON",
-                "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-            ],
-            "search_history": filteredHistory.map { item in
+                "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown",
+                "included_content": [
+                    "search_queries": includeSearchQueries,
+                    "platform_usage": includePlatformUsage,
+                    "usage_statistics": includeUsageStatistics
+                ]
+            ]
+        ]
+        
+        if includeSearchQueries {
+            exportData["search_history"] = filteredHistory.map { item in
                 [
                     "id": item.id.uuidString,
                     "query": item.query,
@@ -366,21 +420,27 @@ struct DataExportView: View {
                     "timestamp": ISO8601DateFormatter().string(from: item.timestamp),
                     "result_count": item.resultCount as Any
                 ]
-            },
-            "platform_usage": analyticsManager.getMostUsedPlatforms().map { platform, count in
+            }
+        }
+        
+        if includePlatformUsage {
+            exportData["platform_usage"] = analyticsManager.getMostUsedPlatforms().map { platform, count in
                 [
                     "platform": platform.rawValue,
                     "platform_name": platform.displayName,
                     "search_count": count
                 ]
-            },
-            "statistics": [
+            }
+        }
+        
+        if includeUsageStatistics {
+            exportData["statistics"] = [
                 "total_searches": analyticsManager.getTotalSearches(),
                 "todays_searches": analyticsManager.getTodaysSearches(),
                 "time_saved_seconds": analyticsManager.getTimeSaved(),
                 "todays_time_saved_seconds": analyticsManager.getTimeSavedToday()
             ]
-        ]
+        }
         
         let jsonData = try JSONSerialization.data(withJSONObject: exportData, options: [.prettyPrinted, .sortedKeys])
         return String(data: jsonData, encoding: .utf8) ?? ""
@@ -466,6 +526,48 @@ struct ExportContentRow: View {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundColor(.green)
         }
+    }
+}
+
+struct ToggleableExportContentRow: View {
+    let icon: String
+    let title: String
+    let description: String
+    @Binding var isSelected: Bool
+    
+    var body: some View {
+        Button(action: {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isSelected.toggle()
+            }
+        }) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.title3)
+                    .foregroundColor(.blue)
+                    .frame(width: 24)
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.primary)
+                    
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(isSelected ? .green : .gray)
+                    .scaleEffect(isSelected ? 1.1 : 1.0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

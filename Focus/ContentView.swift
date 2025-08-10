@@ -297,13 +297,14 @@ struct ContentView: View {
         hideKeyboard()
 
         // Record analytics and search history
-        analyticsManager.recordSearch(for: selectedPlatform)
-
         if premiumManager.isPremiumFeatureAvailable(.searchHistory) {
             SearchHistoryManager.shared.addSearchToHistory(
                 query: searchText,
                 platform: selectedPlatform
             )
+        } else {
+            // If search history is not available, still record analytics
+            analyticsManager.recordSearch(for: selectedPlatform)
         }
 
         isSearching = true

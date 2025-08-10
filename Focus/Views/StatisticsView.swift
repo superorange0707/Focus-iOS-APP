@@ -235,13 +235,18 @@ struct SearchTrendChartCard: View {
         let calendar = Calendar.current
         let endDate = Date()
         
-        return (0..<days).compactMap { dayOffset in
-            guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: endDate) else { return nil }
+        var data: [DailySearchData] = []
+        
+        // Generate data for each day, starting from oldest to newest
+        for dayOffset in (0..<days).reversed() {
+            guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: endDate) else { continue }
             let dateKey = DateFormatter.dayFormatter.string(from: date)
             let count = analyticsManager.analytics.dailySearches[dateKey] ?? 0
             
-            return DailySearchData(date: date, searchCount: count)
-        }.reversed()
+            data.append(DailySearchData(date: date, searchCount: count))
+        }
+        
+        return data
     }
 
     var body: some View {
@@ -283,10 +288,14 @@ struct SearchTrendChartCard: View {
                 }
                 .frame(height: 150)
                 .chartXAxis {
-                    AxisMarks(values: .automatic(desiredCount: 5)) { _ in
+                    AxisMarks(preset: .aligned, values: chartData.map { $0.date }) { value in
                         AxisGridLine()
                         AxisTick()
-                        AxisValueLabel(format: .dateTime.weekday(.abbreviated))
+                        if let date = value.as(Date.self) {
+                            AxisValueLabel {
+                                Text(date, format: .dateTime.weekday(.abbreviated))
+                            }
+                        }
                     }
                 }
                 .chartYAxis {
@@ -314,16 +323,39 @@ struct TimeOfDayAnalysisCard: View {
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
     
     var timeOfDayData: [TimeOfDayData] {
-        // For now, create sample data based on typical usage patterns
-        // In a real implementation, you would track actual search times
-        let morningSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.25)
-        let afternoonSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.35)
-        let eveningSearches = Int(Double(analyticsManager.getTotalSearches()) * 0.40)
+        let searchHistory = SearchHistoryManager.shared.searchHistory
+        
+        // Define time periods according to user's specification:
+        // Morning: 3:00-11:30, Afternoon: 11:30-18:00, Evening: 18:00-3:00
+        var morningCount = 0
+        var afternoonCount = 0
+        var eveningCount = 0
+        
+        let calendar = Calendar.current
+        
+        for item in searchHistory {
+            let hour = calendar.component(.hour, from: item.timestamp)
+            let minute = calendar.component(.minute, from: item.timestamp)
+            let totalMinutes = hour * 60 + minute
+            
+            // Convert time to minutes for easier comparison
+            // Morning: 3:00 (180) to 11:30 (690)
+            // Afternoon: 11:30 (690) to 18:00 (1080) 
+            // Evening: 18:00 (1080) to 3:00 (180 next day)
+            
+            if (totalMinutes >= 180 && totalMinutes < 690) {
+                morningCount += 1
+            } else if (totalMinutes >= 690 && totalMinutes < 1080) {
+                afternoonCount += 1
+            } else {
+                eveningCount += 1
+            }
+        }
         
         return [
-            TimeOfDayData(period: "Morning", searchCount: morningSearches, icon: "sunrise.fill"),
-            TimeOfDayData(period: "Afternoon", searchCount: afternoonSearches, icon: "sun.max.fill"),
-            TimeOfDayData(period: "Evening", searchCount: eveningSearches, icon: "moon.fill")
+            TimeOfDayData(period: "Morning", searchCount: morningCount, icon: "sunrise.fill"),
+            TimeOfDayData(period: "Afternoon", searchCount: afternoonCount, icon: "sun.max.fill"),
+            TimeOfDayData(period: "Evening", searchCount: eveningCount, icon: "moon.fill")
         ]
     }
     

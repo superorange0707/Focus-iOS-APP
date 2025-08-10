@@ -4,10 +4,10 @@ struct MainTabView: View {
     @StateObject private var localizationManager = LocalizationManager.shared
     @StateObject private var userPreferences = UserPreferencesManager.shared
     @State private var showOnboarding = false
+    @State private var selectedTab = 0
     
     var body: some View {
-        TabView {
-            // Search Tab
+        TabView(selection: $selectedTab) {
             SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
@@ -15,7 +15,6 @@ struct MainTabView: View {
                 }
                 .tag(0)
             
-            // History Tab
             SearchHistoryView()
                 .tabItem {
                     Image(systemName: "clock")
@@ -23,7 +22,6 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            // Stats Tab
             StatisticsView()
                 .tabItem {
                     Image(systemName: "chart.bar.fill")
@@ -31,7 +29,6 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            // Settings Tab
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
@@ -39,9 +36,10 @@ struct MainTabView: View {
                 }
                 .tag(3)
         }
+        .tabViewStyle(DefaultTabViewStyle())
         .accentColor(.focusBlue)
+        .environment(\.horizontalSizeClass, .compact)
         .onAppear {
-            // Check if user has seen onboarding
             if !userPreferences.hasSeenOnboarding {
                 showOnboarding = true
             }

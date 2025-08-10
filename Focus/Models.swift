@@ -11,6 +11,12 @@ extension DateFormatter {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
+    static let shortDate: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
 }
 
 // MARK: - Search Error Types
@@ -201,25 +207,24 @@ struct SearchHistoryItem: Codable, Identifiable {
         let now = Date()
 
         if calendar.isDateInToday(timestamp) {
-            // Today: show time only
+            // Today: show time with seconds
             let formatter = DateFormatter()
-            formatter.timeStyle = .short
+            formatter.dateFormat = "h:mm:ss a"
             return formatter.string(from: timestamp)
         } else if calendar.isDateInYesterday(timestamp) {
-            // Yesterday: show "Yesterday" + time
+            // Yesterday: show "Yesterday" + time with seconds
             let formatter = DateFormatter()
-            formatter.timeStyle = .short
+            formatter.dateFormat = "h:mm:ss a"
             return "Yesterday \(formatter.string(from: timestamp))"
         } else if calendar.dateInterval(of: .weekOfYear, for: now)?.contains(timestamp) == true {
-            // This week: show day name + time
+            // This week: show day name + time with seconds
             let formatter = DateFormatter()
-            formatter.dateFormat = "EEEE h:mm a"
+            formatter.dateFormat = "EEEE h:mm:ss a"
             return formatter.string(from: timestamp)
         } else {
-            // Older: show date + time
+            // Older: show date + time with seconds
             let formatter = DateFormatter()
-            formatter.dateStyle = .short
-            formatter.timeStyle = .short
+            formatter.dateFormat = "M/d/yy h:mm:ss a"
             return formatter.string(from: timestamp)
         }
     }
