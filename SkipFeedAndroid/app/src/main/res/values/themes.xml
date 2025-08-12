@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SkipFeed" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/focus_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/focus_blue</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        
+        <item name="colorSecondary">@color/focus_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/background_secondary</item>
+        <item name="colorOnSecondaryContainer">@color/text_primary</item>
+        
+        <item name="colorTertiary">@color/text_secondary</item>
+        <item name="colorOnTertiary">@color/white</item>
+        
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <item name="colorSurface">@color/background_primary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        
+        <!-- Material3 does not define colorBackground/colorOnBackground; use surface colors instead in UI code -->
+        
+        <!-- Window attributes are legacy; keep compatibility on older devices -->
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- This attribute requires API 27; keep it off to satisfy minSdk 24 lint -->
+        <!-- <item name="android:windowLightNavigationBar">true</item> -->
+    </style>
+</resources>

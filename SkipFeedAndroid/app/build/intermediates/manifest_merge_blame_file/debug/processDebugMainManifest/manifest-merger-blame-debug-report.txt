@@ -1,0 +1,301 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.skipfeed.android"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:5:5-67
+11-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:6:5-79
+12-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:6:22-76
+13
+14    <!-- URL scheme handlers for opening external apps -->
+15    <queries>
+15-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:35:5-77:15
+16        <intent>
+16-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:36:9-40:18
+17            <action android:name="android.intent.action.VIEW" />
+17-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+17-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+18
+19            <category android:name="android.intent.category.BROWSABLE" />
+19-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+19-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+20
+21            <data android:scheme="https" />
+21-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+21-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+22        </intent>
+23        <intent>
+23-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:41:9-45:18
+24            <action android:name="android.intent.action.VIEW" />
+24-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+24-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+25
+26            <category android:name="android.intent.category.BROWSABLE" />
+26-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+26-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+27
+28            <data android:scheme="reddit" />
+28-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+28-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+29        </intent>
+30        <intent>
+30-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:46:9-50:18
+31            <action android:name="android.intent.action.VIEW" />
+31-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+31-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+32
+33            <category android:name="android.intent.category.BROWSABLE" />
+33-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+33-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+34
+35            <data android:scheme="youtube" />
+35-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+35-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+36        </intent>
+37        <intent>
+37-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:51:9-55:18
+38            <action android:name="android.intent.action.VIEW" />
+38-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+38-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+39
+40            <category android:name="android.intent.category.BROWSABLE" />
+40-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+40-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+41
+42            <data android:scheme="twitter" />
+42-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+42-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+43        </intent>
+44        <intent>
+44-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:56:9-60:18
+45            <action android:name="android.intent.action.VIEW" />
+45-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+45-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+46
+47            <category android:name="android.intent.category.BROWSABLE" />
+47-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+47-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+48
+49            <data android:scheme="instagram" />
+49-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+49-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+50        </intent>
+51        <intent>
+51-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:61:9-65:18
+52            <action android:name="android.intent.action.VIEW" />
+52-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+52-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+53
+54            <category android:name="android.intent.category.BROWSABLE" />
+54-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+54-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+55
+56            <data android:scheme="facebook" />
+56-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+56-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+57        </intent>
+58        <intent>
+58-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:66:9-70:18
+59            <action android:name="android.intent.action.VIEW" />
+59-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+59-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+60
+61            <category android:name="android.intent.category.BROWSABLE" />
+61-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+61-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+62
+63            <data android:scheme="tiktok" />
+63-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+63-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+64        </intent>
+65
+66        <package android:name="com.reddit.frontpage" />
+66-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:71:9-56
+66-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:71:18-53
+67        <package android:name="com.google.android.youtube" />
+67-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:72:9-62
+67-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:72:18-59
+68        <package android:name="com.twitter.android" />
+68-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:73:9-55
+68-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:73:18-52
+69        <package android:name="com.instagram.android" />
+69-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:74:9-57
+69-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:74:18-54
+70        <package android:name="com.facebook.katana" />
+70-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:75:9-55
+70-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:75:18-52
+71        <package android:name="com.ss.android.ugc.trill" />
+71-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:76:9-60
+71-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:76:18-57
+72    </queries>
+73
+74    <permission
+74-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
+75        android:name="com.skipfeed.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+75-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
+76        android:protectionLevel="signature" />
+76-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
+77
+78    <uses-permission android:name="com.skipfeed.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+78-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
+78-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
+79
+80    <application
+80-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:8:5-32:19
+81        android:name="com.skipfeed.android.SkipFeedApplication"
+81-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:9:9-44
+82        android:allowBackup="true"
+82-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:10:9-35
+83        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+83-->[androidx.core:core:1.13.0] /Users/wangdechun/.gradle/caches/8.13/transforms/0f1212a51916d51af821dd29d1b2e67e/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
+84        android:dataExtractionRules="@xml/data_extraction_rules"
+84-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:11:9-65
+85        android:debuggable="true"
+86        android:extractNativeLibs="false"
+87        android:fullBackupContent="@xml/backup_rules"
+87-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:12:9-54
+88        android:icon="@mipmap/ic_launcher"
+88-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:13:9-43
+89        android:label="@string/app_name"
+89-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:14:9-41
+90        android:roundIcon="@mipmap/ic_launcher_round"
+90-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:15:9-54
+91        android:supportsRtl="true"
+91-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:16:9-35
+92        android:testOnly="true"
+93        android:theme="@style/Theme.SkipFeed" >
+93-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:17:9-46
+94        <activity
+94-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:20:9-30:20
+95            android:name="com.skipfeed.android.presentation.MainActivity"
+95-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:21:13-54
+96            android:exported="true"
+96-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:22:13-36
+97            android:label="@string/app_name"
+97-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:23:13-45
+98            android:theme="@style/Theme.SkipFeed"
+98-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:24:13-50
+99            android:windowSoftInputMode="adjustResize" >
+99-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:25:13-55
+100            <intent-filter>
+100-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:26:13-29:29
+101                <action android:name="android.intent.action.MAIN" />
+101-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:27:17-69
+101-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:27:25-66
+102
+103                <category android:name="android.intent.category.LAUNCHER" />
+103-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:28:17-77
+103-->/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:28:27-74
+104            </intent-filter>
+105        </activity>
+106        <activity
+106-->[androidx.compose.ui:ui-tooling-android:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bfad516a20e6e6071a9129a390ef65e3/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+107            android:name="androidx.compose.ui.tooling.PreviewActivity"
+107-->[androidx.compose.ui:ui-tooling-android:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bfad516a20e6e6071a9129a390ef65e3/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+108            android:exported="true" />
+108-->[androidx.compose.ui:ui-tooling-android:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bfad516a20e6e6071a9129a390ef65e3/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+109        <activity
+109-->[androidx.compose.ui:ui-test-manifest:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/abb15b87054386f71b4260923f7932b1/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:23:9-25:39
+110            android:name="androidx.activity.ComponentActivity"
+110-->[androidx.compose.ui:ui-test-manifest:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/abb15b87054386f71b4260923f7932b1/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:24:13-63
+111            android:exported="true" />
+111-->[androidx.compose.ui:ui-test-manifest:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/abb15b87054386f71b4260923f7932b1/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:25:13-36
+112
+113        <provider
+113-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+114            android:name="androidx.startup.InitializationProvider"
+114-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+115            android:authorities="com.skipfeed.android.androidx-startup"
+115-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+116            android:exported="false" >
+116-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+117            <meta-data
+117-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+118                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+118-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+119                android:value="androidx.startup" />
+119-->[androidx.emoji2:emoji2:1.3.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d9b48f692ca6159eb6c03e8439e640a0/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+120            <meta-data
+120-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/wangdechun/.gradle/caches/8.13/transforms/401dca3acd899fb3301d8c7cdce5455a/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+121                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+121-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/wangdechun/.gradle/caches/8.13/transforms/401dca3acd899fb3301d8c7cdce5455a/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+122                android:value="androidx.startup" />
+122-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/wangdechun/.gradle/caches/8.13/transforms/401dca3acd899fb3301d8c7cdce5455a/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+123            <meta-data
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+124                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+124-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+125                android:value="androidx.startup" />
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+126        </provider>
+127
+128        <uses-library
+128-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+129            android:name="androidx.window.extensions"
+129-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+130            android:required="false" />
+130-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+131        <uses-library
+131-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+132            android:name="androidx.window.sidecar"
+132-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+133            android:required="false" />
+133-->[androidx.window:window:1.0.0] /Users/wangdechun/.gradle/caches/8.13/transforms/d0c8ac366e3219a43b0f4ad302af2e62/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+134
+135        <service
+135-->[androidx.room:room-runtime:2.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bd6e53c12e2397ed690d6163ccdc4b36/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+136            android:name="androidx.room.MultiInstanceInvalidationService"
+136-->[androidx.room:room-runtime:2.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bd6e53c12e2397ed690d6163ccdc4b36/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+137            android:directBootAware="true"
+137-->[androidx.room:room-runtime:2.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bd6e53c12e2397ed690d6163ccdc4b36/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+138            android:exported="false" />
+138-->[androidx.room:room-runtime:2.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bd6e53c12e2397ed690d6163ccdc4b36/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+139
+140        <receiver
+140-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+141            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+141-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+142            android:directBootAware="false"
+142-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+143            android:enabled="true"
+143-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+144            android:exported="true"
+144-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+145            android:permission="android.permission.DUMP" >
+145-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+146            <intent-filter>
+146-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+147                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+147-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+147-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+148            </intent-filter>
+149            <intent-filter>
+149-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+150                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+150-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+150-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+151            </intent-filter>
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+153                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+153-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+153-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+154            </intent-filter>
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+156                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+156-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+156-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/wangdechun/.gradle/caches/8.13/transforms/0e73588a58783a1d5a3a4c3ca5e41d70/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+157            </intent-filter>
+158        </receiver>
+159    </application>
+160
+161</manifest>

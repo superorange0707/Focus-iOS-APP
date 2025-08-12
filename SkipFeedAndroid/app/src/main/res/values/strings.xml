@@ -1,0 +1,135 @@
+<resources>
+    <string name="app_name">SkipFeed</string>
+    
+    <!-- Main App -->
+    <string name="tagline">Skip the feed, find what matters</string>
+    <string name="subtitle">Direct search, zero distractions</string>
+    
+    <!-- Platforms -->
+    <string name="reddit">Reddit</string>
+    <string name="youtube">YouTube</string>
+    <string name="x">X</string>
+    <string name="tiktok">TikTok</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    
+    <!-- Search -->
+    <string name="search_hint">What are you looking for?</string>
+    <string name="search_button">Search</string>
+    <string name="searching">Searching…</string>
+    <string name="open_in">Open in</string>
+    <string name="search_on">Search on</string>
+    <string name="open_tiktok_search">Open TikTok Search</string>
+    <string name="tiktok_search_message">Opens TikTok search page where you can input your query</string>
+    
+    <!-- Search Modes -->
+    <string name="direct">Direct</string>
+    <string name="in_app">In-App</string>
+    <string name="search_mode_direct">Direct Search</string>
+    <string name="search_mode_in_app">In-App Browsing</string>
+    
+    <!-- Navigation -->
+    <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="stats">Stats</string>
+    <string name="settings">Settings</string>
+    
+    <!-- Recent Searches -->
+    <string name="recent_searches">Recent Searches</string>
+    <string name="clear">Clear</string>
+    <string name="no_recent_searches">No recent searches</string>
+    
+    <!-- Search History -->
+    <string name="search_history">Search History</string>
+    <string name="clear_history">Clear History</string>
+    <string name="delete_search">Delete Search</string>
+    <string name="no_search_history">No search history yet</string>
+    <string name="start_searching_message">Start searching to see your history here</string>
+    
+    <!-- Statistics -->
+    <string name="usage_statistics">Usage Statistics</string>
+    <string name="total_searches">Total Searches</string>
+    <string name="searches_today">Searches Today</string>
+    <string name="time_saved">Time Saved</string>
+    <string name="time_saved_today">Time Saved Today</string>
+    <string name="minutes">minutes</string>
+    <string name="hours">hours</string>
+    <string name="searches_by_platform">Searches by Platform</string>
+    <string name="no_stats_yet">No statistics yet</string>
+    <string name="start_searching_stats">Start searching to see your statistics</string>
+    
+    <!-- Settings -->
+    <string name="language">Language</string>
+    <string name="auto_detect_language">Auto-detect Language</string>
+    <string name="platform_order">Platform Order</string>
+    <string name="search_mode">Search Mode</string>
+    <string name="data_export">Data Export</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="reset_data">Reset Data</string>
+    <string name="reset_data_message">This will clear all your search history and statistics. This action cannot be undone.</string>
+    <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Data Export -->
+    <string name="export_data">Export Data</string>
+    <string name="export_search_history">Export Search History</string>
+    <string name="export_statistics">Export Statistics</string>
+    <string name="export_all_data">Export All Data</string>
+    <string name="export_success">Data exported successfully</string>
+    <string name="export_failed">Export failed</string>
+    
+    <!-- About -->
+    <string name="about_description">SkipFeed helps you search social media platforms directly without getting distracted by endless feeds. Find what you\'re looking for faster and save time.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="contact_support">Contact Support</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Welcome to SkipFeed</string>
+    <string name="welcome_subtitle">Skip the feed, find what matters</string>
+    <string name="onboarding_search_title">Direct Search</string>
+    <string name="onboarding_search_description">Search across multiple social media platforms without getting distracted by feeds</string>
+    <string name="onboarding_platforms_title">All Your Platforms</string>
+    <string name="onboarding_platforms_description">Reddit, YouTube, X, TikTok, Instagram, and Facebook all in one place</string>
+    <string name="onboarding_focus_title">Stay Focused</string>
+    <string name="onboarding_focus_description">Find what you\'re looking for quickly and save time that would be wasted scrolling</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    
+    <!-- Reddit Search -->
+    <string name="reddit_search">Reddit Search</string>
+    <string name="sort_by">Sort by</string>
+    <string name="time_filter">Time Filter</string>
+    <string name="relevance">Relevance</string>
+    <string name="hot">Hot</string>
+    <string name="top">Top</string>
+    <string name="new_posts">New</string>
+    <string name="comments">Comments</string>
+    <string name="all_time">All Time</string>
+    <string name="past_year">Past Year</string>
+    <string name="past_month">Past Month</string>
+    <string name="past_week">Past Week</string>
+    <string name="past_day">Past Day</string>
+    <string name="past_hour">Past Hour</string>
+    <string name="load_more">Load More</string>
+    <string name="no_results">No results found</string>
+    <string name="upvotes">upvotes</string>
+    <string name="comments_count">comments</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="error_unknown">An unknown error occurred.</string>
+    <string name="error_no_app">No app found to handle this action.</string>
+    <string name="retry">Retry</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
+    <string name="copied">Copied to clipboard</string>
+</resources>

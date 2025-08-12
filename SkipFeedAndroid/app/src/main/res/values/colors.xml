@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main Theme Colors -->
+    <color name="focus_blue">#007AFF</color>
+    <color name="focus_blue_dark">#0056B3</color>
+    
+    <!-- Background Colors -->
+    <color name="background_primary">#FFFFFF</color>
+    <color name="background_primary_dark">#000000</color>
+    <color name="background_secondary">#F8F9FA</color>
+    <color name="background_secondary_dark">#1C1C1E</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#000000</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary">#6C757D</color>
+    <color name="text_secondary_dark">#8E8E93</color>
+    <color name="text_tertiary">#ADB5BD</color>
+    <color name="text_tertiary_dark">#636366</color>
+    
+    <!-- Platform Colors -->
+    <color name="reddit_orange">#FF4500</color>
+    <color name="youtube_red">#FF0000</color>
+    <color name="x_blue">#1DA1F2</color>
+    <color name="tiktok_black">#000000</color>
+    <color name="instagram_pink">#E4405F</color>
+    <color name="facebook_blue">#1877F2</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradient_top">#E3F2FD</color>
+    <color name="gradient_top_dark">#0D1B2A</color>
+    <color name="gradient_middle">#BBDEFB</color>
+    <color name="gradient_middle_dark">#1B263B</color>
+    <color name="gradient_bottom">#90CAF9</color>
+    <color name="gradient_bottom_dark">#415A77</color>
+    
+    <!-- Glass Effect -->
+    <color name="glass_background">#80FFFFFF</color>
+    <color name="glass_background_dark">#80000000</color>
+    <color name="glass_stroke">#40FFFFFF</color>
+    <color name="glass_stroke_dark">#40FFFFFF</color>
+    
+    <!-- Shadow -->
+    <color name="shadow_color">#40000000</color>
+    <color name="selected_shadow_color">#40007AFF</color>
+    
+    <!-- System Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#28A745</color>
+    <color name="error">#DC3545</color>
+    <color name="warning">#FFC107</color>
+    <color name="info">#17A2B8</color>
+</resources>
