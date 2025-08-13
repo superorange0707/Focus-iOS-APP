@@ -49,6 +49,7 @@ drawable icon_reddit
 drawable icon_tiktok
 drawable icon_x
 drawable icon_youtube
+drawable splash_icon
 mipmap ic_launcher
 mipmap ic_launcher_round
 string about
@@ -155,5 +156,6 @@ string welcome_title
 string x
 string youtube
 style Theme.SkipFeed
+style Theme.SkipFeed.Splash
 xml backup_rules
 xml data_extraction_rules

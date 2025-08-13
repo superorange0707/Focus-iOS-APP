@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.skipfeed.android.app-mergeDebugResources-77:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "/Users/wangdechun/.gradle/caches/8.13/transforms/4eb2ba52689eec5643e1f0febd3a9f70/transformed/core-splashscreen-1.0.1/res/values-v29/values-v29.xml",
+                    "from": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,374",
+                        "endLines": "6,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "369,464"
+                    }
+                }
+            ]
+        }
+    ]
+}

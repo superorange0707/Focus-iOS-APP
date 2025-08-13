@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.skipfeed.android.app-mergeDebugResources-76:/values-ro/values-ro.xml",
+            "outputFile": "com.skipfeed.android.app-mergeDebugResources-77:/values-ro/values-ro.xml",
             "map": [
                 {
                     "source": "/Users/wangdechun/.gradle/caches/8.13/transforms/abf15dc92af4d8d41f901b268a76f6bb/transformed/foundation-release/res/values-ro/values-ro.xml",

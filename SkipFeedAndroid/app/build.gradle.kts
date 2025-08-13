@@ -87,6 +87,9 @@ dependencies {
 
     // Image loading
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
     
     // Room database
     implementation("androidx.room:room-runtime:2.6.1")

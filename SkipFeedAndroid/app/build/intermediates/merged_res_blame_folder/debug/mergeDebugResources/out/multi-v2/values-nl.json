@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.skipfeed.android.app-mergeDebugResources-76:/values-nl/values-nl.xml",
+            "outputFile": "com.skipfeed.android.app-mergeDebugResources-77:/values-nl/values-nl.xml",
             "map": [
                 {
                     "source": "/Users/wangdechun/.gradle/caches/8.13/transforms/5c0bdf30f4dd7d90741b7424dda68b98/transformed/ui-release/res/values-nl/values-nl.xml",

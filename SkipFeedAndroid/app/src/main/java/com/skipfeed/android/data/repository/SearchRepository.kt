@@ -25,12 +25,20 @@ class SearchRepository @Inject constructor(
     }
     
     suspend fun addToSearchHistory(query: String, platform: Platform) {
-        val searchHistoryItem = SearchHistoryItem(
-            query = query,
-            platform = platform.name,
-            timestamp = System.currentTimeMillis()
-        )
-        searchHistoryDao.insertSearch(searchHistoryItem)
+        try {
+            android.util.Log.d("SearchRepository", "Creating SearchHistoryItem: query='$query', platform='${platform.name}'")
+            val searchHistoryItem = SearchHistoryItem(
+                query = query,
+                platform = platform.name,
+                timestamp = System.currentTimeMillis()
+            )
+            android.util.Log.d("SearchRepository", "Inserting into database: $searchHistoryItem")
+            searchHistoryDao.insertSearch(searchHistoryItem)
+            android.util.Log.d("SearchRepository", "Successfully inserted search history item")
+        } catch (e: Exception) {
+            android.util.Log.e("SearchRepository", "Failed to add search to history", e)
+            throw e
+        }
     }
     
     suspend fun getRecentQueries(limit: Int = 5): List<String> {

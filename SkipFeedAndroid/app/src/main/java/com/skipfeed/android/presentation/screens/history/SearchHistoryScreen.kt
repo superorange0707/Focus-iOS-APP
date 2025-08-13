@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -49,11 +50,39 @@ fun SearchHistoryScreen(
             },
             actions = {
                 if (uiState.searchHistory.isNotEmpty()) {
-                    IconButton(onClick = viewModel::clearHistory) {
-                        Icon(
-                            Icons.Default.Delete,
-                            contentDescription = stringResource(R.string.clear_history)
-                        )
+                    if (uiState.isSelectionMode) {
+                        // Selection mode actions
+                        Row {
+                            TextButton(onClick = viewModel::selectAllItems) {
+                                Text("Select All", color = Color(0xFF007AFF))
+                            }
+                            IconButton(onClick = viewModel::deleteSelectedItems) {
+                                Icon(
+                                    Icons.Default.Delete,
+                                    contentDescription = "Delete Selected",
+                                    tint = if (uiState.selectedItems.isNotEmpty()) Color.Red else Color.Gray
+                                )
+                            }
+                            IconButton(onClick = viewModel::toggleSelectionMode) {
+                                Icon(
+                                    Icons.Default.Close,
+                                    contentDescription = "Cancel Selection"
+                                )
+                            }
+                        }
+                    } else {
+                        // Normal mode actions
+                        Row {
+                            TextButton(onClick = viewModel::toggleSelectionMode) {
+                                Text("Select", color = Color(0xFF007AFF))
+                            }
+                            IconButton(onClick = viewModel::clearHistory) {
+                                Icon(
+                                    Icons.Default.Delete,
+                                    contentDescription = stringResource(R.string.clear_history)
+                                )
+                            }
+                        }
                     }
                 }
             },
@@ -103,7 +132,10 @@ fun SearchHistoryScreen(
                 items(uiState.searchHistory) { historyItem ->
                     SearchHistoryCard(
                         historyItem = historyItem,
-                        onDeleteClick = { viewModel.deleteHistoryItem(historyItem) }
+                        isSelectionMode = uiState.isSelectionMode,
+                        isSelected = uiState.selectedItems.contains(historyItem.id),
+                        onDeleteClick = { viewModel.deleteHistoryItem(historyItem) },
+                        onSelectionToggle = { viewModel.toggleItemSelection(historyItem.id) }
                     )
                 }
             }
@@ -114,7 +146,10 @@ fun SearchHistoryScreen(
 @Composable
 private fun SearchHistoryCard(
     historyItem: SearchHistoryItem,
+    isSelectionMode: Boolean,
+    isSelected: Boolean,
     onDeleteClick: () -> Unit,
+    onSelectionToggle: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val platform = Platform.entries.find { it.name == historyItem.platform } ?: Platform.REDDIT
@@ -123,9 +158,14 @@ private fun SearchHistoryCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp)),
+            .clip(RoundedCornerShape(12.dp))
+            .clickable {
+                if (isSelectionMode) {
+                    onSelectionToggle()
+                }
+            },
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = if (isSelected) Color(0xFF007AFF).copy(alpha = 0.1f) else Color.White
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -135,6 +175,18 @@ private fun SearchHistoryCard(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Selection checkbox (only in selection mode)
+            if (isSelectionMode) {
+                Checkbox(
+                    checked = isSelected,
+                    onCheckedChange = { onSelectionToggle() },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF007AFF)
+                    )
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
             // Platform icon
             Box(
                 modifier = Modifier
@@ -182,18 +234,20 @@ private fun SearchHistoryCard(
                     )
                 }
             }
-            
-            // Delete button
-            IconButton(
-                onClick = onDeleteClick,
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(
-                    Icons.Default.Delete,
-                    contentDescription = stringResource(R.string.delete_search),
-                    tint = Color.Gray,
-                    modifier = Modifier.size(20.dp)
-                )
+
+            // Delete button (only in normal mode)
+            if (!isSelectionMode) {
+                IconButton(
+                    onClick = onDeleteClick,
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = stringResource(R.string.delete_search),
+                        tint = Color.Gray,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
             }
         }
     }

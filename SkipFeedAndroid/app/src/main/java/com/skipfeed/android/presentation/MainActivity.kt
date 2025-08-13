@@ -3,6 +3,7 @@ package com.skipfeed.android.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -39,20 +41,32 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.skipfeed.android.R
+import com.skipfeed.android.data.repository.SearchRepository
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var searchRepository: SearchRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Install splash screen before super.onCreate()
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         setContent {
-            SkipFeedApp()
+            SkipFeedApp(searchRepository)
         }
     }
 }
 
 @Composable
-fun SkipFeedApp() {
+fun SkipFeedApp(searchRepository: SearchRepository) {
     val navController = rememberNavController()
     
     // iOS-style gradient background
@@ -74,7 +88,7 @@ fun SkipFeedApp() {
             startDestination = "search",
             modifier = Modifier.fillMaxSize()
         ) {
-            composable("search") { SearchScreen(navController) }
+            composable("search") { SearchScreen(navController, searchRepository) }
             composable("history") { HistoryScreen() }
             composable("stats") { StatsScreen() }
             composable("settings") { SettingsScreen() }
@@ -401,6 +415,34 @@ fun saveRecentSearch(context: android.content.Context, query: String) {
         .apply()
 }
 
+// Save to both recent searches and search history database
+fun saveSearchToHistory(context: android.content.Context, query: String, platform: String, searchRepository: SearchRepository) {
+    // Save to recent searches (for Recent Search chips)
+    saveRecentSearch(context, query)
+
+    // Save to search history database (for History page)
+    CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val platformEnum = when (platform) {
+                "Reddit" -> com.skipfeed.android.data.model.Platform.REDDIT
+                "YouTube" -> com.skipfeed.android.data.model.Platform.YOUTUBE
+                "X" -> com.skipfeed.android.data.model.Platform.X
+                "TikTok" -> com.skipfeed.android.data.model.Platform.TIKTOK
+                "Instagram" -> com.skipfeed.android.data.model.Platform.INSTAGRAM
+                "Facebook" -> com.skipfeed.android.data.model.Platform.FACEBOOK
+                else -> com.skipfeed.android.data.model.Platform.REDDIT
+            }
+
+            android.util.Log.d("SearchHistory", "Saving search: query='$query', platform='$platform' -> $platformEnum")
+            searchRepository.addToSearchHistory(query, platformEnum)
+            android.util.Log.d("SearchHistory", "Search saved successfully")
+        } catch (e: Exception) {
+            android.util.Log.e("SearchHistory", "Failed to save search history", e)
+            Toast.makeText(context, "Failed to save search: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
 fun clearRecentSearches(context: android.content.Context) {
     val sharedPrefs = context.getSharedPreferences("recent_searches", android.content.Context.MODE_PRIVATE)
     sharedPrefs.edit().clear().apply()
@@ -440,7 +482,7 @@ fun RecentSearchChip(
 }
 
 @Composable
-fun SearchScreen(navController: NavHostController) {
+fun SearchScreen(navController: NavHostController, searchRepository: SearchRepository) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedPlatform by remember { mutableStateOf("Reddit") }
     var searchMode by remember { mutableStateOf("Direct") } // Direct or In-App
@@ -595,8 +637,8 @@ fun SearchScreen(navController: NavHostController) {
                 Button(
                     onClick = {
                         if (searchQuery.isNotBlank()) {
-                            // Save to recent searches for both In-App and Direct
-                            saveRecentSearch(context, searchQuery)
+                            // Save to both recent searches and search history database
+                            saveSearchToHistory(context, searchQuery, selectedPlatform, searchRepository)
                             recentSearches = loadRecentSearches(context) // Refresh UI
 
                             if (selectedPlatform == "Reddit" && searchMode == "In-App") {
@@ -697,8 +739,9 @@ fun SearchScreen(navController: NavHostController) {
                             query = recentSearch,
                             onClick = {
                                 searchQuery = recentSearch
-                                // Save to recent searches (moves to front)
-                                saveRecentSearch(context, recentSearch)
+                                // Save to both recent searches and search history database
+                                saveSearchToHistory(context, recentSearch, selectedPlatform, searchRepository)
+                                recentSearches = loadRecentSearches(context) // Refresh UI
 
                                 if (selectedPlatform == "Reddit" && searchMode == "In-App") {
                                     navController.navigate("reddit_search/${java.net.URLEncoder.encode(recentSearch, "UTF-8")}")
@@ -820,6 +863,8 @@ fun SearchModeButton(
 fun HistoryScreen() {
     var searchQuery by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf("All") }
+    var isSelectionMode by remember { mutableStateOf(false) }
+    var selectedItems by remember { mutableStateOf(setOf<String>()) }
     val context = LocalContext.current
     var historyItems by remember { mutableStateOf(loadSearchHistory(context)) }
 
@@ -886,32 +931,100 @@ fun HistoryScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Calculate filtered items first
+        val filteredItems = if (selectedFilter == "All") {
+            historyItems
+        } else {
+            historyItems.filter { it.platform == selectedFilter }
+        }.filter {
+            if (searchQuery.isBlank()) true
+            else it.query.contains(searchQuery, ignoreCase = true)
+        }
+
         // Select and Clear All buttons - exactly like iOS
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            TextButton(
-                onClick = { /* Select all */ }
-            ) {
-                Text(
-                    text = "Select",
-                    color = Color(0xFF007AFF),
-                    fontSize = 17.sp
-                )
-            }
+            if (isSelectionMode) {
+                Row {
+                    TextButton(
+                        onClick = {
+                            // Select all items
+                            selectedItems = filteredItems.map { "${it.query}_${it.platform}_${it.timestamp}" }.toSet()
+                        }
+                    ) {
+                        Text(
+                            text = "Select All",
+                            color = Color(0xFF007AFF),
+                            fontSize = 17.sp
+                        )
+                    }
 
-            TextButton(
-                onClick = {
-                    clearAllHistory(context)
-                    historyItems = loadSearchHistory(context)
+                    TextButton(
+                        onClick = {
+                            // Delete selected items
+                            selectedItems.forEach { itemKey ->
+                                val parts = itemKey.split("_")
+                                if (parts.size >= 3) {
+                                    val query = parts[0]
+                                    val platform = parts[1]
+                                    val timestamp = parts[2]
+                                    val item = HistoryItem(query, platform, timestamp, 0)
+                                    deleteSearchHistory(context, item)
+                                }
+                            }
+                            historyItems = loadSearchHistory(context)
+                            selectedItems = setOf()
+                            isSelectionMode = false
+                        }
+                    ) {
+                        Text(
+                            text = "Delete (${selectedItems.size})",
+                            color = Color(0xFFFF3B30),
+                            fontSize = 17.sp
+                        )
+                    }
+
+                    TextButton(
+                        onClick = {
+                            isSelectionMode = false
+                            selectedItems = setOf()
+                        }
+                    ) {
+                        Text(
+                            text = "Cancel",
+                            color = Color(0xFF8E8E93),
+                            fontSize = 17.sp
+                        )
+                    }
                 }
-            ) {
-                Text(
-                    text = "Clear All",
-                    color = Color(0xFFFF3B30),
-                    fontSize = 17.sp
-                )
+            } else {
+                TextButton(
+                    onClick = {
+                        isSelectionMode = true
+                        selectedItems = setOf()
+                    }
+                ) {
+                    Text(
+                        text = "Select",
+                        color = Color(0xFF007AFF),
+                        fontSize = 17.sp
+                    )
+                }
+
+                TextButton(
+                    onClick = {
+                        clearAllHistory(context)
+                        historyItems = loadSearchHistory(context)
+                    }
+                ) {
+                    Text(
+                        text = "Clear All",
+                        color = Color(0xFFFF3B30),
+                        fontSize = 17.sp
+                    )
+                }
             }
         }
 
@@ -929,21 +1042,15 @@ fun HistoryScreen() {
         Spacer(modifier = Modifier.height(12.dp))
 
         // History items - real data
-        val filteredItems = if (selectedFilter == "All") {
-            historyItems
-        } else {
-            historyItems.filter { it.platform == selectedFilter }
-        }.filter {
-            if (searchQuery.isBlank()) true
-            else it.query.contains(searchQuery, ignoreCase = true)
-        }
-
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             items(filteredItems) { item ->
+                val itemKey = "${item.query}_${item.platform}_${item.timestamp}"
                 IOSHistoryItem(
                     item = item,
+                    isSelectionMode = isSelectionMode,
+                    isSelected = selectedItems.contains(itemKey),
                     onDelete = {
                         // Delete from history
                         deleteSearchHistory(context, item)
@@ -953,6 +1060,13 @@ fun HistoryScreen() {
                         // Restore/repeat search with original mode
                         val originalMode = getSearchMode(context, item)
                         performSearch(context, item.platform, item.query, originalMode)
+                    },
+                    onSelectionToggle = {
+                        selectedItems = if (selectedItems.contains(itemKey)) {
+                            selectedItems - itemKey
+                        } else {
+                            selectedItems + itemKey
+                        }
                     }
                 )
             }
@@ -996,14 +1110,23 @@ fun FilterChip(
 @Composable
 fun IOSHistoryItem(
     item: HistoryItem,
+    isSelectionMode: Boolean = false,
+    isSelected: Boolean = false,
     onDelete: () -> Unit = {},
-    onRestore: () -> Unit = {}
+    onRestore: () -> Unit = {},
+    onSelectionToggle: () -> Unit = {}
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                if (isSelectionMode) {
+                    onSelectionToggle()
+                }
+            },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = if (isSelected) Color(0xFF007AFF).copy(alpha = 0.1f) else Color.White
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
@@ -1013,6 +1136,18 @@ fun IOSHistoryItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Selection checkbox (only in selection mode)
+            if (isSelectionMode) {
+                Checkbox(
+                    checked = isSelected,
+                    onCheckedChange = { onSelectionToggle() },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF007AFF)
+                    )
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
             // Platform icon
             Image(
                 painter = painterResource(id = item.iconRes),
@@ -1059,30 +1194,32 @@ fun IOSHistoryItem(
                 }
             }
 
-            // Action buttons - exactly like iOS
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                IconButton(
-                    onClick = onDelete
+            // Action buttons - exactly like iOS (only in normal mode)
+            if (!isSelectionMode) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = "Delete",
-                        tint = Color(0xFFFF3B30),
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
+                    IconButton(
+                        onClick = onDelete
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete",
+                            tint = Color(0xFFFF3B30),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
 
-                IconButton(
-                    onClick = onRestore
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Refresh,
-                        contentDescription = "Restore",
-                        tint = Color(0xFF007AFF),
-                        modifier = Modifier.size(20.dp)
-                    )
+                    IconButton(
+                        onClick = onRestore
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = "Restore",
+                            tint = Color(0xFF007AFF),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
                 }
             }
         }
