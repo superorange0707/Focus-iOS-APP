@@ -39,8 +39,6 @@ color x_blue
 color youtube_red
 drawable ic_facebook
 drawable ic_instagram
-drawable ic_launcher_background
-drawable ic_launcher_foreground
 drawable ic_reddit
 drawable ic_tiktok
 drawable ic_x
