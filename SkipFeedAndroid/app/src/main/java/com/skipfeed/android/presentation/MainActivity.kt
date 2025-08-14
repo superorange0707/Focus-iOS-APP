@@ -16,9 +16,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.draw.shadow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import java.util.Calendar
+
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -47,6 +55,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+// Data classes
+data class HistoryItem(
+    val query: String,
+    val platform: String,
+    val timestamp: String,
+    val iconRes: Int,
+    val timestampMillis: Long = 0L // Add actual timestamp for filtering
+)
+
+data class Platform(
+    val name: String,
+    val iconRes: Int
+)
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -124,17 +146,17 @@ fun IOSTabBar(
         TabItem("settings", "Settings", Icons.Default.Settings)
     )
     
-    // iOS-style tab bar - clean without extra lines
+    // iOS-style tab bar - clean without extra lines, blends with gradient
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White.copy(alpha = 0.95f))
-            .padding(bottom = 34.dp) // Space for home indicator
+            .background(Color.White.copy(alpha = 0.7f)) // More transparent to blend with gradient
+            .padding(bottom = 4.dp) // Minimal bottom space, tabs closer to bottom
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(vertical = 8.dp), // Much more compact internal padding
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             tabs.forEach { tab ->
@@ -163,16 +185,16 @@ fun IOSTabItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .clickable { onClick() }
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 12.dp, vertical = 4.dp) // Much more compact padding
     ) {
         Icon(
             imageVector = tab.icon,
             contentDescription = tab.title,
             tint = if (isSelected) Color(0xFF007AFF) else Color(0xFF8E8E93),
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(22.dp) // Slightly smaller icon
         )
-        
-        Spacer(modifier = Modifier.height(4.dp))
+
+        Spacer(modifier = Modifier.height(2.dp)) // Reduced spacing
         
         Text(
             text = tab.title,
@@ -187,12 +209,6 @@ data class TabItem(
     val route: String,
     val title: String,
     val icon: ImageVector
-)
-
-// Platform data
-data class Platform(
-    val name: String,
-    val iconRes: Int
 )
 
 val platforms = listOf(
@@ -272,7 +288,7 @@ fun performSearch(context: android.content.Context, platform: String, query: Str
 // Save search history (simplified implementation)
 fun saveSearchHistory(context: android.content.Context, query: String, platform: String, mode: String = "Direct") {
     val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
-    val timestamp = SimpleDateFormat("h:mm:ss a", Locale.getDefault()).format(Date())
+    val timestamp = java.text.SimpleDateFormat("h:mm:ss a", java.util.Locale.getDefault()).format(java.util.Date())
 
     // Save the search (in a real app, you'd use a proper database)
     val historyKey = "${System.currentTimeMillis()}"
@@ -286,6 +302,8 @@ fun saveSearchHistory(context: android.content.Context, query: String, platform:
 
 // Load search history
 fun loadSearchHistory(context: android.content.Context): List<HistoryItem> {
+    // Don't auto-clean - only clean when explicitly requested
+
     val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
     val allEntries = sharedPrefs.all
     val historyItems = mutableListOf<HistoryItem>()
@@ -302,28 +320,31 @@ fun loadSearchHistory(context: android.content.Context): List<HistoryItem> {
         val platform = sharedPrefs.getString("${key}_platform", "") ?: ""
         val timestamp = sharedPrefs.getString("${key}_timestamp", "") ?: ""
 
-        if (query.isNotEmpty() && platform.isNotEmpty()) {
-            val iconRes = when (platform) {
-                "Reddit" -> R.drawable.icon_reddit
-                "YouTube" -> R.drawable.icon_youtube
-                "X" -> R.drawable.icon_x
-                "TikTok" -> R.drawable.icon_tiktok
-                "Instagram" -> R.drawable.icon_instagram
-                "Facebook" -> R.drawable.icon_facebook
-                else -> R.drawable.icon_reddit
+        // Filter out invalid entries and timestamps
+        if (query.isNotEmpty() && platform.isNotEmpty() && timestamp.isNotEmpty()) {
+            // For timestamp validation, check if the key (which is the actual timestamp) is valid
+            val timestampLong = key.toLongOrNull() ?: 0L
+            val year2020 = 1577836800000L // Jan 1, 2020 in milliseconds
+            val now = System.currentTimeMillis()
+
+            // Only include entries with valid timestamps (after 2020 and not in the future)
+            if (timestampLong > 0L && timestampLong >= year2020 && timestampLong <= now) {
+                val iconRes = when (platform) {
+                    "Reddit" -> R.drawable.icon_reddit
+                    "YouTube" -> R.drawable.icon_youtube
+                    "X" -> R.drawable.icon_x
+                    "TikTok" -> R.drawable.icon_tiktok
+                    "Instagram" -> R.drawable.icon_instagram
+                    "Facebook" -> R.drawable.icon_facebook
+                    else -> R.drawable.icon_reddit
+                }
+                historyItems.add(HistoryItem(query, platform, timestamp, iconRes, timestampLong))
             }
-            historyItems.add(HistoryItem(query, platform, timestamp, iconRes))
         }
     }
 
-    // If no history, return sample data
-    if (historyItems.isEmpty()) {
-        return listOf(
-            HistoryItem("Skip", "YouTube", "2:40:55 am", R.drawable.icon_youtube),
-            HistoryItem("Skip", "Reddit", "1:42:46 am", R.drawable.icon_reddit),
-            HistoryItem("Skipfeed", "Reddit", "12:35:47 am", R.drawable.icon_reddit)
-        )
-    }
+    // Return empty list if no valid history found
+    // Don't return sample data as it causes 1970 date issues
 
     return historyItems
 }
@@ -332,6 +353,7 @@ fun loadSearchHistory(context: android.content.Context): List<HistoryItem> {
 fun deleteSearchHistory(context: android.content.Context, item: HistoryItem) {
     val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
     val allEntries = sharedPrefs.all
+    val editor = sharedPrefs.edit()
 
     // Find and delete the matching entry
     for ((key, _) in allEntries) {
@@ -341,16 +363,20 @@ fun deleteSearchHistory(context: android.content.Context, item: HistoryItem) {
             val platform = sharedPrefs.getString("${baseKey}_platform", "")
             val timestamp = sharedPrefs.getString("${baseKey}_timestamp", "")
 
-            if (query == item.query && platform == item.platform && timestamp == item.timestamp) {
-                sharedPrefs.edit()
-                    .remove("${baseKey}_query")
-                    .remove("${baseKey}_platform")
-                    .remove("${baseKey}_timestamp")
-                    .apply()
+            // Match by query and platform (timestamp might be formatted differently)
+            if (query == item.query && platform == item.platform) {
+                editor.remove("${baseKey}_query")
+                editor.remove("${baseKey}_platform")
+                editor.remove("${baseKey}_timestamp")
+                editor.remove("${baseKey}_mode")
+
+                // Also try to remove any other related keys
+                editor.remove(baseKey) // In case there's a base key without suffix
                 break
             }
         }
     }
+    editor.apply()
 }
 
 // Clear all search history
@@ -358,6 +384,79 @@ fun clearAllHistory(context: android.content.Context) {
     val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
     sharedPrefs.edit().clear().apply()
     Toast.makeText(context, "Search history cleared", Toast.LENGTH_SHORT).show()
+}
+
+// Clean invalid history entries (like Jan 1, 1970)
+fun cleanInvalidHistory(context: android.content.Context) {
+    val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
+    val allEntries = sharedPrefs.all
+    val editor = sharedPrefs.edit()
+    var removedCount = 0
+
+    // Find and remove invalid entries
+    for ((key, value) in allEntries) {
+        var shouldRemove = false
+
+        if (key.endsWith("_query")) {
+            val baseKey = key.replace("_query", "")
+            val query = sharedPrefs.getString("${baseKey}_query", "") ?: ""
+            val platform = sharedPrefs.getString("${baseKey}_platform", "") ?: ""
+            val timestamp = sharedPrefs.getString("${baseKey}_timestamp", "") ?: ""
+
+            // Check if this is one of the problematic entries
+            // Remove entries with "Skip" or "Skipfeed" queries that seem to be test data
+            if (query == "Skip" || query == "Skipfeed" || query.isEmpty() || query.isBlank()) {
+                shouldRemove = true
+            }
+
+            // Check if baseKey looks like a very old timestamp (close to 0 or before 2020)
+            val baseKeyLong = baseKey.toLongOrNull()
+            if (baseKeyLong != null) {
+                val year2020 = 1577836800000L // Jan 1, 2020 in milliseconds
+                val now = System.currentTimeMillis()
+                if (baseKeyLong <= 0L || baseKeyLong < year2020 || baseKeyLong > now) {
+                    shouldRemove = true
+                }
+            } else {
+                // If baseKey is not a valid timestamp, remove it
+                shouldRemove = true
+            }
+
+            if (shouldRemove) {
+                editor.remove("${baseKey}_query")
+                editor.remove("${baseKey}_platform")
+                editor.remove("${baseKey}_timestamp")
+                editor.remove("${baseKey}_mode")
+                editor.remove(baseKey) // Remove base key too
+                removedCount++
+            }
+        }
+    }
+
+    editor.apply()
+    // Silently clean without showing toast
+}
+
+// Force clean all problematic records including sample data
+fun forceCleanProblematicRecords(context: android.content.Context) {
+    val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
+    val allEntries = sharedPrefs.all
+    val editor = sharedPrefs.edit()
+    var removedCount = 0
+
+    // Remove any entries that contain "Skip" or "Skipfeed" in the query (sample data)
+    for ((key, value) in allEntries) {
+        val valueStr = value.toString()
+        if (valueStr.contains("Skip", ignoreCase = true) ||
+            valueStr.contains("Skipfeed", ignoreCase = true) ||
+            key.contains("Skip", ignoreCase = true)) {
+            editor.remove(key)
+            removedCount++
+        }
+    }
+
+    editor.apply()
+    // Silently clean without showing toast
 }
 
 // Get search mode for history item
@@ -498,142 +597,301 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .padding(bottom = 120.dp) // Space for tab bar
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
-
-        // App Title - exactly like iOS
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp)
+                .padding(top = 16.dp, bottom = 100.dp) // Much closer to top
         ) {
-            Text(
-                text = "SkipFeed",
-                fontSize = 34.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF007AFF)
-            )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            // App Title - exactly like iOS
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "SkipFeed",
+                    fontSize = 34.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF007AFF)
+                )
 
-            Text(
-                text = "Skip the feed, find what matters",
-                fontSize = 17.sp,
-                color = Color(0xFF8E8E93)
-            )
-        }
+                Spacer(modifier = Modifier.height(4.dp))
 
-        Spacer(modifier = Modifier.height(40.dp))
-
-        // Choose Platform header - exactly like iOS
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 4.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Language,
-                contentDescription = null,
-                tint = Color(0xFF1C1C1E),
-                modifier = Modifier.size(20.dp)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(
-                text = "Choose Platform",
-                fontSize = 17.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF1C1C1E)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Platform selector - exactly like iOS with real icons
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(horizontal = 4.dp)
-        ) {
-            items(platforms) { platform ->
-                IOSPlatformCard(
-                    platform = platform,
-                    isSelected = platform.name == selectedPlatform,
-                    onClick = { selectedPlatform = platform.name }
+                Text(
+                    text = "Skip the feed, find what matters",
+                    fontSize = 17.sp,
+                    color = Color(0xFF8E8E93)
                 )
             }
-        }
 
-        Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
-        // Search card - exactly like iOS
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp)
+            // Choose Platform header - exactly like iOS
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 4.dp)
             ) {
-                // Search input
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { searchQuery = it },
-                    placeholder = {
-                        Text(
-                            "Search $selectedPlatform...",
-                            color = Color(0xFF8E8E93)
-                        )
+                Icon(
+                    imageVector = Icons.Default.Language,
+                    contentDescription = null,
+                    tint = Color(0xFF1C1C1E),
+                    modifier = Modifier.size(20.dp)
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = "Choose Platform",
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF1C1C1E)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Platform selector - exactly like iOS with real icons
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(horizontal = 4.dp)
+            ) {
+                items(platforms) { platform ->
+                    IOSPlatformCard(
+                        platform = platform,
+                        isSelected = platform.name == selectedPlatform,
+                        onClick = { selectedPlatform = platform.name }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // TikTok special interface - show immediately after platform selection
+            if (selectedPlatform == "TikTok") {
+                // TikTok info section
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = Color(0xFF007AFF),
+                        modifier = Modifier.size(20.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Text(
+                        text = "Opens TikTok search page where you can input your query",
+                        fontSize = 14.sp,
+                        color = Color(0xFF8E8E93),
+                        lineHeight = 18.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // Open TikTok Search button
+                Button(
+                    onClick = {
+                        try {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tiktok.com/search"))
+                            context.startActivity(intent)
+                            Toast.makeText(context, "Opening TikTok search", Toast.LENGTH_SHORT).show()
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Unable to open TikTok", Toast.LENGTH_SHORT).show()
+                        }
                     },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFF007AFF),
-                        unfocusedBorderColor = Color(0xFFE5E5EA)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(55.dp)
+                        .shadow(
+                            elevation = 10.dp,
+                            shape = RoundedCornerShape(16.dp),
+                            ambientColor = Color(0xFF007AFF).copy(alpha = 0.3f),
+                            spotColor = Color(0xFF007AFF).copy(alpha = 0.3f)
+                        ),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF007AFF)
                     ),
-                    singleLine = true,
-                    leadingIcon = {
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = null,
-                            tint = Color(0xFF8E8E93)
+                            tint = Color.White,
+                            modifier = Modifier.size(20.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(12.dp))
+
+                        Text(
+                            text = "Open TikTok Search",
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White
                         )
                     }
-                )
+                }
+            }
+
+            // Search area - subtle glassmorphism style like iOS (hidden for TikTok)
+            if (selectedPlatform != "TikTok") {
+                Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = Color.White.copy(alpha = 0.4f), // More subtle background
+                        shape = RoundedCornerShape(20.dp)
+                    )
+                    .border(
+                        width = 0.5.dp,
+                        color = Color(0xFFE5E5EA).copy(alpha = 0.3f), // Very subtle border
+                        shape = RoundedCornerShape(20.dp)
+                    )
+                    .padding(22.dp)
+            ) {
+                // Search input - subtle iOS style
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = Color.White.copy(alpha = 0.6f), // More subtle background
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .border(
+                            width = 0.5.dp,
+                            color = Color(0xFFE5E5EA).copy(alpha = 0.4f), // Very subtle border
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(horizontal = 22.dp, vertical = 18.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = Color(0xFF007AFF).copy(alpha = 0.75f),
+                        modifier = Modifier.size(20.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(15.dp))
+
+                    BasicTextField(
+                        value = searchQuery,
+                        onValueChange = { searchQuery = it },
+                        modifier = Modifier.weight(1f),
+                        textStyle = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color.Black
+                        ),
+                        singleLine = true,
+                        decorationBox = { innerTextField ->
+                            if (searchQuery.isEmpty()) {
+                                Text(
+                                    "Search $selectedPlatform...",
+                                    color = Color(0xFF8E8E93),
+                                    fontSize = 16.sp
+                                )
+                            }
+                            innerTextField()
+                        }
+                    )
+
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(
+                            onClick = { searchQuery = "" },
+                            modifier = Modifier.size(20.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Cancel,
+                                contentDescription = "Clear",
+                                tint = Color(0xFF8E8E93),
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Search mode toggle - only show for Reddit
+                // Search mode toggle - iOS style for Reddit
                 if (selectedPlatform == "Reddit") {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        modifier = Modifier
+                            .background(
+                                color = Color(0xFFF2F2F7),
+                                shape = RoundedCornerShape(16.dp)
+                            )
+                            .border(
+                                width = 0.5.dp,
+                                color = Color(0xFFD1D1D6),
+                                shape = RoundedCornerShape(16.dp)
+                            )
+                            .padding(4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(0.dp)
                     ) {
-                        SearchModeButton(
-                            text = "Direct",
-                            isSelected = searchMode == "Direct",
+                        // Direct mode button
+                        Button(
                             onClick = { searchMode = "Direct" },
-                            modifier = Modifier.weight(1f)
-                        )
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (searchMode == "Direct")
+                                    Color(0xFF007AFF) else Color.Transparent,
+                                contentColor = if (searchMode == "Direct")
+                                    Color.White else Color.Black
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(32.dp),
+                            elevation = ButtonDefaults.buttonElevation(0.dp)
+                        ) {
+                            Text(
+                                text = "Direct",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
 
-                        SearchModeButton(
-                            text = "In-App",
-                            isSelected = searchMode == "In-App",
+                        // In-App mode button
+                        Button(
                             onClick = { searchMode = "In-App" },
-                            modifier = Modifier.weight(1f)
-                        )
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (searchMode == "In-App")
+                                    Color(0xFF007AFF) else Color.Transparent,
+                                contentColor = if (searchMode == "In-App")
+                                    Color.White else Color.Black
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(32.dp),
+                            elevation = ButtonDefaults.buttonElevation(0.dp)
+                        ) {
+                            Text(
+                                text = "In-App",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
                 }
 
-                // Search button - exactly like iOS
+                // Search button - iOS glassmorphism style
                 Button(
                     onClick = {
                         if (searchQuery.isNotBlank()) {
@@ -652,44 +910,72 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                             Toast.makeText(context, "Please enter a search query", Toast.LENGTH_SHORT).show()
                         }
                     },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(55.dp)
+                        .shadow(
+                            elevation = 10.dp,
+                            shape = RoundedCornerShape(20.dp),
+                            ambientColor = Color(0xFF007AFF).copy(alpha = 0.2f),
+                            spotColor = Color(0xFF007AFF).copy(alpha = 0.2f)
+                        ),
+                    shape = RoundedCornerShape(20.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF007AFF)
+                        containerColor = Color.Transparent
                     ),
-                    contentPadding = PaddingValues(vertical = 16.dp)
+                    contentPadding = PaddingValues(0.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = Brush.horizontalGradient(
+                                    colors = listOf(
+                                        Color(0xFF007AFF),
+                                        Color(0xFF5856D6).copy(alpha = 0.7f)
+                                    )
+                                ),
+                                shape = RoundedCornerShape(20.dp)
+                            )
+                            .border(
+                                width = 1.dp,
+                                color = Color.White.copy(alpha = 0.2f),
+                                shape = RoundedCornerShape(20.dp)
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(18.dp)
+                            )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(12.dp))
 
-                    Text(
-                        text = if (selectedPlatform == "Reddit" && searchMode == "In-App") {
-                            "Browse $selectedPlatform"
-                        } else {
-                            "Search on $selectedPlatform"
-                        },
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White
-                    )
+                            Text(
+                                text = if (selectedPlatform == "Reddit" && searchMode == "In-App") {
+                                    "Browse $selectedPlatform"
+                                } else {
+                                    "Search on $selectedPlatform"
+                                },
+                                fontSize = 17.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.White
+                            )
+                        }
+                    }
                 }
             }
-        }
 
-        // Recent searches section - exactly like iOS
-        if (recentSearches.isNotEmpty() && searchQuery.isEmpty() && selectedPlatform != "TikTok") {
-            Spacer(modifier = Modifier.height(28.dp))
+            // Recent searches section - exactly like iOS
+            if (recentSearches.isNotEmpty() && searchQuery.isEmpty() && selectedPlatform != "TikTok") {
+                Spacer(modifier = Modifier.height(28.dp))
 
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(15.dp)
-            ) {
                 // Header row
                 Row(
                     modifier = Modifier
@@ -729,6 +1015,8 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                     }
                 }
 
+                Spacer(modifier = Modifier.height(15.dp))
+
                 // Horizontal scrolling chips
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -754,13 +1042,17 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                 }
             }
         }
+        }
 
-        Spacer(modifier = Modifier.weight(1f))
 
-        // Bottom tagline - exactly like iOS
+
+        // Bottom tagline - fixed position, always visible
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(bottom = 90.dp) // Adjusted for much more compact tab bar
         ) {
             Text(
                 text = "Skip the feed, find what matters",
@@ -793,14 +1085,16 @@ fun IOSPlatformCard(
             .clickable { onClick() },
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.White.copy(alpha = 0.3f) // Very subtle background
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = if (isSelected) 4.dp else 1.dp
+            defaultElevation = 0.dp
         ),
         border = if (isSelected) {
             androidx.compose.foundation.BorderStroke(2.dp, Color(0xFFFF9500))
-        } else null
+        } else {
+            androidx.compose.foundation.BorderStroke(0.5.dp, Color(0xFFE5E5EA).copy(alpha = 0.6f)) // Subtle border for all cards
+        }
     ) {
         Column(
             modifier = Modifier
@@ -809,7 +1103,7 @@ fun IOSPlatformCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Real platform icon
+            // Real platform icon - clean and simple
             Image(
                 painter = painterResource(id = platform.iconRes),
                 contentDescription = platform.name,
@@ -861,225 +1155,524 @@ fun SearchModeButton(
 
 @Composable
 fun HistoryScreen() {
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedFilter by remember { mutableStateOf("All") }
-    var isSelectionMode by remember { mutableStateOf(false) }
-    var selectedItems by remember { mutableStateOf(setOf<String>()) }
     val context = LocalContext.current
     var historyItems by remember { mutableStateOf(loadSearchHistory(context)) }
+    var searchQuery by remember { mutableStateOf("") }
+    var selectedFilter by remember { mutableStateOf("All") }
+    var selectedTimeFilter by remember { mutableStateOf("All Time") }
+    var showTimeFilterMenu by remember { mutableStateOf(false) }
+    var isSelectionMode by remember { mutableStateOf(false) }
+    var selectedItems by remember { mutableStateOf(setOf<String>()) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
-            .padding(bottom = 120.dp)
+            .background(Color(0xFFFAFAFA))
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
+        // HEADER SECTION - Fixed at top
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(20.dp)
+        ) {
+            // Title
+            Text(
+                text = "Search History",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFF1C1C1E),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+            )
 
-        // Header
-        Text(
-            text = "Search History",
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF1C1C1E)
-        )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Search bar - exactly like iOS
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            placeholder = {
-                Text(
-                    "Search history...",
-                    color = Color(0xFF8E8E93)
+            // Search bar and time filter row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Search bar
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    placeholder = {
+                        Text(
+                            "Search history",
+                            color = Color(0xFF8E8E93),
+                            fontSize = 16.sp
+                        )
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .background(Color(0xFFF2F2F7), RoundedCornerShape(12.dp)),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.Transparent,
+                        unfocusedBorderColor = Color.Transparent
+                    ),
+                    leadingIcon = {
+                        Icon(
+                            Icons.Default.Search,
+                            contentDescription = null,
+                            tint = Color(0xFF8E8E93),
+                            modifier = Modifier.size(18.dp)
+                        )
+                    },
+                    singleLine = true,
+                    textStyle = androidx.compose.ui.text.TextStyle(fontSize = 16.sp)
                 )
-            },
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color(0xFF007AFF),
-                unfocusedBorderColor = Color(0xFFE5E5EA)
-            ),
-            singleLine = true,
-            leadingIcon = {
+
+                // Time filter button (icon like iOS)
+                Box {
+                    IconButton(
+                        onClick = { showTimeFilterMenu = true },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                Color(0xFFF2F2F7),
+                                RoundedCornerShape(12.dp)
+                            )
+                    ) {
+                        Icon(
+                            imageVector = when (selectedTimeFilter) {
+                                "Today" -> Icons.Default.WbSunny
+                                "Yesterday" -> Icons.Default.Nightlight
+                                "This Week" -> Icons.Default.CalendarMonth
+                                "This Month" -> Icons.Default.CalendarToday
+                                else -> Icons.Default.AccessTime
+                            },
+                            contentDescription = "Time Filter",
+                            tint = Color(0xFF007AFF),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+
+                    DropdownMenu(
+                        expanded = showTimeFilterMenu,
+                        onDismissRequest = { showTimeFilterMenu = false },
+                        modifier = Modifier.background(Color.White)
+                    ) {
+                        val timeFilters = listOf(
+                            "All Time" to Icons.Default.AccessTime,
+                            "Today" to Icons.Default.WbSunny,
+                            "Yesterday" to Icons.Default.Nightlight,
+                            "This Week" to Icons.Default.CalendarMonth,
+                            "This Month" to Icons.Default.CalendarToday
+                        )
+                        timeFilters.forEach { (filter, icon) ->
+                            DropdownMenuItem(
+                                text = {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = icon,
+                                            contentDescription = null,
+                                            tint = Color(0xFF007AFF),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Text(filter)
+                                        Spacer(modifier = Modifier.weight(1f))
+                                        if (selectedTimeFilter == filter) {
+                                            Icon(
+                                                imageVector = Icons.Default.Check,
+                                                contentDescription = null,
+                                                tint = Color(0xFF007AFF),
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
+                                    }
+                                },
+                                onClick = {
+                                    selectedTimeFilter = filter
+                                    showTimeFilterMenu = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Platform filter chips
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 0.dp)
+            ) {
+                val platforms = listOf("All", "Reddit", "YouTube", "X", "TikTok", "Instagram")
+                items(platforms) { platform ->
+                    FilterChip(
+                        text = platform,
+                        isSelected = selectedFilter == platform,
+                        onClick = { selectedFilter = platform }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Action buttons - iOS style
+            if (isSelectionMode) {
+                // Selection mode: Cancel, Select All, Delete buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    // Left side: Cancel and Select All
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        // Cancel button
+                        Button(
+                            onClick = {
+                                isSelectionMode = false
+                                selectedItems = setOf()
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFFFF3B30).copy(alpha = 0.1f),
+                                contentColor = Color(0xFFFF3B30)
+                            ),
+                            shape = RoundedCornerShape(14.dp),
+                            elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                        ) {
+                            Text(
+                                text = "Cancel",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+
+                        // Select All button
+                        Button(
+                            onClick = {
+                                selectedItems = if (selectedItems.size == historyItems.size) {
+                                    setOf() // Deselect all
+                                } else {
+                                    historyItems.map { "${it.query}_${it.platform}_${it.timestamp}" }.toSet() // Select all
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF007AFF).copy(alpha = 0.1f),
+                                contentColor = Color(0xFF007AFF)
+                            ),
+                            shape = RoundedCornerShape(14.dp),
+                            elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                        ) {
+                            Text(
+                                text = if (selectedItems.size == historyItems.size) "Deselect All" else "Select All",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+                    }
+
+                    // Right side: Delete button (only show if items selected)
+                    if (selectedItems.isNotEmpty()) {
+                        Button(
+                            onClick = {
+                                // Delete selected items
+                                selectedItems.forEach { itemKey ->
+                                    val matchingItem = historyItems.find { historyItem ->
+                                        "${historyItem.query}_${historyItem.platform}_${historyItem.timestamp}" == itemKey
+                                    }
+                                    matchingItem?.let { item ->
+                                        deleteSearchHistory(context, item)
+                                    }
+                                }
+                                historyItems = loadSearchHistory(context)
+                                selectedItems = setOf()
+                                isSelectionMode = false
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFFFF3B30).copy(alpha = 0.1f),
+                                contentColor = Color(0xFFFF3B30)
+                            ),
+                            shape = RoundedCornerShape(14.dp),
+                            elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                        ) {
+                            Text(
+                                text = "Delete (${selectedItems.size})",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+                    }
+                }
+            } else if (historyItems.isNotEmpty()) {
+                // Normal mode: Select and Clear All buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    // Select button
+                    Button(
+                        onClick = { isSelectionMode = true },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF007AFF).copy(alpha = 0.1f),
+                            contentColor = Color(0xFF007AFF)
+                        ),
+                        shape = RoundedCornerShape(14.dp),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                    ) {
+                        Text(
+                            text = "Select",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+
+                    // Clear All button
+                    Button(
+                        onClick = {
+                            clearAllHistory(context)
+                            historyItems = loadSearchHistory(context)
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFFF3B30).copy(alpha = 0.1f),
+                            contentColor = Color(0xFFFF3B30)
+                        ),
+                        shape = RoundedCornerShape(14.dp),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                    ) {
+                        Text(
+                            text = "Clear All",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+            }
+        }
+
+        // CONTENT SECTION - Search records appear HERE (below header)
+        // Filter items based on search query, platform, and time
+        val filteredItems = historyItems.filter { item ->
+            // Search query filter
+            val matchesSearch = if (searchQuery.isBlank()) true
+                else item.query.contains(searchQuery, ignoreCase = true)
+
+            // Platform filter
+            val matchesPlatform = if (selectedFilter == "All") true
+                else item.platform == selectedFilter
+
+            // Time filter - fixed with proper Calendar calculations
+            val matchesTime = when (selectedTimeFilter) {
+                "Today" -> {
+                    val calendar = java.util.Calendar.getInstance()
+                    calendar.set(java.util.Calendar.HOUR_OF_DAY, 0)
+                    calendar.set(java.util.Calendar.MINUTE, 0)
+                    calendar.set(java.util.Calendar.SECOND, 0)
+                    calendar.set(java.util.Calendar.MILLISECOND, 0)
+                    val todayStart = calendar.timeInMillis
+                    item.timestampMillis >= todayStart
+                }
+                "Yesterday" -> {
+                    val calendar = java.util.Calendar.getInstance()
+                    // Start of today
+                    calendar.set(java.util.Calendar.HOUR_OF_DAY, 0)
+                    calendar.set(java.util.Calendar.MINUTE, 0)
+                    calendar.set(java.util.Calendar.SECOND, 0)
+                    calendar.set(java.util.Calendar.MILLISECOND, 0)
+                    val todayStart = calendar.timeInMillis
+
+                    // Start of yesterday
+                    calendar.add(java.util.Calendar.DAY_OF_MONTH, -1)
+                    val yesterdayStart = calendar.timeInMillis
+
+                    item.timestampMillis >= yesterdayStart && item.timestampMillis < todayStart
+                }
+                "This Week" -> {
+                    val calendar = java.util.Calendar.getInstance()
+                    calendar.add(java.util.Calendar.DAY_OF_MONTH, -7)
+                    val weekStart = calendar.timeInMillis
+                    item.timestampMillis >= weekStart
+                }
+                "This Month" -> {
+                    val calendar = java.util.Calendar.getInstance()
+                    calendar.add(java.util.Calendar.DAY_OF_MONTH, -30)
+                    val monthStart = calendar.timeInMillis
+                    item.timestampMillis >= monthStart
+                }
+                else -> true // "All Time" - show everything
+            }
+
+            matchesSearch && matchesPlatform && matchesTime
+        }
+
+        if (filteredItems.isEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null,
+                    imageVector = Icons.Default.History,
+                    contentDescription = "No history",
+                    modifier = Modifier.size(64.dp),
                     tint = Color(0xFF8E8E93)
                 )
-            }
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Filter chips - exactly like iOS
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val filters = listOf("All", "Reddit", "YouTube", "X", "TikTok", "Instagram")
-
-            items(filters) { filter ->
-                FilterChip(
-                    text = filter,
-                    isSelected = filter == selectedFilter,
-                    onClick = { selectedFilter = filter }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "No search history yet",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF1C1C1E),
+                    textAlign = TextAlign.Center
                 )
             }
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Calculate filtered items first
-        val filteredItems = if (selectedFilter == "All") {
-            historyItems
         } else {
-            historyItems.filter { it.platform == selectedFilter }
-        }.filter {
-            if (searchQuery.isBlank()) true
-            else it.query.contains(searchQuery, ignoreCase = true)
-        }
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 20.dp)
+                    .padding(bottom = 100.dp)
+            ) {
+                // Group by date and show records
+                item {
+                    Text(
+                        text = "Today",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF8E8E93),
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
 
-        // Select and Clear All buttons - exactly like iOS
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            if (isSelectionMode) {
-                Row {
-                    TextButton(
-                        onClick = {
-                            // Select all items
-                            selectedItems = filteredItems.map { "${it.query}_${it.platform}_${it.timestamp}" }.toSet()
-                        }
+                items(filteredItems) { historyItem ->
+                    val itemKey = "${historyItem.query}_${historyItem.platform}_${historyItem.timestamp}"
+
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clickable {
+                                if (isSelectionMode) {
+                                    selectedItems = if (selectedItems.contains(itemKey)) {
+                                        selectedItems - itemKey
+                                    } else {
+                                        selectedItems + itemKey
+                                    }
+                                } else {
+                                    // Restore/repeat search
+                                    val originalMode = getSearchMode(context, historyItem)
+                                    performSearch(context, historyItem.platform, historyItem.query, originalMode)
+                                }
+                            },
+                        colors = CardDefaults.cardColors(containerColor = Color.White),
+                        shape = RoundedCornerShape(16.dp)
                     ) {
-                        Text(
-                            text = "Select All",
-                            color = Color(0xFF007AFF),
-                            fontSize = 17.sp
-                        )
-                    }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            // Selection toggle (if in selection mode) - circular like iOS
+                            if (isSelectionMode) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .background(
+                                            if (selectedItems.contains(itemKey)) Color(0xFF007AFF) else Color.Transparent,
+                                            CircleShape
+                                        )
+                                        .border(
+                                            2.dp,
+                                            if (selectedItems.contains(itemKey)) Color(0xFF007AFF) else Color(0xFFE5E5EA),
+                                            CircleShape
+                                        )
+                                        .clickable {
+                                            selectedItems = if (selectedItems.contains(itemKey)) {
+                                                selectedItems - itemKey
+                                            } else {
+                                                selectedItems + itemKey
+                                            }
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (selectedItems.contains(itemKey)) {
+                                        Icon(
+                                            imageVector = Icons.Default.Check,
+                                            contentDescription = null,
+                                            tint = Color.White,
+                                            modifier = Modifier.size(14.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.width(12.dp))
+                            }
 
-                    TextButton(
-                        onClick = {
-                            // Delete selected items
-                            selectedItems.forEach { itemKey ->
-                                val parts = itemKey.split("_")
-                                if (parts.size >= 3) {
-                                    val query = parts[0]
-                                    val platform = parts[1]
-                                    val timestamp = parts[2]
-                                    val item = HistoryItem(query, platform, timestamp, 0)
-                                    deleteSearchHistory(context, item)
+                            Image(
+                                painter = painterResource(id = historyItem.iconRes),
+                                contentDescription = historyItem.platform,
+                                modifier = Modifier.size(24.dp)
+                            )
+
+                            Spacer(modifier = Modifier.width(12.dp))
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = historyItem.query,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = Color(0xFF1C1C1E)
+                                )
+                                Text(
+                                    text = "${historyItem.platform} • ${historyItem.timestamp}",
+                                    fontSize = 12.sp,
+                                    color = Color(0xFF8E8E93)
+                                )
+                            }
+
+                            // Action buttons (if not in selection mode)
+                            if (!isSelectionMode) {
+                                Row {
+                                    IconButton(
+                                        onClick = {
+                                            deleteSearchHistory(context, historyItem)
+                                            historyItems = loadSearchHistory(context)
+                                        }
+                                    ) {
+                                        Icon(
+                                            Icons.Default.Delete,
+                                            contentDescription = "Delete",
+                                            tint = Color(0xFFFF3B30)
+                                        )
+                                    }
+
+                                    IconButton(
+                                        onClick = {
+                                            val originalMode = getSearchMode(context, historyItem)
+                                            performSearch(context, historyItem.platform, historyItem.query, originalMode)
+                                        }
+                                    ) {
+                                        Icon(
+                                            Icons.Default.Refresh,
+                                            contentDescription = "Restore",
+                                            tint = Color(0xFF007AFF)
+                                        )
+                                    }
                                 }
                             }
-                            historyItems = loadSearchHistory(context)
-                            selectedItems = setOf()
-                            isSelectionMode = false
-                        }
-                    ) {
-                        Text(
-                            text = "Delete (${selectedItems.size})",
-                            color = Color(0xFFFF3B30),
-                            fontSize = 17.sp
-                        )
-                    }
-
-                    TextButton(
-                        onClick = {
-                            isSelectionMode = false
-                            selectedItems = setOf()
-                        }
-                    ) {
-                        Text(
-                            text = "Cancel",
-                            color = Color(0xFF8E8E93),
-                            fontSize = 17.sp
-                        )
-                    }
-                }
-            } else {
-                TextButton(
-                    onClick = {
-                        isSelectionMode = true
-                        selectedItems = setOf()
-                    }
-                ) {
-                    Text(
-                        text = "Select",
-                        color = Color(0xFF007AFF),
-                        fontSize = 17.sp
-                    )
-                }
-
-                TextButton(
-                    onClick = {
-                        clearAllHistory(context)
-                        historyItems = loadSearchHistory(context)
-                    }
-                ) {
-                    Text(
-                        text = "Clear All",
-                        color = Color(0xFFFF3B30),
-                        fontSize = 17.sp
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Today section
-        Text(
-            text = "Today",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color(0xFF8E8E93),
-            modifier = Modifier.padding(horizontal = 4.dp)
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // History items - real data
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(1.dp)
-        ) {
-            items(filteredItems) { item ->
-                val itemKey = "${item.query}_${item.platform}_${item.timestamp}"
-                IOSHistoryItem(
-                    item = item,
-                    isSelectionMode = isSelectionMode,
-                    isSelected = selectedItems.contains(itemKey),
-                    onDelete = {
-                        // Delete from history
-                        deleteSearchHistory(context, item)
-                        historyItems = loadSearchHistory(context)
-                    },
-                    onRestore = {
-                        // Restore/repeat search with original mode
-                        val originalMode = getSearchMode(context, item)
-                        performSearch(context, item.platform, item.query, originalMode)
-                    },
-                    onSelectionToggle = {
-                        selectedItems = if (selectedItems.contains(itemKey)) {
-                            selectedItems - itemKey
-                        } else {
-                            selectedItems + itemKey
                         }
                     }
-                )
+                }
             }
         }
     }
 }
-
-data class HistoryItem(
-    val query: String,
-    val platform: String,
-    val timestamp: String,
-    val iconRes: Int
-)
 
 @Composable
 fun FilterChip(
@@ -1089,140 +1682,21 @@ fun FilterChip(
 ) {
     Button(
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (isSelected) Color(0xFF007AFF) else Color(0xFFF2F2F7),
-            contentColor = if (isSelected) Color.White else Color(0xFF1C1C1E)
+            containerColor = if (isSelected) Color(0xFF007AFF) else Color(0xFF007AFF).copy(alpha = 0.1f),
+            contentColor = if (isSelected) Color.White else Color(0xFF007AFF)
         ),
+        shape = RoundedCornerShape(16.dp),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 0.dp
         ),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
     ) {
         Text(
             text = text,
-            fontSize = 15.sp,
+            fontSize = 12.sp,
             fontWeight = FontWeight.Medium
         )
-    }
-}
-
-@Composable
-fun IOSHistoryItem(
-    item: HistoryItem,
-    isSelectionMode: Boolean = false,
-    isSelected: Boolean = false,
-    onDelete: () -> Unit = {},
-    onRestore: () -> Unit = {},
-    onSelectionToggle: () -> Unit = {}
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                if (isSelectionMode) {
-                    onSelectionToggle()
-                }
-            },
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isSelected) Color(0xFF007AFF).copy(alpha = 0.1f) else Color.White
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Selection checkbox (only in selection mode)
-            if (isSelectionMode) {
-                Checkbox(
-                    checked = isSelected,
-                    onCheckedChange = { onSelectionToggle() },
-                    colors = CheckboxDefaults.colors(
-                        checkedColor = Color(0xFF007AFF)
-                    )
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-            }
-
-            // Platform icon
-            Image(
-                painter = painterResource(id = item.iconRes),
-                contentDescription = item.platform,
-                modifier = Modifier.size(32.dp),
-                contentScale = ContentScale.Fit
-            )
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = item.query,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color(0xFF1C1C1E),
-                    maxLines = 1
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = item.platform,
-                        fontSize = 15.sp,
-                        color = Color(0xFF007AFF)
-                    )
-
-                    Text(
-                        text = " • ",
-                        fontSize = 15.sp,
-                        color = Color(0xFF8E8E93)
-                    )
-
-                    Text(
-                        text = item.timestamp,
-                        fontSize = 15.sp,
-                        color = Color(0xFF8E8E93)
-                    )
-                }
-            }
-
-            // Action buttons - exactly like iOS (only in normal mode)
-            if (!isSelectionMode) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    IconButton(
-                        onClick = onDelete
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete",
-                            tint = Color(0xFFFF3B30),
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-
-                    IconButton(
-                        onClick = onRestore
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "Restore",
-                            tint = Color(0xFF007AFF),
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                }
-            }
-        }
     }
 }
 

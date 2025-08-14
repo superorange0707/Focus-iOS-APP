@@ -200,6 +200,8 @@ class SearchHistoryManager: ObservableObject {
     
     private init() {
         loadSearchHistory()
+        // Automatically clean invalid entries on startup
+        cleanupInvalidEntries()
     }
     
     private func loadSearchHistory() {
@@ -207,7 +209,20 @@ class SearchHistoryManager: ObservableObject {
               let history = try? JSONDecoder().decode([SearchHistoryItem].self, from: data) else {
             return
         }
-        self.searchHistory = history
+
+        // Filter out invalid entries (like 1970 dates or corrupted timestamps)
+        let validHistory = history.filter { item in
+            // Check if timestamp is reasonable (after 2020)
+            let year2020 = Date(timeIntervalSince1970: 1577836800) // Jan 1, 2020
+            return item.timestamp >= year2020 && !item.query.isEmpty
+        }
+
+        self.searchHistory = validHistory
+
+        // If we filtered out invalid entries, save the cleaned data
+        if validHistory.count != history.count {
+            saveSearchHistory()
+        }
     }
     
     private func saveSearchHistory() {
@@ -272,6 +287,29 @@ class SearchHistoryManager: ObservableObject {
 
         if searchHistory.count != initialCount {
             saveSearchHistory()
+        }
+    }
+
+    // Clean invalid entries (like 1970 dates or corrupted data)
+    func cleanupInvalidEntries() {
+        let initialCount = searchHistory.count
+        let year2020 = Date(timeIntervalSince1970: 1577836800) // Jan 1, 2020
+
+        searchHistory.removeAll { item in
+            // Remove entries with invalid timestamps or empty queries
+            let hasInvalidTimestamp = item.timestamp < year2020
+            let hasEmptyQuery = item.query.isEmpty || item.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+            if hasInvalidTimestamp {
+                print("Removing item with invalid timestamp: \(item.query) - \(item.timestamp)")
+            }
+
+            return hasInvalidTimestamp || hasEmptyQuery
+        }
+
+        if searchHistory.count != initialCount {
+            saveSearchHistory()
+            print("✅ Cleaned \(initialCount - searchHistory.count) invalid search history entries")
         }
     }
 

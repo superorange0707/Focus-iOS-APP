@@ -1,0 +1,693 @@
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:17: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk = 34
+        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdkVersion specifies that it has been tested with,
+   various compatibility modes kick in. This ensures that your application
+   continues to work, but it may look out of place. For example, if the
+   targetSdkVersion is less than 14, your app may get an option button in the
+   UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:23: Warning: Redundant label can be removed [RedundantLabel]
+            android:label="@string/app_name"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "RedundantLabel":
+   When an activity does not have a label attribute, it will use the one from
+   the application tag. Since the application has already specified the same
+   label, the label on this activity can be omitted.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/gradle/wrapper/gradle-wrapper.properties:3: Warning: A newer version of Gradle than 8.13 is available: 8.14.3 [AndroidGradlePluginVersion]
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.13-all.zip
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:12: Warning: A newer version of compileSdkVersion than 34 is available: 36 [GradleDependency]
+    compileSdk = 34
+    ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:58: Warning: A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.17.0 [GradleDependency]
+    implementation("androidx.core:core-ktx:1.12.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:59: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.7.0 is available: 2.9.2 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:60: Warning: A newer version of androidx.activity:activity-compose than 1.8.2 is available: 1.10.1 [GradleDependency]
+    implementation("androidx.activity:activity-compose:1.8.2")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:61: Warning: A newer version of androidx.compose:compose-bom than 2024.02.00 is available: 2025.08.00 [GradleDependency]
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:68: Warning: A newer version of androidx.navigation:navigation-compose than 2.7.6 is available: 2.9.3 [GradleDependency]
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:71: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-compose than 2.7.0 is available: 2.9.2 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:72: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-compose than 2.7.0 is available: 2.9.2 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:95: Warning: A newer version of androidx.room:room-runtime than 2.6.1 is available: 2.7.2 [GradleDependency]
+    implementation("androidx.room:room-runtime:2.6.1")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:96: Warning: A newer version of androidx.room:room-ktx than 2.6.1 is available: 2.7.2 [GradleDependency]
+    implementation("androidx.room:room-ktx:2.6.1")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:97: Warning: A newer version of androidx.room:room-compiler than 2.6.1 is available: 2.7.2 [GradleDependency]
+    kapt("androidx.room:room-compiler:2.6.1")
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:106: Warning: A newer version of androidx.webkit:webkit than 1.9.0 is available: 1.14.0 [GradleDependency]
+    implementation("androidx.webkit:webkit:1.9.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:119: Warning: A newer version of androidx.hilt:hilt-navigation-compose than 1.1.0 is available: 1.2.0 [GradleDependency]
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:123: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:124: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:125: Warning: A newer version of androidx.compose:compose-bom than 2024.02.00 is available: 2025.08.00 [GradleDependency]
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:75: Warning: A newer version of com.squareup.retrofit2:retrofit than 2.9.0 is available: 3.0.0 [NewerVersionAvailable]
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:76: Warning: A newer version of com.squareup.retrofit2:converter-gson than 2.9.0 is available: 3.0.0 [NewerVersionAvailable]
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:77: Warning: A newer version of com.squareup.okhttp3:logging-interceptor than 4.12.0 is available: 5.1.0 [NewerVersionAvailable]
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:80: Warning: A newer version of com.google.code.gson:gson than 2.10.1 is available: 2.13.1 [NewerVersionAvailable]
+    implementation("com.google.code.gson:gson:2.10.1")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:83: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.10.2 [NewerVersionAvailable]
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:86: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-serialization-json than 1.6.0 is available: 1.9.0 [NewerVersionAvailable]
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:89: Warning: A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0 [NewerVersionAvailable]
+    implementation("io.coil-kt:coil-compose:2.5.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:103: Warning: A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0 [NewerVersionAvailable]
+    implementation("io.coil-kt:coil-compose:2.5.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:109: Warning: A newer version of com.google.accompanist:accompanist-systemuicontroller than 0.32.0 is available: 0.36.0 [NewerVersionAvailable]
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:117: Warning: A newer version of com.google.dagger:hilt-android than 2.48 is available: 2.57 [NewerVersionAvailable]
+    implementation("com.google.dagger:hilt-android:2.48")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:118: Warning: A newer version of com.google.dagger:hilt-compiler than 2.48 is available: 2.57 [NewerVersionAvailable]
+    kapt("com.google.dagger:hilt-compiler:2.48")
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/theme/Theme.kt:33: Warning: Missing Color alpha channel [MissingColorAlphaChannel from androidx.compose.ui.graphics]
+    val LightGlassBackground = Color(0xFAFCFF).copy(alpha = 0.85f) // Subtle blue tint
+                                     ~~~~~~~~
+
+   Explanation for issues of type "MissingColorAlphaChannel":
+   Creating a Color with a hex value requires a 32 bit value (such as
+   0xFF000000), with 8 bits being used per channel (ARGB). Not passing a full
+   32 bit value will result in channels being undefined. For example, passing
+   0xFF0000 will result in a missing alpha channel, so the color will not
+   appear visible.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui.graphics
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:133: Warning: Overriding @string/copy which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override="true", otherwise pick a different name. [PrivateResource]
+    <string name="copy">Copy</string>
+                  ~~~~
+
+   Explanation for issues of type "PrivateResource":
+   Private resources should not be referenced; the may not be present
+   everywhere, and even where they are they may disappear without notice.
+
+   To fix this, copy the resource into your own project instead.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts:97: Warning: This library supports using KSP instead of kapt, which greatly improves performance. Learn more: https://developer.android.com/studio/build/migrate-to-ksp [KaptUsageInsteadOfKsp]
+    kapt("androidx.room:room-compiler:2.6.1")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "KaptUsageInsteadOfKsp":
+   KSP is a more efficient replacement for kapt. For libraries that support
+   both, KSP should be used to improve build times.
+
+   https://developer.android.com/studio/build/migrate-to-ksp
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:5: Warning: The resource R.color.focus_blue_dark appears to be unused [UnusedResources]
+    <color name="focus_blue_dark">#0056B3</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:9: Warning: The resource R.color.background_primary_dark appears to be unused [UnusedResources]
+    <color name="background_primary_dark">#000000</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:11: Warning: The resource R.color.background_secondary_dark appears to be unused [UnusedResources]
+    <color name="background_secondary_dark">#1C1C1E</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:15: Warning: The resource R.color.text_primary_dark appears to be unused [UnusedResources]
+    <color name="text_primary_dark">#FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:17: Warning: The resource R.color.text_secondary_dark appears to be unused [UnusedResources]
+    <color name="text_secondary_dark">#8E8E93</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:18: Warning: The resource R.color.text_tertiary appears to be unused [UnusedResources]
+    <color name="text_tertiary">#ADB5BD</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:19: Warning: The resource R.color.text_tertiary_dark appears to be unused [UnusedResources]
+    <color name="text_tertiary_dark">#636366</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:22: Warning: The resource R.color.reddit_orange appears to be unused [UnusedResources]
+    <color name="reddit_orange">#FF4500</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:23: Warning: The resource R.color.youtube_red appears to be unused [UnusedResources]
+    <color name="youtube_red">#FF0000</color>
+           ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:24: Warning: The resource R.color.x_blue appears to be unused [UnusedResources]
+    <color name="x_blue">#1DA1F2</color>
+           ~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:25: Warning: The resource R.color.tiktok_black appears to be unused [UnusedResources]
+    <color name="tiktok_black">#000000</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:26: Warning: The resource R.color.instagram_pink appears to be unused [UnusedResources]
+    <color name="instagram_pink">#E4405F</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:27: Warning: The resource R.color.facebook_blue appears to be unused [UnusedResources]
+    <color name="facebook_blue">#1877F2</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:30: Warning: The resource R.color.gradient_top appears to be unused [UnusedResources]
+    <color name="gradient_top">#E3F2FD</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:31: Warning: The resource R.color.gradient_top_dark appears to be unused [UnusedResources]
+    <color name="gradient_top_dark">#0D1B2A</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:32: Warning: The resource R.color.gradient_middle appears to be unused [UnusedResources]
+    <color name="gradient_middle">#BBDEFB</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:33: Warning: The resource R.color.gradient_middle_dark appears to be unused [UnusedResources]
+    <color name="gradient_middle_dark">#1B263B</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:34: Warning: The resource R.color.gradient_bottom appears to be unused [UnusedResources]
+    <color name="gradient_bottom">#90CAF9</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:35: Warning: The resource R.color.gradient_bottom_dark appears to be unused [UnusedResources]
+    <color name="gradient_bottom_dark">#415A77</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:38: Warning: The resource R.color.glass_background appears to be unused [UnusedResources]
+    <color name="glass_background">#80FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:39: Warning: The resource R.color.glass_background_dark appears to be unused [UnusedResources]
+    <color name="glass_background_dark">#80000000</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:40: Warning: The resource R.color.glass_stroke appears to be unused [UnusedResources]
+    <color name="glass_stroke">#40FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:41: Warning: The resource R.color.glass_stroke_dark appears to be unused [UnusedResources]
+    <color name="glass_stroke_dark">#40FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:44: Warning: The resource R.color.shadow_color appears to be unused [UnusedResources]
+    <color name="shadow_color">#40000000</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:45: Warning: The resource R.color.selected_shadow_color appears to be unused [UnusedResources]
+    <color name="selected_shadow_color">#40007AFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:49: Warning: The resource R.color.black appears to be unused [UnusedResources]
+    <color name="black">#000000</color>
+           ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:53: Warning: The resource R.color.success appears to be unused [UnusedResources]
+    <color name="success">#28A745</color>
+           ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:55: Warning: The resource R.color.warning appears to be unused [UnusedResources]
+    <color name="warning">#FFC107</color>
+           ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/colors.xml:56: Warning: The resource R.color.info appears to be unused [UnusedResources]
+    <color name="info">#17A2B8</color>
+           ~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:5: Warning: The resource R.string.tagline appears to be unused [UnusedResources]
+    <string name="tagline">Skip the feed, find what matters</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:6: Warning: The resource R.string.subtitle appears to be unused [UnusedResources]
+    <string name="subtitle">Direct search, zero distractions</string>
+            ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:9: Warning: The resource R.string.reddit appears to be unused [UnusedResources]
+    <string name="reddit">Reddit</string>
+            ~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:10: Warning: The resource R.string.youtube appears to be unused [UnusedResources]
+    <string name="youtube">YouTube</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:11: Warning: The resource R.string.x appears to be unused [UnusedResources]
+    <string name="x">X</string>
+            ~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:12: Warning: The resource R.string.tiktok appears to be unused [UnusedResources]
+    <string name="tiktok">TikTok</string>
+            ~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:13: Warning: The resource R.string.instagram appears to be unused [UnusedResources]
+    <string name="instagram">Instagram</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:14: Warning: The resource R.string.facebook appears to be unused [UnusedResources]
+    <string name="facebook">Facebook</string>
+            ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:17: Warning: The resource R.string.search_hint appears to be unused [UnusedResources]
+    <string name="search_hint">What are you looking for?</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:18: Warning: The resource R.string.search_button appears to be unused [UnusedResources]
+    <string name="search_button">Search</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:19: Warning: The resource R.string.searching appears to be unused [UnusedResources]
+    <string name="searching">Searching…</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:20: Warning: The resource R.string.open_in appears to be unused [UnusedResources]
+    <string name="open_in">Open in</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:21: Warning: The resource R.string.search_on appears to be unused [UnusedResources]
+    <string name="search_on">Search on</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:22: Warning: The resource R.string.open_tiktok_search appears to be unused [UnusedResources]
+    <string name="open_tiktok_search">Open TikTok Search</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:23: Warning: The resource R.string.tiktok_search_message appears to be unused [UnusedResources]
+    <string name="tiktok_search_message">Opens TikTok search page where you can input your query</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:28: Warning: The resource R.string.search_mode_direct appears to be unused [UnusedResources]
+    <string name="search_mode_direct">Direct Search</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:29: Warning: The resource R.string.search_mode_in_app appears to be unused [UnusedResources]
+    <string name="search_mode_in_app">In-App Browsing</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:38: Warning: The resource R.string.recent_searches appears to be unused [UnusedResources]
+    <string name="recent_searches">Recent Searches</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:39: Warning: The resource R.string.clear appears to be unused [UnusedResources]
+    <string name="clear">Clear</string>
+            ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:40: Warning: The resource R.string.no_recent_searches appears to be unused [UnusedResources]
+    <string name="no_recent_searches">No recent searches</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:50: Warning: The resource R.string.usage_statistics appears to be unused [UnusedResources]
+    <string name="usage_statistics">Usage Statistics</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:51: Warning: The resource R.string.total_searches appears to be unused [UnusedResources]
+    <string name="total_searches">Total Searches</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:52: Warning: The resource R.string.searches_today appears to be unused [UnusedResources]
+    <string name="searches_today">Searches Today</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:53: Warning: The resource R.string.time_saved appears to be unused [UnusedResources]
+    <string name="time_saved">Time Saved</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:54: Warning: The resource R.string.time_saved_today appears to be unused [UnusedResources]
+    <string name="time_saved_today">Time Saved Today</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:55: Warning: The resource R.string.minutes appears to be unused [UnusedResources]
+    <string name="minutes">minutes</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:56: Warning: The resource R.string.hours appears to be unused [UnusedResources]
+    <string name="hours">hours</string>
+            ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:57: Warning: The resource R.string.searches_by_platform appears to be unused [UnusedResources]
+    <string name="searches_by_platform">Searches by Platform</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:58: Warning: The resource R.string.no_stats_yet appears to be unused [UnusedResources]
+    <string name="no_stats_yet">No statistics yet</string>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:59: Warning: The resource R.string.start_searching_stats appears to be unused [UnusedResources]
+    <string name="start_searching_stats">Start searching to see your statistics</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:68: Warning: The resource R.string.version appears to be unused [UnusedResources]
+    <string name="version">Version</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:75: Warning: The resource R.string.export_data appears to be unused [UnusedResources]
+    <string name="export_data">Export Data</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:76: Warning: The resource R.string.export_search_history appears to be unused [UnusedResources]
+    <string name="export_search_history">Export Search History</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:77: Warning: The resource R.string.export_statistics appears to be unused [UnusedResources]
+    <string name="export_statistics">Export Statistics</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:78: Warning: The resource R.string.export_all_data appears to be unused [UnusedResources]
+    <string name="export_all_data">Export All Data</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:79: Warning: The resource R.string.export_success appears to be unused [UnusedResources]
+    <string name="export_success">Data exported successfully</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:80: Warning: The resource R.string.export_failed appears to be unused [UnusedResources]
+    <string name="export_failed">Export failed</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:83: Warning: The resource R.string.about_description appears to be unused [UnusedResources]
+    <string name="about_description">SkipFeed helps you search social media platforms directly without getting distracted by endless feeds. Find what you\'re looking for faster and save time.</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:84: Warning: The resource R.string.privacy_policy appears to be unused [UnusedResources]
+    <string name="privacy_policy">Privacy Policy</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:85: Warning: The resource R.string.terms_of_service appears to be unused [UnusedResources]
+    <string name="terms_of_service">Terms of Service</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:86: Warning: The resource R.string.contact_support appears to be unused [UnusedResources]
+    <string name="contact_support">Contact Support</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:89: Warning: The resource R.string.welcome_title appears to be unused [UnusedResources]
+    <string name="welcome_title">Welcome to SkipFeed</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:90: Warning: The resource R.string.welcome_subtitle appears to be unused [UnusedResources]
+    <string name="welcome_subtitle">Skip the feed, find what matters</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:91: Warning: The resource R.string.onboarding_search_title appears to be unused [UnusedResources]
+    <string name="onboarding_search_title">Direct Search</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:92: Warning: The resource R.string.onboarding_search_description appears to be unused [UnusedResources]
+    <string name="onboarding_search_description">Search across multiple social media platforms without getting distracted by feeds</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:93: Warning: The resource R.string.onboarding_platforms_title appears to be unused [UnusedResources]
+    <string name="onboarding_platforms_title">All Your Platforms</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:94: Warning: The resource R.string.onboarding_platforms_description appears to be unused [UnusedResources]
+    <string name="onboarding_platforms_description">Reddit, YouTube, X, TikTok, Instagram, and Facebook all in one place</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:95: Warning: The resource R.string.onboarding_focus_title appears to be unused [UnusedResources]
+    <string name="onboarding_focus_title">Stay Focused</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:96: Warning: The resource R.string.onboarding_focus_description appears to be unused [UnusedResources]
+    <string name="onboarding_focus_description">Find what you\'re looking for quickly and save time that would be wasted scrolling</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:97: Warning: The resource R.string.get_started appears to be unused [UnusedResources]
+    <string name="get_started">Get Started</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:98: Warning: The resource R.string.next appears to be unused [UnusedResources]
+    <string name="next">Next</string>
+            ~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:99: Warning: The resource R.string.skip appears to be unused [UnusedResources]
+    <string name="skip">Skip</string>
+            ~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:102: Warning: The resource R.string.reddit_search appears to be unused [UnusedResources]
+    <string name="reddit_search">Reddit Search</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:103: Warning: The resource R.string.sort_by appears to be unused [UnusedResources]
+    <string name="sort_by">Sort by</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:104: Warning: The resource R.string.time_filter appears to be unused [UnusedResources]
+    <string name="time_filter">Time Filter</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:105: Warning: The resource R.string.relevance appears to be unused [UnusedResources]
+    <string name="relevance">Relevance</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:106: Warning: The resource R.string.hot appears to be unused [UnusedResources]
+    <string name="hot">Hot</string>
+            ~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:107: Warning: The resource R.string.top appears to be unused [UnusedResources]
+    <string name="top">Top</string>
+            ~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:108: Warning: The resource R.string.new_posts appears to be unused [UnusedResources]
+    <string name="new_posts">New</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:109: Warning: The resource R.string.comments appears to be unused [UnusedResources]
+    <string name="comments">Comments</string>
+            ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:110: Warning: The resource R.string.all_time appears to be unused [UnusedResources]
+    <string name="all_time">All Time</string>
+            ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:111: Warning: The resource R.string.past_year appears to be unused [UnusedResources]
+    <string name="past_year">Past Year</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:112: Warning: The resource R.string.past_month appears to be unused [UnusedResources]
+    <string name="past_month">Past Month</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:113: Warning: The resource R.string.past_week appears to be unused [UnusedResources]
+    <string name="past_week">Past Week</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:114: Warning: The resource R.string.past_day appears to be unused [UnusedResources]
+    <string name="past_day">Past Day</string>
+            ~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:115: Warning: The resource R.string.past_hour appears to be unused [UnusedResources]
+    <string name="past_hour">Past Hour</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:116: Warning: The resource R.string.load_more appears to be unused [UnusedResources]
+    <string name="load_more">Load More</string>
+            ~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:117: Warning: The resource R.string.no_results appears to be unused [UnusedResources]
+    <string name="no_results">No results found</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:118: Warning: The resource R.string.upvotes appears to be unused [UnusedResources]
+    <string name="upvotes">upvotes</string>
+            ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:119: Warning: The resource R.string.comments_count appears to be unused [UnusedResources]
+    <string name="comments_count">comments</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:122: Warning: The resource R.string.error_network appears to be unused [UnusedResources]
+    <string name="error_network">Network error. Please check your connection.</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:123: Warning: The resource R.string.error_unknown appears to be unused [UnusedResources]
+    <string name="error_unknown">An unknown error occurred.</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:124: Warning: The resource R.string.error_no_app appears to be unused [UnusedResources]
+    <string name="error_no_app">No app found to handle this action.</string>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:125: Warning: The resource R.string.retry appears to be unused [UnusedResources]
+    <string name="retry">Retry</string>
+            ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:128: Warning: The resource R.string.ok appears to be unused [UnusedResources]
+    <string name="ok">OK</string>
+            ~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:129: Warning: The resource R.string.done appears to be unused [UnusedResources]
+    <string name="done">Done</string>
+            ~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:130: Warning: The resource R.string.close appears to be unused [UnusedResources]
+    <string name="close">Close</string>
+            ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:131: Warning: The resource R.string.delete appears to be unused [UnusedResources]
+    <string name="delete">Delete</string>
+            ~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:132: Warning: The resource R.string.share appears to be unused [UnusedResources]
+    <string name="share">Share</string>
+            ~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:133: Warning: The resource R.string.copy appears to be unused [UnusedResources]
+    <string name="copy">Copy</string>
+            ~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml:134: Warning: The resource R.string.copied appears to be unused [UnusedResources]
+    <string name="copied">Copied to clipboard</string>
+            ~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-hdpi/ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-mdpi/ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xhdpi/ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxhdpi/ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png: Warning: Launcher icons should not fill every pixel of their square region; see the design guide for details [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-hdpi/ic_launcher_round.png: Warning: Launcher icon used as round icon did not have a circular shape [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-mdpi/ic_launcher_round.png: Warning: Launcher icon used as round icon did not have a circular shape [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png: Warning: Launcher icon used as round icon did not have a circular shape [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png: Warning: Launcher icon used as round icon did not have a circular shape [IconLauncherShape]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png: Warning: Launcher icon used as round icon did not have a circular shape [IconLauncherShape]
+
+   Explanation for issues of type "IconLauncherShape":
+   According to the Android Design Guide
+   (https://d.android.com/r/studio-ui/designer/material/iconography) your
+   launcher icons should "use a distinct silhouette", a "three-dimensional,
+   front view, with a slight perspective as if viewed from above, so that
+   users perceive some depth."
+
+   The unique silhouette implies that your launcher icon should not be a
+   filled square.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_facebook.png: Warning: Found bitmap drawable res/drawable/icon_facebook.png in densityless folder [IconLocation]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_instagram.png: Warning: Found bitmap drawable res/drawable/icon_instagram.png in densityless folder [IconLocation]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_reddit.png: Warning: Found bitmap drawable res/drawable/icon_reddit.png in densityless folder [IconLocation]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_tiktok.png: Warning: Found bitmap drawable res/drawable/icon_tiktok.png in densityless folder [IconLocation]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_x.png: Warning: Found bitmap drawable res/drawable/icon_x.png in densityless folder [IconLocation]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/drawable/icon_youtube.png: Warning: Found bitmap drawable res/drawable/icon_youtube.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-hdpi/ic_launcher_round.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png [IconDuplicates]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-mdpi/ic_launcher_round.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png [IconDuplicates]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png [IconDuplicates]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png [IconDuplicates]
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png: Warning: The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png [IconDuplicates]
+
+   Explanation for issues of type "IconDuplicates":
+   If an icon is repeated under different names, you can consolidate and just
+   use one of the icons and delete the others to make your application
+   smaller. However, duplicated icons usually are not intentional and can
+   sometimes point to icons that were accidentally overwritten or accidentally
+   not updated.
+
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:231: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                val redditAppIntent = Intent(Intent.ACTION_VIEW, Uri.parse("reddit://www.reddit.com/search/?q=$encodedQuery"))
+                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:232: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.reddit.com/search/?q=$encodedQuery"))
+                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:253: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(searchUrl))
+                                                            ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:274: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(searchUrl))
+                                                        ~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:295: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    sharedPrefs.edit()
+    ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:356: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    val editor = sharedPrefs.edit()
+                 ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:385: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    sharedPrefs.edit().clear().apply()
+    ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:393: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    val editor = sharedPrefs.edit()
+                 ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:444: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    val editor = sharedPrefs.edit()
+                 ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:512: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    sharedPrefs.edit()
+    ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:547: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    sharedPrefs.edit().clear().apply()
+    ~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt:705: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tiktok.com/search"))
+                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/data/model/Platform.kt:102: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+        return Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                                          ~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/RedditSearchScreen.kt:102: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(post.redditUrl))
+                                                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/data/repository/UserPreferencesRepository.kt:68: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+        with(sharedPreferences.edit()) {
+             ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseKtx":
+   The Android KTX libraries decorates the Android platform SDK as well as
+   various libraries with more convenient extension functions available from
+   Kotlin, allowing you to use default parameters, named parameters, and
+   more.
+
+   Available options:
+
+   **remove-defaults** (default is true):
+   Whether to skip arguments that match the defaults provided by the extension.
+
+   Extensions often provide default values for some of the parameters. For example:
+   ```kotlin
+   fun Path.readLines(charset: Charset = Charsets.UTF_8): List<String> { return Files.readAllLines(this, charset) }
+   ```
+   This lint check will by default automatically omit parameters that match the default, so if your code was calling
+
+   ```kotlin
+   Files.readAllLines(file, Charset.UTF_8)
+   ```
+   lint would replace this with
+   ```kotlin
+   file.readLines()
+   ```
+   rather than
+
+   ```kotlin
+   file.readLines(Charset.UTF_8
+   ```
+   You can turn this behavior off using this option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="remove-defaults" value="true" />
+       </issue>
+   </lint>
+   ```
+
+   **require-present** (default is true):
+   Whether to only offer extensions already available.
+
+   This option lets you only have lint suggest extension replacements if those extensions are already available on the class path (in other words, you're already depending on the library containing the extension method.)
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="require-present" value="true" />
+       </issue>
+   </lint>
+   ```
+
+0 errors, 179 warnings

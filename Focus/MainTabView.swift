@@ -28,13 +28,20 @@ struct MainTabView: View {
                     Text("Stats")
                 }
                 .tag(2)
+
+            CompareView()
+                .tabItem {
+                    Image(systemName: "person.2.fill")
+                    Text("Compare")
+                }
+                .tag(3)
             
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("Settings")
                 }
-                .tag(3)
+                .tag(4)
         }
         .tabViewStyle(DefaultTabViewStyle())
         .accentColor(.focusBlue)

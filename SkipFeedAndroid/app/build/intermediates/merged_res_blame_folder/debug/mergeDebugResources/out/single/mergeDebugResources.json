@@ -8,12 +8,12 @@
         "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_tiktok.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_tiktok.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_splash_icon_wrapper.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/splash_icon_wrapper.xml"
     },
     {
-        "merged": "com.skipfeed.android.app-debug-79:/drawable_splash_icon.xml.flat",
-        "source": "com.skipfeed.android.app-main-81:/drawable/splash_icon.xml"
+        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_tiktok.xml.flat",
+        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_tiktok.xml"
     },
     {
         "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_instagram.xml.flat",

@@ -346,11 +346,17 @@ struct HistoryTabContent: View {
 
                     // Action buttons
                     HStack(spacing: 16) {
-                        Button("Clean Now") {
+                        Button("Clean Old Items") {
                             cleanOldItems()
                         }
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.blue)
+
+                        Button("Clean Invalid") {
+                            searchHistoryManager.cleanupInvalidEntries()
+                        }
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.orange)
 
                         Spacer()
 

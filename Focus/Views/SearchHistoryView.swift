@@ -269,9 +269,13 @@ struct SearchHistoryView: View {
                                         .background(Color.red.opacity(0.1))
                                         .cornerRadius(14)
                                     }
-                                    
-                                    // Clear All button (only when not in selection mode)
+
+                                    // Buttons for non-selection mode
                                     if !isSelectionMode {
+                                        // Clean Invalid button - remove this as it's not useful
+                                        // The invalid entries are now automatically cleaned on load
+
+                                        // Clear All button
                                         Button("Clear All") {
                                             searchHistoryManager.clearHistory()
                                         }

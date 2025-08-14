@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app"
+    name=":app"
+    type="APP"
+    maven="SkipFeed Android:app:unspecified"
+    agpVersion="8.12.0"
+    buildFolder="build"
+    bootClassPath="/Users/wangdechun/Library/Android/sdk/platforms/android-34/android.jar:/Users/wangdechun/Library/Android/sdk/build-tools/35.0.0/core-lambda-stubs.jar"
+    javaSourceLevel="17"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

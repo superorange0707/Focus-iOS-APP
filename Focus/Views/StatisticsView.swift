@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // Import Charts only if available (iOS 16+)
 #if canImport(Charts)
@@ -10,6 +11,7 @@ struct StatisticsView: View {
     @StateObject private var analyticsManager = UsageAnalyticsManager.shared
     @StateObject private var localizationManager = LocalizationManager.shared
     @State private var selectedTimeRange: TimeRange = .week
+    @State private var showingShareStudio = false
     
     enum TimeRange: String, CaseIterable {
         case week = "7d"
@@ -95,6 +97,17 @@ struct StatisticsView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle(localizationManager.localizedString(.statistics))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingShareStudio = true }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .accessibilityLabel("Share Studio")
+                }
+            }
+            .sheet(isPresented: $showingShareStudio) {
+                ShareStudioView()
+            }
         }
     }
     
@@ -124,6 +137,8 @@ struct StatisticsView: View {
         }
     }
 }
+
+
 
 // MARK: - Platform Usage Pie Chart
 struct PlatformUsagePieChartCard: View {
