@@ -52,6 +52,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    lint {
+        disable += "MissingTranslation"
+    }
 }
 
 dependencies {
@@ -87,6 +90,9 @@ dependencies {
 
     // Image loading
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    // WebView for in-app browsing
+    implementation("androidx.webkit:webkit:1.8.0")
 
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.0.1")

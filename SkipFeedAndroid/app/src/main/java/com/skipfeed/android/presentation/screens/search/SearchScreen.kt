@@ -40,6 +40,7 @@ import com.skipfeed.android.R
 import com.skipfeed.android.data.model.Platform
 import com.skipfeed.android.data.model.SearchMode
 import com.skipfeed.android.presentation.components.PlatformSelector
+import com.skipfeed.android.presentation.components.TikTokWebViewDialog
 import com.skipfeed.android.presentation.components.SearchModeToggle
 import com.skipfeed.android.presentation.theme.*
 
@@ -52,6 +53,7 @@ fun SearchScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
+    var showTikTokWebView by remember { mutableStateOf(false) }
 
     // Animation for search button scale
     val searchButtonScale by animateFloatAsState(
@@ -141,7 +143,7 @@ fun SearchScreen(
                         SearchModeToggleView(
                             searchMode = uiState.searchMode,
                             onSearchModeChanged = viewModel::updateSearchMode,
-                            modifier = Modifier.padding(top = (-6).dp) // Reduced spacing like iOS
+                            modifier = Modifier.padding(top = 0.dp) // Fixed negative padding
                         )
                     }
                 } else {
@@ -173,7 +175,13 @@ fun SearchScreen(
                     onClick = {
                         keyboardController?.hide()
                         focusManager.clearFocus()
-                        viewModel.performSearch(context)
+
+                        if (uiState.selectedPlatform == Platform.TIKTOK) {
+                            // Show in-app TikTok WebView
+                            showTikTokWebView = true
+                        } else {
+                            viewModel.performSearch(context)
+                        }
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -331,6 +339,13 @@ fun SearchScreen(
                 )
             }
         }
+    }
+
+    // TikTok WebView Dialog
+    if (showTikTokWebView) {
+        TikTokWebViewDialog(
+            onDismiss = { showTikTokWebView = false }
+        )
     }
 }
 

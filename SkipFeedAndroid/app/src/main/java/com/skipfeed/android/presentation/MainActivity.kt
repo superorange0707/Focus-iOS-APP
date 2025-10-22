@@ -26,6 +26,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import java.util.Calendar
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+import com.skipfeed.android.data.model.Platform
+import com.skipfeed.android.data.repository.UsageAnalyticsRepository
+import com.skipfeed.android.presentation.components.TikTokWebViewDialog
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -50,11 +55,28 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.skipfeed.android.R
 import com.skipfeed.android.data.repository.SearchRepository
+import com.skipfeed.android.presentation.screens.history.SearchHistoryScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.ui.draw.scale
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.res.stringResource
+import androidx.compose.material3.Surface
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.runtime.CompositionLocalProvider
 
 // Data classes
 data class HistoryItem(
@@ -65,7 +87,7 @@ data class HistoryItem(
     val timestampMillis: Long = 0L // Add actual timestamp for filtering
 )
 
-data class Platform(
+data class PlatformInfo(
     val name: String,
     val iconRes: Int
 )
@@ -76,44 +98,60 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var searchRepository: SearchRepository
 
+    @Inject
+    lateinit var usageAnalyticsRepository: UsageAnalyticsRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install splash screen before super.onCreate()
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
+
+        // Initialize LocalizationManager
+        com.skipfeed.android.data.LocalizationManager.getInstance().initialize(this)
+
         setContent {
-            SkipFeedApp(searchRepository)
+            SkipFeedApp(searchRepository, usageAnalyticsRepository)
         }
     }
 }
 
 @Composable
-fun SkipFeedApp(searchRepository: SearchRepository) {
+fun SkipFeedApp(searchRepository: SearchRepository, usageAnalyticsRepository: UsageAnalyticsRepository) {
     val navController = rememberNavController()
-    
-    // iOS-style gradient background
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = androidx.compose.ui.graphics.Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFF0F8FF), // Alice Blue
-                        Color(0xFFE6F3FF), // Light blue
-                        Color(0xFFD1E9FF)  // Deeper light blue
+    val localizationManager = remember { com.skipfeed.android.data.LocalizationManager.getInstance() }
+
+    // Set layout direction based on current language
+    val layoutDirection = if (localizationManager.isRightToLeft()) {
+        LayoutDirection.Rtl
+    } else {
+        LayoutDirection.Ltr
+    }
+
+    CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
+        // iOS-style gradient background
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                        colors = listOf(
+                            Color(0xFFF0F8FF), // Alice Blue
+                            Color(0xFFE6F3FF), // Light blue
+                            Color(0xFFD1E9FF)  // Deeper light blue
+                        )
                     )
                 )
-            )
-    ) {
+        ) {
         NavHost(
             navController = navController,
             startDestination = "search",
             modifier = Modifier.fillMaxSize()
         ) {
-            composable("search") { SearchScreen(navController, searchRepository) }
-            composable("history") { HistoryScreen() }
-            composable("stats") { StatsScreen() }
-            composable("settings") { SettingsScreen() }
+            composable("search") { SearchScreen(navController, searchRepository, usageAnalyticsRepository) }
+            composable("history") { HistoryScreen(searchRepository, usageAnalyticsRepository) }
+            composable("stats") { StatisticsScreen() }
+            composable("settings") { SettingsScreen(searchRepository, usageAnalyticsRepository) }
             composable("reddit_search/{query}") { backStackEntry ->
                 val query = backStackEntry.arguments?.getString("query") ?: ""
                 RedditSearchScreen(
@@ -128,6 +166,7 @@ fun SkipFeedApp(searchRepository: SearchRepository) {
             navController = navController,
             modifier = Modifier.align(Alignment.BottomCenter)
         )
+        }
     }
 }
 
@@ -140,10 +179,10 @@ fun IOSTabBar(
     val currentRoute = navBackStackEntry?.destination?.route
     
     val tabs = listOf(
-        TabItem("search", "Search", Icons.Default.Search),
-        TabItem("history", "History", Icons.Default.History),
-        TabItem("stats", "Stats", Icons.Default.BarChart),
-        TabItem("settings", "Settings", Icons.Default.Settings)
+        TabItem("search", stringResource(R.string.search), Icons.Default.Search),
+        TabItem("history", stringResource(R.string.history), Icons.Default.History),
+        TabItem("stats", stringResource(R.string.stats), Icons.Default.BarChart),
+        TabItem("settings", stringResource(R.string.settings), Icons.Default.Settings)
     )
     
     // iOS-style tab bar - clean without extra lines, blends with gradient
@@ -212,12 +251,12 @@ data class TabItem(
 )
 
 val platforms = listOf(
-    Platform("Reddit", R.drawable.icon_reddit),
-    Platform("YouTube", R.drawable.icon_youtube),
-    Platform("X", R.drawable.icon_x),
-    Platform("TikTok", R.drawable.icon_tiktok),
-    Platform("Instagram", R.drawable.icon_instagram),
-    Platform("Facebook", R.drawable.icon_facebook)
+    PlatformInfo("Reddit", R.drawable.icon_reddit),
+    PlatformInfo("YouTube", R.drawable.icon_youtube),
+    PlatformInfo("X", R.drawable.icon_x),
+    PlatformInfo("TikTok", R.drawable.icon_tiktok),
+    PlatformInfo("Instagram", R.drawable.icon_instagram),
+    PlatformInfo("Facebook", R.drawable.icon_facebook)
 )
 
 // Search functionality implementation
@@ -379,11 +418,31 @@ fun deleteSearchHistory(context: android.content.Context, item: HistoryItem) {
     editor.apply()
 }
 
-// Clear all search history
-fun clearAllHistory(context: android.content.Context) {
+// Clear all search history (both SharedPreferences and Room database)
+fun clearAllHistory(context: android.content.Context, searchRepository: SearchRepository? = null, usageAnalyticsRepository: UsageAnalyticsRepository? = null) {
+    // Clear SharedPreferences (legacy storage)
     val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
     sharedPrefs.edit().clear().apply()
-    Toast.makeText(context, "Search history cleared", Toast.LENGTH_SHORT).show()
+    clearRecentSearches(context)
+
+    // Clear Room database if repositories are available
+    if (searchRepository != null && usageAnalyticsRepository != null) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                searchRepository.clearSearchHistory()
+                usageAnalyticsRepository.clearAnalytics()
+                CoroutineScope(Dispatchers.Main).launch {
+                    Toast.makeText(context, "All data cleared successfully", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    Toast.makeText(context, "Error clearing data: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    } else {
+        Toast.makeText(context, "Search history cleared", Toast.LENGTH_SHORT).show()
+    }
 }
 
 // Clean invalid history entries (like Jan 1, 1970)
@@ -581,11 +640,13 @@ fun RecentSearchChip(
 }
 
 @Composable
-fun SearchScreen(navController: NavHostController, searchRepository: SearchRepository) {
+fun SearchScreen(navController: NavHostController, searchRepository: SearchRepository, usageAnalyticsRepository: UsageAnalyticsRepository) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedPlatform by remember { mutableStateOf("Reddit") }
     var searchMode by remember { mutableStateOf("Direct") } // Direct or In-App
+    var showTikTokWebView by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     // Load recent searches - refresh when needed
     var recentSearches by remember { mutableStateOf(loadRecentSearches(context)) }
@@ -622,7 +683,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = "Skip the feed, find what matters",
+                    text = stringResource(R.string.tagline),
                     fontSize = 17.sp,
                     color = Color(0xFF8E8E93)
                 )
@@ -645,7 +706,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
-                    text = "Choose Platform",
+                    text = stringResource(R.string.choose_platform),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF1C1C1E)
@@ -689,7 +750,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Text(
-                        text = "Opens TikTok search page where you can input your query",
+                        text = stringResource(R.string.tiktok_search_message),
                         fontSize = 14.sp,
                         color = Color(0xFF8E8E93),
                         lineHeight = 18.sp
@@ -701,13 +762,13 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                 // Open TikTok Search button
                 Button(
                     onClick = {
-                        try {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tiktok.com/search"))
-                            context.startActivity(intent)
-                            Toast.makeText(context, "Opening TikTok search", Toast.LENGTH_SHORT).show()
-                        } catch (e: Exception) {
-                            Toast.makeText(context, "Unable to open TikTok", Toast.LENGTH_SHORT).show()
+                        // Record analytics
+                        coroutineScope.launch {
+                            usageAnalyticsRepository.recordSearch(Platform.TIKTOK)
                         }
+
+                        // Show in-app TikTok WebView
+                        showTikTokWebView = true
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -737,7 +798,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                         Spacer(modifier = Modifier.width(12.dp))
 
                         Text(
-                            text = "Open TikTok Search",
+                            text = stringResource(R.string.open_tiktok_search),
                             fontSize = 17.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color.White
@@ -799,7 +860,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                         decorationBox = { innerTextField ->
                             if (searchQuery.isEmpty()) {
                                 Text(
-                                    "Search $selectedPlatform...",
+                                    stringResource(R.string.search_hint),
                                     color = Color(0xFF8E8E93),
                                     fontSize = 16.sp
                                 )
@@ -895,6 +956,20 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                 Button(
                     onClick = {
                         if (searchQuery.isNotBlank()) {
+                            // Record analytics
+                            val platform = when (selectedPlatform) {
+                                "Reddit" -> Platform.REDDIT
+                                "YouTube" -> Platform.YOUTUBE
+                                "X" -> Platform.X
+                                "TikTok" -> Platform.TIKTOK
+                                "Instagram" -> Platform.INSTAGRAM
+                                else -> Platform.REDDIT
+                            }
+
+                            coroutineScope.launch {
+                                usageAnalyticsRepository.recordSearch(platform)
+                            }
+
                             // Save to both recent searches and search history database
                             saveSearchToHistory(context, searchQuery, selectedPlatform, searchRepository)
                             recentSearches = loadRecentSearches(context) // Refresh UI
@@ -993,7 +1068,7 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "Recent Searches",
+                            text = stringResource(R.string.recent_searches),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color(0xFF8E8E93)
@@ -1064,18 +1139,25 @@ fun SearchScreen(navController: NavHostController, searchRepository: SearchRepos
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "Direct search, zero distractions",
+                text = stringResource(R.string.subtitle),
                 fontSize = 15.sp,
                 color = Color(0xFF8E8E93),
                 textAlign = TextAlign.Center
             )
         }
     }
+
+    // TikTok WebView Dialog
+    if (showTikTokWebView) {
+        TikTokWebViewDialog(
+            onDismiss = { showTikTokWebView = false }
+        )
+    }
 }
 
 @Composable
 fun IOSPlatformCard(
-    platform: Platform,
+    platform: PlatformInfo,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
@@ -1154,7 +1236,7 @@ fun SearchModeButton(
 }
 
 @Composable
-fun HistoryScreen() {
+fun HistoryScreen(searchRepository: SearchRepository, usageAnalyticsRepository: UsageAnalyticsRepository) {
     val context = LocalContext.current
     var historyItems by remember { mutableStateOf(loadSearchHistory(context)) }
     var searchQuery by remember { mutableStateOf("") }
@@ -1178,7 +1260,7 @@ fun HistoryScreen() {
         ) {
             // Title
             Text(
-                text = "Search History",
+                text = stringResource(R.string.search_history),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF1C1C1E),
@@ -1433,7 +1515,7 @@ fun HistoryScreen() {
                     // Clear All button
                     Button(
                         onClick = {
-                            clearAllHistory(context)
+                            clearAllHistory(context, searchRepository, usageAnalyticsRepository)
                             historyItems = loadSearchHistory(context)
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -1525,7 +1607,7 @@ fun HistoryScreen() {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "No search history yet",
+                    text = stringResource(R.string.no_search_history),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color(0xFF1C1C1E),
@@ -1700,641 +1782,339 @@ fun FilterChip(
     }
 }
 
+
+// MARK: - Legal Content Functions
+
+fun getPrivacyPolicyContent(): String {
+    return """
+SkipFeed Privacy Policy
+
+Last updated: ${java.text.SimpleDateFormat("MMMM dd, yyyy", java.util.Locale.getDefault()).format(java.util.Date())}
+
+1. Information We Collect
+We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support.
+
+2. How We Use Your Information
+We use the information we collect to provide, maintain, and improve our services.
+
+3. Information Sharing
+We do not sell, trade, or otherwise transfer your personal information to third parties.
+
+4. Data Security
+We implement appropriate security measures to protect your personal information.
+
+5. Contact Us
+If you have any questions about this Privacy Policy, please contact us at privacy@skipfeed.app.
+""".trimIndent()
+}
+
+fun getTermsOfServiceContent(): String {
+    return """
+SkipFeed Terms of Service
+
+Last updated: ${java.text.SimpleDateFormat("MMMM dd, yyyy", java.util.Locale.getDefault()).format(java.util.Date())}
+
+1. Acceptance of Terms
+By using SkipFeed, you agree to these terms.
+
+2. Description of Service
+SkipFeed is a search aggregation service for social media platforms.
+
+3. User Responsibilities
+You are responsible for your use of the service and any content you access.
+
+4. Privacy
+Your privacy is important to us. Please review our Privacy Policy.
+
+5. Modifications
+We may modify these terms at any time.
+
+6. Contact
+Questions about these terms? Contact us at legal@skipfeed.app.
+""".trimIndent()
+}
+
+fun getSupportFAQContent(): String {
+    return """
+SkipFeed Support & FAQ
+
+Frequently Asked Questions
+
+Q: How does SkipFeed work?
+A: SkipFeed allows you to search across multiple social media platforms directly, without getting distracted by feeds or endless scrolling.
+
+Q: Which platforms are supported?
+A: We currently support Reddit, YouTube, X (Twitter), TikTok, Instagram, and Facebook.
+
+Q: Is my data private?
+A: Yes! All your search history and usage data is stored locally on your device. We don't collect or transmit your personal data.
+
+Q: Can I export my search history?
+A: Yes, you can export your search history in CSV, TXT, or JSON format from the Settings page.
+
+Q: How do I change the language?
+A: Go to Settings > Language to choose your preferred language or enable auto-detection.
+
+Q: Can I customize platform order?
+A: Yes! You can enable automatic ordering based on your usage frequency, or keep them in a fixed order.
+
+Q: How do I clear my search history?
+A: Go to Settings > Data Management > Clear All Data, or use the time filter options to clear specific periods.
+
+Q: Is there a premium version?
+A: Premium features are coming soon! Stay tuned for updates.
+
+Q: How do I contact support?
+A: Email us at support@skipfeed.app for any questions or issues.
+
+Q: Where can I learn more?
+A: Visit our website at https://skipfeed.app for more information.
+
+Need more help?
+Contact us at: support@skipfeed.app
+""".trimIndent()
+}
+
 @Composable
-fun StatsScreen() {
-    var selectedPeriod by remember { mutableStateOf("7 Days") }
+fun SettingsScreen(searchRepository: SearchRepository, usageAnalyticsRepository: UsageAnalyticsRepository) {
+    var showLanguageSelector by remember { mutableStateOf(false) }
+    var showDataExport by remember { mutableStateOf(false) }
+    var showClearDataDialog by remember { mutableStateOf(false) }
+    var showPrivacyPolicy by remember { mutableStateOf(false) }
+    var showTermsOfService by remember { mutableStateOf(false) }
+    var showSupportFAQ by remember { mutableStateOf(false) }
+    var showRetentionSelector by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val localizationManager = remember { com.skipfeed.android.data.LocalizationManager.getInstance() }
+
+    // User preferences state - load from SharedPreferences
+    var autoDetectLanguage by remember {
+        mutableStateOf(getUserPreference(context, "auto_detect_language", true))
+    }
+    var currentLanguage by remember {
+        mutableStateOf(localizationManager.getCurrentLanguageDisplayName())
+    }
+    var automaticPlatformOrder by remember {
+        mutableStateOf(getUserPreference(context, "automatic_platform_order", true))
+    }
+    var dataRetentionPeriod by remember {
+        mutableStateOf(getUserPreference(context, "data_retention_period", "1 Month"))
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
-            .padding(bottom = 120.dp)
+            .background(Color(0xFFF2F2F7)) // iOS grouped background
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
-
-        // Header
-        Text(
-            text = "Statistics",
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF1C1C1E)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Period selector - exactly like iOS
-        Row(
+        // iOS-style navigation bar
+        Surface(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            color = Color.White,
+            shadowElevation = 0.5.dp
         ) {
-            PeriodButton(
-                text = "7 Days",
-                isSelected = selectedPeriod == "7 Days",
-                onClick = { selectedPeriod = "7 Days" },
-                modifier = Modifier.weight(1f)
-            )
-
-            PeriodButton(
-                text = "30 Days",
-                isSelected = selectedPeriod == "30 Days",
-                onClick = { selectedPeriod = "30 Days" },
-                modifier = Modifier.weight(1f)
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 60.dp, bottom = 16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(R.string.settings),
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF1C1C1E)
+                )
+            }
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 20.dp, bottom = 140.dp)
         ) {
-            // Time Saved Card - exactly like iOS
+            // Preferences Card
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFF34C759) // iOS green
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(24.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Timer,
-                                contentDescription = null,
-                                tint = Color.White,
-                                modifier = Modifier.size(24.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "Time Saved",
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color.White
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Text(
-                            text = "1h 5m",
-                            fontSize = 36.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-
-                        Text(
-                            text = "vs endless scrolling",
-                            fontSize = 15.sp,
-                            color = Color.White.copy(alpha = 0.8f)
-                        )
-                    }
-                }
-            }
-
-            // Stats row - exactly like iOS
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    StatsCard(
-                        title = "26",
-                        subtitle = "Total",
-                        icon = Icons.Default.Search,
-                        color = Color(0xFF007AFF),
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    StatsCard(
-                        title = "26",
-                        subtitle = "Today",
-                        icon = Icons.Default.Today,
-                        color = Color(0xFFFF9500),
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-
-            // Time of Day Analysis - exactly like iOS
-            item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(20.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Schedule,
-                                contentDescription = null,
-                                tint = Color(0xFF007AFF),
-                                modifier = Modifier.size(20.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "Time of Day Analysis",
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF1C1C1E)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        Text(
-                            text = "Most Active: 2:00 AM - 3:00 AM",
-                            fontSize = 15.sp,
-                            color = Color(0xFF8E8E93)
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = "Peak search time when you need focus most",
-                            fontSize = 13.sp,
-                            color = Color(0xFF8E8E93)
-                        )
-                    }
-                }
-            }
-
-            // Focus Insights - exactly like iOS
-            item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(20.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Psychology,
-                                contentDescription = null,
-                                tint = Color(0xFF007AFF),
-                                modifier = Modifier.size(20.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "Focus Insights",
-                                fontSize = 17.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF1C1C1E)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        // Focus Score
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Focus Score",
-                                fontSize = 15.sp,
-                                color = Color(0xFF1C1C1E)
-                            )
-
-                            Text(
-                                text = "85/100",
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF34C759)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        // Efficiency
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Search Efficiency",
-                                fontSize = 15.sp,
-                                color = Color(0xFF1C1C1E)
-                            )
-
-                            Text(
-                                text = "92%",
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF34C759)
-                            )
+                ModernPreferencesCard(
+                    autoDetectLanguage = autoDetectLanguage,
+                    currentLanguage = currentLanguage,
+                    onLanguageClick = { showLanguageSelector = true },
+                    onAutoDetectToggle = {
+                        autoDetectLanguage = it
+                        saveUserPreferences(context, "auto_detect_language", it)
+                        if (it) {
+                            currentLanguage = "System Default"
+                            saveUserPreferences(context, "current_language", "System Default")
+                            applyLanguageChange(context, getSystemLanguage())
                         }
                     }
-                }
+                )
             }
 
-            // Platform Usage - exactly like iOS
+            // Data Management Card
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(20.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.PieChart,
-                                    contentDescription = null,
-                                    tint = Color(0xFF007AFF),
-                                    modifier = Modifier.size(20.dp)
-                                )
+                DataManagementCard(
+                    dataRetentionPeriod = dataRetentionPeriod,
+                    automaticPlatformOrder = automaticPlatformOrder,
+                    onRetentionClick = { showRetentionSelector = true },
+                    onPlatformOrderToggle = {
+                    automaticPlatformOrder = it
+                    saveUserPreferences(context, "automatic_platform_order", it)
+                    // Apply platform ordering change immediately
+                    applyPlatformOrderingChange(context, it)
+                },
+                    onExportClick = { showDataExport = true },
+                    onClearDataClick = { showClearDataDialog = true }
+                )
+            }
 
-                                Spacer(modifier = Modifier.width(8.dp))
-
-                                Text(
-                                    text = "Platform Usage",
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = Color(0xFF1C1C1E)
-                                )
-                            }
-
-                            Text(
-                                text = "7 Days",
-                                fontSize = 15.sp,
-                                color = Color(0xFF8E8E93)
-                            )
+            // About & Support Card
+            item {
+                AboutSupportCard(
+                    onPrivacyPolicyClick = { showPrivacyPolicy = true },
+                    onTermsClick = { showTermsOfService = true },
+                    onSupportClick = { showSupportFAQ = true },
+                    onContactClick = {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("mailto:support@skipfeed.app")
                         }
-
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        // Platform usage items
-                        PlatformUsageItem("Reddit", 53, 14, Color(0xFFFF4500))
-                        Spacer(modifier = Modifier.height(12.dp))
-                        PlatformUsageItem("YouTube", 46, 12, Color(0xFFFF0000))
+                        context.startActivity(intent)
                     }
-                }
+                )
             }
         }
     }
-}
 
-@Composable
-fun PeriodButton(
-    text: String,
-    isSelected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = if (isSelected) Color.White else Color(0xFFF2F2F7),
-            contentColor = Color(0xFF1C1C1E)
-        ),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = if (isSelected) 4.dp else 0.dp
-        ),
-        contentPadding = PaddingValues(vertical = 12.dp)
-    ) {
-        Text(
-            text = text,
-            fontSize = 15.sp,
-            fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium
+    // Dialogs and Sheets
+    if (showLanguageSelector) {
+        LanguageSelectorDialog(
+            currentLanguage = currentLanguage,
+            autoDetectLanguage = autoDetectLanguage,
+            onLanguageSelected = { languageCode ->
+                // LocalizationManager handles the restart
+                localizationManager.setLanguage(context, languageCode)
+                saveUserPreferences(context, "auto_detect_language", false)
+                showLanguageSelector = false
+            },
+            onAutoDetectToggle = { enabled ->
+                autoDetectLanguage = enabled
+                saveUserPreferences(context, "auto_detect_language", enabled)
+                if (enabled) {
+                    val systemLang = localizationManager.getSystemLanguage()
+                    // LocalizationManager handles the restart
+                    localizationManager.setLanguage(context, systemLang)
+                }
+            },
+            onDismiss = { showLanguageSelector = false }
+        )
+    }
+
+    if (showDataExport) {
+        DataExportDialog(
+            onDismiss = { showDataExport = false },
+            onExport = { format, timeRange, content ->
+                exportSearchData(context, format, timeRange, content)
+                showDataExport = false
+            }
+        )
+    }
+
+    if (showClearDataDialog) {
+        AlertDialog(
+            onDismissRequest = { showClearDataDialog = false },
+            title = { Text("Clear All Data") },
+            text = { Text("This will permanently delete all your search history and usage statistics. This action cannot be undone.") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        clearAllHistory(context, searchRepository, usageAnalyticsRepository)
+                        showClearDataDialog = false
+                    }
+                ) {
+                    Text("Clear", color = Color(0xFFFF3B30))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showClearDataDialog = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    if (showRetentionSelector) {
+        RetentionPeriodDialog(
+            currentPeriod = dataRetentionPeriod,
+            onPeriodSelected = { period ->
+                dataRetentionPeriod = period
+                saveUserPreferences(context, "data_retention_period", period)
+                // Apply retention policy immediately
+                applyDataRetentionPolicy(context, period)
+                showRetentionSelector = false
+            },
+            onDismiss = { showRetentionSelector = false }
+        )
+    }
+
+    if (showPrivacyPolicy) {
+        InternalWebViewDialog(
+            title = stringResource(R.string.privacy_policy_title),
+            content = getPrivacyPolicyContent(),
+            onDismiss = { showPrivacyPolicy = false }
+        )
+    }
+
+    if (showTermsOfService) {
+        InternalWebViewDialog(
+            title = stringResource(R.string.terms_of_service_title),
+            content = getTermsOfServiceContent(),
+            onDismiss = { showTermsOfService = false }
+        )
+    }
+
+    if (showSupportFAQ) {
+        InternalWebViewDialog(
+            title = stringResource(R.string.support_faq_title),
+            content = getSupportFAQContent(),
+            onDismiss = { showSupportFAQ = false }
         )
     }
 }
 
-@Composable
-fun StatsCard(
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    color: Color,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = color,
-                modifier = Modifier.size(32.dp)
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = title,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1C1C1E)
-            )
-
-            Text(
-                text = subtitle,
-                fontSize = 13.sp,
-                color = Color(0xFF8E8E93)
-            )
-        }
-    }
-}
+// MARK: - Modern Card Components
 
 @Composable
-fun PlatformUsageItem(
-    platform: String,
-    percentage: Int,
-    searches: Int,
-    color: Color
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Color indicator
-        Box(
-            modifier = Modifier
-                .size(12.dp)
-                .background(color, androidx.compose.foundation.shape.CircleShape)
-        )
-
-        Spacer(modifier = Modifier.width(12.dp))
-
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(
-                text = platform,
-                fontSize = 17.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFF1C1C1E)
-            )
-
-            Text(
-                text = "$percentage% • $searches searches",
-                fontSize = 15.sp,
-                color = Color(0xFF8E8E93)
-            )
-        }
-    }
-}
-
-@Composable
-fun SettingsScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .padding(bottom = 120.dp)
-    ) {
-        Spacer(modifier = Modifier.height(60.dp))
-
-        // Header
-        Text(
-            text = "Settings",
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF1C1C1E)
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            // Preferences Section
-            item {
-                SettingsSection(
-                    title = "Preferences",
-                    icon = Icons.Default.Settings,
-                    iconColor = Color(0xFF007AFF)
-                ) {
-                    SettingsRow(
-                        title = "Language",
-                        subtitle = "Auto-detect",
-                        icon = Icons.Default.Language,
-                        onClick = { /* Language settings */ }
-                    )
-                }
-            }
-
-            // Data Management Section
-            item {
-                SettingsSection(
-                    title = "Data Management",
-                    icon = Icons.Default.Storage,
-                    iconColor = Color(0xFF007AFF)
-                ) {
-                    // Data Retention Period with current selection
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Schedule,
-                                contentDescription = null,
-                                tint = Color(0xFF8E8E93),
-                                modifier = Modifier.size(20.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(12.dp))
-
-                            Column {
-                                Text(
-                                    text = "Data Retention Period",
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    color = Color(0xFF1C1C1E)
-                                )
-
-                                Text(
-                                    text = "How long to keep search history",
-                                    fontSize = 13.sp,
-                                    color = Color(0xFF8E8E93)
-                                )
-                            }
-                        }
-
-                        Text(
-                            text = "7 Days",
-                            fontSize = 17.sp,
-                            color = Color(0xFF8E8E93)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Platform Order toggle
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.SwapVert,
-                                contentDescription = null,
-                                tint = Color(0xFF8E8E93),
-                                modifier = Modifier.size(20.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(12.dp))
-
-                            Column {
-                                Text(
-                                    text = "Platform Order",
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    color = Color(0xFF1C1C1E)
-                                )
-
-                                Text(
-                                    text = "Auto-sorted by usage frequency",
-                                    fontSize = 13.sp,
-                                    color = Color(0xFF8E8E93)
-                                )
-                            }
-                        }
-
-                        Switch(
-                            checked = true,
-                            onCheckedChange = { /* Toggle platform order */ },
-                            colors = SwitchDefaults.colors(
-                                checkedThumbColor = Color.White,
-                                checkedTrackColor = Color(0xFF34C759),
-                                uncheckedThumbColor = Color.White,
-                                uncheckedTrackColor = Color(0xFF8E8E93)
-                            )
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    SettingsRow(
-                        title = "Export Data",
-                        subtitle = "Export search history and statistics",
-                        icon = Icons.Default.Download,
-                        onClick = { /* Export data */ }
-                    )
-
-                    SettingsRow(
-                        title = "Clear All Data",
-                        subtitle = "Remove all search history and statistics",
-                        icon = Icons.Default.Delete,
-                        iconColor = Color(0xFFFF3B30),
-                        textColor = Color(0xFFFF3B30),
-                        onClick = { /* Clear data */ }
-                    )
-                }
-            }
-
-            // About & Support Section
-            item {
-                SettingsSection(
-                    title = "About & Support",
-                    icon = Icons.Default.Info,
-                    iconColor = Color(0xFF007AFF)
-                ) {
-                    SettingsRow(
-                        title = "Version",
-                        subtitle = "1.0",
-                        icon = Icons.Default.AppRegistration,
-                        onClick = { /* Version info */ }
-                    )
-
-                    SettingsRow(
-                        title = "Privacy Policy",
-                        subtitle = "",
-                        icon = Icons.Default.PrivacyTip,
-                        onClick = { /* Privacy policy */ }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SettingsSection(
-    title: String,
-    icon: ImageVector,
-    iconColor: Color,
-    content: @Composable () -> Unit
+fun ModernPreferencesCard(
+    autoDetectLanguage: Boolean,
+    currentLanguage: String,
+    onLanguageClick: () -> Unit,
+    onAutoDetectToggle: (Boolean) -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
+            // Header
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = icon,
+                    imageVector = Icons.Default.Settings,
                     contentDescription = null,
-                    tint = iconColor,
-                    modifier = Modifier.size(20.dp)
+                    tint = Color(0xFF007AFF),
+                    modifier = Modifier.size(24.dp)
                 )
 
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
                 Text(
-                    text = title,
-                    fontSize = 17.sp,
+                    text = stringResource(R.string.preferences),
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF1C1C1E)
                 )
@@ -2342,7 +2122,13 @@ fun SettingsSection(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            content()
+            // Language Settings Row
+            ModernSettingRow(
+                icon = Icons.Default.Language,
+                title = stringResource(R.string.language),
+                value = if (autoDetectLanguage) stringResource(R.string.auto_detect_language) else currentLanguage,
+                onClick = onLanguageClick
+            )
         }
     }
 }
@@ -2438,4 +2224,1121 @@ fun RetentionButton(
             fontWeight = FontWeight.Medium
         )
     }
+}
+
+// MARK: - New Modern Components
+
+@Composable
+fun DataManagementCard(
+    dataRetentionPeriod: String,
+    automaticPlatformOrder: Boolean,
+    onRetentionClick: () -> Unit,
+    onPlatformOrderToggle: (Boolean) -> Unit,
+    onExportClick: () -> Unit,
+    onClearDataClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            // Header
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Storage,
+                    contentDescription = null,
+                    tint = Color(0xFF007AFF),
+                    modifier = Modifier.size(24.dp)
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Text(
+                    text = stringResource(R.string.data_management),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF1C1C1E)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Data Retention Period
+            ModernSettingRow(
+                icon = Icons.Default.Schedule,
+                title = stringResource(R.string.data_retention_period),
+                value = dataRetentionPeriod,
+                onClick = onRetentionClick
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Platform Order Toggle
+            ModernToggleRow(
+                icon = Icons.Default.SwapVert,
+                title = stringResource(R.string.automatic_platform_order),
+                subtitle = if (automaticPlatformOrder) "Platforms sorted by usage frequency" else "Platforms in fixed order",
+                isOn = automaticPlatformOrder,
+                onToggle = onPlatformOrderToggle
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Export Data
+            ModernActionRow(
+                icon = Icons.Default.Download,
+                title = stringResource(R.string.export_data),
+                isDestructive = false,
+                onClick = onExportClick
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Clear All Data
+            ModernActionRow(
+                icon = Icons.Default.Delete,
+                title = stringResource(R.string.clear_all_data),
+                isDestructive = true,
+                onClick = onClearDataClick
+            )
+        }
+    }
+}
+
+@Composable
+fun AboutSupportCard(
+    onPrivacyPolicyClick: () -> Unit,
+    onTermsClick: () -> Unit,
+    onSupportClick: () -> Unit,
+    onContactClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            // Header
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = null,
+                    tint = Color(0xFF007AFF),
+                    modifier = Modifier.size(24.dp)
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Text(
+                    text = stringResource(R.string.about_support),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF1C1C1E)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // App Version
+            ModernSettingRow(
+                icon = Icons.Default.AppRegistration,
+                title = "Version",
+                value = "1.0.0",
+                onClick = null
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Privacy Policy
+            ModernActionRow(
+                icon = Icons.Default.PrivacyTip,
+                title = stringResource(R.string.privacy_policy),
+                isDestructive = false,
+                onClick = onPrivacyPolicyClick
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Terms of Service
+            ModernActionRow(
+                icon = Icons.Default.Description,
+                title = stringResource(R.string.terms_of_service),
+                isDestructive = false,
+                onClick = onTermsClick
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Support & FAQ
+            ModernActionRow(
+                icon = Icons.Default.Help,
+                title = stringResource(R.string.support_faq),
+                isDestructive = false,
+                onClick = onSupportClick
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Contact Us
+            ModernActionRow(
+                icon = Icons.Default.Email,
+                title = stringResource(R.string.contact_us),
+                isDestructive = false,
+                onClick = onContactClick
+            )
+        }
+    }
+}
+
+// MARK: - Modern Setting Components
+
+@Composable
+fun ModernSettingRow(
+    icon: ImageVector,
+    title: String,
+    value: String,
+    onClick: (() -> Unit)?
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .then(
+                if (onClick != null) {
+                    Modifier.clickable { onClick() }
+                } else {
+                    Modifier
+                }
+            )
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Color(0xFF007AFF),
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF1C1C1E)
+            )
+
+            if (value.isNotEmpty()) {
+                Text(
+                    text = value,
+                    fontSize = 12.sp,
+                    color = Color(0xFF8E8E93)
+                )
+            }
+        }
+
+        if (onClick != null) {
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = null,
+                tint = Color(0xFF8E8E93),
+                modifier = Modifier.size(16.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun ModernToggleRow(
+    icon: ImageVector,
+    title: String,
+    subtitle: String,
+    isOn: Boolean,
+    onToggle: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Color(0xFF007AFF),
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF1C1C1E)
+            )
+
+            Text(
+                text = subtitle,
+                fontSize = 12.sp,
+                color = Color(0xFF8E8E93)
+            )
+        }
+
+        Switch(
+            checked = isOn,
+            onCheckedChange = onToggle,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color.White,
+                checkedTrackColor = Color(0xFF34C759),
+                uncheckedThumbColor = Color.White,
+                uncheckedTrackColor = Color(0xFF8E8E93)
+            )
+        )
+    }
+}
+
+@Composable
+fun ModernActionRow(
+    icon: ImageVector,
+    title: String,
+    isDestructive: Boolean,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = if (isDestructive) Color(0xFFFF3B30) else Color(0xFF007AFF),
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Text(
+            text = title,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = if (isDestructive) Color(0xFFFF3B30) else Color(0xFF1C1C1E),
+            modifier = Modifier.weight(1f)
+        )
+
+        Icon(
+            imageVector = Icons.Default.ChevronRight,
+            contentDescription = null,
+            tint = Color(0xFF8E8E93),
+            modifier = Modifier.size(16.dp)
+        )
+    }
+}
+
+// MARK: - Dialog Components
+
+@Composable
+fun LanguageSelectorDialog(
+    currentLanguage: String,
+    autoDetectLanguage: Boolean,
+    onLanguageSelected: (String) -> Unit,
+    onAutoDetectToggle: (Boolean) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val localizationManager = remember { com.skipfeed.android.data.LocalizationManager.getInstance() }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.language)) },
+        text = {
+            LazyColumn {
+                item {
+                    // Auto-detect toggle
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.LocationOn,
+                            contentDescription = null,
+                            tint = Color(0xFF007AFF),
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(12.dp))
+
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = stringResource(R.string.auto_detect_language),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Text(
+                                text = stringResource(R.string.use_system_language),
+                                fontSize = 12.sp,
+                                color = Color(0xFF8E8E93)
+                            )
+                        }
+
+                        Switch(
+                            checked = autoDetectLanguage,
+                            onCheckedChange = onAutoDetectToggle,
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = Color.White,
+                                checkedTrackColor = Color(0xFF34C759)
+                            )
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+
+                // Exactly 11 language items - using LazyColumn items
+                items(11) { index ->
+                    val (code, name) = when (index) {
+                        0 -> "ar" to "العربية"
+                        1 -> "zh" to "中文"
+                        2 -> "de" to "Deutsch"
+                        3 -> "en" to "English"
+                        4 -> "es" to "Español"
+                        5 -> "fr" to "Français"
+                        6 -> "it" to "Italiano"
+                        7 -> "ja" to "日本語"
+                        8 -> "ko" to "한국어"
+                        9 -> "pt" to "Português"
+                        10 -> "ru" to "Русский"
+                        else -> "en" to "English" // fallback
+                    }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onLanguageSelected(code) }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = localizationManager.currentLanguage == code && !autoDetectLanguage,
+                            onClick = { onLanguageSelected(code) },
+                            colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF007AFF))
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(text = name, fontSize = 16.sp, color = Color(0xFF1C1C1E))
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.done), color = Color(0xFF007AFF))
+            }
+        }
+    )
+}
+
+@Composable
+fun DataExportDialog(
+    onDismiss: () -> Unit,
+    onExport: (format: String, timeRange: String, content: List<String>) -> Unit
+) {
+    var selectedFormat by remember { mutableStateOf("CSV") }
+    var selectedTimeRange by remember { mutableStateOf("All Time") }
+    var includeSearchQueries by remember { mutableStateOf(true) }
+    var includePlatformUsage by remember { mutableStateOf(true) }
+    var includeUsageStatistics by remember { mutableStateOf(true) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Export Data") },
+        text = {
+            Column {
+                // Format Selection
+                Text(
+                    text = "Export Format",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF1C1C1E)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    val formats = listOf("CSV", "TXT", "JSON")
+                    formats.forEach { format ->
+                        FilterChip(
+                            text = format,
+                            isSelected = selectedFormat == format,
+                            onClick = { selectedFormat = format }
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Time Range Selection
+                Text(
+                    text = "Time Range",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF1C1C1E)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                val timeRanges = listOf("All Time", "Last 7 Days", "Last 30 Days", "Last 3 Months")
+                timeRanges.forEach { range ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { selectedTimeRange = range }
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedTimeRange == range,
+                            onClick = { selectedTimeRange = range },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color(0xFF007AFF)
+                            )
+                        )
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Text(
+                            text = range,
+                            fontSize = 14.sp,
+                            color = Color(0xFF1C1C1E)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Content Selection
+                Text(
+                    text = "Export Content",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF1C1C1E)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Search Queries Toggle
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Switch(
+                        checked = includeSearchQueries,
+                        onCheckedChange = { includeSearchQueries = it },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Color(0xFF007AFF),
+                            uncheckedThumbColor = Color.White,
+                            uncheckedTrackColor = Color(0xFF8E8E93)
+                        ),
+                        modifier = Modifier.scale(0.8f)
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Column {
+                        Text(
+                            text = "Search Queries",
+                            fontSize = 14.sp,
+                            color = Color(0xFF1C1C1E)
+                        )
+                        Text(
+                            text = "All search terms and timestamps",
+                            fontSize = 12.sp,
+                            color = Color(0xFF8E8E93)
+                        )
+                    }
+                }
+
+                // Platform Usage Toggle
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Switch(
+                        checked = includePlatformUsage,
+                        onCheckedChange = { includePlatformUsage = it },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Color(0xFF007AFF),
+                            uncheckedThumbColor = Color.White,
+                            uncheckedTrackColor = Color(0xFF8E8E93)
+                        ),
+                        modifier = Modifier.scale(0.8f)
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Column {
+                        Text(
+                            text = "Platform Usage",
+                            fontSize = 14.sp,
+                            color = Color(0xFF1C1C1E)
+                        )
+                        Text(
+                            text = "Which platforms you searched most",
+                            fontSize = 12.sp,
+                            color = Color(0xFF8E8E93)
+                        )
+                    }
+                }
+
+                // Usage Statistics Toggle
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Switch(
+                        checked = includeUsageStatistics,
+                        onCheckedChange = { includeUsageStatistics = it },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Color(0xFF007AFF),
+                            uncheckedThumbColor = Color.White,
+                            uncheckedTrackColor = Color(0xFF8E8E93)
+                        ),
+                        modifier = Modifier.scale(0.8f)
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Column {
+                        Text(
+                            text = "Usage Statistics",
+                            fontSize = 14.sp,
+                            color = Color(0xFF1C1C1E)
+                        )
+                        Text(
+                            text = "Search counts and time saved data",
+                            fontSize = 12.sp,
+                            color = Color(0xFF8E8E93)
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    val content = mutableListOf<String>()
+                    if (includeSearchQueries) content.add("queries")
+                    if (includePlatformUsage) content.add("platforms")
+                    if (includeUsageStatistics) content.add("statistics")
+                    onExport(selectedFormat, selectedTimeRange, content)
+                }
+            ) {
+                Text("Export", color = Color(0xFF007AFF))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+fun RetentionPeriodDialog(
+    currentPeriod: String,
+    onPeriodSelected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Data Retention Period") },
+        text = {
+            Column {
+                Text(
+                    text = "How long should search history be kept?",
+                    fontSize = 14.sp,
+                    color = Color(0xFF8E8E93),
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+                val periods = listOf(
+                    "7 Days",
+                    "30 Days",
+                    "3 Months",
+                    "1 Year",
+                    "Forever"
+                )
+
+                periods.forEach { period ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onPeriodSelected(period) }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = currentPeriod == period,
+                            onClick = { onPeriodSelected(period) },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color(0xFF007AFF)
+                            )
+                        )
+
+                        Spacer(modifier = Modifier.width(12.dp))
+
+                        Text(
+                            text = period,
+                            fontSize = 16.sp,
+                            color = Color(0xFF1C1C1E)
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Done", color = Color(0xFF007AFF))
+            }
+        }
+    )
+}
+
+@Composable
+fun WebViewDialog(
+    title: String,
+    url: String,
+    onDismiss: () -> Unit,
+    onOpenUrl: (String) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            Column {
+                Text(
+                    text = "This will open in your browser:",
+                    fontSize = 14.sp,
+                    color = Color(0xFF8E8E93)
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = url,
+                    fontSize = 14.sp,
+                    color = Color(0xFF007AFF),
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onOpenUrl(url)
+                    onDismiss()
+                }
+            ) {
+                Text("Open", color = Color(0xFF007AFF))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+// MARK: - User Preferences Management
+
+fun saveUserPreferences(context: android.content.Context, key: String, value: String) {
+    val sharedPrefs = context.getSharedPreferences("user_preferences", android.content.Context.MODE_PRIVATE)
+    sharedPrefs.edit().putString(key, value).apply()
+}
+
+fun saveUserPreferences(context: android.content.Context, key: String, value: Boolean) {
+    val sharedPrefs = context.getSharedPreferences("user_preferences", android.content.Context.MODE_PRIVATE)
+    sharedPrefs.edit().putBoolean(key, value).apply()
+}
+
+fun getUserPreference(context: android.content.Context, key: String, defaultValue: String): String {
+    val sharedPrefs = context.getSharedPreferences("user_preferences", android.content.Context.MODE_PRIVATE)
+    return sharedPrefs.getString(key, defaultValue) ?: defaultValue
+}
+
+fun getUserPreference(context: android.content.Context, key: String, defaultValue: Boolean): Boolean {
+    val sharedPrefs = context.getSharedPreferences("user_preferences", android.content.Context.MODE_PRIVATE)
+    return sharedPrefs.getBoolean(key, defaultValue)
+}
+
+// Export data functionality
+fun exportSearchData(context: android.content.Context, format: String, timeRange: String, content: List<String>) {
+    val historyItems = loadSearchHistory(context)
+
+    // Filter by time range
+    val filteredItems = when (timeRange) {
+        "Last 7 Days" -> {
+            val weekAgo = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000)
+            historyItems.filter { it.timestampMillis >= weekAgo }
+        }
+        "Last 30 Days" -> {
+            val monthAgo = System.currentTimeMillis() - (30 * 24 * 60 * 60 * 1000)
+            historyItems.filter { it.timestampMillis >= monthAgo }
+        }
+        "Last 3 Months" -> {
+            val threeMonthsAgo = System.currentTimeMillis() - (90 * 24 * 60 * 60 * 1000)
+            historyItems.filter { it.timestampMillis >= threeMonthsAgo }
+        }
+        else -> historyItems // All Time
+    }
+
+    // Generate export content based on format
+    val exportContent = when (format) {
+        "CSV" -> generateCSVContent(filteredItems, content)
+        "TXT" -> generateTXTContent(filteredItems, content)
+        "JSON" -> generateJSONContent(filteredItems, content)
+        else -> generateCSVContent(filteredItems, content)
+    }
+
+    // Create and share file
+    shareExportedData(context, exportContent, format.lowercase())
+}
+
+fun generateCSVContent(items: List<HistoryItem>, content: List<String>): String {
+    val sb = StringBuilder()
+
+    if (content.contains("queries")) {
+        sb.append("Query,Platform,Timestamp,Date\n")
+        items.forEach { item ->
+            val date = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                .format(java.util.Date(item.timestampMillis))
+            sb.append("\"${item.query}\",\"${item.platform}\",\"${item.timestamp}\",\"$date\"\n")
+        }
+    }
+
+    if (content.contains("platforms")) {
+        sb.append("\nPlatform Usage:\n")
+        val platformCounts = items.groupBy { it.platform }.mapValues { it.value.size }
+        platformCounts.forEach { (platform, count) ->
+            sb.append("$platform,$count\n")
+        }
+    }
+
+    if (content.contains("statistics")) {
+        sb.append("\nStatistics:\n")
+        sb.append("Total Searches,${items.size}\n")
+        sb.append("Unique Queries,${items.map { it.query }.distinct().size}\n")
+        sb.append("Platforms Used,${items.map { it.platform }.distinct().size}\n")
+    }
+
+    return sb.toString()
+}
+
+fun generateTXTContent(items: List<HistoryItem>, content: List<String>): String {
+    val sb = StringBuilder()
+    sb.append("SkipFeed Data Export\n")
+    sb.append("Generated: ${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())}\n\n")
+
+    if (content.contains("queries")) {
+        sb.append("SEARCH HISTORY:\n")
+        sb.append("================\n")
+        items.forEach { item ->
+            val date = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                .format(java.util.Date(item.timestampMillis))
+            sb.append("Query: ${item.query}\n")
+            sb.append("Platform: ${item.platform}\n")
+            sb.append("Time: ${item.timestamp}\n")
+            sb.append("Date: $date\n\n")
+        }
+    }
+
+    if (content.contains("platforms")) {
+        sb.append("PLATFORM USAGE:\n")
+        sb.append("===============\n")
+        val platformCounts = items.groupBy { it.platform }.mapValues { it.value.size }
+        platformCounts.forEach { (platform, count) ->
+            sb.append("$platform: $count searches\n")
+        }
+        sb.append("\n")
+    }
+
+    if (content.contains("statistics")) {
+        sb.append("STATISTICS:\n")
+        sb.append("===========\n")
+        sb.append("Total Searches: ${items.size}\n")
+        sb.append("Unique Queries: ${items.map { it.query }.distinct().size}\n")
+        sb.append("Platforms Used: ${items.map { it.platform }.distinct().size}\n")
+    }
+
+    return sb.toString()
+}
+
+fun generateJSONContent(items: List<HistoryItem>, content: List<String>): String {
+    val sb = StringBuilder()
+    sb.append("{\n")
+    sb.append("  \"export_info\": {\n")
+    sb.append("    \"app\": \"SkipFeed\",\n")
+    sb.append("    \"version\": \"1.0.0\",\n")
+    sb.append("    \"generated\": \"${java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", java.util.Locale.getDefault()).format(java.util.Date())}\"\n")
+    sb.append("  },\n")
+
+    if (content.contains("queries")) {
+        sb.append("  \"search_history\": [\n")
+        items.forEachIndexed { index, item ->
+            val date = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", java.util.Locale.getDefault())
+                .format(java.util.Date(item.timestampMillis))
+            sb.append("    {\n")
+            sb.append("      \"query\": \"${item.query}\",\n")
+            sb.append("      \"platform\": \"${item.platform}\",\n")
+            sb.append("      \"timestamp\": \"${item.timestamp}\",\n")
+            sb.append("      \"date\": \"$date\"\n")
+            sb.append("    }")
+            if (index < items.size - 1) sb.append(",")
+            sb.append("\n")
+        }
+        sb.append("  ]")
+        if (content.contains("platforms") || content.contains("statistics")) sb.append(",")
+        sb.append("\n")
+    }
+
+    if (content.contains("platforms")) {
+        sb.append("  \"platform_usage\": {\n")
+        val platformCounts = items.groupBy { it.platform }.mapValues { it.value.size }
+        platformCounts.entries.forEachIndexed { index, (platform, count) ->
+            sb.append("    \"$platform\": $count")
+            if (index < platformCounts.size - 1) sb.append(",")
+            sb.append("\n")
+        }
+        sb.append("  }")
+        if (content.contains("statistics")) sb.append(",")
+        sb.append("\n")
+    }
+
+    if (content.contains("statistics")) {
+        sb.append("  \"statistics\": {\n")
+        sb.append("    \"total_searches\": ${items.size},\n")
+        sb.append("    \"unique_queries\": ${items.map { it.query }.distinct().size},\n")
+        sb.append("    \"platforms_used\": ${items.map { it.platform }.distinct().size}\n")
+        sb.append("  }\n")
+    }
+
+    sb.append("}")
+    return sb.toString()
+}
+
+fun shareExportedData(context: android.content.Context, content: String, format: String) {
+    try {
+        val fileName = "skipfeed_export_${System.currentTimeMillis()}.$format"
+        val file = java.io.File(context.cacheDir, fileName)
+        file.writeText(content)
+
+        val uri = androidx.core.content.FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            file
+        )
+
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = when (format) {
+                "csv" -> "text/csv"
+                "json" -> "application/json"
+                else -> "text/plain"
+            }
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_SUBJECT, "SkipFeed Data Export")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        context.startActivity(Intent.createChooser(shareIntent, "Share Export"))
+    } catch (e: Exception) {
+        // Handle error - could show a toast
+        android.util.Log.e("SkipFeed", "Error sharing export: ${e.message}")
+    }
+}
+
+// MARK: - Language Management Functions
+
+fun getSystemLanguage(): String {
+    return java.util.Locale.getDefault().language
+}
+
+fun applyLanguageChange(context: android.content.Context, languageCode: String) {
+    // Save the language preference
+    saveUserPreferences(context, "app_language", languageCode)
+
+    // Apply locale change (requires activity restart for full effect)
+    val locale = when (languageCode) {
+        "English" -> java.util.Locale.ENGLISH
+        "中文" -> java.util.Locale.CHINESE
+        "Español" -> java.util.Locale("es")
+        "Français" -> java.util.Locale.FRENCH
+        "Deutsch" -> java.util.Locale.GERMAN
+        "日本語" -> java.util.Locale.JAPANESE
+        else -> java.util.Locale.ENGLISH
+    }
+
+    java.util.Locale.setDefault(locale)
+
+    val config = context.resources.configuration
+    config.setLocale(locale)
+
+    // Restart the activity to apply language changes
+    if (context is android.app.Activity) {
+        val intent = context.intent
+        context.finish()
+        context.startActivity(intent)
+    }
+}
+
+// MARK: - Data Retention Functions
+
+fun applyDataRetentionPolicy(context: android.content.Context, period: String) {
+    val historyItems = loadSearchHistory(context)
+    val cutoffTime = when (period) {
+        "7 Days" -> System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000L)
+        "30 Days" -> System.currentTimeMillis() - (30 * 24 * 60 * 60 * 1000L)
+        "3 Months" -> System.currentTimeMillis() - (90 * 24 * 60 * 60 * 1000L)
+        "1 Year" -> System.currentTimeMillis() - (365 * 24 * 60 * 60 * 1000L)
+        "Forever" -> 0L
+        else -> System.currentTimeMillis() - (30 * 24 * 60 * 60 * 1000L)
+    }
+
+    if (cutoffTime > 0) {
+        val filteredItems = historyItems.filter { it.timestampMillis >= cutoffTime }
+        saveSearchHistory(context, filteredItems)
+    }
+}
+
+fun saveSearchHistory(context: android.content.Context, items: List<HistoryItem>) {
+    val sharedPrefs = context.getSharedPreferences("search_history", android.content.Context.MODE_PRIVATE)
+    val editor = sharedPrefs.edit()
+
+    // Clear existing history
+    editor.clear()
+
+    // Save new filtered history
+    items.forEachIndexed { index, item ->
+        editor.putString("query_$index", item.query)
+        editor.putString("platform_$index", item.platform)
+        editor.putString("timestamp_$index", item.timestamp)
+        editor.putLong("timestamp_millis_$index", item.timestampMillis)
+        editor.putInt("icon_$index", item.iconRes)
+    }
+
+    editor.putInt("history_count", items.size)
+    editor.apply()
+}
+
+// MARK: - Platform Ordering Functions
+
+fun applyPlatformOrderingChange(context: android.content.Context, isAutomatic: Boolean) {
+    // Save the preference
+    saveUserPreferences(context, "platform_ordering_mode", if (isAutomatic) "automatic" else "manual")
+
+    if (isAutomatic) {
+        // Reorder platforms based on usage frequency
+        reorderPlatformsByUsage(context)
+    } else {
+        // Reset to default order
+        resetPlatformsToDefaultOrder(context)
+    }
+}
+
+fun reorderPlatformsByUsage(context: android.content.Context) {
+    val historyItems = loadSearchHistory(context)
+    val platformCounts = historyItems.groupBy { it.platform }.mapValues { it.value.size }
+
+    // Sort platforms by usage count (descending)
+    val sortedPlatforms = platformCounts.toList().sortedByDescending { it.second }
+
+    // Save the new order
+    val sharedPrefs = context.getSharedPreferences("platform_order", android.content.Context.MODE_PRIVATE)
+    val editor = sharedPrefs.edit()
+
+    sortedPlatforms.forEachIndexed { index, (platform, _) ->
+        editor.putString("platform_$index", platform)
+    }
+    editor.putInt("platform_count", sortedPlatforms.size)
+    editor.apply()
+}
+
+fun resetPlatformsToDefaultOrder(context: android.content.Context) {
+    val defaultOrder = listOf("Reddit", "YouTube", "X", "TikTok", "Instagram", "Facebook")
+
+    val sharedPrefs = context.getSharedPreferences("platform_order", android.content.Context.MODE_PRIVATE)
+    val editor = sharedPrefs.edit()
+
+    defaultOrder.forEachIndexed { index, platform ->
+        editor.putString("platform_$index", platform)
+    }
+    editor.putInt("platform_count", defaultOrder.size)
+    editor.apply()
+}
+
+// MARK: - Internal WebView Dialog
+
+@Composable
+fun InternalWebViewDialog(
+    title: String,
+    content: String,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        },
+        text = {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 400.dp)
+            ) {
+                item {
+                    Text(
+                        text = content,
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp,
+                        color = Color(0xFF1C1C1E)
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Close", color = Color(0xFF007AFF))
+            }
+        }
+    )
 }

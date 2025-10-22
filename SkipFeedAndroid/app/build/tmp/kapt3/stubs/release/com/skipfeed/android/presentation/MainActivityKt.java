@@ -1,6 +1,6 @@
 package com.skipfeed.android.presentation;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000v\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\u000e\n\u0000\n\u0002\u0010\u000b\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\b\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\b\n\u0002\u0018\u0002\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0002\b\u0007\n\u0002\u0018\u0002\n\u0002\b\t\n\u0002\u0018\u0002\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0002\b\n\u001a&\u0010\u0005\u001a\u00020\u00062\u0006\u0010\u0007\u001a\u00020\b2\u0006\u0010\t\u001a\u00020\n2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\fH\u0007\u001a\b\u0010\r\u001a\u00020\u0006H\u0007\u001a&\u0010\u000e\u001a\u00020\u00062\u0006\u0010\u000f\u001a\u00020\u00022\u0006\u0010\t\u001a\u00020\n2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\fH\u0007\u001a\u001a\u0010\u0010\u001a\u00020\u00062\u0006\u0010\u0011\u001a\u00020\u00122\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u001a&\u0010\u0015\u001a\u00020\u00062\u0006\u0010\u0016\u001a\u00020\u00172\u0006\u0010\t\u001a\u00020\n2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\fH\u0007\u001a0\u0010\u0018\u001a\u00020\u00062\u0006\u0010\u0007\u001a\u00020\b2\u0006\u0010\t\u001a\u00020\n2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\f2\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u001a2\u0010\u0019\u001a\u00020\u00062\u0006\u0010\u000f\u001a\u00020\b2\u0006\u0010\u001a\u001a\u00020\u001b2\u0006\u0010\u001c\u001a\u00020\u001b2\u0006\u0010\u001d\u001a\u00020\u001eH\u0007\u00f8\u0001\u0000\u00a2\u0006\u0004\b\u001f\u0010 \u001a\u001e\u0010!\u001a\u00020\u00062\u0006\u0010\"\u001a\u00020\b2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\fH\u0007\u001a\"\u0010#\u001a\u00020\u00062\u0006\u0010\u0007\u001a\u00020\b2\u0006\u0010\t\u001a\u00020\n2\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u001a0\u0010$\u001a\u00020\u00062\u0006\u0010\u0007\u001a\u00020\b2\u0006\u0010\t\u001a\u00020\n2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\f2\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u001a\u0018\u0010%\u001a\u00020\u00062\u0006\u0010\u0011\u001a\u00020\u00122\u0006\u0010&\u001a\u00020\'H\u0007\u001aL\u0010(\u001a\u00020\u00062\u0006\u0010)\u001a\u00020\b2\u0006\u0010*\u001a\u00020\b2\u0006\u0010+\u001a\u00020,2\b\b\u0002\u0010-\u001a\u00020\u001e2\b\b\u0002\u0010.\u001a\u00020\u001e2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\fH\u0007\u00f8\u0001\u0000\u00a2\u0006\u0004\b/\u00100\u001a\b\u00101\u001a\u00020\u0006H\u0007\u001a=\u00102\u001a\u00020\u00062\u0006\u0010)\u001a\u00020\b2\u0006\u0010+\u001a\u00020,2\u0006\u0010-\u001a\u00020\u001e2\u0011\u00103\u001a\r\u0012\u0004\u0012\u00020\u00060\f\u00a2\u0006\u0002\b4H\u0007\u00f8\u0001\u0000\u00a2\u0006\u0004\b5\u00106\u001a\u0010\u00107\u001a\u00020\u00062\u0006\u0010&\u001a\u00020\'H\u0007\u001a<\u00108\u001a\u00020\u00062\u0006\u0010)\u001a\u00020\b2\u0006\u0010*\u001a\u00020\b2\u0006\u0010+\u001a\u00020,2\u0006\u0010\u001d\u001a\u00020\u001e2\b\b\u0002\u0010\u0013\u001a\u00020\u0014H\u0007\u00f8\u0001\u0000\u00a2\u0006\u0004\b9\u0010:\u001a\b\u0010;\u001a\u00020\u0006H\u0007\u001a\u000e\u0010<\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>\u001a\u000e\u0010?\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>\u001a\u000e\u0010@\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>\u001a\u0016\u0010A\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>2\u0006\u0010B\u001a\u00020C\u001a\u000e\u0010D\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>\u001a\u0016\u0010E\u001a\u00020\b2\u0006\u0010=\u001a\u00020>2\u0006\u0010B\u001a\u00020C\u001a\u0014\u0010F\u001a\b\u0012\u0004\u0012\u00020\b0\u00012\u0006\u0010=\u001a\u00020>\u001a\u0014\u0010G\u001a\b\u0012\u0004\u0012\u00020C0\u00012\u0006\u0010=\u001a\u00020>\u001a&\u0010H\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>2\u0006\u0010\u000f\u001a\u00020\b2\u0006\u0010\"\u001a\u00020\b2\u0006\u0010I\u001a\u00020\b\u001a\u0016\u0010J\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>2\u0006\u0010\"\u001a\u00020\b\u001a(\u0010K\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>2\u0006\u0010\"\u001a\u00020\b2\u0006\u0010\u000f\u001a\u00020\b2\b\b\u0002\u0010I\u001a\u00020\b\u001a&\u0010L\u001a\u00020\u00062\u0006\u0010=\u001a\u00020>2\u0006\u0010\"\u001a\u00020\b2\u0006\u0010\u000f\u001a\u00020\b2\u0006\u0010&\u001a\u00020\'\"\u0017\u0010\u0000\u001a\b\u0012\u0004\u0012\u00020\u00020\u0001\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0003\u0010\u0004\u0082\u0002\u0007\n\u0005\b\u00a1\u001e0\u0001\u00a8\u0006M"}, d2 = {"platforms", "", "Lcom/skipfeed/android/presentation/Platform;", "getPlatforms", "()Ljava/util/List;", "FilterChip", "", "text", "", "isSelected", "", "onClick", "Lkotlin/Function0;", "HistoryScreen", "IOSPlatformCard", "platform", "IOSTabBar", "navController", "Landroidx/navigation/NavHostController;", "modifier", "Landroidx/compose/ui/Modifier;", "IOSTabItem", "tab", "Lcom/skipfeed/android/presentation/TabItem;", "PeriodButton", "PlatformUsageItem", "percentage", "", "searches", "color", "Landroidx/compose/ui/graphics/Color;", "PlatformUsageItem-g2O1Hgs", "(Ljava/lang/String;IIJ)V", "RecentSearchChip", "query", "RetentionButton", "SearchModeButton", "SearchScreen", "searchRepository", "Lcom/skipfeed/android/data/repository/SearchRepository;", "SettingsRow", "title", "subtitle", "icon", "Landroidx/compose/ui/graphics/vector/ImageVector;", "iconColor", "textColor", "SettingsRow-BQnUqu0", "(Ljava/lang/String;Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;JJLkotlin/jvm/functions/Function0;)V", "SettingsScreen", "SettingsSection", "content", "Landroidx/compose/runtime/Composable;", "SettingsSection-9LQNqLg", "(Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;JLkotlin/jvm/functions/Function0;)V", "SkipFeedApp", "StatsCard", "StatsCard-42QJj7c", "(Ljava/lang/String;Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;JLandroidx/compose/ui/Modifier;)V", "StatsScreen", "cleanInvalidHistory", "context", "Landroid/content/Context;", "clearAllHistory", "clearRecentSearches", "deleteSearchHistory", "item", "Lcom/skipfeed/android/presentation/HistoryItem;", "forceCleanProblematicRecords", "getSearchMode", "loadRecentSearches", "loadSearchHistory", "performSearch", "mode", "saveRecentSearch", "saveSearchHistory", "saveSearchToHistory", "app_release"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000z\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\u0010\u000e\n\u0002\u0018\u0002\n\u0002\b\u0007\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u000b\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\t\n\u0002\u0018\u0002\n\u0002\b\u0012\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\n\n\u0002\u0018\u0002\n\u0002\b\n\n\u0002\u0018\u0002\n\u0002\b\u001a\u001a@\u0010\u0005\u001a\u00020\u00062\f\u0010\u0007\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\f\u0010\t\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\f\u0010\n\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\f\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001ai\u0010\f\u001a\u00020\u00062\f\u0010\r\u001a\b\u0012\u0004\u0012\u00020\u00060\b2Q\u0010\u000e\u001aM\u0012\u0013\u0012\u00110\u0010\u00a2\u0006\f\b\u0011\u0012\b\b\u0012\u0012\u0004\b\b(\u0013\u0012\u0013\u0012\u00110\u0010\u00a2\u0006\f\b\u0011\u0012\b\b\u0012\u0012\u0004\b\b(\u0014\u0012\u0019\u0012\u0017\u0012\u0004\u0012\u00020\u00100\u0001\u00a2\u0006\f\b\u0011\u0012\b\b\u0012\u0012\u0004\b\b(\u0015\u0012\u0004\u0012\u00020\u00060\u000fH\u0007\u001aV\u0010\u0016\u001a\u00020\u00062\u0006\u0010\u0017\u001a\u00020\u00102\u0006\u0010\u0018\u001a\u00020\u00192\f\u0010\u001a\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\u0012\u0010\u001b\u001a\u000e\u0012\u0004\u0012\u00020\u0019\u0012\u0004\u0012\u00020\u00060\u001c2\f\u0010\u001d\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\f\u0010\u001e\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a&\u0010\u001f\u001a\u00020\u00062\u0006\u0010 \u001a\u00020\u00102\u0006\u0010!\u001a\u00020\u00192\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a\b\u0010#\u001a\u00020\u0006H\u0007\u001a&\u0010$\u001a\u00020\u00062\u0006\u0010%\u001a\u00020\u00022\u0006\u0010!\u001a\u00020\u00192\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a\u001a\u0010&\u001a\u00020\u00062\u0006\u0010\'\u001a\u00020(2\b\b\u0002\u0010)\u001a\u00020*H\u0007\u001a&\u0010+\u001a\u00020\u00062\u0006\u0010,\u001a\u00020-2\u0006\u0010!\u001a\u00020\u00192\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a&\u0010.\u001a\u00020\u00062\u0006\u0010/\u001a\u00020\u00102\u0006\u0010\u0015\u001a\u00020\u00102\f\u0010\r\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001aN\u00100\u001a\u00020\u00062\u0006\u00101\u001a\u00020\u00102\u0006\u00102\u001a\u00020\u00192\u0012\u00103\u001a\u000e\u0012\u0004\u0012\u00020\u0010\u0012\u0004\u0012\u00020\u00060\u001c2\u0012\u00104\u001a\u000e\u0012\u0004\u0012\u00020\u0019\u0012\u0004\u0012\u00020\u00060\u001c2\f\u0010\r\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a.\u00105\u001a\u00020\u00062\u0006\u00106\u001a\u0002072\u0006\u0010/\u001a\u00020\u00102\u0006\u00108\u001a\u00020\u00192\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a:\u00109\u001a\u00020\u00062\u0006\u00102\u001a\u00020\u00192\u0006\u00101\u001a\u00020\u00102\f\u0010:\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\u0012\u00104\u001a\u000e\u0012\u0004\u0012\u00020\u0019\u0012\u0004\u0012\u00020\u00060\u001cH\u0007\u001a0\u0010;\u001a\u00020\u00062\u0006\u00106\u001a\u0002072\u0006\u0010/\u001a\u00020\u00102\u0006\u0010<\u001a\u00020\u00102\u000e\u0010\"\u001a\n\u0012\u0004\u0012\u00020\u0006\u0018\u00010\bH\u0007\u001a<\u0010=\u001a\u00020\u00062\u0006\u00106\u001a\u0002072\u0006\u0010/\u001a\u00020\u00102\u0006\u0010>\u001a\u00020\u00102\u0006\u0010?\u001a\u00020\u00192\u0012\u0010@\u001a\u000e\u0012\u0004\u0012\u00020\u0019\u0012\u0004\u0012\u00020\u00060\u001cH\u0007\u001a\u001e\u0010A\u001a\u00020\u00062\u0006\u0010B\u001a\u00020\u00102\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a\"\u0010C\u001a\u00020\u00062\u0006\u0010 \u001a\u00020\u00102\u0006\u0010!\u001a\u00020\u00192\b\b\u0002\u0010)\u001a\u00020*H\u0007\u001a2\u0010D\u001a\u00020\u00062\u0006\u0010E\u001a\u00020\u00102\u0012\u0010F\u001a\u000e\u0012\u0004\u0012\u00020\u0010\u0012\u0004\u0012\u00020\u00060\u001c2\f\u0010\r\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u001a0\u0010G\u001a\u00020\u00062\u0006\u0010 \u001a\u00020\u00102\u0006\u0010!\u001a\u00020\u00192\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\b\b\u0002\u0010)\u001a\u00020*H\u0007\u001a\u0018\u0010H\u001a\u00020\u00062\u0006\u0010\'\u001a\u00020(2\u0006\u0010I\u001a\u00020JH\u0007\u001aL\u0010K\u001a\u00020\u00062\u0006\u0010/\u001a\u00020\u00102\u0006\u0010>\u001a\u00020\u00102\u0006\u00106\u001a\u0002072\b\b\u0002\u0010L\u001a\u00020M2\b\b\u0002\u0010N\u001a\u00020M2\f\u0010\"\u001a\b\u0012\u0004\u0012\u00020\u00060\bH\u0007\u00f8\u0001\u0000\u00a2\u0006\u0004\bO\u0010P\u001a\b\u0010Q\u001a\u00020\u0006H\u0007\u001a\u0010\u0010R\u001a\u00020\u00062\u0006\u0010I\u001a\u00020JH\u0007\u001a:\u0010S\u001a\u00020\u00062\u0006\u0010/\u001a\u00020\u00102\u0006\u0010T\u001a\u00020\u00102\f\u0010\r\u001a\b\u0012\u0004\u0012\u00020\u00060\b2\u0012\u0010U\u001a\u000e\u0012\u0004\u0012\u00020\u0010\u0012\u0004\u0012\u00020\u00060\u001cH\u0007\u001a\u0016\u0010V\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010Y\u001a\u00020\u0010\u001a\u0016\u0010Z\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010[\u001a\u00020\u0010\u001a\u0016\u0010\\\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010]\u001a\u00020\u0019\u001a\u000e\u0010^\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\u000e\u0010_\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\u000e\u0010`\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\u0016\u0010a\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010b\u001a\u00020c\u001a,\u0010d\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010\u0013\u001a\u00020\u00102\u0006\u0010\u0014\u001a\u00020\u00102\f\u0010\u0015\u001a\b\u0012\u0004\u0012\u00020\u00100\u0001\u001a\u000e\u0010e\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\"\u0010f\u001a\u00020\u00102\f\u0010g\u001a\b\u0012\u0004\u0012\u00020c0\u00012\f\u0010\u0015\u001a\b\u0012\u0004\u0012\u00020\u00100\u0001\u001a\"\u0010h\u001a\u00020\u00102\f\u0010g\u001a\b\u0012\u0004\u0012\u00020c0\u00012\f\u0010\u0015\u001a\b\u0012\u0004\u0012\u00020\u00100\u0001\u001a\"\u0010i\u001a\u00020\u00102\f\u0010g\u001a\b\u0012\u0004\u0012\u00020c0\u00012\f\u0010\u0015\u001a\b\u0012\u0004\u0012\u00020\u00100\u0001\u001a\u0006\u0010j\u001a\u00020\u0010\u001a\u0016\u0010k\u001a\u00020\u00102\u0006\u0010W\u001a\u00020X2\u0006\u0010b\u001a\u00020c\u001a\u0006\u0010l\u001a\u00020\u0010\u001a\u0006\u0010m\u001a\u00020\u0010\u001a\u0006\u0010n\u001a\u00020\u0010\u001a\u001e\u0010o\u001a\u00020\u00192\u0006\u0010W\u001a\u00020X2\u0006\u0010p\u001a\u00020\u00102\u0006\u0010q\u001a\u00020\u0019\u001a\u001e\u0010o\u001a\u00020\u00102\u0006\u0010W\u001a\u00020X2\u0006\u0010p\u001a\u00020\u00102\u0006\u0010q\u001a\u00020\u0010\u001a\u0014\u0010r\u001a\b\u0012\u0004\u0012\u00020\u00100\u00012\u0006\u0010W\u001a\u00020X\u001a\u0014\u0010s\u001a\b\u0012\u0004\u0012\u00020c0\u00012\u0006\u0010W\u001a\u00020X\u001a&\u0010t\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010%\u001a\u00020\u00102\u0006\u0010B\u001a\u00020\u00102\u0006\u0010u\u001a\u00020\u0010\u001a\u000e\u0010v\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\u000e\u0010w\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X\u001a\u0016\u0010x\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010B\u001a\u00020\u0010\u001a(\u0010y\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010B\u001a\u00020\u00102\u0006\u0010%\u001a\u00020\u00102\b\b\u0002\u0010u\u001a\u00020\u0010\u001a\u001c\u0010y\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\f\u0010g\u001a\b\u0012\u0004\u0012\u00020c0\u0001\u001a&\u0010z\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010B\u001a\u00020\u00102\u0006\u0010%\u001a\u00020\u00102\u0006\u0010I\u001a\u00020J\u001a\u001e\u0010{\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010p\u001a\u00020\u00102\u0006\u0010<\u001a\u00020\u0019\u001a\u001e\u0010{\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010p\u001a\u00020\u00102\u0006\u0010<\u001a\u00020\u0010\u001a\u001e\u0010|\u001a\u00020\u00062\u0006\u0010W\u001a\u00020X2\u0006\u0010\u0015\u001a\u00020\u00102\u0006\u0010\u0013\u001a\u00020\u0010\"\u0017\u0010\u0000\u001a\b\u0012\u0004\u0012\u00020\u00020\u0001\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0003\u0010\u0004\u0082\u0002\u0007\n\u0005\b\u00a1\u001e0\u0001\u00a8\u0006}"}, d2 = {"platforms", "", "Lcom/skipfeed/android/presentation/Platform;", "getPlatforms", "()Ljava/util/List;", "AboutSupportCard", "", "onPrivacyPolicyClick", "Lkotlin/Function0;", "onTermsClick", "onSupportClick", "onContactClick", "DataExportDialog", "onDismiss", "onExport", "Lkotlin/Function3;", "", "Lkotlin/ParameterName;", "name", "format", "timeRange", "content", "DataManagementCard", "dataRetentionPeriod", "automaticPlatformOrder", "", "onRetentionClick", "onPlatformOrderToggle", "Lkotlin/Function1;", "onExportClick", "onClearDataClick", "FilterChip", "text", "isSelected", "onClick", "HistoryScreen", "IOSPlatformCard", "platform", "IOSTabBar", "navController", "Landroidx/navigation/NavHostController;", "modifier", "Landroidx/compose/ui/Modifier;", "IOSTabItem", "tab", "Lcom/skipfeed/android/presentation/TabItem;", "InternalWebViewDialog", "title", "LanguageSelectorDialog", "currentLanguage", "autoDetectLanguage", "onLanguageSelected", "onAutoDetectToggle", "ModernActionRow", "icon", "Landroidx/compose/ui/graphics/vector/ImageVector;", "isDestructive", "ModernPreferencesCard", "onLanguageClick", "ModernSettingRow", "value", "ModernToggleRow", "subtitle", "isOn", "onToggle", "RecentSearchChip", "query", "RetentionButton", "RetentionPeriodDialog", "currentPeriod", "onPeriodSelected", "SearchModeButton", "SearchScreen", "searchRepository", "Lcom/skipfeed/android/data/repository/SearchRepository;", "SettingsRow", "iconColor", "Landroidx/compose/ui/graphics/Color;", "textColor", "SettingsRow-BQnUqu0", "(Ljava/lang/String;Ljava/lang/String;Landroidx/compose/ui/graphics/vector/ImageVector;JJLkotlin/jvm/functions/Function0;)V", "SettingsScreen", "SkipFeedApp", "WebViewDialog", "url", "onOpenUrl", "applyDataRetentionPolicy", "context", "Landroid/content/Context;", "period", "applyLanguageChange", "languageCode", "applyPlatformOrderingChange", "isAutomatic", "cleanInvalidHistory", "clearAllHistory", "clearRecentSearches", "deleteSearchHistory", "item", "Lcom/skipfeed/android/presentation/HistoryItem;", "exportSearchData", "forceCleanProblematicRecords", "generateCSVContent", "items", "generateJSONContent", "generateTXTContent", "getPrivacyPolicyContent", "getSearchMode", "getSupportFAQContent", "getSystemLanguage", "getTermsOfServiceContent", "getUserPreference", "key", "defaultValue", "loadRecentSearches", "loadSearchHistory", "performSearch", "mode", "reorderPlatformsByUsage", "resetPlatformsToDefaultOrder", "saveRecentSearch", "saveSearchHistory", "saveSearchToHistory", "saveUserPreferences", "shareExportedData", "app_release"})
 public final class MainActivityKt {
     @org.jetbrains.annotations.NotNull()
     private static final java.util.List<com.skipfeed.android.presentation.Platform> platforms = null;
@@ -128,15 +128,19 @@ public final class MainActivityKt {
     kotlin.jvm.functions.Function0<kotlin.Unit> onClick) {
     }
     
-    @androidx.compose.runtime.Composable()
-    public static final void StatsScreen() {
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String getPrivacyPolicyContent() {
+        return null;
     }
     
-    @androidx.compose.runtime.Composable()
-    public static final void PeriodButton(@org.jetbrains.annotations.NotNull()
-    java.lang.String text, boolean isSelected, @org.jetbrains.annotations.NotNull()
-    kotlin.jvm.functions.Function0<kotlin.Unit> onClick, @org.jetbrains.annotations.NotNull()
-    androidx.compose.ui.Modifier modifier) {
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String getTermsOfServiceContent() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String getSupportFAQContent() {
+        return null;
     }
     
     @androidx.compose.runtime.Composable()
@@ -144,8 +148,182 @@ public final class MainActivityKt {
     }
     
     @androidx.compose.runtime.Composable()
+    public static final void ModernPreferencesCard(boolean autoDetectLanguage, @org.jetbrains.annotations.NotNull()
+    java.lang.String currentLanguage, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onLanguageClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.Boolean, kotlin.Unit> onAutoDetectToggle) {
+    }
+    
+    @androidx.compose.runtime.Composable()
     public static final void RetentionButton(@org.jetbrains.annotations.NotNull()
     java.lang.String text, boolean isSelected, @org.jetbrains.annotations.NotNull()
     androidx.compose.ui.Modifier modifier) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void DataManagementCard(@org.jetbrains.annotations.NotNull()
+    java.lang.String dataRetentionPeriod, boolean automaticPlatformOrder, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onRetentionClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.Boolean, kotlin.Unit> onPlatformOrderToggle, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onExportClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onClearDataClick) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void AboutSupportCard(@org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onPrivacyPolicyClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onTermsClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onSupportClick, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onContactClick) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void ModernSettingRow(@org.jetbrains.annotations.NotNull()
+    androidx.compose.ui.graphics.vector.ImageVector icon, @org.jetbrains.annotations.NotNull()
+    java.lang.String title, @org.jetbrains.annotations.NotNull()
+    java.lang.String value, @org.jetbrains.annotations.Nullable()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onClick) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void ModernToggleRow(@org.jetbrains.annotations.NotNull()
+    androidx.compose.ui.graphics.vector.ImageVector icon, @org.jetbrains.annotations.NotNull()
+    java.lang.String title, @org.jetbrains.annotations.NotNull()
+    java.lang.String subtitle, boolean isOn, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.Boolean, kotlin.Unit> onToggle) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void ModernActionRow(@org.jetbrains.annotations.NotNull()
+    androidx.compose.ui.graphics.vector.ImageVector icon, @org.jetbrains.annotations.NotNull()
+    java.lang.String title, boolean isDestructive, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onClick) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void LanguageSelectorDialog(@org.jetbrains.annotations.NotNull()
+    java.lang.String currentLanguage, boolean autoDetectLanguage, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.String, kotlin.Unit> onLanguageSelected, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.Boolean, kotlin.Unit> onAutoDetectToggle, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void DataExportDialog(@org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function3<? super java.lang.String, ? super java.lang.String, ? super java.util.List<java.lang.String>, kotlin.Unit> onExport) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void RetentionPeriodDialog(@org.jetbrains.annotations.NotNull()
+    java.lang.String currentPeriod, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.String, kotlin.Unit> onPeriodSelected, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void WebViewDialog(@org.jetbrains.annotations.NotNull()
+    java.lang.String title, @org.jetbrains.annotations.NotNull()
+    java.lang.String url, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function1<? super java.lang.String, kotlin.Unit> onOpenUrl) {
+    }
+    
+    public static final void saveUserPreferences(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String key, @org.jetbrains.annotations.NotNull()
+    java.lang.String value) {
+    }
+    
+    public static final void saveUserPreferences(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String key, boolean value) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String getUserPreference(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String key, @org.jetbrains.annotations.NotNull()
+    java.lang.String defaultValue) {
+        return null;
+    }
+    
+    public static final boolean getUserPreference(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String key, boolean defaultValue) {
+        return false;
+    }
+    
+    public static final void exportSearchData(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String format, @org.jetbrains.annotations.NotNull()
+    java.lang.String timeRange, @org.jetbrains.annotations.NotNull()
+    java.util.List<java.lang.String> content) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String generateCSVContent(@org.jetbrains.annotations.NotNull()
+    java.util.List<com.skipfeed.android.presentation.HistoryItem> items, @org.jetbrains.annotations.NotNull()
+    java.util.List<java.lang.String> content) {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String generateTXTContent(@org.jetbrains.annotations.NotNull()
+    java.util.List<com.skipfeed.android.presentation.HistoryItem> items, @org.jetbrains.annotations.NotNull()
+    java.util.List<java.lang.String> content) {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String generateJSONContent(@org.jetbrains.annotations.NotNull()
+    java.util.List<com.skipfeed.android.presentation.HistoryItem> items, @org.jetbrains.annotations.NotNull()
+    java.util.List<java.lang.String> content) {
+        return null;
+    }
+    
+    public static final void shareExportedData(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String content, @org.jetbrains.annotations.NotNull()
+    java.lang.String format) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String getSystemLanguage() {
+        return null;
+    }
+    
+    public static final void applyLanguageChange(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String languageCode) {
+    }
+    
+    public static final void applyDataRetentionPolicy(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.lang.String period) {
+    }
+    
+    public static final void saveSearchHistory(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, @org.jetbrains.annotations.NotNull()
+    java.util.List<com.skipfeed.android.presentation.HistoryItem> items) {
+    }
+    
+    public static final void applyPlatformOrderingChange(@org.jetbrains.annotations.NotNull()
+    android.content.Context context, boolean isAutomatic) {
+    }
+    
+    public static final void reorderPlatformsByUsage(@org.jetbrains.annotations.NotNull()
+    android.content.Context context) {
+    }
+    
+    public static final void resetPlatformsToDefaultOrder(@org.jetbrains.annotations.NotNull()
+    android.content.Context context) {
+    }
+    
+    @androidx.compose.runtime.Composable()
+    public static final void InternalWebViewDialog(@org.jetbrains.annotations.NotNull()
+    java.lang.String title, @org.jetbrains.annotations.NotNull()
+    java.lang.String content, @org.jetbrains.annotations.NotNull()
+    kotlin.jvm.functions.Function0<kotlin.Unit> onDismiss) {
     }
 }

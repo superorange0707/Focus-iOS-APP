@@ -11,9 +11,16 @@
     compileTarget="android-34"
     neverShrinking="true">
   <lintOptions
+      disable="MissingTranslation"
       abortOnError="true"
       absolutePaths="true"
       checkReleaseBuilds="true"
-      explainIssues="true"/>
+      explainIssues="true">
+    <severities>
+      <severity
+        id="MissingTranslation"
+        severity="IGNORE" />
+    </severities>
+  </lintOptions>
   <variant name="debug"/>
 </lint-module>

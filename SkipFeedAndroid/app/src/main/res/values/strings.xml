@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">SkipFeed</string>
-    
+
     <!-- Main App -->
     <string name="tagline">Skip the feed, find what matters</string>
     <string name="subtitle">Direct search, zero distractions</string>
-    
+    <string name="search_hint">What are you looking for?</string>
+    <string name="choose_platform">Choose Platform</string>
+    <string name="search_on">Search on</string>
+    <string name="open_in">Open in</string>
+    <string name="direct">Direct</string>
+    <string name="in_app">In-App</string>
+
     <!-- Platforms -->
     <string name="reddit">Reddit</string>
     <string name="youtube">YouTube</string>
@@ -12,19 +18,21 @@
     <string name="tiktok">TikTok</string>
     <string name="instagram">Instagram</string>
     <string name="facebook">Facebook</string>
-    
+
     <!-- Search -->
-    <string name="search_hint">What are you looking for?</string>
     <string name="search_button">Search</string>
     <string name="searching">Searching…</string>
-    <string name="open_in">Open in</string>
-    <string name="search_on">Search on</string>
     <string name="open_tiktok_search">Open TikTok Search</string>
     <string name="tiktok_search_message">Opens TikTok search page where you can input your query</string>
+    <string name="reddit_post">Reddit Post</string>
+    <string name="tiktok_search">TikTok Search</string>
+    <string name="open_in_reddit">Open in Reddit</string>
+    <string name="view_link">View Link</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     
     <!-- Search Modes -->
-    <string name="direct">Direct</string>
-    <string name="in_app">In-App</string>
     <string name="search_mode_direct">Direct Search</string>
     <string name="search_mode_in_app">In-App Browsing</string>
     
@@ -60,7 +68,7 @@
     
     <!-- Settings -->
     <string name="language">Language</string>
-    <string name="auto_detect_language">Auto-detect Language</string>
+    <string name="auto_detect_language">Auto-detect</string>
     <string name="platform_order">Platform Order</string>
     <string name="search_mode">Search Mode</string>
     <string name="data_export">Data Export</string>
@@ -69,10 +77,8 @@
     <string name="reset_data">Reset Data</string>
     <string name="reset_data_message">This will clear all your search history and statistics. This action cannot be undone.</string>
     <string name="reset">Reset</string>
-    <string name="cancel">Cancel</string>
-    
+
     <!-- Data Export -->
-    <string name="export_data">Export Data</string>
     <string name="export_search_history">Export Search History</string>
     <string name="export_statistics">Export Statistics</string>
     <string name="export_all_data">Export All Data</string>
@@ -81,8 +87,6 @@
     
     <!-- About -->
     <string name="about_description">SkipFeed helps you search social media platforms directly without getting distracted by endless feeds. Find what you\'re looking for faster and save time.</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="terms_of_service">Terms of Service</string>
     <string name="contact_support">Contact Support</string>
     
     <!-- Onboarding -->
@@ -126,10 +130,59 @@
     
     <!-- Common -->
     <string name="ok">OK</string>
-    <string name="done">Done</string>
-    <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="share">Share</string>
     <string name="copy">Copy</string>
     <string name="copied">Copied to clipboard</string>
+
+    <!-- Settings Extended -->
+    <string name="preferences">Preferences</string>
+    <string name="data_management">Data Management</string>
+    <string name="about_support">About &amp; Support</string>
+    <string name="data_retention_period">Data Retention Period</string>
+    <string name="automatic_platform_order">Automatic Platform Order</string>
+    <string name="export_data">Export Data</string>
+    <string name="clear_all_data">Clear All Data</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="support_faq">Support &amp; FAQ</string>
+    <string name="contact_us">Contact Us</string>
+
+    <!-- Statistics Extended -->
+    <string name="last_seven_days">Last 7 Days</string>
+    <string name="last_thirty_days">Last 30 Days</string>
+    <string name="since_first_use">Since First Use</string>
+    <string name="platform_usage">Platform Usage</string>
+    <string name="time_of_day_analysis">Time of Day Analysis</string>
+    <string name="search_trend">Search Trend</string>
+    <string name="days">Days</string>
+    <string name="searches">searches</string>
+    <string name="search_times">search times</string>
+    <string name="percentage">%</string>
+    <string name="statistics">Statistics</string>
+    <string name="total_searches_label">Total Searches</string>
+    <string name="searches_today_label">Searches Today</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="evening">Evening</string>
+    <string name="night">Night</string>
+    <string name="insights">Insights</string>
+    <string name="focus_score">Focus Score</string>
+    <string name="staying_focused">Staying Focused</string>
+    <string name="todays_impact">Today\'s Impact</string>
+    <string name="time_saved_from_distractions">Time saved from distractions</string>
+    <string name="efficiency">Efficiency</string>
+    <string name="direct_searches_save_time">Direct searches save time</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="you_search_most_often_in_the_evening">You search most often in the evening</string>
+
+    <!-- Settings Extended -->
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="terms_of_service_title">Terms of Service</string>
+    <string name="support_faq_title">Support &amp; FAQ</string>
+    <string name="use_system_language">Use system language</string>
+    <string name="automatic_platform_ordering">Automatic Platform Ordering</string>
+    <string name="order_platforms_by_usage">Order platforms by usage frequency</string>
 </resources>

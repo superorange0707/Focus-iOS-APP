@@ -7,7 +7,7 @@ import com.skipfeed.android.presentation.MainActivity_GeneratedInjector;
 import com.skipfeed.android.presentation.screens.history.SearchHistoryViewModel_HiltModules;
 import com.skipfeed.android.presentation.screens.search.SearchViewModel_HiltModules;
 import com.skipfeed.android.presentation.screens.settings.SettingsViewModel_HiltModules;
-import com.skipfeed.android.presentation.screens.statistics.StatisticsViewModel_HiltModules;
+import com.skipfeed.android.presentation.viewmodel.StatisticsViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
 import dagger.Module;

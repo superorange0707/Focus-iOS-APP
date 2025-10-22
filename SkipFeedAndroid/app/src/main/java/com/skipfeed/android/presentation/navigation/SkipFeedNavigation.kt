@@ -20,7 +20,7 @@ import com.skipfeed.android.R
 import com.skipfeed.android.presentation.screens.history.SearchHistoryScreen
 import com.skipfeed.android.presentation.screens.search.SearchScreen
 import com.skipfeed.android.presentation.screens.settings.SettingsScreen
-import com.skipfeed.android.presentation.screens.statistics.StatisticsScreen
+import com.skipfeed.android.presentation.StatisticsScreen
 
 sealed class Screen(val route: String, val titleRes: Int, val icon: androidx.compose.ui.graphics.vector.ImageVector) {
     object Search : Screen("search", R.string.search, Icons.Filled.Search)

@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">SkipFeed</string>
+    
+    <!-- Main App -->
+    <string name="tagline">跳过信息流，找到重要内容</string>
+    <string name="subtitle">直接搜索，零干扰</string>
+    <string name="search_hint">您在寻找什么？</string>
+    <string name="choose_platform">选择平台</string>
+    <string name="search_on">搜索于</string>
+    <string name="open_in">打开方式</string>
+    <string name="direct">直接</string>
+    <string name="in_app">应用内</string>
+    
+    <!-- Platforms -->
+    <string name="reddit">Reddit</string>
+    <string name="youtube">YouTube</string>
+    <string name="x">X</string>
+    <string name="tiktok">TikTok</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Search -->
+    <string name="search_button">搜索</string>
+    <string name="searching">搜索中…</string>
+    <string name="open_tiktok_search">打开 TikTok 搜索</string>
+    <string name="tiktok_search_message">打开 TikTok 搜索页面，您可以在其中输入查询</string>
+    <string name="reddit_post">Reddit 帖子</string>
+    <string name="tiktok_search">TikTok 搜索</string>
+    <string name="open_in_reddit">在 Reddit 中打开</string>
+    <string name="view_link">查看链接</string>
+    <string name="done">完成</string>
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+
+    <!-- Navigation -->
+    <string name="search">搜索</string>
+    <string name="history">历史</string>
+    <string name="stats">统计</string>
+    <string name="settings">设置</string>
+    
+    <!-- Recent Searches -->
+    <string name="recent_searches">最近搜索</string>
+    <string name="clear">清除</string>
+    <string name="no_recent_searches">没有最近搜索</string>
+    
+    <!-- Search History -->
+    <string name="search_history">搜索历史</string>
+    <string name="clear_history">清除历史</string>
+    <string name="delete_search">删除搜索</string>
+    <string name="no_search_history">还没有搜索历史</string>
+    <string name="start_searching_message">开始搜索以查看您的历史记录</string>
+    
+    <!-- Settings -->
+    <string name="language">语言</string>
+    <string name="auto_detect_language">自动检测</string>
+    <string name="platform_order">平台顺序</string>
+    <string name="search_mode">搜索模式</string>
+    <string name="data_export">数据导出</string>
+    <string name="about">关于</string>
+    <string name="version">版本</string>
+    <string name="reset_data">重置数据</string>
+    <string name="reset_data_message">这将清除您的所有搜索历史和统计信息。此操作无法撤销。</string>
+    <string name="reset">重置</string>
+
+    <!-- Common -->
+    <string name="ok">确定</string>
+    <string name="delete">删除</string>
+    <string name="share">分享</string>
+    <string name="copy">复制</string>
+    <string name="copied">已复制到剪贴板</string>
+
+    <!-- Settings Extended -->
+    <string name="preferences">偏好设置</string>
+    <string name="data_management">数据管理</string>
+    <string name="about_support">关于与支持</string>
+    <string name="data_retention_period">数据保留期</string>
+    <string name="automatic_platform_order">自动平台排序</string>
+    <string name="export_data">导出数据</string>
+    <string name="clear_all_data">清除所有数据</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="terms_of_service">服务条款</string>
+    <string name="support_faq">支持与常见问题</string>
+    <string name="contact_us">联系我们</string>
+
+    <!-- Statistics Extended -->
+    <string name="search_trend">搜索趋势</string>
+    <string name="days">天</string>
+    <string name="searches">次搜索</string>
+    <string name="search_times">搜索次数</string>
+    <string name="percentage">%</string>
+    <string name="statistics">统计</string>
+    <string name="time_saved">节省时间</string>
+    <string name="total_searches_label">总搜索次数</string>
+    <string name="searches_today_label">今日搜索</string>
+    <string name="morning">上午</string>
+    <string name="afternoon">下午</string>
+    <string name="evening">晚上</string>
+    <string name="night">夜间</string>
+    <string name="insights">洞察</string>
+    <string name="focus_score">专注分数</string>
+    <string name="staying_focused">保持专注</string>
+    <string name="todays_impact">今日影响</string>
+    <string name="time_saved_from_distractions">从干扰中节省的时间</string>
+    <string name="efficiency">效率</string>
+    <string name="direct_searches_save_time">直接搜索节省时间</string>
+    <string name="low">低</string>
+    <string name="medium">中等</string>
+    <string name="high">高</string>
+    <string name="you_search_most_often_in_the_evening">您最常在晚上搜索</string>
+
+    <!-- Settings Extended -->
+    <string name="privacy_policy_title">隐私政策</string>
+    <string name="terms_of_service_title">服务条款</string>
+    <string name="support_faq_title">支持与常见问题</string>
+    <string name="use_system_language">使用系统语言</string>
+    <string name="automatic_platform_ordering">自动平台排序</string>
+    <string name="order_platforms_by_usage">按使用频率排序平台</string>
+</resources>

@@ -88,12 +88,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="58"
+            line="61"
             column="20"
-            startOffset="1334"
-            endLine="58"
+            startOffset="1391"
+            endLine="61"
             endColumn="51"
-            endOffset="1365"/>
+            endOffset="1422"/>
     </incident>
 
     <incident
@@ -108,12 +108,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="59"
+            line="62"
             column="20"
-            startOffset="1386"
-            endLine="59"
+            startOffset="1443"
+            endLine="62"
             endColumn="68"
-            endOffset="1434"/>
+            endOffset="1491"/>
     </incident>
 
     <incident
@@ -128,12 +128,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="60"
+            line="63"
             column="20"
-            startOffset="1455"
-            endLine="60"
+            startOffset="1512"
+            endLine="63"
             endColumn="62"
-            endOffset="1497"/>
+            endOffset="1554"/>
     </incident>
 
     <incident
@@ -148,12 +148,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="61"
+            line="64"
             column="20"
-            startOffset="1518"
-            endLine="61"
+            startOffset="1575"
+            endLine="64"
             endColumn="71"
-            endOffset="1569"/>
+            endOffset="1626"/>
     </incident>
 
     <incident
@@ -168,12 +168,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="68"
+            line="71"
             column="20"
-            startOffset="1832"
-            endLine="68"
+            startOffset="1889"
+            endLine="71"
             endColumn="66"
-            endOffset="1878"/>
+            endOffset="1935"/>
     </incident>
 
     <incident
@@ -188,12 +188,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="71"
+            line="74"
             column="20"
-            startOffset="1921"
-            endLine="71"
+            startOffset="1978"
+            endLine="74"
             endColumn="74"
-            endOffset="1975"/>
+            endOffset="2032"/>
     </incident>
 
     <incident
@@ -208,12 +208,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="72"
+            line="75"
             column="20"
-            startOffset="1996"
-            endLine="72"
+            startOffset="2053"
+            endLine="75"
             endColumn="72"
-            endOffset="2048"/>
+            endOffset="2105"/>
     </incident>
 
     <incident
@@ -228,12 +228,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="95"
+            line="98"
             column="20"
-            startOffset="2768"
-            endLine="95"
+            startOffset="2825"
+            endLine="98"
             endColumn="54"
-            endOffset="2802"/>
+            endOffset="2859"/>
     </incident>
 
     <incident
@@ -248,12 +248,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="96"
+            line="99"
             column="20"
-            startOffset="2823"
-            endLine="96"
+            startOffset="2880"
+            endLine="99"
             endColumn="50"
-            endOffset="2853"/>
+            endOffset="2910"/>
     </incident>
 
     <incident
@@ -268,12 +268,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="97"
+            line="100"
             column="10"
-            startOffset="2864"
-            endLine="97"
+            startOffset="2921"
+            endLine="100"
             endColumn="45"
-            endOffset="2899"/>
+            endOffset="2956"/>
     </incident>
 
     <incident
@@ -288,12 +288,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="106"
+            line="109"
             column="20"
-            startOffset="3111"
-            endLine="106"
+            startOffset="3168"
+            endLine="109"
             endColumn="50"
-            endOffset="3141"/>
+            endOffset="3198"/>
     </incident>
 
     <incident
@@ -308,12 +308,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="119"
+            line="122"
             column="20"
-            startOffset="3669"
-            endLine="119"
+            startOffset="3726"
+            endLine="122"
             endColumn="65"
-            endOffset="3714"/>
+            endOffset="3771"/>
     </incident>
 
     <incident
@@ -328,12 +328,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="123"
+            line="126"
             column="31"
-            startOffset="3811"
-            endLine="123"
+            startOffset="3868"
+            endLine="126"
             endColumn="62"
-            endOffset="3842"/>
+            endOffset="3899"/>
     </incident>
 
     <incident
@@ -348,12 +348,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="124"
+            line="127"
             column="31"
-            startOffset="3874"
-            endLine="124"
+            startOffset="3931"
+            endLine="127"
             endColumn="75"
-            endOffset="3918"/>
+            endOffset="3975"/>
     </incident>
 
     <incident
@@ -368,12 +368,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="125"
+            line="128"
             column="31"
-            startOffset="3950"
-            endLine="125"
+            startOffset="4007"
+            endLine="128"
             endColumn="82"
-            endOffset="4001"/>
+            endOffset="4058"/>
     </incident>
 
     <incident
@@ -388,12 +388,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="75"
+            line="78"
             column="20"
-            startOffset="2104"
-            endLine="75"
+            startOffset="2161"
+            endLine="78"
             endColumn="59"
-            endOffset="2143"/>
+            endOffset="2200"/>
     </incident>
 
     <incident
@@ -408,12 +408,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="76"
+            line="79"
             column="20"
-            startOffset="2164"
-            endLine="76"
+            startOffset="2221"
+            endLine="79"
             endColumn="65"
-            endOffset="2209"/>
+            endOffset="2266"/>
     </incident>
 
     <incident
@@ -428,12 +428,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="77"
+            line="80"
             column="20"
-            startOffset="2230"
-            endLine="77"
+            startOffset="2287"
+            endLine="80"
             endColumn="69"
-            endOffset="2279"/>
+            endOffset="2336"/>
     </incident>
 
     <incident
@@ -448,12 +448,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="80"
+            line="83"
             column="20"
-            startOffset="2317"
-            endLine="80"
+            startOffset="2374"
+            endLine="83"
             endColumn="54"
-            endOffset="2351"/>
+            endOffset="2408"/>
     </incident>
 
     <incident
@@ -468,12 +468,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="83"
+            line="86"
             column="20"
-            startOffset="2395"
-            endLine="83"
+            startOffset="2452"
+            endLine="86"
             endColumn="76"
-            endOffset="2451"/>
+            endOffset="2508"/>
     </incident>
 
     <incident
@@ -488,32 +488,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="86"
-            column="20"
-            startOffset="2509"
-            endLine="86"
-            endColumn="76"
-            endOffset="2565"/>
-    </incident>
-
-    <incident
-        id="NewerVersionAvailable"
-        severity="warning"
-        message="A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0">
-        <fix-replace
-            description="Change to 2.7.0"
-            family="Update versions"
-            oldString="2.5.0"
-            replacement="2.7.0"
-            priority="0"/>
-        <location
-            file="${:app*projectDir}/build.gradle.kts"
             line="89"
             column="20"
-            startOffset="2608"
+            startOffset="2566"
             endLine="89"
-            endColumn="51"
-            endOffset="2639"/>
+            endColumn="76"
+            endOffset="2622"/>
     </incident>
 
     <incident
@@ -528,12 +508,32 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="103"
+            line="92"
             column="20"
-            startOffset="3039"
-            endLine="103"
+            startOffset="2665"
+            endLine="92"
             endColumn="51"
-            endOffset="3070"/>
+            endOffset="2696"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0">
+        <fix-replace
+            description="Change to 2.7.0"
+            family="Update versions"
+            oldString="2.5.0"
+            replacement="2.7.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="106"
+            column="20"
+            startOffset="3096"
+            endLine="106"
+            endColumn="51"
+            endOffset="3127"/>
     </incident>
 
     <incident
@@ -548,12 +548,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="109"
+            line="112"
             column="20"
-            startOffset="3200"
-            endLine="109"
+            startOffset="3257"
+            endLine="112"
             endColumn="82"
-            endOffset="3262"/>
+            endOffset="3319"/>
     </incident>
 
     <incident
@@ -568,12 +568,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="117"
+            line="120"
             column="20"
-            startOffset="3562"
-            endLine="117"
+            startOffset="3619"
+            endLine="120"
             endColumn="57"
-            endOffset="3599"/>
+            endOffset="3656"/>
     </incident>
 
     <incident
@@ -588,12 +588,12 @@
             priority="0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="118"
+            line="121"
             column="10"
-            startOffset="3610"
-            endLine="118"
+            startOffset="3667"
+            endLine="121"
             endColumn="48"
-            endOffset="3648"/>
+            endOffset="3705"/>
     </incident>
 
     <incident
@@ -622,13 +622,153 @@
         severity="warning"
         message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
         <location
-            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
-            line="133"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-es/strings.xml"
+            line="59"
             column="19"
-            startOffset="6379"
-            endLine="133"
+            startOffset="2580"
+            endLine="59"
             endColumn="23"
-            endOffset="6383"/>
+            endOffset="2584"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-zh/strings.xml"
+            line="59"
+            column="19"
+            startOffset="2120"
+            endLine="59"
+            endColumn="23"
+            endOffset="2124"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-ar/strings.xml"
+            line="71"
+            column="19"
+            startOffset="3060"
+            endLine="71"
+            endColumn="23"
+            endOffset="3064"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-de/strings.xml"
+            line="87"
+            column="19"
+            startOffset="4124"
+            endLine="87"
+            endColumn="23"
+            endOffset="4128"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-fr/strings.xml"
+            line="87"
+            column="19"
+            startOffset="4327"
+            endLine="87"
+            endColumn="23"
+            endOffset="4331"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-it/strings.xml"
+            line="87"
+            column="19"
+            startOffset="4224"
+            endLine="87"
+            endColumn="23"
+            endOffset="4228"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-ja/strings.xml"
+            line="87"
+            column="19"
+            startOffset="3536"
+            endLine="87"
+            endColumn="23"
+            endOffset="3540"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-ko/strings.xml"
+            line="87"
+            column="19"
+            startOffset="3534"
+            endLine="87"
+            endColumn="23"
+            endOffset="3538"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-pt/strings.xml"
+            line="87"
+            column="19"
+            startOffset="4146"
+            endLine="87"
+            endColumn="23"
+            endOffset="4150"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values-ru/strings.xml"
+            line="87"
+            column="19"
+            startOffset="4095"
+            endLine="87"
+            endColumn="23"
+            endOffset="4099"/>
+    </incident>
+
+    <incident
+        id="PrivateResource"
+        severity="warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="131"
+            column="19"
+            startOffset="6246"
+            endLine="131"
+            endColumn="23"
+            endOffset="6250"/>
     </incident>
 
     <incident
@@ -640,12 +780,12 @@
             url="https://developer.android.com/studio/build/migrate-to-ksp"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="97"
+            line="100"
             column="5"
-            startOffset="2859"
-            endLine="97"
+            startOffset="2916"
+            endLine="100"
             endColumn="46"
-            endOffset="2900"/>
+            endOffset="2957"/>
     </incident>
 
     <incident
@@ -829,6 +969,76 @@
     <incident
         id="UseKtx"
         severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/data/LocalizationManager.kt"
+                    startOffset="2035"
+                    endOffset="2040"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/data/LocalizationManager.kt"
+                    startOffset="2040"
+                    endOffset="2041"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/data/LocalizationManager.kt"
+                    startOffset="2041"
+                    endOffset="2042"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/data/LocalizationManager.kt"
+                    startOffset="2081"
+                    endOffset="2089"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/data/LocalizationManager.kt"
+            line="62"
+            column="13"
+            startOffset="2023"
+            endLine="62"
+            endColumn="31"
+            endOffset="2041"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
         message="Use the KTX extension function `String.toUri` instead?">
         <fix-replace
             description="Replace with the toUri extension function"
@@ -842,17 +1052,17 @@
             priority="0">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                startOffset="7823"
-                endOffset="7883"/>
+                startOffset="9253"
+                endOffset="9313"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="231"
+            line="261"
             column="66"
-            startOffset="7823"
-            endLine="231"
+            startOffset="9253"
+            endLine="261"
             endColumn="126"
-            endOffset="7883"/>
+            endOffset="9313"/>
     </incident>
 
     <incident
@@ -871,17 +1081,17 @@
             priority="0">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                startOffset="7948"
-                endOffset="8007"/>
+                startOffset="9378"
+                endOffset="9437"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="232"
+            line="262"
             column="64"
-            startOffset="7948"
-            endLine="232"
+            startOffset="9378"
+            endLine="262"
             endColumn="123"
-            endOffset="8007"/>
+            endOffset="9437"/>
     </incident>
 
     <incident
@@ -900,17 +1110,17 @@
             priority="0">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                startOffset="9055"
-                endOffset="9075"/>
+                startOffset="10485"
+                endOffset="10505"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="253"
+            line="283"
             column="61"
-            startOffset="9055"
-            endLine="253"
+            startOffset="10485"
+            endLine="283"
             endColumn="81"
-            endOffset="9075"/>
+            endOffset="10505"/>
     </incident>
 
     <incident
@@ -929,17 +1139,17 @@
             priority="0">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                startOffset="10123"
-                endOffset="10143"/>
+                startOffset="11553"
+                endOffset="11573"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="274"
+            line="304"
             column="57"
-            startOffset="10123"
-            endLine="274"
+            startOffset="11553"
+            endLine="304"
             endColumn="77"
-            endOffset="10143"/>
+            endOffset="11573"/>
     </incident>
 
     <incident
@@ -962,8 +1172,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11092"
-                    endOffset="11097"/>
+                    startOffset="12522"
+                    endOffset="12527"/>
             </fix-replace>
             <fix-replace
                 description="Replace with  {"
@@ -974,8 +1184,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11097"
-                    endOffset="11098"/>
+                    startOffset="12527"
+                    endOffset="12528"/>
             </fix-replace>
             <fix-replace
                 description="Delete &quot;.&quot;"
@@ -986,8 +1196,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11107"
-                    endOffset="11108"/>
+                    startOffset="12537"
+                    endOffset="12538"/>
             </fix-replace>
             <fix-replace
                 description="Replace with }"
@@ -998,8 +1208,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11315"
-                    endOffset="11323"/>
+                    startOffset="12745"
+                    endOffset="12753"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1010,8 +1220,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11099"
-                    endOffset="11099"/>
+                    startOffset="12529"
+                    endOffset="12529"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1022,8 +1232,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11148"
-                    endOffset="11148"/>
+                    startOffset="12578"
+                    endOffset="12578"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1034,8 +1244,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11203"
-                    endOffset="11203"/>
+                    startOffset="12633"
+                    endOffset="12633"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1046,18 +1256,18 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="11260"
-                    endOffset="11260"/>
+                    startOffset="12690"
+                    endOffset="12690"/>
             </fix-replace>
         </fix-composite>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="295"
+            line="325"
             column="5"
-            startOffset="11080"
-            endLine="295"
+            startOffset="12510"
+            endLine="325"
             endColumn="23"
-            endOffset="11098"/>
+            endOffset="12528"/>
     </incident>
 
     <incident
@@ -1078,8 +1288,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13777"
-                    endOffset="13790"/>
+                    startOffset="15207"
+                    endOffset="15220"/>
             </fix-replace>
             <fix-replace
                 description="Replace with edit"
@@ -1092,8 +1302,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13802"
-                    endOffset="13807"/>
+                    startOffset="15232"
+                    endOffset="15237"/>
             </fix-replace>
             <fix-replace
                 description="Replace with  {"
@@ -1104,8 +1314,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13807"
-                    endOffset="13808"/>
+                    startOffset="15237"
+                    endOffset="15238"/>
             </fix-replace>
             <fix-replace
                 description="Delete &quot;editor.&quot;"
@@ -1116,8 +1326,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14372"
-                    endOffset="14379"/>
+                    startOffset="15802"
+                    endOffset="15809"/>
             </fix-replace>
             <fix-replace
                 description="Delete &quot;editor.&quot;"
@@ -1128,616 +1338,56 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14422"
-                    endOffset="14429"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14475"
-                    endOffset="14482"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14529"
-                    endOffset="14536"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14640"
-                    endOffset="14647"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with }"
-                robot="true"
-                independent="true"
-                oldString="editor.apply()"
-                replacement="}"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14764"
-                    endOffset="14778"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13810"
-                    endOffset="13810"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13852"
-                    endOffset="13852"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13887"
-                    endOffset="13887"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13925"
-                    endOffset="13925"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="13977"
-                    endOffset="13977"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14047"
-                    endOffset="14047"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14123"
-                    endOffset="14123"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14202"
-                    endOffset="14202"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14288"
-                    endOffset="14288"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14356"
-                    endOffset="14356"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14406"
-                    endOffset="14406"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14459"
-                    endOffset="14459"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14513"
-                    endOffset="14513"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14563"
-                    endOffset="14563"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14624"
-                    endOffset="14624"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14708"
-                    endOffset="14708"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14730"
-                    endOffset="14730"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14744"
-                    endOffset="14744"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14754"
-                    endOffset="14754"/>
-            </fix-replace>
-        </fix-composite>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="356"
-            column="18"
-            startOffset="13790"
-            endLine="356"
-            endColumn="36"
-            endOffset="13808"/>
-    </incident>
-
-    <incident
-        id="UseKtx"
-        severity="warning"
-        message="Use the KTX extension function `SharedPreferences.edit` instead?">
-        <fix-composite
-            description="Replace with the edit extension function"
-            family="Replace with the edit extension function"
-            robot="true"
-            independent="true">
-            <fix-replace
-                description="Replace with edit"
-                robot="true"
-                independent="true"
-                oldString="edit("
-                replacement="edit"
-                reformat="value"
-                imports="androidx.core.content.edit"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14989"
-                    endOffset="14994"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with  {"
-                robot="true"
-                independent="true"
-                oldString=")"
-                replacement=" {"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14994"
-                    endOffset="14995"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;.&quot;"
-                robot="true"
-                independent="true"
-                oldString="."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="14995"
-                    endOffset="14996"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with }"
-                robot="true"
-                independent="true"
-                oldString=".apply()"
-                replacement="}"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15003"
-                    endOffset="15011"/>
-            </fix-replace>
-        </fix-composite>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="385"
-            column="5"
-            startOffset="14977"
-            endLine="385"
-            endColumn="23"
-            endOffset="14995"/>
-    </incident>
-
-    <incident
-        id="UseKtx"
-        severity="warning"
-        message="Use the KTX extension function `SharedPreferences.edit` instead?">
-        <fix-composite
-            description="Replace with the edit extension function"
-            family="Replace with the edit extension function"
-            robot="true"
-            independent="true">
-            <fix-replace
-                description="Delete &quot;val editor = &quot;"
-                robot="true"
-                independent="true"
-                oldString="val editor = "
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15356"
-                    endOffset="15369"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with edit"
-                robot="true"
-                independent="true"
-                oldString="edit("
-                replacement="edit"
-                reformat="value"
-                imports="androidx.core.content.edit"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15381"
-                    endOffset="15386"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with  {"
-                robot="true"
-                independent="true"
-                oldString=")"
-                replacement=" {"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15386"
-                    endOffset="15387"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16805"
-                    endOffset="16812"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16855"
-                    endOffset="16862"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16908"
-                    endOffset="16915"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16962"
-                    endOffset="16969"/>
-            </fix-replace>
-            <fix-replace
-                description="Delete &quot;editor.&quot;"
-                robot="true"
-                independent="true"
-                oldString="editor."
-                replacement=""
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17011"
-                    endOffset="17018"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with }"
-                robot="true"
-                independent="true"
-                oldString="editor.apply()"
-                replacement="}"
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17123"
-                    endOffset="17137"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15388"
-                    endOffset="15388"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15414"
-                    endOffset="15414"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15453"
-                    endOffset="15453"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15492"
-                    endOffset="15492"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15526"
-                    endOffset="15526"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15564"
-                    endOffset="15564"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15616"
-                    endOffset="15616"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15692"
-                    endOffset="15692"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15774"
-                    endOffset="15774"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15859"
+                    startOffset="15852"
                     endOffset="15859"/>
             </fix-replace>
             <fix-replace
-                description="Replace with     "
+                description="Delete &quot;editor.&quot;"
                 robot="true"
                 independent="true"
-                oldString=""
-                replacement="    "
+                oldString="editor."
+                replacement=""
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="15922"
-                    endOffset="15922"/>
+                    startOffset="15905"
+                    endOffset="15912"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="15959"
+                    endOffset="15966"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16070"
+                    endOffset="16077"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString="editor.apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16194"
+                    endOffset="16208"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1748,8 +1398,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16012"
-                    endOffset="16012"/>
+                    startOffset="15240"
+                    endOffset="15240"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1760,8 +1410,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16108"
-                    endOffset="16108"/>
+                    startOffset="15282"
+                    endOffset="15282"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1772,8 +1422,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16144"
-                    endOffset="16144"/>
+                    startOffset="15317"
+                    endOffset="15317"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1784,8 +1434,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16159"
-                    endOffset="16159"/>
+                    startOffset="15355"
+                    endOffset="15355"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1796,8 +1446,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16251"
-                    endOffset="16251"/>
+                    startOffset="15407"
+                    endOffset="15407"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1808,8 +1458,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16304"
-                    endOffset="16304"/>
+                    startOffset="15477"
+                    endOffset="15477"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1820,8 +1470,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16343"
-                    endOffset="16343"/>
+                    startOffset="15553"
+                    endOffset="15553"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1832,8 +1482,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16420"
-                    endOffset="16420"/>
+                    startOffset="15632"
+                    endOffset="15632"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1844,8 +1494,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16473"
-                    endOffset="16473"/>
+                    startOffset="15718"
+                    endOffset="15718"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1856,8 +1506,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16561"
-                    endOffset="16561"/>
+                    startOffset="15786"
+                    endOffset="15786"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1868,8 +1518,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16601"
-                    endOffset="16601"/>
+                    startOffset="15836"
+                    endOffset="15836"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1880,8 +1530,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16619"
-                    endOffset="16619"/>
+                    startOffset="15889"
+                    endOffset="15889"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1892,8 +1542,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16640"
-                    endOffset="16640"/>
+                    startOffset="15943"
+                    endOffset="15943"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1904,8 +1554,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16706"
-                    endOffset="16706"/>
+                    startOffset="15993"
+                    endOffset="15993"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1916,8 +1566,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16742"
-                    endOffset="16742"/>
+                    startOffset="16054"
+                    endOffset="16054"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1928,8 +1578,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16757"
-                    endOffset="16757"/>
+                    startOffset="16138"
+                    endOffset="16138"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1940,8 +1590,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16789"
-                    endOffset="16789"/>
+                    startOffset="16160"
+                    endOffset="16160"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1952,8 +1602,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16839"
-                    endOffset="16839"/>
+                    startOffset="16174"
+                    endOffset="16174"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -1964,90 +1614,88 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16892"
-                    endOffset="16892"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16946"
-                    endOffset="16946"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="16995"
-                    endOffset="16995"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17057"
-                    endOffset="17057"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17088"
-                    endOffset="17088"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17102"
-                    endOffset="17102"/>
-            </fix-replace>
-            <fix-replace
-                description="Replace with     "
-                robot="true"
-                independent="true"
-                oldString=""
-                replacement="    "
-                priority="0">
-                <range
-                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17112"
-                    endOffset="17112"/>
+                    startOffset="16184"
+                    endOffset="16184"/>
             </fix-replace>
         </fix-composite>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="393"
+            line="386"
             column="18"
-            startOffset="15369"
-            endLine="393"
+            startOffset="15220"
+            endLine="386"
             endColumn="36"
-            endOffset="15387"/>
+            endOffset="15238"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16419"
+                    endOffset="16424"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16424"
+                    endOffset="16425"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16425"
+                    endOffset="16426"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="16433"
+                    endOffset="16441"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="415"
+            column="5"
+            startOffset="16407"
+            endLine="415"
+            endColumn="23"
+            endOffset="16425"/>
     </incident>
 
     <incident
@@ -2068,8 +1716,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17463"
-                    endOffset="17476"/>
+                    startOffset="16786"
+                    endOffset="16799"/>
             </fix-replace>
             <fix-replace
                 description="Replace with edit"
@@ -2082,8 +1730,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17488"
-                    endOffset="17493"/>
+                    startOffset="16811"
+                    endOffset="16816"/>
             </fix-replace>
             <fix-replace
                 description="Replace with  {"
@@ -2094,8 +1742,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17493"
-                    endOffset="17494"/>
+                    startOffset="16816"
+                    endOffset="16817"/>
             </fix-replace>
             <fix-replace
                 description="Delete &quot;editor.&quot;"
@@ -2106,8 +1754,56 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17878"
-                    endOffset="17885"/>
+                    startOffset="18235"
+                    endOffset="18242"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18285"
+                    endOffset="18292"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18338"
+                    endOffset="18345"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18392"
+                    endOffset="18399"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18441"
+                    endOffset="18448"/>
             </fix-replace>
             <fix-replace
                 description="Replace with }"
@@ -2118,8 +1814,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17945"
-                    endOffset="17959"/>
+                    startOffset="18553"
+                    endOffset="18567"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2130,8 +1826,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17495"
-                    endOffset="17495"/>
+                    startOffset="16818"
+                    endOffset="16818"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2142,8 +1838,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17521"
-                    endOffset="17521"/>
+                    startOffset="16844"
+                    endOffset="16844"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2154,8 +1850,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17608"
-                    endOffset="17608"/>
+                    startOffset="16883"
+                    endOffset="16883"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2166,8 +1862,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17647"
-                    endOffset="17647"/>
+                    startOffset="16922"
+                    endOffset="16922"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2178,8 +1874,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17687"
-                    endOffset="17687"/>
+                    startOffset="16956"
+                    endOffset="16956"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2190,8 +1886,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17747"
-                    endOffset="17747"/>
+                    startOffset="16994"
+                    endOffset="16994"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2202,8 +1898,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17811"
-                    endOffset="17811"/>
+                    startOffset="17046"
+                    endOffset="17046"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2214,8 +1910,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17866"
-                    endOffset="17866"/>
+                    startOffset="17122"
+                    endOffset="17122"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2226,8 +1922,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17897"
-                    endOffset="17897"/>
+                    startOffset="17204"
+                    endOffset="17204"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2238,8 +1934,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17924"
-                    endOffset="17924"/>
+                    startOffset="17289"
+                    endOffset="17289"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2250,18 +1946,318 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="17934"
-                    endOffset="17934"/>
+                    startOffset="17352"
+                    endOffset="17352"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17442"
+                    endOffset="17442"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17538"
+                    endOffset="17538"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17574"
+                    endOffset="17574"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17589"
+                    endOffset="17589"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17681"
+                    endOffset="17681"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17734"
+                    endOffset="17734"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17773"
+                    endOffset="17773"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17850"
+                    endOffset="17850"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17903"
+                    endOffset="17903"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="17991"
+                    endOffset="17991"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18031"
+                    endOffset="18031"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18049"
+                    endOffset="18049"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18070"
+                    endOffset="18070"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18136"
+                    endOffset="18136"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18172"
+                    endOffset="18172"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18187"
+                    endOffset="18187"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18219"
+                    endOffset="18219"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18269"
+                    endOffset="18269"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18322"
+                    endOffset="18322"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18376"
+                    endOffset="18376"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18425"
+                    endOffset="18425"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18487"
+                    endOffset="18487"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18518"
+                    endOffset="18518"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18532"
+                    endOffset="18532"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18542"
+                    endOffset="18542"/>
             </fix-replace>
         </fix-composite>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="444"
+            line="423"
             column="18"
-            startOffset="17476"
-            endLine="444"
+            startOffset="16799"
+            endLine="423"
             endColumn="36"
-            endOffset="17494"/>
+            endOffset="16817"/>
     </incident>
 
     <incident
@@ -2274,6 +2270,18 @@
             robot="true"
             independent="true">
             <fix-replace
+                description="Delete &quot;val editor = &quot;"
+                robot="true"
+                independent="true"
+                oldString="val editor = "
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18893"
+                    endOffset="18906"/>
+            </fix-replace>
+            <fix-replace
                 description="Replace with edit"
                 robot="true"
                 independent="true"
@@ -2284,8 +2292,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="19942"
-                    endOffset="19947"/>
+                    startOffset="18918"
+                    endOffset="18923"/>
             </fix-replace>
             <fix-replace
                 description="Replace with  {"
@@ -2296,32 +2304,32 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="19947"
-                    endOffset="19948"/>
+                    startOffset="18923"
+                    endOffset="18924"/>
             </fix-replace>
             <fix-replace
-                description="Delete &quot;.&quot;"
+                description="Delete &quot;editor.&quot;"
                 robot="true"
                 independent="true"
-                oldString="."
+                oldString="editor."
                 replacement=""
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="19957"
-                    endOffset="19958"/>
+                    startOffset="19308"
+                    endOffset="19315"/>
             </fix-replace>
             <fix-replace
                 description="Replace with }"
                 robot="true"
                 independent="true"
-                oldString=".apply()"
+                oldString="editor.apply()"
                 replacement="}"
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="20023"
-                    endOffset="20031"/>
+                    startOffset="19375"
+                    endOffset="19389"/>
             </fix-replace>
             <fix-replace
                 description="Replace with     "
@@ -2332,18 +2340,138 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="19949"
-                    endOffset="19949"/>
+                    startOffset="18925"
+                    endOffset="18925"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="18951"
+                    endOffset="18951"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19038"
+                    endOffset="19038"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19077"
+                    endOffset="19077"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19117"
+                    endOffset="19117"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19177"
+                    endOffset="19177"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19241"
+                    endOffset="19241"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19296"
+                    endOffset="19296"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19327"
+                    endOffset="19327"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19354"
+                    endOffset="19354"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="19364"
+                    endOffset="19364"/>
             </fix-replace>
         </fix-composite>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="512"
-            column="5"
-            startOffset="19930"
-            endLine="512"
-            endColumn="23"
-            endOffset="19948"/>
+            line="474"
+            column="18"
+            startOffset="18906"
+            endLine="474"
+            endColumn="36"
+            endOffset="18924"/>
     </incident>
 
     <incident
@@ -2366,8 +2494,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="21717"
-                    endOffset="21722"/>
+                    startOffset="21372"
+                    endOffset="21377"/>
             </fix-replace>
             <fix-replace
                 description="Replace with  {"
@@ -2378,8 +2506,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="21722"
-                    endOffset="21723"/>
+                    startOffset="21377"
+                    endOffset="21378"/>
             </fix-replace>
             <fix-replace
                 description="Delete &quot;.&quot;"
@@ -2390,8 +2518,8 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="21723"
-                    endOffset="21724"/>
+                    startOffset="21387"
+                    endOffset="21388"/>
             </fix-replace>
             <fix-replace
                 description="Replace with }"
@@ -2402,18 +2530,100 @@
                 priority="0">
                 <range
                     file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                    startOffset="21731"
-                    endOffset="21739"/>
+                    startOffset="21453"
+                    endOffset="21461"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="21379"
+                    endOffset="21379"/>
             </fix-replace>
         </fix-composite>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="547"
+            line="542"
             column="5"
-            startOffset="21705"
-            endLine="547"
+            startOffset="21360"
+            endLine="542"
             endColumn="23"
-            endOffset="21723"/>
+            endOffset="21378"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="23147"
+                    endOffset="23152"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="23152"
+                    endOffset="23153"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="23153"
+                    endOffset="23154"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="23161"
+                    endOffset="23169"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="577"
+            column="5"
+            startOffset="23135"
+            endLine="577"
+            endColumn="23"
+            endOffset="23153"/>
     </incident>
 
     <incident
@@ -2432,17 +2642,785 @@
             priority="0">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-                startOffset="27055"
-                endOffset="27097"/>
+                startOffset="28506"
+                endOffset="28548"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
-            line="705"
+            line="735"
             column="69"
-            startOffset="27055"
-            endLine="705"
+            startOffset="28506"
+            endLine="735"
             endColumn="111"
-            endOffset="27097"/>
+            endOffset="28548"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `String.toUri` instead?">
+        <fix-replace
+            description="Replace with the toUri extension function"
+            family="Replace with the toUri extension function"
+            robot="true"
+            independent="true"
+            oldString="Uri.parse(&quot;mailto:support@skipfeed.app&quot;)"
+            replacement="&quot;mailto:support@skipfeed.app&quot;.toUri()"
+            reformat="value"
+            imports="androidx.core.net.toUri"
+            priority="0">
+            <range
+                file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                startOffset="80516"
+                endOffset="80556"/>
+        </fix-replace>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="1927"
+            column="36"
+            startOffset="80516"
+            endLine="1927"
+            endColumn="76"
+            endOffset="80556"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `String.toUri` instead?">
+        <fix-replace
+            description="Replace with the toUri extension function"
+            family="Replace with the toUri extension function"
+            robot="true"
+            independent="true"
+            oldString="Uri.parse(&quot;mailto:support@skipfeed.app&quot;)"
+            replacement="&quot;mailto:support@skipfeed.app&quot;.toUri()"
+            reformat="value"
+            imports="androidx.core.net.toUri"
+            priority="0">
+            <range
+                file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                startOffset="80516"
+                endOffset="80556"/>
+        </fix-replace>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="1927"
+            column="36"
+            startOffset="80516"
+            endLine="1927"
+            endColumn="76"
+            endOffset="80556"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112428"
+                    endOffset="112433"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112433"
+                    endOffset="112434"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112434"
+                    endOffset="112435"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112456"
+                    endOffset="112464"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="2922"
+            column="5"
+            startOffset="112416"
+            endLine="2922"
+            endColumn="23"
+            endOffset="112434"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112682"
+                    endOffset="112687"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112687"
+                    endOffset="112688"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112688"
+                    endOffset="112689"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="112711"
+                    endOffset="112719"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="2927"
+            column="5"
+            startOffset="112670"
+            endLine="2927"
+            endColumn="23"
+            endOffset="112688"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Delete &quot;val editor = &quot;"
+                robot="true"
+                independent="true"
+                oldString="val editor = "
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122641"
+                    endOffset="122654"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122666"
+                    endOffset="122671"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122671"
+                    endOffset="122672"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122708"
+                    endOffset="122715"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122807"
+                    endOffset="122814"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122860"
+                    endOffset="122867"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122919"
+                    endOffset="122926"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122980"
+                    endOffset="122987"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123052"
+                    endOffset="123059"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123106"
+                    endOffset="123113"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString="editor.apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123153"
+                    endOffset="123167"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122674"
+                    endOffset="122674"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122704"
+                    endOffset="122704"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122724"
+                    endOffset="122724"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122757"
+                    endOffset="122757"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122799"
+                    endOffset="122799"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122852"
+                    endOffset="122852"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122911"
+                    endOffset="122911"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="122972"
+                    endOffset="122972"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123044"
+                    endOffset="123044"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123095"
+                    endOffset="123095"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="123102"
+                    endOffset="123102"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3180"
+            column="18"
+            startOffset="122654"
+            endLine="3180"
+            endColumn="36"
+            endOffset="122672"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Delete &quot;val editor = &quot;"
+                robot="true"
+                independent="true"
+                oldString="val editor = "
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124128"
+                    endOffset="124141"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124153"
+                    endOffset="124158"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124158"
+                    endOffset="124159"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124230"
+                    endOffset="124237"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124286"
+                    endOffset="124293"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString="editor.apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124344"
+                    endOffset="124358"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124161"
+                    endOffset="124161"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124222"
+                    endOffset="124222"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124276"
+                    endOffset="124276"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124282"
+                    endOffset="124282"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3222"
+            column="18"
+            startOffset="124141"
+            endLine="3222"
+            endColumn="36"
+            endOffset="124159"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Delete &quot;val editor = &quot;"
+                robot="true"
+                independent="true"
+                oldString="val editor = "
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124634"
+                    endOffset="124647"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124659"
+                    endOffset="124664"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124664"
+                    endOffset="124665"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124728"
+                    endOffset="124735"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;editor.&quot;"
+                robot="true"
+                independent="true"
+                oldString="editor."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124784"
+                    endOffset="124791"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString="editor.apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124839"
+                    endOffset="124853"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124667"
+                    endOffset="124667"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124720"
+                    endOffset="124720"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124774"
+                    endOffset="124774"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+                    startOffset="124780"
+                    endOffset="124780"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3235"
+            column="18"
+            startOffset="124647"
+            endLine="3235"
+            endColumn="36"
+            endOffset="124665"/>
     </incident>
 
     <incident

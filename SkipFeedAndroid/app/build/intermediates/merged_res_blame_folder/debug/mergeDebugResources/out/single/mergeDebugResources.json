@@ -1,106 +1,106 @@
 [
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_reddit.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_reddit.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
         "merged": "com.skipfeed.android.app-debug-79:/drawable_splash_icon_wrapper.xml.flat",
         "source": "com.skipfeed.android.app-main-81:/drawable/splash_icon_wrapper.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_tiktok.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_tiktok.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_tiktok.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_tiktok.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_instagram.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_instagram.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_youtube.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_youtube.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_splash_icon.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/splash_icon.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/xml_file_paths.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/xml/file_paths.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_x.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_x.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_facebook.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_facebook.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_facebook.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_facebook.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_instagram.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_instagram.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_x.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_x.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_facebook.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_facebook.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/xml_data_extraction_rules.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/xml/data_extraction_rules.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_facebook.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_facebook.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_tiktok.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_tiktok.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_instagram.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_instagram.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_x.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_x.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_instagram.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_instagram.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_x.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_x.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_youtube.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_youtube.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_ic_reddit.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/ic_reddit.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.skipfeed.android.app-debug-79:/xml_data_extraction_rules.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/xml_backup_rules.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/xml/backup_rules.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/xml_backup_rules.xml.flat",
+        "source": "com.skipfeed.android.app-main-81:/xml/backup_rules.xml"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_ic_reddit.xml.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/ic_reddit.xml"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_tiktok.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_tiktok.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_youtube.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_youtube.png"
+        "merged": "com.skipfeed.android.app-debug-79:/drawable_icon_youtube.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/drawable/icon_youtube.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-debug-79:/drawable_icon_reddit.png.flat",
-        "source": "/Users/wangdechun/.gradle/daemon/8.13/com.skipfeed.android.app-main-81:/drawable/icon_reddit.png"
+        "merged": "com.skipfeed.android.app-debug-79:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.skipfeed.android.app-main-81:/mipmap-hdpi/ic_launcher.png"
     }
 ]

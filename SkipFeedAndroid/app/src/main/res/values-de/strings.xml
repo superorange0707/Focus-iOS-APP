@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">SkipFeed</string>
+    
+    <!-- Main App -->
+    <string name="tagline">Überspringe den Feed, finde was wichtig ist</string>
+    <string name="subtitle">Direkte Suche, null Ablenkungen</string>
+    <string name="search_hint">Wonach suchst du?</string>
+    <string name="choose_platform">Plattform Wählen</string>
+    <string name="search_on">Suchen auf</string>
+    <string name="open_in">Öffnen in</string>
+    <string name="direct">Direkt</string>
+    <string name="in_app">In der App</string>
+    
+    <!-- Platforms -->
+    <string name="reddit">Reddit</string>
+    <string name="youtube">YouTube</string>
+    <string name="x">X</string>
+    <string name="tiktok">TikTok</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Search -->
+    <string name="search_button">Suchen</string>
+    <string name="searching">Suche läuft…</string>
+    <string name="open_tiktok_search">TikTok-Suche öffnen</string>
+    <string name="tiktok_search_message">Öffnet die TikTok-Suchseite, wo Sie Ihre Anfrage eingeben können</string>
+    <string name="reddit_post">Reddit-Beitrag</string>
+    <string name="tiktok_search">TikTok-Suche</string>
+    <string name="open_in_reddit">In Reddit öffnen</string>
+    <string name="view_link">Link anzeigen</string>
+    <string name="done">Fertig</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="close">Schließen</string>
+
+    <!-- Navigation -->
+    <string name="search">Suchen</string>
+    <string name="history">Verlauf</string>
+    <string name="stats">Statistiken</string>
+    <string name="settings">Einstellungen</string>
+    
+    <!-- Recent Searches -->
+    <string name="recent_searches">Letzte Suchen</string>
+    <string name="clear">Löschen</string>
+    <string name="no_recent_searches">Keine letzten Suchen</string>
+    
+    <!-- Search History -->
+    <string name="search_history">Suchverlauf</string>
+    <string name="clear_history">Verlauf Löschen</string>
+    <string name="delete_search">Suche Löschen</string>
+    <string name="no_search_history">Noch kein Suchverlauf</string>
+    <string name="start_searching_message">Beginne zu suchen, um deinen Verlauf zu sehen</string>
+    
+    <!-- Statistics -->
+    <string name="usage_statistics">Nutzungsstatistiken</string>
+    <string name="total_searches">Gesamte Suchen</string>
+    <string name="searches_today">Suchen Heute</string>
+    <string name="time_saved">Zeit Gespart</string>
+    <string name="time_saved_today">Zeit Heute Gespart</string>
+    <string name="minutes">Minuten</string>
+    <string name="hours">Stunden</string>
+    <string name="searches_by_platform">Suchen nach Plattform</string>
+    <string name="no_stats_yet">Noch keine Statistiken</string>
+    <string name="start_searching_stats">Beginne zu suchen, um deine Statistiken zu sehen</string>
+    <string name="platform_usage">Plattform-Nutzung</string>
+    <string name="insights">Einblicke</string>
+    <string name="focus_score">Fokus-Score</string>
+    <string name="staying_focused">Du bleibst fokussiert!</string>
+    <string name="todays_impact">Heutiger Einfluss</string>
+    <string name="time_saved_from_distractions">Zeit vor Ablenkungen gespart</string>
+    <string name="efficiency">Effizienz</string>
+    <string name="direct_searches_save_time">Direkte Suchen sparen Zeit</string>
+    <string name="since_first_use">seit der ersten Nutzung</string>
+    <string name="last_seven_days">Letzte 7 Tage</string>
+    <string name="last_thirty_days">Letzte 30 Tage</string>
+    <string name="time_of_day_analysis">Tageszeit-Analyse</string>
+    <string name="morning">Morgen</string>
+    <string name="afternoon">Nachmittag</string>
+    <string name="evening">Abend</string>
+    <string name="night">Nacht</string>
+    
+    <!-- Settings -->
+    <string name="language">Sprache</string>
+    <string name="auto_detect_language">Automatische Erkennung</string>
+    <string name="platform_order">Plattform-Reihenfolge</string>
+    <string name="search_mode">Suchmodus</string>
+    <string name="data_export">Datenexport</string>
+    <string name="about">Über</string>
+    <string name="version">Version</string>
+    <string name="reset_data">Daten Zurücksetzen</string>
+    <string name="reset_data_message">Dies löscht deinen gesamten Suchverlauf und deine Statistiken. Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="reset">Zurücksetzen</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="delete">Löschen</string>
+    <string name="share">Teilen</string>
+    <string name="copy">Kopieren</string>
+    <string name="copied">In die Zwischenablage kopiert</string>
+
+    <!-- Settings Extended -->
+    <string name="preferences">Einstellungen</string>
+    <string name="data_management">Datenverwaltung</string>
+    <string name="about_support">Über und Support</string>
+    <string name="data_retention_period">Datenaufbewahrungszeitraum</string>
+    <string name="automatic_platform_order">Automatische Plattform-Reihenfolge</string>
+    <string name="export_data">Daten Exportieren</string>
+    <string name="clear_all_data">Alle Daten Löschen</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="terms_of_service">Nutzungsbedingungen</string>
+    <string name="support_faq">Support und FAQ</string>
+    <string name="contact_us">Kontaktiere Uns</string>
+</resources>

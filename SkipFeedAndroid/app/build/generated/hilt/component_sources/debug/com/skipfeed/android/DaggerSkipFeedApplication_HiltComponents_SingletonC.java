@@ -33,8 +33,8 @@ import com.skipfeed.android.presentation.screens.search.SearchViewModel;
 import com.skipfeed.android.presentation.screens.search.SearchViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.skipfeed.android.presentation.screens.settings.SettingsViewModel;
 import com.skipfeed.android.presentation.screens.settings.SettingsViewModel_HiltModules_KeyModule_ProvideFactory;
-import com.skipfeed.android.presentation.screens.statistics.StatisticsViewModel;
-import com.skipfeed.android.presentation.screens.statistics.StatisticsViewModel_HiltModules_KeyModule_ProvideFactory;
+import com.skipfeed.android.presentation.viewmodel.StatisticsViewModel;
+import com.skipfeed.android.presentation.viewmodel.StatisticsViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
 import dagger.hilt.android.flags.HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule;
@@ -443,6 +443,7 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
     @CanIgnoreReturnValue
     private MainActivity injectMainActivity2(MainActivity instance) {
       MainActivity_MembersInjector.injectSearchRepository(instance, singletonCImpl.searchRepositoryProvider.get());
+      MainActivity_MembersInjector.injectUsageAnalyticsRepository(instance, singletonCImpl.usageAnalyticsRepositoryProvider.get());
       return instance;
     }
   }
@@ -483,7 +484,7 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
 
     @Override
     public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-      return MapBuilder.<String, Provider<ViewModel>>newMapBuilder(4).put("com.skipfeed.android.presentation.screens.history.SearchHistoryViewModel", ((Provider) searchHistoryViewModelProvider)).put("com.skipfeed.android.presentation.screens.search.SearchViewModel", ((Provider) searchViewModelProvider)).put("com.skipfeed.android.presentation.screens.settings.SettingsViewModel", ((Provider) settingsViewModelProvider)).put("com.skipfeed.android.presentation.screens.statistics.StatisticsViewModel", ((Provider) statisticsViewModelProvider)).build();
+      return MapBuilder.<String, Provider<ViewModel>>newMapBuilder(4).put("com.skipfeed.android.presentation.screens.history.SearchHistoryViewModel", ((Provider) searchHistoryViewModelProvider)).put("com.skipfeed.android.presentation.screens.search.SearchViewModel", ((Provider) searchViewModelProvider)).put("com.skipfeed.android.presentation.screens.settings.SettingsViewModel", ((Provider) settingsViewModelProvider)).put("com.skipfeed.android.presentation.viewmodel.StatisticsViewModel", ((Provider) statisticsViewModelProvider)).build();
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -516,8 +517,8 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
           case 2: // com.skipfeed.android.presentation.screens.settings.SettingsViewModel 
           return (T) new SettingsViewModel(singletonCImpl.userPreferencesRepositoryProvider.get(), singletonCImpl.searchRepositoryProvider.get(), singletonCImpl.usageAnalyticsRepositoryProvider.get());
 
-          case 3: // com.skipfeed.android.presentation.screens.statistics.StatisticsViewModel 
-          return (T) new StatisticsViewModel(singletonCImpl.usageAnalyticsRepositoryProvider.get());
+          case 3: // com.skipfeed.android.presentation.viewmodel.StatisticsViewModel 
+          return (T) new StatisticsViewModel(singletonCImpl.usageAnalyticsRepositoryProvider.get(), singletonCImpl.searchRepositoryProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -610,9 +611,9 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
 
     private Provider<SearchRepository> searchRepositoryProvider;
 
-    private Provider<UserPreferencesRepository> userPreferencesRepositoryProvider;
-
     private Provider<UsageAnalyticsRepository> usageAnalyticsRepositoryProvider;
+
+    private Provider<UserPreferencesRepository> userPreferencesRepositoryProvider;
 
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
@@ -636,8 +637,8 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
       this.provideSkipFeedDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<SkipFeedDatabase>(singletonCImpl, 4));
       this.provideApplicationContextProvider = DoubleCheck.provider(new SwitchingProvider<Context>(singletonCImpl, 5));
       this.searchRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SearchRepository>(singletonCImpl, 0));
-      this.userPreferencesRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<UserPreferencesRepository>(singletonCImpl, 6));
-      this.usageAnalyticsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<UsageAnalyticsRepository>(singletonCImpl, 7));
+      this.usageAnalyticsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<UsageAnalyticsRepository>(singletonCImpl, 6));
+      this.userPreferencesRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<UserPreferencesRepository>(singletonCImpl, 7));
     }
 
     @Override
@@ -691,11 +692,11 @@ public final class DaggerSkipFeedApplication_HiltComponents_SingletonC {
           case 5: // android.content.Context 
           return (T) AppModule_ProvideApplicationContextFactory.provideApplicationContext(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 6: // com.skipfeed.android.data.repository.UserPreferencesRepository 
-          return (T) new UserPreferencesRepository(singletonCImpl.provideApplicationContextProvider.get());
-
-          case 7: // com.skipfeed.android.data.repository.UsageAnalyticsRepository 
+          case 6: // com.skipfeed.android.data.repository.UsageAnalyticsRepository 
           return (T) new UsageAnalyticsRepository(singletonCImpl.usageAnalyticsDao());
+
+          case 7: // com.skipfeed.android.data.repository.UserPreferencesRepository 
+          return (T) new UserPreferencesRepository(singletonCImpl.provideApplicationContextProvider.get());
 
           default: throw new AssertionError(id);
         }

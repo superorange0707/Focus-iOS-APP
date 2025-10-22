@@ -1,9 +1,20 @@
 -- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:33:9-41:20
+	android:grantUriPermissions
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-47
+	android:authorities
+		INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:35:13-64
+	android:exported
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:36:13-37
+	android:name
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:34:13-62
 manifest
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-79:12
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-90:12
+INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-90:12
+INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-90:12
+INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:2:1-90:12
 MERGED from [androidx.databinding:viewbinding:8.12.0] /Users/wangdechun/.gradle/caches/8.13/transforms/855853bb8abd878b92cac4cf3bcc50d2/transformed/viewbinding-8.12.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.1.0] /Users/wangdechun/.gradle/caches/8.13/transforms/39b8aeea3852424ed0b8656a24ec6d61/transformed/hilt-navigation-compose-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.1.0] /Users/wangdechun/.gradle/caches/8.13/transforms/9a3db9956a3a07a584dc033933fc4a36/transformed/hilt-navigation-1.1.0/AndroidManifest.xml:2:1-7:12
@@ -123,8 +134,8 @@ ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/Androi
 	android:name
 		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:6:22-76
 application
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:8:5-32:19
-INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:8:5-32:19
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:8:5-43:19
+INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:8:5-43:19
 MERGED from [com.google.android.material:material:1.12.0] /Users/wangdechun/.gradle/caches/8.13/transforms/97c218e88ba5390c4baa180dbce6d2cf/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] /Users/wangdechun/.gradle/caches/8.13/transforms/97c218e88ba5390c4baa180dbce6d2cf/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /Users/wangdechun/.gradle/caches/8.13/transforms/bfad516a20e6e6071a9129a390ef65e3/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
@@ -196,57 +207,63 @@ ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/Androi
 	android:name
 		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:28:27-74
 queries
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:35:5-77:15
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:46:5-88:15
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:https
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:36:9-40:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:47:9-51:18
 action#android.intent.action.VIEW
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:13-65
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:48:13-65
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:37:21-62
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:48:21-62
 category#android.intent.category.BROWSABLE
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-74
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:49:13-74
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:23-71
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:49:23-71
 data
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:13-44
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:50:13-44
 	android:scheme
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:19-41
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:50:19-41
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:reddit
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:41:9-45:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:52:9-56:18
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:youtube
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:46:9-50:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:57:9-61:18
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:twitter
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:51:9-55:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:62:9-66:18
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:instagram
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:56:9-60:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:67:9-71:18
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:facebook
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:61:9-65:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:72:9-76:18
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:tiktok
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:66:9-70:18
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:77:9-81:18
 package#com.reddit.frontpage
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:71:9-56
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:82:9-56
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:71:18-53
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:82:18-53
 package#com.google.android.youtube
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:72:9-62
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:83:9-62
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:72:18-59
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:83:18-59
 package#com.twitter.android
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:73:9-55
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:84:9-55
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:73:18-52
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:84:18-52
 package#com.instagram.android
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:74:9-57
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:85:9-57
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:74:18-54
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:85:18-54
 package#com.facebook.katana
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:75:9-55
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:86:9-55
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:75:18-52
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:86:18-52
 package#com.ss.android.ugc.trill
-ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:76:9-60
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:87:9-60
 	android:name
-		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:76:18-57
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:87:18-57
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:38:13-40:54
+	android:resource
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:40:17-51
+	android:name
+		ADDED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml:39:17-67
 uses-sdk
 INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/AndroidManifest.xml

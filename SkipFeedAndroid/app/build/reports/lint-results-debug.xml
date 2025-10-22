@@ -20,6 +20,24 @@
     </issue>
 
     <issue
+        id="AppBundleLocaleChanges"
+        severity="Warning"
+        message="Found dynamic locale changes, but did not find corresponding Play Core library calls for downloading languages and splitting by language is not disabled in the `bundle` configuration"
+        category="Correctness"
+        priority="5"
+        summary="App Bundle handling of runtime locale changes"
+        explanation="When changing locales at runtime (e.g. to provide an in-app language switcher), the Android App Bundle must be configured to not split by locale or the Play Core library must be used to download additional locales at runtime."
+        url="https://developer.android.com/guide/app-bundle/configure-base#handling_language_changes"
+        urls="https://developer.android.com/guide/app-bundle/configure-base#handling_language_changes"
+        errorLine1="        config.setLocale(locale)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/data/LocalizationManager.kt"
+            line="99"
+            column="9"/>
+    </issue>
+
+    <issue
         id="RedundantLabel"
         severity="Warning"
         message="Redundant label can be removed"
@@ -79,7 +97,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="58"
+            line="61"
             column="20"/>
     </issue>
 
@@ -95,7 +113,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="59"
+            line="62"
             column="20"/>
     </issue>
 
@@ -111,7 +129,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="60"
+            line="63"
             column="20"/>
     </issue>
 
@@ -127,7 +145,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="61"
+            line="64"
             column="20"/>
     </issue>
 
@@ -143,7 +161,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="68"
+            line="71"
             column="20"/>
     </issue>
 
@@ -159,7 +177,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="71"
+            line="74"
             column="20"/>
     </issue>
 
@@ -175,7 +193,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="72"
+            line="75"
             column="20"/>
     </issue>
 
@@ -191,7 +209,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="95"
+            line="98"
             column="20"/>
     </issue>
 
@@ -207,7 +225,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="96"
+            line="99"
             column="20"/>
     </issue>
 
@@ -223,7 +241,7 @@
         errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="97"
+            line="100"
             column="10"/>
     </issue>
 
@@ -239,7 +257,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="106"
+            line="109"
             column="20"/>
     </issue>
 
@@ -255,7 +273,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="119"
+            line="122"
             column="20"/>
     </issue>
 
@@ -271,7 +289,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="123"
+            line="126"
             column="31"/>
     </issue>
 
@@ -287,7 +305,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="124"
+            line="127"
             column="31"/>
     </issue>
 
@@ -303,7 +321,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="125"
+            line="128"
             column="31"/>
     </issue>
 
@@ -319,7 +337,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="75"
+            line="78"
             column="20"/>
     </issue>
 
@@ -335,7 +353,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="76"
+            line="79"
             column="20"/>
     </issue>
 
@@ -351,7 +369,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="77"
+            line="80"
             column="20"/>
     </issue>
 
@@ -367,7 +385,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="80"
+            line="83"
             column="20"/>
     </issue>
 
@@ -383,7 +401,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="83"
+            line="86"
             column="20"/>
     </issue>
 
@@ -397,22 +415,6 @@
         explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
         errorLine1="    implementation(&quot;org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="86"
-            column="20"/>
-    </issue>
-
-    <issue
-        id="NewerVersionAvailable"
-        severity="Warning"
-        message="A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0"
-        category="Correctness"
-        priority="4"
-        summary="Newer Library Versions Available"
-        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
-        errorLine1="    implementation(&quot;io.coil-kt:coil-compose:2.5.0&quot;)"
-        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
             line="89"
@@ -431,7 +433,23 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="103"
+            line="92"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of io.coil-kt:coil-compose than 2.5.0 is available: 2.7.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;io.coil-kt:coil-compose:2.5.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
+            line="106"
             column="20"/>
     </issue>
 
@@ -447,7 +465,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="109"
+            line="112"
             column="20"/>
     </issue>
 
@@ -463,7 +481,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="117"
+            line="120"
             column="20"/>
     </issue>
 
@@ -479,7 +497,7 @@
         errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="118"
+            line="121"
             column="10"/>
     </issue>
 
@@ -507,11 +525,171 @@
         priority="3"
         summary="Using private resources"
         explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copiar&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-es/strings.xml"
+            line="59"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>复制&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-zh/strings.xml"
+            line="59"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>نسخ&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-ar/strings.xml"
+            line="71"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Kopieren&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-de/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copier&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-fr/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copia&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-it/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>コピー&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-ja/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>복사&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-ko/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Copiar&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-pt/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
+        errorLine1="    &lt;string name=&quot;copy&quot;>Копировать&lt;/string>"
+        errorLine2="                  ~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values-ru/strings.xml"
+            line="87"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="PrivateResource"
+        severity="Warning"
+        message="Overriding `@string/copy` which is marked as private in androidx.preference:preference:1.2.1. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        category="Correctness"
+        priority="3"
+        summary="Using private resources"
+        explanation="Private resources should not be referenced; the may not be present everywhere, and even where they are they may disappear without notice.&#xA;&#xA;To fix this, copy the resource into your own project instead."
         errorLine1="    &lt;string name=&quot;copy&quot;>Copy&lt;/string>"
         errorLine2="                  ~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="133"
+            line="131"
             column="19"/>
     </issue>
 
@@ -529,7 +707,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/build.gradle.kts"
-            line="97"
+            line="100"
             column="5"/>
     </issue>
 
@@ -1000,22 +1178,6 @@
     <issue
         id="UnusedResources"
         severity="Warning"
-        message="The resource `R.string.tagline` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;tagline&quot;>Skip the feed, find what matters&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="5"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
         message="The resource `R.string.subtitle` appears to be unused"
         category="Performance"
         priority="3"
@@ -1032,144 +1194,16 @@
     <issue
         id="UnusedResources"
         severity="Warning"
-        message="The resource `R.string.reddit` appears to be unused"
+        message="The resource `R.string.search_on` appears to be unused"
         category="Performance"
         priority="3"
         summary="Unused resources"
         explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;reddit&quot;>Reddit&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~">
+        errorLine1="    &lt;string name=&quot;search_on&quot;>Search on&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
             line="9"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.youtube` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;youtube&quot;>YouTube&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="10"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.x` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;x&quot;>X&lt;/string>"
-        errorLine2="            ~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="11"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.tiktok` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;tiktok&quot;>TikTok&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="12"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.instagram` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;instagram&quot;>Instagram&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="13"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.facebook` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;facebook&quot;>Facebook&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="14"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.search_hint` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;search_hint&quot;>What are you looking for?&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="17"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.search_button` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;search_button&quot;>Search&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="18"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.searching` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;searching&quot;>Searching…&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="19"
             column="13"/>
     </issue>
 
@@ -1185,6 +1219,102 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="10"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.reddit` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;reddit&quot;>Reddit&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="15"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.youtube` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;youtube&quot;>YouTube&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="16"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.x` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;x&quot;>X&lt;/string>"
+        errorLine2="            ~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="17"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.tiktok` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;tiktok&quot;>TikTok&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="18"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.instagram` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;instagram&quot;>Instagram&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="19"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.facebook` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;facebook&quot;>Facebook&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
             line="20"
             column="13"/>
     </issue>
@@ -1192,16 +1322,32 @@
     <issue
         id="UnusedResources"
         severity="Warning"
-        message="The resource `R.string.search_on` appears to be unused"
+        message="The resource `R.string.search_button` appears to be unused"
         category="Performance"
         priority="3"
         summary="Unused resources"
         explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;search_on&quot;>Search on&lt;/string>"
+        errorLine1="    &lt;string name=&quot;search_button&quot;>Search&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="23"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.searching` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;searching&quot;>Searching…&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="21"
+            line="24"
             column="13"/>
     </issue>
 
@@ -1217,7 +1363,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="22"
+            line="25"
             column="13"/>
     </issue>
 
@@ -1233,7 +1379,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="23"
+            line="26"
             column="13"/>
     </issue>
 
@@ -1249,7 +1395,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="28"
+            line="29"
             column="13"/>
     </issue>
 
@@ -1265,7 +1411,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="29"
+            line="30"
             column="13"/>
     </issue>
 
@@ -1281,7 +1427,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="38"
+            line="39"
             column="13"/>
     </issue>
 
@@ -1297,7 +1443,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="39"
+            line="40"
             column="13"/>
     </issue>
 
@@ -1313,7 +1459,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="40"
+            line="41"
             column="13"/>
     </issue>
 
@@ -1329,55 +1475,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="50"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.total_searches` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;total_searches&quot;>Total Searches&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
             line="51"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.searches_today` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;searches_today&quot;>Searches Today&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="52"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.time_saved` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;time_saved&quot;>Time Saved&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="53"
             column="13"/>
     </issue>
 
@@ -1393,7 +1491,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="54"
+            line="55"
             column="13"/>
     </issue>
 
@@ -1409,7 +1507,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="55"
+            line="56"
             column="13"/>
     </issue>
 
@@ -1425,7 +1523,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="56"
+            line="57"
             column="13"/>
     </issue>
 
@@ -1441,7 +1539,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="57"
+            line="58"
             column="13"/>
     </issue>
 
@@ -1457,7 +1555,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="58"
+            line="59"
             column="13"/>
     </issue>
 
@@ -1473,7 +1571,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="59"
+            line="60"
             column="13"/>
     </issue>
 
@@ -1489,23 +1587,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="68"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.export_data` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;export_data&quot;>Export Data&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="75"
+            line="69"
             column="13"/>
     </issue>
 
@@ -1608,38 +1690,6 @@
     <issue
         id="UnusedResources"
         severity="Warning"
-        message="The resource `R.string.privacy_policy` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;privacy_policy&quot;>Privacy Policy&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="84"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.terms_of_service` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;terms_of_service&quot;>Terms of Service&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="85"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
         message="The resource `R.string.contact_support` appears to be unused"
         category="Performance"
         priority="3"
@@ -1649,7 +1699,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="86"
+            line="84"
             column="13"/>
     </issue>
 
@@ -1665,7 +1715,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="89"
+            line="87"
             column="13"/>
     </issue>
 
@@ -1681,7 +1731,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="90"
+            line="88"
             column="13"/>
     </issue>
 
@@ -1697,7 +1747,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="91"
+            line="89"
             column="13"/>
     </issue>
 
@@ -1713,7 +1763,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="92"
+            line="90"
             column="13"/>
     </issue>
 
@@ -1729,7 +1779,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="93"
+            line="91"
             column="13"/>
     </issue>
 
@@ -1745,7 +1795,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="94"
+            line="92"
             column="13"/>
     </issue>
 
@@ -1761,7 +1811,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="95"
+            line="93"
             column="13"/>
     </issue>
 
@@ -1777,7 +1827,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="96"
+            line="94"
             column="13"/>
     </issue>
 
@@ -1793,7 +1843,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="97"
+            line="95"
             column="13"/>
     </issue>
 
@@ -1809,7 +1859,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="98"
+            line="96"
             column="13"/>
     </issue>
 
@@ -1825,7 +1875,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="99"
+            line="97"
             column="13"/>
     </issue>
 
@@ -1841,7 +1891,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="102"
+            line="100"
             column="13"/>
     </issue>
 
@@ -1857,7 +1907,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="103"
+            line="101"
             column="13"/>
     </issue>
 
@@ -1873,7 +1923,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="104"
+            line="102"
             column="13"/>
     </issue>
 
@@ -1889,7 +1939,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="105"
+            line="103"
             column="13"/>
     </issue>
 
@@ -1905,7 +1955,7 @@
         errorLine2="            ~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="106"
+            line="104"
             column="13"/>
     </issue>
 
@@ -1921,7 +1971,7 @@
         errorLine2="            ~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="107"
+            line="105"
             column="13"/>
     </issue>
 
@@ -1937,7 +1987,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="108"
+            line="106"
             column="13"/>
     </issue>
 
@@ -1953,7 +2003,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="109"
+            line="107"
             column="13"/>
     </issue>
 
@@ -1969,7 +2019,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="110"
+            line="108"
             column="13"/>
     </issue>
 
@@ -1985,7 +2035,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="111"
+            line="109"
             column="13"/>
     </issue>
 
@@ -2001,7 +2051,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="112"
+            line="110"
             column="13"/>
     </issue>
 
@@ -2017,7 +2067,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="113"
+            line="111"
             column="13"/>
     </issue>
 
@@ -2033,7 +2083,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="114"
+            line="112"
             column="13"/>
     </issue>
 
@@ -2049,7 +2099,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="115"
+            line="113"
             column="13"/>
     </issue>
 
@@ -2065,7 +2115,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="116"
+            line="114"
             column="13"/>
     </issue>
 
@@ -2081,7 +2131,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="117"
+            line="115"
             column="13"/>
     </issue>
 
@@ -2097,7 +2147,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="118"
+            line="116"
             column="13"/>
     </issue>
 
@@ -2113,7 +2163,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="119"
+            line="117"
             column="13"/>
     </issue>
 
@@ -2129,7 +2179,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="122"
+            line="120"
             column="13"/>
     </issue>
 
@@ -2145,7 +2195,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="123"
+            line="121"
             column="13"/>
     </issue>
 
@@ -2161,7 +2211,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="124"
+            line="122"
             column="13"/>
     </issue>
 
@@ -2177,7 +2227,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="125"
+            line="123"
             column="13"/>
     </issue>
 
@@ -2193,23 +2243,7 @@
         errorLine2="            ~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="128"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.string.done` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
-        errorLine1="    &lt;string name=&quot;done&quot;>Done&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~">
-        <location
-            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="129"
+            line="126"
             column="13"/>
     </issue>
 
@@ -2225,7 +2259,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="130"
+            line="128"
             column="13"/>
     </issue>
 
@@ -2241,7 +2275,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="131"
+            line="129"
             column="13"/>
     </issue>
 
@@ -2257,7 +2291,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="132"
+            line="130"
             column="13"/>
     </issue>
 
@@ -2273,7 +2307,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="133"
+            line="131"
             column="13"/>
     </issue>
 
@@ -2289,7 +2323,119 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
-            line="134"
+            line="132"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.privacy_policy` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;privacy_policy&quot;>Privacy Policy&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="142"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.terms_of_service` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;terms_of_service&quot;>Terms of Service&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="143"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.support_faq` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;support_faq&quot;>Support &amp;amp; FAQ&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="144"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.contact_us` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;contact_us&quot;>Contact Us&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="145"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.focus_score` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;focus_score&quot;>Focus Score&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="161"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.todays_impact` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;todays_impact&quot;>Today\&apos;s Impact&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="162"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.time_saved_from_distractions` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.&#xA;&#xA;&#xA;The unused resource check can ignore tests. If you want to include resources that are only referenced from tests, consider packaging them in a test source set instead.&#xA;&#xA;You can include test sources in the unused resource check by setting the system property lint.unused-resources.include-tests =true, and to exclude them (usually for performance reasons), use lint.unused-resources.exclude-tests =true.&#xA;,"
+        errorLine1="    &lt;string name=&quot;time_saved_from_distractions&quot;>Time saved from distractions&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/res/values/strings.xml"
+            line="163"
             column="13"/>
     </issue>
 
@@ -2570,6 +2716,22 @@
     <issue
         id="UseKtx"
         severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            sharedPrefs.edit().putString(&quot;app_language&quot;, languageCode).apply()"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/data/LocalizationManager.kt"
+            line="62"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
         message="Use the KTX extension function `String.toUri` instead?"
         category="Productivity"
         priority="6"
@@ -2579,7 +2741,7 @@
         errorLine2="                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="231"
+            line="261"
             column="66"/>
     </issue>
 
@@ -2595,7 +2757,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="232"
+            line="262"
             column="64"/>
     </issue>
 
@@ -2611,7 +2773,7 @@
         errorLine2="                                                            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="253"
+            line="283"
             column="61"/>
     </issue>
 
@@ -2627,7 +2789,7 @@
         errorLine2="                                                        ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="274"
+            line="304"
             column="57"/>
     </issue>
 
@@ -2643,7 +2805,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="295"
+            line="325"
             column="5"/>
     </issue>
 
@@ -2659,7 +2821,7 @@
         errorLine2="                 ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="356"
+            line="386"
             column="18"/>
     </issue>
 
@@ -2675,7 +2837,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="385"
+            line="415"
             column="5"/>
     </issue>
 
@@ -2691,7 +2853,7 @@
         errorLine2="                 ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="393"
+            line="423"
             column="18"/>
     </issue>
 
@@ -2707,7 +2869,7 @@
         errorLine2="                 ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="444"
+            line="474"
             column="18"/>
     </issue>
 
@@ -2723,7 +2885,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="512"
+            line="542"
             column="5"/>
     </issue>
 
@@ -2739,7 +2901,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="547"
+            line="577"
             column="5"/>
     </issue>
 
@@ -2755,8 +2917,120 @@
         errorLine2="                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
-            line="705"
+            line="735"
             column="69"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                            data = Uri.parse(&quot;mailto:support@skipfeed.app&quot;)"
+        errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="1927"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                            data = Uri.parse(&quot;mailto:support@skipfeed.app&quot;)"
+        errorLine2="                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="1927"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    sharedPrefs.edit().putString(key, value).apply()"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="2922"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    sharedPrefs.edit().putBoolean(key, value).apply()"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="2927"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    val editor = sharedPrefs.edit()"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3180"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    val editor = sharedPrefs.edit()"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3222"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    val editor = sharedPrefs.edit()"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/wangdechun/Documents/Focus/SkipFeedAndroid/app/src/main/java/com/skipfeed/android/presentation/MainActivity.kt"
+            line="3235"
+            column="18"/>
     </issue>
 
     <issue

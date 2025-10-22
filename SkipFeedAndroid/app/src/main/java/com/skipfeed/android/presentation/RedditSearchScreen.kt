@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.skipfeed.android.data.*
+import com.skipfeed.android.presentation.components.RedditPostDetailDialog
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +37,7 @@ fun RedditSearchScreen(
     val viewModel: RedditSearchViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+    var selectedPost by remember { mutableStateOf<RedditPost?>(null) }
     
     LaunchedEffect(query) {
         viewModel.searchPosts(query)
@@ -98,14 +100,21 @@ fun RedditSearchScreen(
                         hasMorePosts = uiState.hasMorePosts,
                         onLoadMore = { viewModel.loadMorePosts() },
                         onPostClick = { post ->
-                            // Open post in browser
-                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(post.redditUrl))
-                            context.startActivity(intent)
+                            // Show post detail dialog
+                            selectedPost = post
                         }
                     )
                 }
             }
         }
+    }
+
+    // Show post detail dialog
+    selectedPost?.let { post ->
+        RedditPostDetailDialog(
+            post = post,
+            onDismiss = { selectedPost = null }
+        )
     }
 }
 
