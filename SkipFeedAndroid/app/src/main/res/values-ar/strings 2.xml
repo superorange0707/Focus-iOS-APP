@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">SkipFeed</string>
+    
+    <!-- Main App -->
+    <string name="tagline">تخطى التغذية، اعثر على ما يهم</string>
+    <string name="subtitle">بحث مباشر، بدون تشتيت</string>
+    <string name="search_hint">عن ماذا تبحث؟</string>
+    <string name="choose_platform">اختر المنصة</string>
+    <string name="search_on">البحث في</string>
+    <string name="open_in">فتح في</string>
+    <string name="direct">مباشر</string>
+    <string name="in_app">داخل التطبيق</string>
+    
+    <!-- Platforms -->
+    <string name="reddit">Reddit</string>
+    <string name="youtube">YouTube</string>
+    <string name="x">X</string>
+    <string name="tiktok">TikTok</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Search -->
+    <string name="search_button">بحث</string>
+    <string name="searching">جاري البحث…</string>
+    <string name="open_tiktok_search">فتح بحث TikTok</string>
+    <string name="tiktok_search_message">يفتح صفحة بحث TikTok حيث يمكنك إدخال استعلامك</string>
+    <string name="reddit_post">منشور Reddit</string>
+    <string name="tiktok_search">بحث TikTok</string>
+    <string name="open_in_reddit">فتح في Reddit</string>
+    <string name="view_link">عرض الرابط</string>
+    <string name="done">تم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="close">إغلاق</string>
+
+    <!-- Navigation -->
+    <string name="search">بحث</string>
+    <string name="history">التاريخ</string>
+    <string name="stats">الإحصائيات</string>
+    <string name="settings">الإعدادات</string>
+    
+    <!-- Recent Searches -->
+    <string name="recent_searches">عمليات البحث الأخيرة</string>
+    <string name="clear">مسح</string>
+    <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
+    
+    <!-- Search History -->
+    <string name="search_history">تاريخ البحث</string>
+    <string name="clear_history">مسح التاريخ</string>
+    <string name="delete_search">حذف البحث</string>
+    <string name="no_search_history">لا يوجد تاريخ بحث حتى الآن</string>
+    <string name="start_searching_message">ابدأ البحث لرؤية تاريخك هنا</string>
+    
+    <!-- Statistics -->
+    <string name="usage_statistics">إحصائيات الاستخدام</string>
+    <string name="total_searches">إجمالي عمليات البحث</string>
+    <string name="searches_today">عمليات البحث اليوم</string>
+    <string name="time_saved">الوقت المحفوظ</string>
+    <string name="time_saved_today">الوقت المحفوظ اليوم</string>
+    <string name="minutes">دقائق</string>
+    <string name="hours">ساعات</string>
+    <string name="searches_by_platform">عمليات البحث حسب المنصة</string>
+    <string name="no_stats_yet">لا توجد إحصائيات حتى الآن</string>
+    <string name="start_searching_stats">ابدأ البحث لرؤية إحصائياتك</string>
+    
+    <!-- Settings -->
+    <string name="language">اللغة</string>
+    <string name="auto_detect_language">كشف تلقائي</string>
+    <string name="platform_order">ترتيب المنصات</string>
+    <string name="search_mode">وضع البحث</string>
+    <string name="data_export">تصدير البيانات</string>
+    <string name="about">حول</string>
+    <string name="version">الإصدار</string>
+    <string name="reset_data">إعادة تعيين البيانات</string>
+    <string name="reset_data_message">سيؤدي هذا إلى مسح جميع تاريخ البحث والإحصائيات. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="reset">إعادة تعيين</string>
+
+    <!-- Common -->
+    <string name="ok">موافق</string>
+    <string name="delete">حذف</string>
+    <string name="share">مشاركة</string>
+    <string name="copy">نسخ</string>
+    <string name="copied">تم النسخ إلى الحافظة</string>
+
+    <!-- Settings Extended -->
+    <string name="preferences">التفضيلات</string>
+    <string name="data_management">إدارة البيانات</string>
+    <string name="about_support">حول والدعم</string>
+    <string name="data_retention_period">فترة الاحتفاظ بالبيانات</string>
+    <string name="automatic_platform_order">ترتيب المنصات التلقائي</string>
+    <string name="export_data">تصدير البيانات</string>
+    <string name="clear_all_data">مسح جميع البيانات</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+    <string name="support_faq">الدعم والأسئلة الشائعة</string>
+    <string name="contact_us">اتصل بنا</string>
+</resources>

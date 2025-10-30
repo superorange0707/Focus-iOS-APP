@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">SkipFeed</string>
+    
+    <!-- Main App -->
+    <string name="tagline">Évitez le flux, trouvez ce qui compte</string>
+    <string name="subtitle">Recherche directe, zéro distraction</string>
+    <string name="search_hint">Que recherchez-vous ?</string>
+    <string name="choose_platform">Choisir la Plateforme</string>
+    <string name="search_on">Rechercher sur</string>
+    <string name="open_in">Ouvrir dans</string>
+    <string name="direct">Direct</string>
+    <string name="in_app">Dans l\'App</string>
+    
+    <!-- Platforms -->
+    <string name="reddit">Reddit</string>
+    <string name="youtube">YouTube</string>
+    <string name="x">X</string>
+    <string name="tiktok">TikTok</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Search -->
+    <string name="search_button">Rechercher</string>
+    <string name="searching">Recherche en cours…</string>
+    <string name="open_tiktok_search">Ouvrir la Recherche TikTok</string>
+    <string name="tiktok_search_message">Ouvre la page de recherche TikTok où vous pouvez saisir votre requête</string>
+    <string name="reddit_post">Post Reddit</string>
+    <string name="tiktok_search">Recherche TikTok</string>
+    <string name="open_in_reddit">Ouvrir dans Reddit</string>
+    <string name="view_link">Voir le Lien</string>
+    <string name="done">Terminé</string>
+    <string name="cancel">Annuler</string>
+    <string name="close">Fermer</string>
+
+    <!-- Navigation -->
+    <string name="search">Rechercher</string>
+    <string name="history">Historique</string>
+    <string name="stats">Statistiques</string>
+    <string name="settings">Paramètres</string>
+    
+    <!-- Recent Searches -->
+    <string name="recent_searches">Recherches Récentes</string>
+    <string name="clear">Effacer</string>
+    <string name="no_recent_searches">Aucune recherche récente</string>
+    
+    <!-- Search History -->
+    <string name="search_history">Historique de Recherche</string>
+    <string name="clear_history">Effacer l\'Historique</string>
+    <string name="delete_search">Supprimer la Recherche</string>
+    <string name="no_search_history">Aucun historique de recherche</string>
+    <string name="start_searching_message">Commencez à rechercher pour voir votre historique</string>
+    
+    <!-- Statistics -->
+    <string name="usage_statistics">Statistiques d\'Utilisation</string>
+    <string name="total_searches">Total des Recherches</string>
+    <string name="searches_today">Recherches Aujourd\'hui</string>
+    <string name="time_saved">Temps Économisé</string>
+    <string name="time_saved_today">Temps Économisé Aujourd\'hui</string>
+    <string name="minutes">minutes</string>
+    <string name="hours">heures</string>
+    <string name="searches_by_platform">Recherches par Plateforme</string>
+    <string name="no_stats_yet">Aucune statistique pour le moment</string>
+    <string name="start_searching_stats">Commencez à rechercher pour voir vos statistiques</string>
+    <string name="platform_usage">Utilisation des Plateformes</string>
+    <string name="insights">Aperçus</string>
+    <string name="focus_score">Score de Concentration</string>
+    <string name="staying_focused">Vous restez concentré !</string>
+    <string name="todays_impact">Impact d\'Aujourd\'hui</string>
+    <string name="time_saved_from_distractions">Temps économisé des distractions</string>
+    <string name="efficiency">Efficacité</string>
+    <string name="direct_searches_save_time">Les recherches directes économisent du temps</string>
+    <string name="since_first_use">depuis la première utilisation</string>
+    <string name="last_seven_days">7 Derniers Jours</string>
+    <string name="last_thirty_days">30 Derniers Jours</string>
+    <string name="time_of_day_analysis">Analyse par Heure</string>
+    <string name="morning">Matin</string>
+    <string name="afternoon">Après-midi</string>
+    <string name="evening">Soir</string>
+    <string name="night">Nuit</string>
+    
+    <!-- Settings -->
+    <string name="language">Langue</string>
+    <string name="auto_detect_language">Détection automatique</string>
+    <string name="platform_order">Ordre des Plateformes</string>
+    <string name="search_mode">Mode de Recherche</string>
+    <string name="data_export">Exportation de Données</string>
+    <string name="about">À Propos</string>
+    <string name="version">Version</string>
+    <string name="reset_data">Réinitialiser les Données</string>
+    <string name="reset_data_message">Cela effacera tout votre historique de recherche et vos statistiques. Cette action ne peut pas être annulée.</string>
+    <string name="reset">Réinitialiser</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="delete">Supprimer</string>
+    <string name="share">Partager</string>
+    <string name="copy">Copier</string>
+    <string name="copied">Copié dans le presse-papiers</string>
+
+    <!-- Settings Extended -->
+    <string name="preferences">Préférences</string>
+    <string name="data_management">Gestion des Données</string>
+    <string name="about_support">À Propos et Support</string>
+    <string name="data_retention_period">Période de Rétention des Données</string>
+    <string name="automatic_platform_order">Ordre Automatique des Plateformes</string>
+    <string name="export_data">Exporter les Données</string>
+    <string name="clear_all_data">Effacer Toutes les Données</string>
+    <string name="privacy_policy">Politique de Confidentialité</string>
+    <string name="terms_of_service">Conditions d\'Utilisation</string>
+    <string name="support_faq">Support et FAQ</string>
+    <string name="contact_us">Nous Contacter</string>
+
+    <!-- Statistics Extended -->
+    <string name="search_trend">Tendance de Recherche</string>
+    <string name="days">Jours</string>
+    <string name="searches">recherches</string>
+    <string name="search_times">fois de recherche</string>
+    <string name="percentage">%</string>
+    <string name="statistics">Statistiques</string>
+
+    <!-- Settings Extended -->
+    <string name="privacy_policy_title">Politique de Confidentialité</string>
+    <string name="terms_of_service_title">Conditions d\'Utilisation</string>
+    <string name="support_faq_title">Support et FAQ</string>
+    <string name="use_system_language">Utiliser la langue du système</string>
+    <string name="automatic_platform_ordering">Ordre Automatique des Plateformes</string>
+    <string name="order_platforms_by_usage">Ordonner les plateformes par fréquence d\'utilisation</string>
+</resources>
